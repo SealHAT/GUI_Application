@@ -1,0 +1,17 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE account(ID INTEGER PRIMARY KEY AUTOINCREMENT,username varchar(255), password varchar(255));
+INSERT INTO "account" VALUES(1,'admin','quasar');
+INSERT INTO "account" VALUES(2,'sarah','quasar');
+INSERT INTO "account" VALUES(3,'theoz','quasar');
+INSERT INTO "account" VALUES(4,'sepehr','quasar');
+INSERT INTO "account" VALUES(5,'krystine','quasar');
+INSERT INTO "account" VALUES(6,'juan','quasar');
+INSERT INTO "account" VALUES(7,'jerry','cs1d');
+INSERT INTO "account" VALUES(9,'jane doe','password96');
+INSERT INTO "account" VALUES(10,'billy bob','quasar');
+CREATE TABLE travel(ID integer,destination text,foreign key(ID) references account);
+CREATE TABLE purchase(ID integer,restaurant_ID text,item text,quantity text,foreign key(ID) references account);
+DELETE FROM sqlite_sequence;
+INSERT INTO "sqlite_sequence" VALUES('account',10);
+COMMIT;
