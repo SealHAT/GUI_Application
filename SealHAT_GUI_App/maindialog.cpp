@@ -58,25 +58,7 @@ void maindialog::centerDialog() {
  **/
 void maindialog::on_restaurantsButton_clicked()
 {
-    ui->listOfRestaurants->clear();
-    ui->listOfFoodItems->clear();
-
-    for(list<Restaurant*>::const_iterator it = _restaurantList.restaurants.begin();
-        it != _restaurantList.restaurants.end(); it++) {
-
-        QTreeWidgetItem *type = new QTreeWidgetItem(ui->listOfRestaurants);
-        ui->listOfRestaurants->addTopLevelItem(type);
-        type->setText(0, ((*it)->getRestaurantName()));
-        ui->listOfRestaurants->addTopLevelItem(type);
-
-    }
-
-    /** Automatically selects the first item on the list to view */
-    ui->listOfRestaurants->setCurrentItem(ui->listOfRestaurants->topLevelItem(0));
-    on_listOfRestaurants_itemSelectionChanged();
-
     ui->customerPages->setCurrentIndex(VIEW_RESTAURANTS);
-
 }
 
 /**
@@ -100,63 +82,7 @@ void maindialog::on_adminSignOutButton_clicked()
  **/
 void maindialog::on_purchaseHistoryButton_clicked()
 {
-    QString foodName;
-    QString price;
-    QString qty;
-    QString total;
-    QString currentRestaurant;
-
-
-    if(!(currentAccount->getPurchaseList().empty())) {
-
-        list<FoodItem*> purchaseList = currentAccount->getPurchaseList();
-        // Sets the iterator to begin at the start of the list
-        list<FoodItem*>::iterator it = purchaseList.begin();
-        QString previousRestaurant = (*it)->getFromWhere();
-
-        while(it != purchaseList.end())
-        {
-            currentRestaurant = (*it)->getFromWhere();
-
-            QTreeWidgetItem *parent = new QTreeWidgetItem(ui->purchaseHistoryList);
-            ui->purchaseHistoryList->addTopLevelItem(parent);
-
-            if(previousRestaurant == currentRestaurant ) {
-                foodName = (*it)->getName();
-                price = QString::number((*it)->getPrice());
-                qty   = QString::number((*it)->getQuantity());
-                total = QString::number((*it)->getPrice() * (*it)->getQuantity());
-
-                QTreeWidgetItem *itm = new QTreeWidgetItem();
-
-                itm->setText(0, foodName);
-                itm->setText(1, "$" + price + ".00");
-                itm->setTextAlignment(1, Qt::AlignCenter);
-                itm->setText(2, qty);
-                itm->setTextAlignment(2, Qt::AlignCenter);
-                itm->setText(3, "$" + total + ".00");
-                itm->setTextAlignment(3, Qt::AlignCenter);
-
-
-                parent->addChild(itm);
-            }
-            else {
-                parent->setText(0, (*it)->getFromWhere());
-                ui->purchaseHistoryList->addTopLevelItem(parent);
-                previousRestaurant = currentRestaurant;
-
-            }
-            // Iterator increments to the next node
-            it++;
-        }
-    }
-    else {
-        ui->purchaseHistoryList->hide();
-    }
-
-
     ui->customerPages->setCurrentIndex(PURCHASE_HISTORY);
-
 }
 
 /**
@@ -164,35 +90,7 @@ void maindialog::on_purchaseHistoryButton_clicked()
  **/
 void maindialog::on_listOfRestaurants_itemSelectionChanged()
 {
-    Restaurant *currentRestaurant = NULL;
-    QTreeWidgetItem* selectedRestaurant = ui->listOfRestaurants->currentItem();
-
-
-    if(selectedRestaurant != NULL)
-    {
-        QString restaurantName = selectedRestaurant->data(0, 0).toString();
-
-        currentRestaurant = _restaurantList.findRestaurantByName(restaurantName);
-        ui->distanceFromSaddleback->setText(QString::number(currentRestaurant->getDistance()) + " miles");
-
-        ui->listOfFoodItems->clear();
-
-        list<FoodItem*> currentMenu = currentRestaurant->getMenu();
-        for(list<FoodItem*>::const_iterator it = currentMenu.begin();
-          it != currentMenu.end(); it++)
-        {
-
-          QTreeWidgetItem *type = new QTreeWidgetItem(ui->listOfFoodItems);
-          ui->listOfFoodItems->addTopLevelItem(type);
-          type->setText(0, ((*it)->getName()));
-          type->setText(1, "$" + QString::number(((*it)->getPrice())));
-          type->setTextAlignment(1, Qt::AlignCenter);
-          ui->listOfFoodItems->addTopLevelItem(type);
-        }
-    }
-    else {
-        qDebug() << "Nothing was selected.\n";
-    }
+    qDebug() << "Nothing was selected.\n";
 }
 
 /**
@@ -216,82 +114,6 @@ void maindialog::on_shortestTripButton_clicked()
  **/
 void maindialog::on_travelToAllButton_clicked()
 {
-    // Set the go back button the 'arrows.png'
-    QPixmap pixmap(":/arrows.png");
-    QIcon ButtonIcon(pixmap);
-    ui->goBackFromTripToAllButton->setIcon(ButtonIcon);
-    ui->goBackFromTripToAllButton->setIconSize(ui->goBackFromTripToAllButton->rect().size());
-
-    float totalTraveled = 0.0;
-
-    //Vertex<string> test;
-    //test.createGraph(_restaurantList.restaurants, false);
-
-    Vertex<string> vertexAr[11];
-
-    float graph[11][11] = {{0.0,   8,    4.29, 12.41, 7.56, 2.67, 5.94, 8.44, 12.75, 9.19, 14.54, },
-                           {8,     0.0,  13.2, 15.4,  11.5, 13.3, 15.2, 5.8,  6.9,   8.56, 3.5, },
-                           {4.29,  13.2, 0.0,  15.1,  14.8, 0.1,  4.2,  10.3, 9.3,   5.2,  11.0,  },
-                           {12.41, 15.4, 15.1, 0.0,   4.3,  16.1, 14.3, 18.4, 18.3,  17.2, 17.2,  },
-                           {7.56,  11.5, 14.8, 4.3,   0.0,  8.1,  9.4,  14.4, 14.3,  13.2, 13.2, },
-                           {2.67,  13.3, 0.1,  16.1,  8.1,  0.0,  4.5,  8.5,  8.4,   5.1,  12.1,   },
-                           {5.94,  15.2, 4.2,  14.3,  9.4,  4.5,  0.0,  8.56, 11.1,  5.1,  14.2,   },
-                           {8.44,  5.8,  10.3, 18.4,  14.4, 8.5,  8.56, 0.0,  0.7,   5.8,  4.0, },
-                           {12.75, 6.9,  9.3,  18.7,  14.3, 8.4,  11.1, 0.7,  0.0,   5.7,  4.7,  },
-                           {9.19,  8.56, 5.2,  17.2,  13.2, 5.1,  5.1,  5.8,  5.7,   0.0,  9.5, },
-                           {14.54, 3.5,  11.0, 17.2,  13.2, 12.1, 14.2, 4.0,  4.7,   9.5,  0.0,},};
-    QString nameAr[] = {"Saddleback",
-                       "McDonalds", "Chipotle", "Dominos Pizza", "KFC", "Subway",
-                       "In-N-Out", "Wendys", "Jack in the Box", "El Pollo Loco", "Papa Johns Pizza"};
-
-    for(int k = 0; k < 11; k++)
-    {
-        vertexAr[k].setVertexValue(k);
-        vertexAr[k].setData(nameAr[k].toStdString());
-    }
-
-
-
-    vertexAr[0].setVisited(true);
-
-    int temp = 0;
-
-
-    ui->shortestTripToAllList->clear();
-
-    for(int i = 0; i < 10; i++)
-    {
-        int smallest = 1;
-
-        for(int j = 0; j < 11; j++)
-        {
-            if(temp == smallest)
-                smallest++;
-
-            if(graph[temp][j] < graph[temp][smallest] && !vertexAr[j].getVisited())
-            {
-                smallest = j;
-            }
-
-        }
-
-
-        QTreeWidgetItem *type = new QTreeWidgetItem(ui->shortestTripToAllList);
-        ui->shortestTripToAllList->addTopLevelItem(type);
-        type->setText(0, (nameAr[smallest]));
-        type->setText(1, QString::number(graph[temp][smallest]) + " miles");
-        type->setTextAlignment(1, Qt::AlignCenter);
-
-        totalTraveled += graph[temp][smallest];
-        qDebug() << "totalTraveled: " << totalTraveled;
-        ui->shortestTripToAllList->addTopLevelItem(type);
-
-        vertexAr[smallest].setVisited(true);
-        temp = smallest;
-    }
-
-    ui->distanceToAllTotal->setText(QString::number(totalTraveled) + " miles");
-
     ui->customerPages->setCurrentIndex(TRIP_TO_ALL);
 }
 
@@ -301,21 +123,6 @@ void maindialog::on_travelToAllButton_clicked()
 void maindialog::on_matienanceButton_clicked()
 {
     ui->adminPages->setCurrentIndex(MATIENANCE);
-
-    ui->listOfChangeRestaurants->clear();
-
-    for(list<Restaurant*>::const_iterator it = _restaurantList.restaurants.begin();
-        it != _restaurantList.restaurants.end(); it++) {
-
-        QTreeWidgetItem *type = new QTreeWidgetItem(ui->listOfChangeRestaurants);
-        ui->listOfChangeRestaurants->addTopLevelItem(type);
-        type->setText(0, ((*it)->getRestaurantName()));
-        type->setText(1, (QString::number((*it)->getDistance()) + " miles"));
-        type->setTextAlignment(1, Qt::AlignCenter);
-
-        ui->listOfChangeRestaurants->addTopLevelItem(type);
-
-        }
 }
 
 /**
