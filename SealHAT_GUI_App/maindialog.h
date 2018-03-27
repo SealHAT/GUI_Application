@@ -42,7 +42,7 @@ class maindialog : public QDialog
     };
 
     enum ADMIN_PAGES {
-        ADMIN_HOME_PAGE,
+        RETRIEVE_DATA_HOME_PAGE,
         MATIENANCE,
         CUSTOMER_HISTORY,
     };
@@ -72,7 +72,7 @@ private slots:
 
     void on_configureDevOptionButton_clicked();
 
-    void on_signUpButton_clicked();
+    void on_retrieveDataButton_clicked();
 
     void on_goBackButton_clicked();
 

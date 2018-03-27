@@ -31,8 +31,7 @@ FORMS    += \
     shoppingcart.ui
 
 
-HEADERS  += mainwindow.h \
-    restaurantlist.h \
+HEADERS  += restaurantlist.h \
     restaurant.h \
     fooditem.h \
     maindialog.h \

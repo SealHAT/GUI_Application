@@ -38,19 +38,20 @@ list<FoodItem*> Customer::getShoppingCart() const {
 }
 
 void Customer::addPurchase(FoodItem* pro) {
-
+    (void)pro;
 }
 
 void Customer::addToCart(FoodItem* pro) {
-
+    (void)pro;
 }
 
 bool Customer::removeCart(QString removeFoodItem) {
-
+    (void)removeFoodItem;
+    return NULL;
 }
 
 bool Customer::purchase() {
-
+    return NULL;
 }
 
 void Customer::setID(unsigned short ID)

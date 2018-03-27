@@ -7,64 +7,55 @@
 
 #include <QDebug>
 
-
-maindialog::maindialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::maindialog)
+/**
+ * Initial GUI setup.
+ **/
+maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog)
 {
     ui->setupUi(this);
 
+    // On the Login stack, set the welcome page.
     ui->loginStacked->setCurrentIndex(INITIAL_PAGE);
-    ui->loginErrorMessage->setVisible(false);
 
-    // Recieves data from the Account table and puts it into a list
-    _sql.SQL_to_CustomerList(_customerList);
-
-
-    // Recieves data from the Restaurant table and puts it into a list
-    _sql.SQL_to_RestaurantList(_restaurantList);
-
-    // Sets the screen to appear tinier for the log in
+    // Set size for smaller welcome screen.
     this->setFixedSize(421, 421);
-
 }
 
+/**
+ * Delete GUI on exit.
+ **/
 maindialog::~maindialog()
 {
     delete ui;
 }
-
 
 /**
  * @brief maindialog::on_signOutButton_clicked
  */
 void maindialog::on_signOutButton_clicked()
 {
-    // Saves any information changes through program here.
-
-    // Main Dialog closes and the login screen appears again.
-    currentAccount = NULL;
-
     // Sets the dialog back to a login screen
     this->setFixedSize(421, 421);
 
-    ui->usernameLogin->clear();
-    ui->passwordLogin->clear();
-    ui->loginErrorMessage->setHidden(true);
     ui->mainStacked->setCurrentIndex(0);
     ui->loginStacked->setCurrentIndex(INITIAL_PAGE);
 
     this->centerDialog();
-
 }
 
+/**
+ * Center the contents of the page.
+ **/
 void maindialog::centerDialog() {
     QRect screenGeometry = QApplication::desktop()->screenGeometry();
-    int x = (screenGeometry.width()-this->width()) / 2;
-    int y = (screenGeometry.height()-this->height()) / 2;
+    int x = (screenGeometry.width() - this->width()) / 2;
+    int y = (screenGeometry.height() - this->height()) / 2;
     this->move(x, y);
 }
 
+/**
+ *
+ **/
 void maindialog::on_restaurantsButton_clicked()
 {
     ui->listOfRestaurants->clear();
@@ -88,17 +79,25 @@ void maindialog::on_restaurantsButton_clicked()
 
 }
 
-
+/**
+ *
+ **/
 void maindialog::on_customerHomeButton_clicked()
 {
     ui->customerPages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
 }
 
+/**
+ *
+ **/
 void maindialog::on_adminSignOutButton_clicked()
 {
     on_signOutButton_clicked();
 }
 
+/**
+ *
+ **/
 void maindialog::on_purchaseHistoryButton_clicked()
 {
     QString foodName;
@@ -160,6 +159,9 @@ void maindialog::on_purchaseHistoryButton_clicked()
 
 }
 
+/**
+ *
+ **/
 void maindialog::on_listOfRestaurants_itemSelectionChanged()
 {
     Restaurant *currentRestaurant = NULL;
@@ -193,19 +195,25 @@ void maindialog::on_listOfRestaurants_itemSelectionChanged()
     }
 }
 
-
-
-
+/**
+ *
+ **/
 void maindialog::on_planATripButton_clicked()
 {
     ui->customerPages->setCurrentIndex(PLAN_A_TRIP);
 }
 
+/**
+ *
+ **/
 void maindialog::on_shortestTripButton_clicked()
 {
     ui->customerPages->setCurrentIndex(SHORT_TRIP);
 }
 
+/**
+ *
+ **/
 void maindialog::on_travelToAllButton_clicked()
 {
     // Set the go back button the 'arrows.png'
@@ -287,6 +295,9 @@ void maindialog::on_travelToAllButton_clicked()
     ui->customerPages->setCurrentIndex(TRIP_TO_ALL);
 }
 
+/**
+ *
+ **/
 void maindialog::on_matienanceButton_clicked()
 {
     ui->adminPages->setCurrentIndex(MATIENANCE);
@@ -305,9 +316,11 @@ void maindialog::on_matienanceButton_clicked()
         ui->listOfChangeRestaurants->addTopLevelItem(type);
 
         }
-
 }
 
+/**
+ *
+ **/
 void maindialog::on_editRestaurantButton_clicked()
 {
     // Set the go back button the 'arrows.png'
@@ -351,11 +364,17 @@ void maindialog::on_editRestaurantButton_clicked()
         }
 }
 
+/**
+ *
+ **/
 void maindialog::on_goBackFromEditRestaurant_clicked()
 {
     ui->adminPages->setCurrentIndex(MATIENANCE);
 }
 
+/**
+ *
+ **/
 void maindialog::on_addRestaurantButton_clicked()
 {
     // Set the go back button the 'arrows.png'
@@ -386,17 +405,26 @@ void maindialog::on_addRestaurantButton_clicked()
     ui->adminPages->setCurrentIndex(3);
 }
 
+/**
+ *
+ **/
 void maindialog::on_goBackFromAddRestaurantButton_clicked()
 {
     ui->adminPages->setCurrentIndex(MATIENANCE);
 }
 
+/**
+ *
+ **/
 void maindialog::on_goBackFromAddNewMenuButton_clicked()
 {
     ui->adminPages->setCurrentIndex(3);
 
 }
 
+/**
+ *
+ **/
 void maindialog::on_addNewRestaurantNextButton_clicked()
 {
     ui->newRestaurantErrorMessage->setVisible(false);
@@ -491,12 +519,17 @@ void maindialog::on_addNewRestaurantNextButton_clicked()
        }
 }
 
-
+/**
+ *
+ **/
 void maindialog::on_continueToTakeATripButton_clicked()
 {
     ui->customerPages->setCurrentIndex(TAKE_A_TRIP_INSTRUCTIONS);
 }
 
+/**
+ *
+ **/
 void maindialog::on_takeATripButton_clicked()
 {
     // Set the shopping cart the 'shop.png'
@@ -510,6 +543,9 @@ void maindialog::on_takeATripButton_clicked()
     ui->customerPages->setCurrentIndex(TAKE_A_TRIP);
 }
 
+/**
+ *
+ **/
 void maindialog::on_beginTripButton_clicked()
 {
 
@@ -535,7 +571,9 @@ void maindialog::on_beginTripButton_clicked()
 
 }
 
-
+/**
+ *
+ **/
 void maindialog::on_shoppingCartButton_clicked()
 {
     ShoppingCart *currentShoppingCart = new ShoppingCart;
@@ -548,6 +586,9 @@ void maindialog::on_shoppingCartButton_clicked()
 
 }
 
+/**
+ *
+ **/
 void maindialog::on_goToNextRestaurantButton_clicked()
 {
     if(ui->goToNextRestaurantButton->text() == "FINISH") {
@@ -556,6 +597,9 @@ void maindialog::on_goToNextRestaurantButton_clicked()
 
 }
 
+/**
+ *
+ **/
 void maindialog::on_listOfDistancesFromNewRestaurant_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     bool VALID_COL = 1;
@@ -564,17 +608,25 @@ void maindialog::on_listOfDistancesFromNewRestaurant_itemDoubleClicked(QTreeWidg
     }
 }
 
+/**
+ *
+ **/
 void maindialog::on_confirmTripToAllButton_clicked()
 {
     Travel newTrip;
 }
 
-
+/**
+ *
+ **/
 void maindialog::on_goBackFromCustomTripButton_clicked()
 {
     ui->customerPages->setCurrentIndex(PLAN_A_TRIP);
 }
 
+/**
+ *
+ **/
 void maindialog::on_customTripButton_clicked()
 {
     // Set the go back button the 'arrows.png'
@@ -586,11 +638,17 @@ void maindialog::on_customTripButton_clicked()
     ui->customerPages->setCurrentIndex(CUSTOM_TRIP);
 }
 
+/**
+ *
+ **/
 void maindialog::on_goBackFromTripToAllButton_clicked()
 {
     ui->customerPages->setCurrentIndex(TAKE_A_TRIP);
 }
 
+/**
+ *
+ **/
 void maindialog::on_addNewMenuItemButton_2_clicked()
 {
     //displays current menu items and prices
@@ -659,6 +717,9 @@ void maindialog::on_addNewMenuItemButton_2_clicked()
    }
 }
 
+/**
+ *
+ **/
 void maindialog::on_doneButtonOnAddMenuItem_clicked()
 {
     //switch to admin home page
