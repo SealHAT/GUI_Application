@@ -50,3 +50,68 @@ void maindialog::centerDialog() {
     int y = (screenGeometry.height() - this->height()) / 2;
     this->move(x, y);
 }
+
+void maindialog::on_configureHomeButton_clicked()
+{
+    ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
+}
+
+void maindialog::on_lightButton_clicked()
+{
+    //set button colors. selected tab will be highlighted
+    ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->imuButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->lightButton->setStyleSheet("background-color:rgb(241, 181, 33)");
+    ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+
+    ui->ConfigurePages->setCurrentIndex(LIGHT_CONFIGURE);
+}
+
+void maindialog::on_temperatureButton_clicked()
+{
+    //set button colors. selected tab will be highlighted
+    ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->imuButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->temperatureButton->setStyleSheet("background-color:rgb(241, 181, 33)");
+
+    ui->ConfigurePages->setCurrentIndex(TEMPERATURE_CONFIGURE);
+}
+
+void maindialog::on_ekgButton_clicked()
+{
+    //set button colors. selected tab will be highlighted
+    ui->ekgButton->setStyleSheet("background-color:rgb(241, 181, 33)");
+    ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->imuButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+
+    ui->ConfigurePages->setCurrentIndex(EKG_CONFIGURE);
+}
+
+void maindialog::on_imuButton_clicked()
+{
+    //set button colors. selected tab will be highlighted
+    ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->imuButton->setStyleSheet("background-color:rgb(241, 181, 33)");
+    ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+
+    ui->ConfigurePages->setCurrentIndex(IMU_CONFIGURE);
+}
+
+void maindialog::on_gpsButton_clicked()
+{
+    //set button colors. selected tab will be highlighted
+    ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->gpsButton->setStyleSheet("background-color:rgb(241, 181, 33)");
+    ui->imuButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+
+    ui->ConfigurePages->setCurrentIndex(GPS_CONFIGURE);
+}

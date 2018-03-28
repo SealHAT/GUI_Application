@@ -54,6 +54,18 @@ private slots:
 
     //void on_backButton_clicked();
 
+    void on_configureHomeButton_clicked();
+
+    void on_lightButton_clicked();
+
+    void on_temperatureButton_clicked();
+
+    void on_ekgButton_clicked();
+
+    void on_imuButton_clicked();
+
+    void on_gpsButton_clicked();
+
 private:
     Ui::maindialog *ui;
 };
