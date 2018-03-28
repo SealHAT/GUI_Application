@@ -26,7 +26,7 @@
      <height>561</height>
     </rect>
    </property>
-   <widget class="QWidget" name="login">
+   <widget class="QWidget" name="StartPage">
     <widget class="QStackedWidget" name="loginStacked">
      <property name="geometry">
       <rect>
@@ -46,8 +46,8 @@
       <widget class="QPushButton" name="retrieveDataButton">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>220</y>
+         <x>160</x>
+         <y>250</y>
          <width>113</width>
          <height>32</height>
         </rect>
@@ -109,84 +109,11 @@ border: none;</string>
         <set>Qt::NoTextInteraction</set>
        </property>
       </widget>
-      <widget class="QLineEdit" name="usernameLogin">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>260</y>
-         <width>51</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgba(255, 255, 255, 100)</string>
-       </property>
-       <property name="maxLength">
-        <number>25</number>
-       </property>
-       <property name="frame">
-        <bool>false</bool>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="passwordLogin">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>360</y>
-         <width>161</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <underline>false</underline>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>IBeamCursor</cursorShape>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::StrongFocus</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgba(255, 255, 255, 100)</string>
-       </property>
-       <property name="inputMethodHints">
-        <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="maxLength">
-        <number>25</number>
-       </property>
-       <property name="frame">
-        <bool>false</bool>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::Password</enum>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
       <widget class="QPushButton" name="configureDevOptionButton">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>170</y>
+         <x>160</x>
+         <y>190</y>
          <width>113</width>
          <height>32</height>
         </rect>
@@ -212,30 +139,6 @@ border: none;</string>
        </property>
        <property name="flat">
         <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="passwordTitle">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>340</y>
-         <width>71</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Futura</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: white</string>
-       </property>
-       <property name="text">
-        <string>Password</string>
        </property>
       </widget>
       <widget class="QLabel" name="companyLogo">
@@ -268,430 +171,14 @@ border: none;</string>
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QLabel" name="label_4">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>320</y>
-         <width>47</width>
-         <height>13</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="signUpPage">
-      <widget class="QLabel" name="createAnAccountTitle">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>20</y>
-         <width>211</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Shree Devanagari 714</family>
-         <pointsize>24</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255)</string>
-       </property>
-       <property name="text">
-        <string>Create an Account</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="createAccountPasswordTitle">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>100</y>
-         <width>71</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Futura</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: white</string>
-       </property>
-       <property name="text">
-        <string>Password</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="newUsername">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>70</y>
-         <width>161</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgba(255, 255, 255, 100)</string>
-       </property>
-       <property name="frame">
-        <bool>false</bool>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="signUpUsername">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>50</y>
-         <width>81</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Futura</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: white</string>
-       </property>
-       <property name="text">
-        <string>Username</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="newPassword">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>120</y>
-         <width>161</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgba(255, 255, 255, 100)</string>
-       </property>
-       <property name="frame">
-        <bool>false</bool>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="retryPasswordTitle">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>150</y>
-         <width>141</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Futura</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: white</string>
-       </property>
-       <property name="text">
-        <string>Re-enter password</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="retryPassword">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>170</y>
-         <width>161</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgba(255, 255, 255, 100)</string>
-       </property>
-       <property name="frame">
-        <bool>false</bool>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="createAccountButton">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>360</y>
-         <width>113</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Futura</family>
-         <pointsize>13</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color:rgb(63, 55, 76);
-color: rgb(255, 255, 255);
-border: none;</string>
-       </property>
-       <property name="text">
-        <string>SIGN UP</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="goBackButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>20</y>
-         <width>21</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Futura</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: none;
-color: rgb(255, 255, 255);
-border: none;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="termsAndConditionsTitle">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>200</y>
-         <width>191</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Futura</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: white</string>
-       </property>
-       <property name="text">
-        <string>Terms and Conditions</string>
-       </property>
-      </widget>
-      <widget class="QTextBrowser" name="termsAndConditions">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>220</y>
-         <width>361</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="mouseTracking">
-        <bool>false</bool>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::WheelFocus</enum>
-       </property>
-       <property name="contextMenuPolicy">
-        <enum>Qt::DefaultContextMenu</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgba(255, 255, 255, 100);
-</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-       <property name="lineWidth">
-        <number>0</number>
-       </property>
-       <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QAbstractScrollArea::AdjustIgnored</enum>
-       </property>
-       <property name="lineWrapMode">
-        <enum>QTextEdit::WidgetWidth</enum>
-       </property>
-       <property name="lineWrapColumnOrWidth">
-        <number>41</number>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-       <property name="html">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:16px; margin-bottom:16px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Helvetica Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol'; font-size:12pt; color:#ffffff;&quot;&gt;Hereby I agree to the user terms implied by quasar:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:16px; margin-bottom:16px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Helvetica Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol'; font-size:12pt; color:#ffffff;&quot;&gt;All the information provided will be used to provide a better experience for the user.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:16px; margin-bottom:16px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Helvetica Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol'; font-size:12pt; color:#ffffff;&quot;&gt;I will use the app just for the route features, not for navigation.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:16px; margin-bottom:16px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Helvetica Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol'; font-size:12pt; color:#ffffff;&quot;&gt;The accuracy may differ depending of the localization settings in the phone.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:16px; margin-bottom:16px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Helvetica Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol'; font-size:12pt; color:#ffffff;&quot;&gt;We are not responsible for any incidents from point to point, since the application is not capable of predicting what is happening in the current time.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:16px; margin-bottom:16px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Helvetica Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol'; font-size:12pt; color:#ffffff;&quot;&gt;Once a transaction has taken place, any refunds or returns will be in between foodie and restaurant. We will not take any place in the prices.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:16px; margin-bottom:16px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Helvetica Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol'; font-size:12pt; color:#ffffff;&quot;&gt;By agreeing to this terms, I certify that I have read the terms and conditions of the company and will follow them. In case of a legal case, this terms will be used either agains or at the favor of the foodie.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="overwriteMode">
-        <bool>false</bool>
-       </property>
-       <property name="tabStopWidth">
-        <number>75</number>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="agreementCheckBox">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>310</y>
-         <width>361</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: white</string>
-       </property>
-       <property name="text">
-        <string>I have read and agree to quasar's terms and conditions. </string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="usernameError">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>70</y>
-         <width>181</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(248,44,126);
-</string>
-       </property>
-       <property name="text">
-        <string>Username error message</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="retryPasswordError">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>171</y>
-         <width>221</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(248,44,126);
-</string>
-       </property>
-       <property name="text">
-        <string>Re-try error</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="termsAndConditionsError">
-       <property name="geometry">
-        <rect>
-         <x>25</x>
-         <y>330</y>
-         <width>261</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(248,44,126);
-</string>
-       </property>
-       <property name="text">
-        <string>** Please complete terms and conditions.</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="passwordError">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>120</y>
-         <width>181</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(248,44,126);
-</string>
-       </property>
-       <property name="text">
-        <string>Password error </string>
-       </property>
-      </widget>
-      <zorder>createAnAccountTitle</zorder>
-      <zorder>createAccountPasswordTitle</zorder>
-      <zorder>newUsername</zorder>
-      <zorder>signUpUsername</zorder>
-      <zorder>newPassword</zorder>
-      <zorder>retryPasswordTitle</zorder>
-      <zorder>retryPassword</zorder>
-      <zorder>createAccountButton</zorder>
-      <zorder>termsAndConditionsTitle</zorder>
-      <zorder>termsAndConditions</zorder>
-      <zorder>agreementCheckBox</zorder>
-      <zorder>usernameError</zorder>
-      <zorder>retryPasswordError</zorder>
-      <zorder>termsAndConditionsError</zorder>
-      <zorder>passwordError</zorder>
-      <zorder>goBackButton</zorder>
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="customer">
-    <widget class="QGraphicsView" name="sideBarBackground">
+   <widget class="QWidget" name="Configure">
+    <widget class="QGraphicsView" name="ConfigureView">
      <property name="geometry">
       <rect>
-       <x>-70</x>
+       <x>-60</x>
        <y>10</y>
        <width>271</width>
        <height>621</height>
@@ -730,135 +217,7 @@ p, li { white-space: pre-wrap; }
       <enum>QFrame::Plain</enum>
      </property>
     </widget>
-    <widget class="QPushButton" name="takeATripButton">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>280</y>
-       <width>113</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Futura</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgb(152, 162, 173);
-color: rgb(0, 0, 0);
-border: none;</string>
-     </property>
-     <property name="text">
-      <string>LIGHT - TAKE A TRIP</string>
-     </property>
-     <property name="autoDefault">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="travelLogButton">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>200</y>
-       <width>113</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Futura</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgb(152, 162, 173);
-color: rgb(0, 0, 0);
-border: none;</string>
-     </property>
-     <property name="text">
-      <string>HEART - TRAVEL LOG</string>
-     </property>
-     <property name="autoDefault">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="restaurantsButton">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>160</y>
-       <width>113</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Futura</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgb(152, 162, 173);
-color: rgb(0, 0, 0);
-border: none;</string>
-     </property>
-     <property name="text">
-      <string>IMU - PLACES</string>
-     </property>
-     <property name="autoDefault">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="planATripButton">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>240</y>
-       <width>113</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Futura</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgb(152, 162, 173);
-color: rgb(0, 0, 0);
-border: none;</string>
-     </property>
-     <property name="text">
-      <string>TEMP - PLAN A TRIP</string>
-     </property>
-     <property name="autoDefault">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="loggedInUsername">
+    <widget class="QLabel" name="SensorHeadingLabel">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -870,7 +229,9 @@ border: none;</string>
      <property name="font">
       <font>
        <family>Futura</family>
-       <pointsize>14</pointsize>
+       <pointsize>18</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="focusPolicy">
@@ -880,18 +241,18 @@ border: none;</string>
       <string notr="true">color: rgb(241, 181, 33)</string>
      </property>
      <property name="text">
-      <string>Username</string>
+      <string>Sensors</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QPushButton" name="signOutButton">
+    <widget class="QPushButton" name="backButton">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>10</x>
        <y>10</y>
-       <width>113</width>
+       <width>41</width>
        <height>32</height>
       </rect>
      </property>
@@ -906,7 +267,7 @@ border: none;</string>
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QStackedWidget" name="customerPages">
+    <widget class="QStackedWidget" name="ConfigurePages">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -921,13 +282,13 @@ border: none;</string>
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="customerHomePage">
+     <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>20</x>
          <y>10</y>
-         <width>501</width>
+         <width>591</width>
          <height>61</height>
         </rect>
        </property>
@@ -937,8 +298,11 @@ border: none;</string>
          <pointsize>19</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:rgb(0, 0, 0)</string>
+       </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;WELCOME BACK EXPLORER!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Configure SealHAT Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="homePageDescription">
@@ -947,16 +311,20 @@ border: none;</string>
          <x>50</x>
          <y>90</y>
          <width>531</width>
-         <height>111</height>
+         <height>31</height>
         </rect>
        </property>
        <property name="font">
         <font>
          <family>.SF NS Text</family>
+         <pointsize>10</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:rgb(0, 0, 0)</string>
+       </property>
        <property name="text">
-        <string>Hi there, ready to start your next exploration?! Find new discoveries of delicious food at the speed of light.</string>
+        <string>This page will display power and storage estimates. The tabs on the left will be used to set up each sensor.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -2764,7 +2132,7 @@ border: none;</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QPushButton" name="customerHomeButton">
+    <widget class="QPushButton" name="gpsButton">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -2784,7 +2152,7 @@ color: rgb(0, 0, 0);
 border: none;</string>
      </property>
      <property name="text">
-      <string>GPS - HOME</string>
+      <string>GPS</string>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -2796,11 +2164,139 @@ border: none;</string>
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="purchaseHistoryButton">
+    <widget class="QPushButton" name="imuButton">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>160</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Futura</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgb(152, 162, 173);
+color: rgb(0, 0, 0);
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>IMU</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ekgButton">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>200</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Futura</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgb(152, 162, 173);
+color: rgb(0, 0, 0);
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>EKG</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="temperatureButton">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>240</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Futura</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgb(152, 162, 173);
+color: rgb(0, 0, 0);
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>TEMPERATURE</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="lightButton">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>280</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Futura</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgb(152, 162, 173);
+color: rgb(0, 0, 0);
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>LIGHT</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="configureHomeButton">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>500</y>
+       <y>490</y>
        <width>151</width>
        <height>32</height>
       </rect>
@@ -2809,15 +2305,17 @@ border: none;</string>
       <font>
        <family>Futura</family>
        <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color:rgb(167,203,218);
-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
 border: none;</string>
      </property>
      <property name="text">
-      <string>PREVIEW - PURCH HIST</string>
+      <string>CONFIGURE HOME</string>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -2829,17 +2327,17 @@ border: none;</string>
       <bool>false</bool>
      </property>
     </widget>
-    <zorder>sideBarBackground</zorder>
+    <zorder>ConfigureView</zorder>
     <zorder>topHeadingBackground</zorder>
-    <zorder>travelLogButton</zorder>
-    <zorder>restaurantsButton</zorder>
-    <zorder>planATripButton</zorder>
-    <zorder>loggedInUsername</zorder>
-    <zorder>customerPages</zorder>
-    <zorder>customerHomeButton</zorder>
-    <zorder>purchaseHistoryButton</zorder>
-    <zorder>signOutButton</zorder>
-    <zorder>takeATripButton</zorder>
+    <zorder>SensorHeadingLabel</zorder>
+    <zorder>ConfigurePages</zorder>
+    <zorder>backButton</zorder>
+    <zorder>gpsButton</zorder>
+    <zorder>imuButton</zorder>
+    <zorder>ekgButton</zorder>
+    <zorder>temperatureButton</zorder>
+    <zorder>lightButton</zorder>
+    <zorder>configureHomeButton</zorder>
    </widget>
    <widget class="QWidget" name="admin">
     <widget class="QPushButton" name="adminHomeButton">

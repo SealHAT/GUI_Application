@@ -15,33 +15,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     maindialog.cpp \
-    account.cpp \
-    restaurant.cpp \
-    fooditem.cpp \
-    customer.cpp \
-    customerlist.cpp \
-    login.cpp \
-    restaurantlist.cpp \
-    travel.cpp \
-    shoppingcart.cpp \
-    sql.cpp
+    login.cpp
 
 FORMS    += \
-    maindialog.ui \
-    shoppingcart.ui
+    maindialog.ui
 
 
-HEADERS  += restaurantlist.h \
-    restaurant.h \
-    fooditem.h \
-    maindialog.h \
-    account.h \
-    customer.h \
-    customerlist.h \
-    vertex.h \
-    travel.h \
-    shoppingcart.h \
-    sql.h
+HEADERS  += \
+    maindialog.h
 
 RESOURCES += \
     images.qrc
