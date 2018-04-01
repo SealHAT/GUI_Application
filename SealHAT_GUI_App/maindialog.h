@@ -66,6 +66,8 @@ private slots:
 
     void on_gpsButton_clicked();
 
+    void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);
+
 private:
     Ui::maindialog *ui;
 };
