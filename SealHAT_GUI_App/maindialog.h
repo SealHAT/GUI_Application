@@ -23,13 +23,12 @@ class maindialog : public QDialog
         LIGHT_CONFIGURE             = 5,
     };
 
-    enum ADMIN_PAGES {
+    enum DATA_RETRIEVAL_PAGES {
         RETRIEVE_DATA_HOME_PAGE,
-        MATIENANCE,
-        CUSTOMER_HISTORY,
+        DOWNLOAD_PROGRESS_PAGE,
     };
 
-    enum LOGIN_PAGES {
+    enum WELCOME_PAGES {
         INITIAL_PAGE = 0,
     };
 
@@ -42,17 +41,11 @@ public:
 private slots:
     void on_backButton_clicked(); //
 
-    //void on_configureHomeButton_clicked(); //
-
     //void on_adminSignOutButton_clicked(); //
 
     void on_configureDevOptionButton_clicked(); //
 
     void on_retrieveDataButton_clicked(); //
-
-    void on_goBackButton_clicked();
-
-    //void on_backButton_clicked();
 
     void on_configureHomeButton_clicked();
 
@@ -67,6 +60,8 @@ private slots:
     void on_gpsButton_clicked();
 
     void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);
+
+    void on_backButton2_clicked();
 
 private:
     Ui::maindialog *ui;

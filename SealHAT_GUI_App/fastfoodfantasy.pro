@@ -15,7 +15,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     maindialog.cpp \
-    login.cpp
+    configure.cpp \
+    retrievedata.cpp
 
 FORMS    += \
     maindialog.ui
