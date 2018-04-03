@@ -67,6 +67,18 @@ void maindialog::on_lightButton_clicked()
     ui->ConfigurePages->setCurrentIndex(LIGHT_CONFIGURE);
 }
 
+/**************************************************************
+ * FUNCTION: on_temperatureButton_clicked
+ * ------------------------------------------------------------
+ * This function gets called when the Temperature Button is
+ * pressed. It sets the active page to the Configure
+ * Temperature Sensor page. On this page, different attributes
+ * of the temperature sensor may be set.
+ *
+ *  Parameters: none
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_temperatureButton_clicked()
 {
     //set button colors. selected tab will be highlighted
@@ -75,6 +87,17 @@ void maindialog::on_temperatureButton_clicked()
     ui->ConfigurePages->setCurrentIndex(TEMPERATURE_CONFIGURE);
 }
 
+/**************************************************************
+ * FUNCTION: on_ekgButton_clicked
+ * ------------------------------------------------------------
+ * This function gets called when the EKG Button is pressed. It
+ * sets the active page to the Configure EKG Sensor page. On
+ * this page, different attributes of the EKG sensor may be set.
+ *
+ *  Parameters: none
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_ekgButton_clicked()
 {
     //set button colors. selected tab will be highlighted
@@ -83,6 +106,17 @@ void maindialog::on_ekgButton_clicked()
     ui->ConfigurePages->setCurrentIndex(EKG_CONFIGURE);
 }
 
+/**************************************************************
+ * FUNCTION: on_imuButton_clicked
+ * ------------------------------------------------------------
+ * This function gets called when the IMU Button is pressed. It
+ * sets the active page to the Configure IMU Sensor page. On
+ * this page, different attributes of the IMU sensor may be set.
+ *
+ *  Parameters: none
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_imuButton_clicked()
 {
     //set button colors. selected tab will be highlighted
@@ -91,6 +125,17 @@ void maindialog::on_imuButton_clicked()
     ui->ConfigurePages->setCurrentIndex(IMU_CONFIGURE);
 }
 
+/**************************************************************
+ * FUNCTION: on_gpsButton_clicked
+ * ------------------------------------------------------------
+ * This function gets called when the GPS Button is pressed. It
+ * sets the active page to the Configure GPS Sensor page. On
+ * this page, different attributes of the GPS sensor may be set.
+ *
+ *  Parameters: none
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_gpsButton_clicked()
 {
     //set button colors. selected tab will be highlighted
@@ -99,6 +144,24 @@ void maindialog::on_gpsButton_clicked()
     ui->ConfigurePages->setCurrentIndex(GPS_CONFIGURE);
 }
 
+/**************************************************************
+ * FUNCTION: setActiveButtonColor
+ * ------------------------------------------------------------
+ * This function sets the colors of the sensor buttons. The
+ * button for the page that is currently active will be
+ * highlighted a different color. All of the remaining buttons
+ * will be their normal color. This function uses the
+ * enumerated page number to determine which button to
+ * highlight. All of the other buttons are "set" to their
+ * normal colors if any of them were previously highlighted.
+ * Upon returning to the configure homepage, all of the buttons
+ * are set back to their normal color.
+ *
+ *  Parameters:
+ *      pageToHighlight : Enum value of button to highlight.
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
 {
     switch(pageToHighlight)
