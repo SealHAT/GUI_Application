@@ -14,6 +14,12 @@ class maindialog : public QDialog
 {
     Q_OBJECT
 
+ struct xcel{
+     uint32_t time;
+     uint8_t mode; //scale/power/sampling rate
+     uint8_t theshold;
+     uint8_t Duration;
+ };
     enum CONFIGURE_PAGES {
         CONFIGURE_DEV_HOME_PAGE     = 0,
         GPS_CONFIGURE               = 1,
@@ -39,6 +45,12 @@ class maindialog : public QDialog
     enum FREQUENCY_VALUES {
         FREQ_10HZ = 0,
     };
+    enum VALIDATOR_STATES {
+        INVALID = 0,
+        INTERMEDIATE = 1,
+        ACCEPTABLE = 2
+    };
+
 
 public:
     explicit maindialog(QWidget *parent = 0);
@@ -71,9 +83,9 @@ private slots:
 
     void on_backButton2_clicked();
 
-    //void on_lineEdit_2_editingFinished();
+    void on_xcel_thres_editingFinished();
 
-    void on_xcel_thres_returnPressed();
+    void on_xcel_duration_editingFinished();
 
 private:
     Ui::maindialog *ui;
