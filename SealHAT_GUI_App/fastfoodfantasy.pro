@@ -16,7 +16,8 @@ TEMPLATE = app
 SOURCES += main.cpp\
     maindialog.cpp \
     configure.cpp \
-    retrievedata.cpp
+    retrievedata.cpp \
+    imu_config.cpp
 
 FORMS    += \
     maindialog.ui

@@ -17,6 +17,9 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     // Set size for smaller welcome screen.
     this->setFixedSize(421, 421);
+
+    // Hide the yay label on the IMU page
+    ui->warn_label->hide();
 }
 
 /**
@@ -54,3 +57,8 @@ void maindialog::centerDialog() {
     int y = (screenGeometry.height() - this->height()) / 2;
     this->move(x, y);
 }
+
+
+
+
+

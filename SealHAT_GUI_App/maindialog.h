@@ -32,6 +32,14 @@ class maindialog : public QDialog
         INITIAL_PAGE = 0,
     };
 
+    enum SENSOR_MODE{
+        DISABLE = 0
+    };
+
+    enum FREQUENCY_VALUES {
+        FREQ_10HZ = 0,
+    };
+
 public:
     explicit maindialog(QWidget *parent = 0);
     void centerDialog();
@@ -62,6 +70,10 @@ private slots:
     void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);
 
     void on_backButton2_clicked();
+
+    //void on_lineEdit_2_editingFinished();
+
+    void on_xcel_thres_returnPressed();
 
 private:
     Ui::maindialog *ui;
