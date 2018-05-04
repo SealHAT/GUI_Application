@@ -87,6 +87,11 @@ private slots:
 
     void on_xcel_duration_editingFinished();
 
+
+    void on_Xcel_swPAGE_clicked();
+
+    void on_Mag_swPAGE_clicked();
+
 private:
     Ui::maindialog *ui;
 };

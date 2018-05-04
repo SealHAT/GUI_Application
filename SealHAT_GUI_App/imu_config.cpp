@@ -6,6 +6,16 @@
 
 #include <QDebug>
 
+void maindialog::on_Mag_swPAGE_clicked()
+{
+
+}
+
+void maindialog::on_Xcel_swPAGE_clicked()
+{
+
+}
+
 void maindialog::on_xcel_thres_editingFinished()
 {
     int valid;

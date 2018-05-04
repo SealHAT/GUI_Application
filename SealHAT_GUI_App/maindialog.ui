@@ -776,6 +776,19 @@ border: none;</string>
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;Invalid time input! (0.32s - 128s)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
+        <widget class="QPushButton" name="Mag_swPAGE">
+         <property name="geometry">
+          <rect>
+           <x>510</x>
+           <y>20</y>
+           <width>113</width>
+           <height>32</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Magnetometer</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QWidget" name="magConfigPage">
         <widget class="QLabel" name="mag_title">
@@ -921,6 +934,19 @@ border: none;</string>
            <string>100 Hz</string>
           </property>
          </item>
+        </widget>
+        <widget class="QPushButton" name="Xcel_swPAGE">
+         <property name="geometry">
+          <rect>
+           <x>490</x>
+           <y>10</y>
+           <width>113</width>
+           <height>32</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Accelerometer</string>
+         </property>
         </widget>
        </widget>
       </widget>
@@ -2252,7 +2278,7 @@ border: none;</string>
         <rect>
          <x>470</x>
          <y>360</y>
-         <width>131</width>
+         <width>160</width>
          <height>51</height>
         </rect>
        </property>

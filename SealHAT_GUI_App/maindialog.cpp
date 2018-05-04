@@ -58,3 +58,6 @@ void maindialog::centerDialog() {
     int y = (screenGeometry.height() - this->height()) / 2;
     this->move(x, y);
 }
+
+
+
