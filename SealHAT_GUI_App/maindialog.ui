@@ -436,7 +436,7 @@ border: none;</string>
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="xcelConfigPage">
         <widget class="QTimeEdit" name="xcel_timeEdit">
@@ -1166,6 +1166,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>0</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_2">
        <property name="geometry">
@@ -1178,6 +1181,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>1</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_3">
@@ -1192,6 +1198,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>2</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_4">
        <property name="geometry">
@@ -1204,6 +1213,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>3</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_5">
@@ -1218,6 +1230,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>4</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_6">
        <property name="geometry">
@@ -1230,6 +1245,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>5</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_7">
@@ -1244,6 +1262,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>6</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_8">
        <property name="geometry">
@@ -1256,6 +1277,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>7</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_9">
@@ -1270,6 +1294,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>8</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_10">
        <property name="geometry">
@@ -1282,6 +1309,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>9</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_11">
@@ -1296,6 +1326,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>10</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_12">
        <property name="geometry">
@@ -1308,6 +1341,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>11</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_13">
@@ -1322,6 +1358,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>12</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_14">
        <property name="geometry">
@@ -1334,6 +1373,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>13</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_15">
@@ -1348,6 +1390,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>14</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_16">
        <property name="geometry">
@@ -1360,6 +1405,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>15</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_17">
@@ -1374,6 +1422,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>16</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_18">
        <property name="geometry">
@@ -1386,6 +1437,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>17</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_19">
@@ -1400,6 +1454,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>18</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_20">
        <property name="geometry">
@@ -1412,6 +1469,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>19</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_21">
@@ -1426,6 +1486,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>20</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_22">
        <property name="geometry">
@@ -1438,6 +1501,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>21</number>
        </property>
       </widget>
       <widget class="QPushButton" name="b_23">
@@ -1452,6 +1518,9 @@ border: none;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="button_shift" stdset="0">
+        <number>22</number>
+       </property>
       </widget>
       <widget class="QPushButton" name="b_24">
        <property name="geometry">
@@ -1464,6 +1533,9 @@ border: none;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="button_shift" stdset="0">
+        <number>23</number>
        </property>
       </widget>
       <widget class="QLabel" name="label_13">
@@ -1716,9 +1788,9 @@ border: none;</string>
       <widget class="QLabel" name="label_36">
        <property name="geometry">
         <rect>
-         <x>500</x>
+         <x>510</x>
          <y>180</y>
-         <width>31</width>
+         <width>41</width>
          <height>16</height>
         </rect>
        </property>
@@ -1789,6 +1861,19 @@ border: none;</string>
        </property>
        <property name="text">
         <string>9pm</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_23">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>150</y>
+         <width>31</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Time&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>

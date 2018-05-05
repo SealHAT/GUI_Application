@@ -6,6 +6,7 @@
 #include <QTreeWidgetItem>
 #include <list>
 
+
 namespace Ui {
 class maindialog;
 }
@@ -14,16 +15,26 @@ class maindialog : public QDialog
 {
     Q_OBJECT
 
- struct Xcel{
-     uint32_t time;
-     //uint8_t dimension;
-     //uint8_t scale;
-    // uint8_t power;
+    struct Xcel{
+        uint32_t time;
+        //uint8_t dimension;
+        //uint8_t scale;
+        // uint8_t power;
 
-     uint8_t mode; //  6D/4D [7]/scale[6:5]/power[4:3]/sampling rate[2:0]
-     uint8_t threshold;
-     uint8_t duration;
- };
+        uint8_t mode; //  6D/4D [7]/scale[6:5]/power[4:3]/sampling rate[2:0]
+        uint8_t threshold;
+        uint8_t duration;
+    };
+
+    struct Temp{
+        uint32_t temp_time = 0;
+        uint8_t mode = 0;
+
+    };
+
+    Temp finalTemp;
+    Temp temporaryTemp;
+
     enum CONFIGURE_PAGES {
         CONFIGURE_DEV_HOME_PAGE     = 0,
         GPS_CONFIGURE               = 1,
@@ -159,14 +170,8 @@ private slots:
 
     void on_mag_finishButton_clicked();
 
-    void on_b_23_clicked();
+    void hour_clicked();
 
-
-    void on_b_clicked();
-
-    void on_b_toggled(bool checked);
-
-    void on_b_clicked(bool checked);
 
 private:
     Ui::maindialog *ui;
