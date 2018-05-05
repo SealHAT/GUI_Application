@@ -4,7 +4,7 @@
 #include <QMessageBox>
 
 #include <QDebug>
-
+bool sw = true;
 /**
  * Initial GUI setup.
  **/
@@ -61,3 +61,49 @@ void maindialog::centerDialog() {
 
 
 
+void maindialog::on_b_23_clicked()
+{
+    if(sw == true){
+        ui->b_23->setStyleSheet("background-color:rgb(34,139,34)");
+        sw = false;
+
+    }else{
+        ui->b_23->setStyleSheet("background-color:rgb(152, 162, 173)");
+        sw = true;
+    }
+
+}
+
+/*void maindialog::on_b_23_clicked(bool checked)
+{
+    if(checked == true){
+        ui->b_23->setStyleSheet("background-color:rgb(34,139,34)");
+        //sw -= 1;
+
+    }else{
+        ui->b_23->setStyleSheet("background-color:rgb(152, 162, 173)");
+    }
+}*/
+
+void maindialog::on_b_clicked()
+{
+
+}
+
+void maindialog::on_b_toggled(bool checked)
+{
+    if(checked == true){
+        ui->b->setStyleSheet("background-color:rgb(34,139,34)");
+        //checked = false;
+
+    }else{
+        ui->b->setStyleSheet("background-color:rgb(152, 162, 173)");
+        //checked = true;
+    }
+
+}
+
+void maindialog::on_b_clicked(bool checked)
+{
+
+}

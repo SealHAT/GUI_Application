@@ -14,11 +14,15 @@ class maindialog : public QDialog
 {
     Q_OBJECT
 
- struct xcel{
+ struct Xcel{
      uint32_t time;
-     uint8_t mode; //scale/power/sampling rate
-     uint8_t theshold;
-     uint8_t Duration;
+     //uint8_t dimension;
+     //uint8_t scale;
+    // uint8_t power;
+
+     uint8_t mode; //  6D/4D [7]/scale[6:5]/power[4:3]/sampling rate[2:0]
+     uint8_t threshold;
+     uint8_t duration;
  };
     enum CONFIGURE_PAGES {
         CONFIGURE_DEV_HOME_PAGE     = 0,
@@ -38,13 +42,55 @@ class maindialog : public QDialog
         INITIAL_PAGE = 0,
     };
 
-    enum SENSOR_MODE{
-        DISABLE = 0
+    enum IMU_MODE{
+        ACC_6D_ENABLE       = 0x80,
+        ACC_4D_ENABLE       = 0x00,
+
+        ACC_2G_SCALE        = 0x00,
+        ACC_4G_SCALE        = 0x20,
+        ACC_8G_SCALE        = 0x40,
+
+        ACC_HR_PWR          = 0x00,
+        ACC_NORM_PWR        = 0x08,
+        ACC_LP_PWR          = 0x10,
+
+        ACC_1HZ_FREQ        = 0x000,
+        ACC_10HZ_FREQ       = 0x001,
+        ACC_25HZ_FREQ       = 0x010,
+        ACC_50HZ_FREQ       = 0x011,
+        ACC_100HZ_FREQ      = 0x100,
+        ACC_200HZ_FREQ      = 0x101,
+        ACC_400HZ_FREQ      = 0x110,
     };
 
-    enum FREQUENCY_VALUES {
-        FREQ_10HZ = 0,
+    enum IMU_PAGES {
+        XCEL_CONFIGURE              = 0,
+        MAG_CONFIGURE               = 1,
     };
+
+    enum PWR_MODE {
+        ACC_HR      = 0,
+        ACC_NORMAL  = 1,
+        ACC_LP  = 2,
+    };
+
+    enum XCEL_SCALE {
+        ACC_2G = 0,
+        ACC_4G = 1,
+        ACC_8G = 2,
+    };
+
+    enum XCEL_FREQUENCY_VALUES {
+        FREQ_1HZ = 0,
+        FREQ_10HZ = 1,
+        FREQ_25HZ = 2,
+        FREQ_50HZ = 3,
+        FREQ_100HZ = 4,
+        FREQ_200HZ = 5,
+        FREQ_400HZ = 6,
+    };
+
+
     enum VALIDATOR_STATES {
         INVALID = 0,
         INTERMEDIATE = 1,
@@ -83,14 +129,44 @@ private slots:
 
     void on_backButton2_clicked();
 
+    //void setIMUButtonColor(IMU_PAGES pageToHighlight);
+
     void on_xcel_thres_editingFinished();
 
     void on_xcel_duration_editingFinished();
 
-
     void on_Xcel_swPAGE_clicked();
 
     void on_Mag_swPAGE_clicked();
+
+    void on_IMU_SW_clicked();
+
+    //void setActiveIMU_PAGEColor(IMU_MODE Mode);
+
+    void IMUxcel_Disable();
+
+    void IMUmag_Disable();
+
+    void IMUxcel_Enable();
+
+    void IMUmag_Enable();
+
+    void on_xcel_SW_clicked();
+
+    void on_mag_SW_clicked();
+
+    void on_xcel_finishButton_clicked();
+
+    void on_mag_finishButton_clicked();
+
+    void on_b_23_clicked();
+
+
+    void on_b_clicked();
+
+    void on_b_toggled(bool checked);
+
+    void on_b_clicked(bool checked);
 
 private:
     Ui::maindialog *ui;
