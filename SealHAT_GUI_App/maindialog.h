@@ -140,8 +140,6 @@ private slots:
 
     void on_backButton2_clicked();
 
-    //void setIMUButtonColor(IMU_PAGES pageToHighlight);
-
     void on_xcel_thres_editingFinished();
 
     void on_xcel_duration_editingFinished();
@@ -151,8 +149,6 @@ private slots:
     void on_Mag_swPAGE_clicked();
 
     void on_IMU_SW_clicked();
-
-    //void setActiveIMU_PAGEColor(IMU_MODE Mode);
 
     void IMUxcel_Disable();
 
@@ -170,7 +166,11 @@ private slots:
 
     void on_mag_finishButton_clicked();
 
+    void temp_timeTable_control();
+
     void hour_clicked();
+
+    void labels_hide();
 
 
 private:

@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     maindialog.cpp \
     configure.cpp \
     retrievedata.cpp \
-    imu_config.cpp
+    imu_config.cpp \
+    temp_config.cpp
 
 FORMS    += \
     maindialog.ui

@@ -12,8 +12,6 @@
 
 void maindialog::IMUxcel_Disable()
 {
-    ui->xcel_timeEdit->setDisabled(true);
-    ui->xcel_timeEdit_2->setDisabled(true);
     ui->xcel_scaleBox->setDisabled(true);
     ui->xcel_pwrBox->setDisabled(true);
     ui->xcel_freqBox->setDisabled(true);
@@ -26,8 +24,6 @@ void maindialog::IMUxcel_Disable()
 
 void maindialog::IMUmag_Disable()
 {
-    ui->mag_timeEdit->setDisabled(true);
-    ui->mag_timeEdit_2->setDisabled(true);
     ui->mag_pwrBox->setDisabled(true);
     ui->mag_freqBox->setDisabled(true);
     ui->mag_finishButton->setDisabled(true);
@@ -35,8 +31,6 @@ void maindialog::IMUmag_Disable()
 
 void maindialog::IMUxcel_Enable()
 {
-    ui->xcel_timeEdit->setDisabled(false);
-    ui->xcel_timeEdit_2->setDisabled(false);
     ui->xcel_scaleBox->setDisabled(false);
     ui->xcel_pwrBox->setDisabled(false);
     ui->xcel_freqBox->setDisabled(false);
@@ -50,8 +44,6 @@ void maindialog::IMUxcel_Enable()
 
 void maindialog::IMUmag_Enable()
 {
-    ui->mag_timeEdit->setDisabled(false);
-    ui->mag_timeEdit_2->setDisabled(false);
     ui->mag_pwrBox->setDisabled(false);
     ui->mag_freqBox->setDisabled(false);
     ui->mag_finishButton->setDisabled(false);
