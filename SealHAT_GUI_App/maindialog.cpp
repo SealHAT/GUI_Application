@@ -30,6 +30,7 @@ void maindialog::labels_hide()
 {
     ui->thres_warnLABEL->hide();
     ui->dur_warnLABEL->hide();
+    ui->temp_warnLABEL->hide();
 
 }
 
@@ -90,6 +91,7 @@ void maindialog::hour_clicked()
     //qDebug() << "time is :" << temporaryTemp.time << endl;
     //qDebug() << "time is :" << temporaryEkg.time << endl;
 }
+
 
 
 

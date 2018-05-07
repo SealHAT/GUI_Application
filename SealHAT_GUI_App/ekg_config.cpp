@@ -31,6 +31,9 @@ void maindialog::on_ekg_SW_clicked()
     }
 }
 
+
+
+
 void maindialog::ekg_disable_button(bool disable)
 {
     ui->ekg_b->setDisabled(disable);

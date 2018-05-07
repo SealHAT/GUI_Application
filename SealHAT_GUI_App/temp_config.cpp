@@ -2,7 +2,7 @@
 #include "ui_maindialog.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
-#include <QDoubleValidator>
+#include <QIntValidator>
 
 #include <QDebug>
 
@@ -108,3 +108,19 @@ void maindialog::temp_timeTable_control()
 
 }
 
+void maindialog::on_temp_freq_editingFinished()
+{
+    int valid;
+    int pos;
+    QIntValidator v(1, 65000, this);
+
+    QString thres = ui->temp_freq->text();
+    valid = v.validate(thres, pos);
+    //qDebug() << valid;
+    if(valid != ACCEPTABLE){
+        ui->temp_warnLABEL->show();
+
+    }else{
+        ui->temp_warnLABEL->hide();
+    }
+}

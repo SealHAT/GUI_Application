@@ -201,6 +201,8 @@ private slots:
 
     void temp_timeTable_control();
 
+    void on_temp_freq_editingFinished();
+
 private:
     Ui::maindialog *ui;
 };
