@@ -6,6 +6,77 @@
 
 #include <QDebug>
 
+void maindialog::on_temp_SW_clicked()
+{
+    QString title = ui->temp_SW->text();
+    if(title == "Enable")
+    {
+        temp_disable(false);
+        ui->temp_SW->setText("Disable");
+    }else{
+        ui->temp_SW->setText("Enable");
+        temp_disable(true);
+    }
+}
+
+void maindialog::temp_disable(bool disable)
+{
+    temp_disable_button(disable);
+    ui->temp_freq->setDisabled(disable);
+}
+
+void maindialog::temp_disable_button(bool disable)
+{
+    ui->b->setDisabled(disable);
+    ui->b_2->setDisabled(disable);
+    ui->b_3->setDisabled(disable);
+    ui->b_4->setDisabled(disable);
+    ui->b_5->setDisabled(disable);
+    ui->b_6->setDisabled(disable);
+    ui->b_7->setDisabled(disable);
+    ui->b_8->setDisabled(disable);
+    ui->b_9->setDisabled(disable);
+    ui->b_10->setDisabled(disable);
+    ui->b_11->setDisabled(disable);
+    ui->b_12->setDisabled(disable);
+    ui->b_13->setDisabled(disable);
+    ui->b_14->setDisabled(disable);
+    ui->b_15->setDisabled(disable);
+    ui->b_16->setDisabled(disable);
+    ui->b_17->setDisabled(disable);
+    ui->b_18->setDisabled(disable);
+    ui->b_19->setDisabled(disable);
+    ui->b_20->setDisabled(disable);
+    ui->b_21->setDisabled(disable);
+    ui->b_22->setDisabled(disable);
+    ui->b_23->setDisabled(disable);
+    ui->b_24->setDisabled(disable);
+
+    ui->b->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_2->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_3->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_4->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_5->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_6->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_7->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_8->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_9->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_10->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_11->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_12->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_13->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_14->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_15->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_16->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_17->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_18->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_19->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_20->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_21->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_22->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_23->setStyleSheet("background-color:rgb(152, 162, 173)");
+    ui->b_24->setStyleSheet("background-color:rgb(152, 162, 173)");
+}
 
 
 void maindialog::temp_timeTable_control()
@@ -37,22 +108,3 @@ void maindialog::temp_timeTable_control()
 
 }
 
-void maindialog::hour_clicked()
-{
-
-    QPushButton* button = qobject_cast<QPushButton*>(sender());
-    if(!button->property("clicked").isValid()) {
-        button->setProperty("clicked", false);
-    }
-    bool clicked = button->property("clicked").toBool();
-    button->setProperty("clicked", !clicked);
-
-    if(!clicked) {
-        button->setStyleSheet("background-color:rgb(34,139,34)");
-        temporaryTemp.temp_time |= 1 << button->property("button_shift").toInt();
-    } else {
-        button->setStyleSheet("background-color:rgb(152, 162, 173)");
-        temporaryTemp.temp_time &= ~(1 << button->property("button_shift").toInt());
-    }
-    qDebug() << "time is :" << temporaryTemp.temp_time << endl;
-}

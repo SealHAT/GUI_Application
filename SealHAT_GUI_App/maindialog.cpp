@@ -21,10 +21,9 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     // Hide all the warning label on the IMU page
     labels_hide();
 
-
     temp_timeTable_control();
-
-
+    ekg_timeTable_control();
+    gps_timeTable_control();
 }
 
 void maindialog::labels_hide()
@@ -69,3 +68,30 @@ void maindialog::centerDialog() {
     int y = (screenGeometry.height() - this->height()) / 2;
     this->move(x, y);
 }
+
+void maindialog::hour_clicked()
+{
+
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    if(!button->property("clicked").isValid()) {
+        button->setProperty("clicked", false);
+    }
+    bool clicked = button->property("clicked").toBool();
+    button->setProperty("clicked", !clicked);
+        if(!clicked) {
+            button->setStyleSheet("background-color:rgb(34,139,34)");
+            //temporaryTemp.time |= 1 << button->property("button_shift").toInt();
+            //temporaryEkg.time |= 1 << button->property("button_shift").toInt();
+        } else {
+            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            //temporaryTemp.time &= ~(1 << button->property("button_shift").toInt());
+            //temporaryEkg.time &= ~(1 << button->property("button_shift").toInt());
+        }
+    //qDebug() << "time is :" << temporaryTemp.time << endl;
+    //qDebug() << "time is :" << temporaryEkg.time << endl;
+}
+
+
+
+
+

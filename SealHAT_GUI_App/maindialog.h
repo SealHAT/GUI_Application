@@ -27,13 +27,20 @@ class maindialog : public QDialog
     };
 
     struct Temp{
-        uint32_t temp_time = 0;
+        uint32_t time = 0;
         uint8_t mode = 0;
 
     };
 
     Temp finalTemp;
     Temp temporaryTemp;
+
+    struct Ekg{
+        bool disable = false;
+        uint32_t time = 0;
+        uint8_t mode = 0;
+    };
+    Ekg temporaryEkg;
 
     enum CONFIGURE_PAGES {
         CONFIGURE_DEV_HOME_PAGE     = 0,
@@ -166,12 +173,33 @@ private slots:
 
     void on_mag_finishButton_clicked();
 
-    void temp_timeTable_control();
-
     void hour_clicked();
 
     void labels_hide();
 
+    void ekg_Disable(bool disable);
+
+    void ekg_disable_button(bool disable);
+
+    void ekg_timeTable_control();
+
+    void on_ekg_SW_clicked();
+
+    void on_gps_SW_clicked();
+
+    void gps_disable(bool disable);
+
+    void gps_disable_button(bool disable);
+
+    void gps_timeTable_control();
+
+    void on_temp_SW_clicked();
+
+    void temp_disable(bool disable);
+
+    void temp_disable_button(bool disable);
+
+    void temp_timeTable_control();
 
 private:
     Ui::maindialog *ui;

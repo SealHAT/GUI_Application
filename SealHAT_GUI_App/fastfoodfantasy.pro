@@ -18,7 +18,9 @@ SOURCES += main.cpp\
     configure.cpp \
     retrievedata.cpp \
     imu_config.cpp \
-    temp_config.cpp
+    temp_config.cpp \
+    ekg_config.cpp \
+    gps_config.cpp
 
 FORMS    += \
     maindialog.ui

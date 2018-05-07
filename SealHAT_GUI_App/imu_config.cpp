@@ -151,26 +151,7 @@ void maindialog::on_xcel_duration_editingFinished()
         ui->dur_warnLABEL->hide();
     }
 }
-/*enum IMU_MODE{
-    ACC_6D_ENABLE       = 0x80,
-    ACC_6D_ENABLE       = 0x00,
 
-    ACC_2G_SCALE        = 0x00,
-    ACC_4G_SCALE        = 0x20,
-    ACC_8G_SCALE        = 0x40,
-
-    ACC_HR_PWR          = 0x00,
-    ACC_NORM_PWR        = 0x08,
-    ACC_LP_PWR          = 0x10,
-
-    ACC_1HZ_FREQ        = 0x00,
-    ACC_10HZ_FREQ       = 0x01,
-    ACC_25HZ_FREQ       = 0x02,
-    ACC_50HZ_FREQ       = 0x03,
-    ACC_100HZ_FREQ      = 0x04,
-    ACC_200HZ_FREQ      = 0x05,
-    ACC_400HZ_FREQ      = 0x06,
-};*/
 
 void maindialog::on_xcel_finishButton_clicked()
 {
