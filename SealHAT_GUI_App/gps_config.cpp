@@ -109,3 +109,4 @@ void maindialog::gps_timeTable_control()
         connect( ui->gps_b_24, SIGNAL(clicked()), this, SLOT(hour_clicked()));
 
 }
+

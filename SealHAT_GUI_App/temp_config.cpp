@@ -23,6 +23,7 @@ void maindialog::temp_disable(bool disable)
 {
     temp_disable_button(disable);
     ui->temp_freq->setDisabled(disable);
+    ui->temp_warnLABEL->hide();
 }
 
 void maindialog::temp_disable_button(bool disable)

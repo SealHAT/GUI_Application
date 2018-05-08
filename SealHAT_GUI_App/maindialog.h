@@ -44,11 +44,12 @@ class maindialog : public QDialog
 
     enum CONFIGURE_PAGES {
         CONFIGURE_DEV_HOME_PAGE     = 0,
-        GPS_CONFIGURE               = 1,
-        IMU_CONFIGURE               = 2,
-        EKG_CONFIGURE               = 3,
-        TEMPERATURE_CONFIGURE       = 4,
-        LIGHT_CONFIGURE             = 5,
+        XCEL_CONFIGURE              = 1,
+        MAG_CONFIGURE               = 2,
+        GPS_CONFIGURE               = 3,
+        EKG_CONFIGURE               = 4,
+        TEMPERATURE_CONFIGURE       = 5,
+        LIGHT_CONFIGURE             = 6,
     };
 
     enum DATA_RETRIEVAL_PAGES {
@@ -82,8 +83,6 @@ class maindialog : public QDialog
     };
 
     enum IMU_PAGES {
-        XCEL_CONFIGURE              = 0,
-        MAG_CONFIGURE               = 1,
     };
 
     enum PWR_MODE {
@@ -139,8 +138,6 @@ private slots:
 
     void on_ekgButton_clicked();
 
-    void on_imuButton_clicked();
-
     void on_gpsButton_clicked();
 
     void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);
@@ -151,27 +148,16 @@ private slots:
 
     void on_xcel_duration_editingFinished();
 
-    void on_Xcel_swPAGE_clicked();
-
-    void on_Mag_swPAGE_clicked();
-
     void on_IMU_SW_clicked();
-
-    void IMUxcel_Disable();
 
     void IMUmag_Disable();
 
-    void IMUxcel_Enable();
 
     void IMUmag_Enable();
 
     void on_xcel_SW_clicked();
 
     void on_mag_SW_clicked();
-
-    void on_xcel_finishButton_clicked();
-
-    void on_mag_finishButton_clicked();
 
     void hour_clicked();
 
@@ -202,6 +188,28 @@ private slots:
     void temp_timeTable_control();
 
     void on_temp_freq_editingFinished();
+
+    void on_magButton_clicked();
+
+    void on_xcelButton_clicked();
+
+//Accelerometer
+
+    void IMUxcel_Enable();
+
+    void IMUxcel_Disable();
+
+    void xcel_timeTable_control();
+
+    void xcel_disable_button(bool disable);
+
+
+
+//Magnetometer
+    void mag_disable_button(bool disable);
+
+    void mag_timeTable_control();
+
 
 private:
     Ui::maindialog *ui;

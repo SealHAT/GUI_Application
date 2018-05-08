@@ -21,9 +21,12 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     // Hide all the warning label on the IMU page
     labels_hide();
 
+    ui->PwrStorageText->setReadOnly(true);
     temp_timeTable_control();
     ekg_timeTable_control();
     gps_timeTable_control();
+    xcel_timeTable_control();
+    mag_timeTable_control();
 }
 
 void maindialog::labels_hide()
@@ -31,7 +34,6 @@ void maindialog::labels_hide()
     ui->thres_warnLABEL->hide();
     ui->dur_warnLABEL->hide();
     ui->temp_warnLABEL->hide();
-
 }
 
 /**
@@ -78,7 +80,10 @@ void maindialog::hour_clicked()
         button->setProperty("clicked", false);
     }
     bool clicked = button->property("clicked").toBool();
+    qDebug() << "1. click before setproperty is :" << clicked << endl;
     button->setProperty("clicked", !clicked);
+    qDebug() << "2. click after setproperty is :" << clicked << endl;
+    //qDebug() << "time is :" << temporaryTemp.time << endl;
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
             //temporaryTemp.time |= 1 << button->property("button_shift").toInt();
@@ -91,6 +96,11 @@ void maindialog::hour_clicked()
     //qDebug() << "time is :" << temporaryTemp.time << endl;
     //qDebug() << "time is :" << temporaryEkg.time << endl;
 }
+
+
+
+
+
 
 
 

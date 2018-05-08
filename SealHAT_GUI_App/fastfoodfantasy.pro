@@ -17,10 +17,11 @@ SOURCES += main.cpp\
     maindialog.cpp \
     configure.cpp \
     retrievedata.cpp \
-    imu_config.cpp \
     temp_config.cpp \
     ekg_config.cpp \
-    gps_config.cpp
+    gps_config.cpp \
+    mag_config.cpp \
+    xcel_config.cpp
 
 FORMS    += \
     maindialog.ui
