@@ -80,7 +80,7 @@ void maindialog::hour_clicked()
         button->setProperty("clicked", false);
     }
     bool clicked = button->property("clicked").toBool();
-    qDebug() << "1. click before setproperty is :" << clicked << endl;
+    //qDebug() << "1. click before setproperty is :" << clicked << endl;
     button->setProperty("clicked", !clicked);
     qDebug() << "2. click after setproperty is :" << clicked << endl;
     //qDebug() << "time is :" << temporaryTemp.time << endl;

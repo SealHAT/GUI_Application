@@ -282,8 +282,8 @@ border: none;</string>
         <colorrole role="Button">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>2</red>
-           <green>79</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -291,8 +291,8 @@ border: none;</string>
         <colorrole role="Base">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>0</red>
-           <green>83</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -300,8 +300,8 @@ border: none;</string>
         <colorrole role="Window">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>0</red>
-           <green>84</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -311,8 +311,8 @@ border: none;</string>
         <colorrole role="Button">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>2</red>
-           <green>79</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -320,8 +320,8 @@ border: none;</string>
         <colorrole role="Base">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>0</red>
-           <green>83</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -329,8 +329,8 @@ border: none;</string>
         <colorrole role="Window">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>0</red>
-           <green>84</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -340,8 +340,8 @@ border: none;</string>
         <colorrole role="Button">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>2</red>
-           <green>79</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -349,8 +349,8 @@ border: none;</string>
         <colorrole role="Base">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>0</red>
-           <green>84</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -358,8 +358,8 @@ border: none;</string>
         <colorrole role="Window">
          <brush brushstyle="SolidPattern">
           <color alpha="255">
-           <red>0</red>
-           <green>84</green>
+           <red>152</red>
+           <green>162</green>
            <blue>173</blue>
           </color>
          </brush>
@@ -371,7 +371,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -1026,7 +1026,7 @@ border: none;</string>
         </rect>
        </property>
        <property name="currentText">
-        <string>50 Hz</string>
+        <string>1 Hz</string>
        </property>
        <item>
         <property name="text">
@@ -4108,7 +4108,7 @@ border: none;</string>
         </font>
        </property>
        <property name="currentText">
-        <string>40 Hz</string>
+        <string>Bypass (0 Hz)</string>
        </property>
        <item>
         <property name="text">
@@ -6130,9 +6130,9 @@ border: none;</string>
       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Estimated Power:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;                Storage:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; color:#000000;&quot;&gt;Estimated Power:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; color:#000000;&quot;&gt;                Storage:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <zorder>ConfigureView</zorder>

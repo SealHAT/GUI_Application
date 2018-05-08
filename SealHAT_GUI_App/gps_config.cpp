@@ -55,6 +55,14 @@ void maindialog::gps_disable_button(bool disable)
     ui->gps_b_23->setDisabled(disable);
     ui->gps_b_24->setDisabled(disable);
 
+
+    ui->gps_b->setProperty("clicked", false);
+    ui->gps_b_2->setProperty("clicked", false);
+    ui->gps_b_3->setProperty("clicked", false);
+    ui->gps_b_4->setProperty("clicked", false);
+    ui->gps_b_5->setProperty("clicked", false);
+
+
     ui->gps_b->setStyleSheet("background-color:rgb(152, 162, 173)");
     ui->gps_b_2->setStyleSheet("background-color:rgb(152, 162, 173)");
     ui->gps_b_3->setStyleSheet("background-color:rgb(152, 162, 173)");
