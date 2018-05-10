@@ -10,19 +10,17 @@
  * Disable all the configuration option if this button is clicked.
 */
 
-void maindialog::IMUmag_Disable()
+void maindialog::IMUmag_Disable(bool disable)
 {
-    ui->mag_pwrBox->setDisabled(true);
-    ui->mag_freqBox->setDisabled(true);
+    ui->mag_pwrBox->setDisabled(disable);
+    ui->mag_freqBox->setDisabled(disable);
     //ui->mag_finishButton->setDisabled(true);
 }
 
-void maindialog::IMUmag_Enable()
+void maindialog::mag_setDefault()
 {
-    ui->mag_pwrBox->setDisabled(false);
-    ui->mag_freqBox->setDisabled(false);
-    //ui->mag_finishButton->setDisabled(false);
-
+    ui->mag_pwrBox->setCurrentIndex(MAG_LP);
+    ui->mag_freqBox->setCurrentIndex(MAG_FREQ_50HZ);
 }
 
 void maindialog::on_mag_SW_clicked()
@@ -31,11 +29,11 @@ void maindialog::on_mag_SW_clicked()
     if(title == "Enable")
     {
         ui->mag_SW->setText("Disable");
-        IMUmag_Enable();
+        IMUmag_Disable(false);
         mag_disable_button(false);
     }else{
         ui->mag_SW->setText("Enable");
-        IMUmag_Disable();
+        IMUmag_Disable(true);
         mag_disable_button(true);
     }
 }
@@ -55,8 +53,7 @@ void maindialog::mag_timeTable_control()
 
 
 void maindialog::mag_disable_button(bool disable)
-{
-
+{    
     for(QPushButton* button : ui->magConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);

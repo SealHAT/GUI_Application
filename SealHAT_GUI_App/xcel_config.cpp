@@ -10,52 +10,29 @@
  * Disable all the configuration option if this button is clicked.
 */
 
-void maindialog::IMUxcel_Disable()
+void maindialog::IMUxcel_Disable(bool disable)
 {
-    ui->xcel_scaleBox->setDisabled(true);
-    ui->xcel_pwrBox->setDisabled(true);
-    ui->xcel_freqBox->setDisabled(true);
-    ui->xcel_sixD_button->setDisabled(true);
-    ui->xcel_fourD_button->setDisabled(true);
-    ui->xcel_thres->setDisabled(true);
-    ui->xcel_duration->setDisabled(true);
-    //ui->xcel_finishButton->setDisabled(true);
-    ui->thres_warnLABEL->hide();
-    ui->dur_warnLABEL->hide();
-}
-
-void maindialog::IMUxcel_Enable()
-{
-    ui->xcel_scaleBox->setDisabled(false);
-    ui->xcel_pwrBox->setDisabled(false);
-    ui->xcel_freqBox->setDisabled(false);
-    ui->xcel_sixD_button->setDisabled(false);
-    ui->xcel_fourD_button->setDisabled(false);
-    ui->xcel_thres->setDisabled(false);
-    ui->xcel_duration->setDisabled(false);
-    //ui->xcel_finishButton->setDisabled(false);
-}
-
-
-void maindialog::on_IMU_SW_clicked()
-{
-    QString title = ui->IMU_SW->text();
-    if(title == "Enable")
-    {
-        ui->IMU_SW->setText("Disable");
-        ui->xcel_SW->setDisabled(false);
-        //ui->mag_SW->setDisabled(false);
-        IMUxcel_Enable();
-        IMUmag_Enable();
-    }else{
-        ui->IMU_SW->setText("Enable");
-        ui->xcel_SW->setDisabled(true);
-        //ui->mag_SW->setDisabled(true);
-        IMUxcel_Disable();
-        IMUmag_Disable();
+    ui->xcel_scaleBox->setDisabled(disable);
+    ui->xcel_pwrBox->setDisabled(disable);
+    ui->xcel_freqBox->setDisabled(disable);
+    ui->xcel_sixD_button->setDisabled(disable);
+    ui->xcel_fourD_button->setDisabled(disable);
+    ui->xcel_thres->setDisabled(disable);
+    ui->xcel_duration->setDisabled(disable);
+    if(disable){
+        ui->thres_warnLABEL->setVisible(!disable);
+        ui->dur_warnLABEL->setVisible(!disable);
     }
 }
 
+void maindialog::xcel_setDefault()
+{
+    ui->xcel_scaleBox->setCurrentIndex(ACC_2G);
+    ui->xcel_pwrBox->setCurrentIndex(ACC_HR);
+    ui->xcel_freqBox->setCurrentIndex(ACC_FREQ_50HZ);
+    ui->xcel_thres->setText("0.5");
+    ui->xcel_duration->setText("0");
+}
 
 void maindialog::on_xcel_SW_clicked()
 {
@@ -63,38 +40,14 @@ void maindialog::on_xcel_SW_clicked()
     if(title == "Enable")
     {
         ui->xcel_SW->setText("Disable");
-        IMUxcel_Enable();
+        IMUxcel_Disable(false);
         xcel_disable_button(false);
     }else{
         ui->xcel_SW->setText("Enable");
-        IMUxcel_Disable();
+        IMUxcel_Disable(true);
         xcel_disable_button(true);
     }
 }
-
-/*
-void maindialog::on_mag_SW_clicked()
-{
-    QString title = ui->mag_SW->text();
-    if(title == "Enable")
-    {
-        ui->mag_SW->setText("Disable");
-        IMUmag_Enable();
-    }else{
-        ui->mag_SW->setText("Enable");
-        IMUmag_Disable();
-    }
-}*/
-
-
-
-/*Switch from MAG to ACC*/
-/*void maindialog::on_Xcel_swPAGE_clicked()
-{
-    //setActiveButtonColor(MAG_CONFIGURE);
-
-    ui->imuPages->setCurrentIndex(XCEL_CONFIGURE);
-}*/
 
 /*Check the value in threshold blank and enable the warning
  * if the value user put in is not is the range [0,16] with
@@ -134,6 +87,35 @@ void maindialog::on_xcel_duration_editingFinished()
 
     }else{
         ui->dur_warnLABEL->hide();
+    }
+}
+
+
+
+void maindialog::xcel_timeTable_control()
+{
+    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>())
+    {
+        if(button->property("button_shift").isValid())
+        {
+            connect(button,SIGNAL(clicked()), this, SLOT(hour_clicked()));
+        }
+    }
+}
+
+
+void maindialog::xcel_disable_button(bool disable)
+{
+    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
+        if(button->property("button_shift").isValid()) {
+            button->setDisabled(disable);
+            if(disable){
+                button->setProperty("clicked", false);
+                button->setStyleSheet("background-color:rgb(105, 105,105)");
+            }else{
+                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            }
+        }
     }
 }
 
@@ -203,108 +185,4 @@ void maindialog::on_xcel_finishButton_clicked()
     //QDebug() << "duration:" << quint8(xcel.duration) << endl;
     //store xcel value
 }*/
-
-void maindialog::xcel_timeTable_control()
-{
-        connect( ui->xcel_b, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_2, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_3, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_4, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_5, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_6, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_7, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_8, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_9, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_10, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_11, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_12, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_13, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_14, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_15, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_16, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_17, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_18, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_19, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_20, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_21, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_22, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_23, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        connect( ui->xcel_b_24, SIGNAL(clicked()), this, SLOT(hour_clicked()));
-
-}
-
-
-void maindialog::xcel_disable_button(bool disable)
-{
-    ui->xcel_b->setDisabled(disable);
-    ui->xcel_b_2->setDisabled(disable);
-    ui->xcel_b_3->setDisabled(disable);
-    ui->xcel_b_4->setDisabled(disable);
-    ui->xcel_b_5->setDisabled(disable);
-    ui->xcel_b_6->setDisabled(disable);
-    ui->xcel_b_7->setDisabled(disable);
-    ui->xcel_b_8->setDisabled(disable);
-    ui->xcel_b_9->setDisabled(disable);
-    ui->xcel_b_10->setDisabled(disable);
-    ui->xcel_b_11->setDisabled(disable);
-    ui->xcel_b_12->setDisabled(disable);
-    ui->xcel_b_13->setDisabled(disable);
-    ui->xcel_b_14->setDisabled(disable);
-    ui->xcel_b_15->setDisabled(disable);
-    ui->xcel_b_16->setDisabled(disable);
-    ui->xcel_b_17->setDisabled(disable);
-    ui->xcel_b_18->setDisabled(disable);
-    ui->xcel_b_19->setDisabled(disable);
-    ui->xcel_b_20->setDisabled(disable);
-    ui->xcel_b_21->setDisabled(disable);
-    ui->xcel_b_22->setDisabled(disable);
-    ui->xcel_b_23->setDisabled(disable);
-    ui->xcel_b_24->setDisabled(disable);
-
-    ui->xcel_b->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_2->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_3->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_4->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_5->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_6->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_7->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_8->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_9->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_10->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_11->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_12->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_13->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_14->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_15->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_16->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_17->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_18->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_19->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_20->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_21->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_22->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_23->setStyleSheet("background-color:rgb(152, 162, 173)");
-    ui->xcel_b_24->setStyleSheet("background-color:rgb(152, 162, 173)");
-}
-
-
-
-
-
-/*
-void maindialog::setActiveIMU_PAGEColor(IMU_MODE Mode)
-{
-    switch(Mode)
-    {
-        case ENABLE: {
-            //ui->xcelConfigPage->setStyleSheet("background-color:rgb(152, 162, 173)");
-            //ui->magConfigPage->setStyleSheet("background-color:rgb(152, 162, 173)");
-        } break;
-        case DISABLE: {
-            //ui->xcelConfigPage->setStyleSheet("background-color:black;");
-            //ui->magConfigPage->setStyleSheet("background-color:black;");
-        } break;
-    }
-}*/
-
 

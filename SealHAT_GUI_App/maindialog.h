@@ -85,26 +85,54 @@ class maindialog : public QDialog
     enum IMU_PAGES {
     };
 
-    enum PWR_MODE {
-        ACC_HR      = 0,
+    enum ACC_PWR_MODE {
+        ACC_LP      = 0,
         ACC_NORMAL  = 1,
-        ACC_LP  = 2,
+        ACC_HR  = 2,
     };
 
-    enum XCEL_SCALE {
+    enum ACC_SCALE {
         ACC_2G = 0,
         ACC_4G = 1,
         ACC_8G = 2,
     };
 
-    enum XCEL_FREQUENCY_VALUES {
-        FREQ_1HZ = 0,
-        FREQ_10HZ = 1,
-        FREQ_25HZ = 2,
-        FREQ_50HZ = 3,
-        FREQ_100HZ = 4,
-        FREQ_200HZ = 5,
-        FREQ_400HZ = 6,
+    enum ACC_FREQUENCY_VALUES {
+        ACC_FREQ_1HZ = 0,
+        ACC_FREQ_10HZ = 1,
+        ACC_FREQ_25HZ = 2,
+        ACC_FREQ_50HZ = 3,
+        ACC_FREQ_100HZ = 4,
+        ACC_FREQ_200HZ = 5,
+        ACC_FREQ_400HZ = 6,
+    };
+
+    enum MAG_PWR_MODE {
+        MAG_LP      = 0,
+        MAG_NORMAL  = 1,
+    };
+
+
+    enum MAG_FREQUENCY_VALUES {
+        MAG_FREQ_10HZ = 0,
+        MAG_FREQ_20HZ = 1,
+        MAG_FREQ_50HZ = 2,
+        MAG_FREQ_100HZ = 3,
+    };
+
+    enum MAG_GAIN_VALUES {
+        EKG_20_GAIN = 0,
+        EKG_40_GAIN = 1,
+        EKG_80_GAIN = 2,
+        EKG_160_GAIN = 3,
+    };
+
+
+    enum EKG_LP_FREQUENCY_VALUES {
+        EKG_LP_FREQ_BYPASS = 0,
+        EKG_LP_FREQ_40HZ = 1,
+        EKG_LP_FREQ_100HZ = 2,
+        EKG_LP_FREQ_150HZ = 3,
     };
 
 
@@ -122,9 +150,9 @@ public:
     ~maindialog();
 
 private slots:
-    void on_backButton_clicked(); //
 
-    //void on_adminSignOutButton_clicked(); //
+//Button
+    void on_backButton_clicked(); //
 
     void on_configureDevOptionButton_clicked(); //
 
@@ -144,24 +172,46 @@ private slots:
 
     void on_backButton2_clicked();
 
+    void on_magButton_clicked();
+
+    void on_xcelButton_clicked();
+
+//Main_funct_control
+    void hour_clicked();
+
+    void labels_hide();
+
+//Accelerometer
+    void on_xcel_SW_clicked();
+
+    void xcel_setDefault();
+
+    void IMUxcel_Disable(bool disable);
+
     void on_xcel_thres_editingFinished();
 
     void on_xcel_duration_editingFinished();
 
-    void on_IMU_SW_clicked();
+    void xcel_timeTable_control();
 
-    void IMUmag_Disable();
+    void xcel_disable_button(bool disable);
 
 
-    void IMUmag_Enable();
-
-    void on_xcel_SW_clicked();
-
+//Magnetometer
     void on_mag_SW_clicked();
 
-    void hour_clicked();
+    void mag_setDefault();
 
-    void labels_hide();
+    void IMUmag_Disable(bool disable);
+
+    void mag_disable_button(bool disable);
+
+    void mag_timeTable_control();
+
+//EKG
+    void on_ekg_SW_clicked();
+
+    void ekg_setDefault();
 
     void ekg_Disable(bool disable);
 
@@ -169,8 +219,9 @@ private slots:
 
     void ekg_timeTable_control();
 
-    void on_ekg_SW_clicked();
+    //void ekg_LPFreq_CombinationSet();
 
+//GPS
     void on_gps_SW_clicked();
 
     void gps_disable(bool disable);
@@ -179,7 +230,10 @@ private slots:
 
     void gps_timeTable_control();
 
+//Temperature
     void on_temp_SW_clicked();
+
+    void temp_setDefault();
 
     void temp_disable(bool disable);
 
@@ -189,27 +243,20 @@ private slots:
 
     void on_temp_freq_editingFinished();
 
-    void on_magButton_clicked();
-
-    void on_xcelButton_clicked();
-
-//Accelerometer
-
-    void IMUxcel_Enable();
-
-    void IMUxcel_Disable();
-
-    void xcel_timeTable_control();
-
-    void xcel_disable_button(bool disable);
 
 
 
-//Magnetometer
-    void mag_disable_button(bool disable);
+    void on_ekg_odr256_clicked();
 
-    void mag_timeTable_control();
+    void on_ekg_odr128_clicked();
 
+    void on_ekg_odr512_clicked();
+
+    void on_chooseDestButton_clicked();
+
+    void on_storeData_destinationEdit_editingFinished();
+
+    void on_completeButton_clicked();
 
 private:
     Ui::maindialog *ui;

@@ -371,7 +371,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>6</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -1026,7 +1026,7 @@ border: none;</string>
         </rect>
        </property>
        <property name="currentText">
-        <string>1 Hz</string>
+        <string>50 Hz</string>
        </property>
        <item>
         <property name="text">
@@ -1148,39 +1148,6 @@ border: none;</string>
        </property>
        <property name="checked">
         <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="IMU_SW">
-       <property name="geometry">
-        <rect>
-         <x>470</x>
-         <y>30</y>
-         <width>141</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>41</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>141</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Disable</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
        </property>
       </widget>
       <widget class="QLabel" name="label_64">
@@ -1563,6 +1530,9 @@ border: none;</string>
         <font>
          <pointsize>12</pointsize>
         </font>
+       </property>
+       <property name="currentText">
+        <string>50 Hz</string>
        </property>
        <item>
         <property name="text">
@@ -6024,7 +5994,7 @@ border: none;</string>
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="completeButton">
      <property name="geometry">
       <rect>
        <x>710</x>
@@ -6130,9 +6100,9 @@ border: none;</string>
       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; color:#000000;&quot;&gt;Estimated Power:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; color:#000000;&quot;&gt;                Storage:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Estimated Power:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;                Storage:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <zorder>ConfigureView</zorder>
@@ -6146,7 +6116,7 @@ p, li { white-space: pre-wrap; }
     <zorder>temperatureButton</zorder>
     <zorder>configureHomeButton</zorder>
     <zorder>magButton</zorder>
-    <zorder>pushButton</zorder>
+    <zorder>completeButton</zorder>
     <zorder>PwrStorageText</zorder>
    </widget>
    <widget class="QWidget" name="DataRetrieval">
@@ -6316,27 +6286,6 @@ border: none;</string>
         <bool>false</bool>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit">
-       <property name="geometry">
-        <rect>
-         <x>110</x>
-         <y>260</y>
-         <width>301</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color:rgb(167,203,218);</string>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
       <widget class="QPushButton" name="getDataButton">
        <property name="geometry">
         <rect>
@@ -6391,6 +6340,16 @@ border: none;</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="storeData_destinationEdit">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>260</y>
+         <width>291</width>
+         <height>20</height>
+        </rect>
        </property>
       </widget>
      </widget>
