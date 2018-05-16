@@ -31,6 +31,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     gps_timeTable_control();
     xcel_timeTable_control();
     mag_timeTable_control();
+    setConfigList();
 
     //ekg_LPFreq_CombinationSet();
 
@@ -65,14 +66,7 @@ void maindialog::on_configureDevOptionButton_clicked()
     this->centerDialog();
 }
 
-void maindialog::on_completeButton_clicked()
-{
-    //this->setFixedSize(850, 558);
 
-    ui->mainStacked->setCurrentIndex(2);
-    ui->ConfigurePages->setCurrentIndex(RETRIEVE_DATA_HOME_PAGE);
-    this->centerDialog();
-}
 
 void maindialog::on_retrieveDataButton_clicked()
 {

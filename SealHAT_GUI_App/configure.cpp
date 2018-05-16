@@ -27,6 +27,15 @@ void maindialog::on_backButton_clicked()
     this->centerDialog();
 }
 
+void maindialog::on_completeButton_clicked()
+{
+    //this->setFixedSize(850, 558);
+
+    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+
+    ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
+}
+
 /**************************************************************
  * FUNCTION: on_configureHomeButton_clicked
  * ------------------------------------------------------------

@@ -371,14 +371,14 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>10</y>
+         <x>30</x>
+         <y>20</y>
          <width>591</width>
          <height>61</height>
         </rect>
@@ -415,10 +415,138 @@ border: none;</string>
         <string notr="true">color:rgb(0, 0, 0)</string>
        </property>
        <property name="text">
-        <string>This page will display power and storage estimates. The tabs on the left will be used to set up each sensor.</string>
+        <string>This page will display configuratin list for EACH SENSOR.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>140</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>GPS:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_173">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>190</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Accelerometer:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_174">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>240</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Magnetemeter:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_175">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>300</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>EKG:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_176">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>350</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Temp&amp;Light:</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="GPS_ConfigList">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>130</y>
+         <width>311</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="GPS_ConfigList_2">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>180</y>
+         <width>311</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="GPS_ConfigList_3">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>230</y>
+         <width>311</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="GPS_ConfigList_4">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>290</y>
+         <width>311</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="GPS_ConfigList_5">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>340</y>
+         <width>311</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_177">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>250</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Coming Soon! :)</string>
        </property>
       </widget>
      </widget>
@@ -450,10 +578,10 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_SW">
        <property name="geometry">
         <rect>
-         <x>310</x>
-         <y>30</y>
-         <width>111</width>
-         <height>31</height>
+         <x>500</x>
+         <y>20</y>
+         <width>121</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -464,7 +592,9 @@ border: none;</string>
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -1026,7 +1156,7 @@ border: none;</string>
         </rect>
        </property>
        <property name="currentText">
-        <string>50 Hz</string>
+        <string>1 Hz</string>
        </property>
        <item>
         <property name="text">
@@ -1350,12 +1480,12 @@ border: none;</string>
         <rect>
          <x>100</x>
          <y>190</y>
-         <width>21</width>
+         <width>31</width>
          <height>16</height>
         </rect>
        </property>
        <property name="text">
-        <string>0am</string>
+        <string>12am</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_80">
@@ -1480,10 +1610,10 @@ border: none;</string>
       <widget class="QPushButton" name="mag_SW">
        <property name="geometry">
         <rect>
-         <x>290</x>
-         <y>30</y>
-         <width>71</width>
-         <height>31</height>
+         <x>500</x>
+         <y>20</y>
+         <width>121</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -1494,7 +1624,9 @@ border: none;</string>
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -1532,7 +1664,7 @@ border: none;</string>
         </font>
        </property>
        <property name="currentText">
-        <string>50 Hz</string>
+        <string>10 Hz</string>
        </property>
        <item>
         <property name="text">
@@ -2138,12 +2270,12 @@ border: none;</string>
         <rect>
          <x>100</x>
          <y>170</y>
-         <width>21</width>
+         <width>31</width>
          <height>16</height>
         </rect>
        </property>
        <property name="text">
-        <string>0am</string>
+        <string>12am</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_161">
@@ -3031,12 +3163,12 @@ border: none;</string>
         <rect>
          <x>100</x>
          <y>180</y>
-         <width>21</width>
+         <width>31</width>
          <height>16</height>
         </rect>
        </property>
        <property name="text">
-        <string>0am</string>
+        <string>12am</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_116">
@@ -3095,9 +3227,9 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>500</x>
-         <y>30</y>
-         <width>111</width>
-         <height>41</height>
+         <y>20</y>
+         <width>121</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -3115,6 +3247,8 @@ border: none;</string>
        <property name="font">
         <font>
          <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -3146,7 +3280,7 @@ border: none;</string>
          <x>20</x>
          <y>250</y>
          <width>281</width>
-         <height>16</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="text">
@@ -3649,12 +3783,12 @@ border: none;</string>
         <rect>
          <x>110</x>
          <y>170</y>
-         <width>21</width>
+         <width>31</width>
          <height>16</height>
         </rect>
        </property>
        <property name="text">
-        <string>0am</string>
+        <string>12am</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_43">
@@ -3959,10 +4093,10 @@ border: none;</string>
       <widget class="QPushButton" name="ekg_SW">
        <property name="geometry">
         <rect>
-         <x>460</x>
+         <x>500</x>
          <y>20</y>
-         <width>141</width>
-         <height>41</height>
+         <width>121</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -3980,6 +4114,8 @@ border: none;</string>
        <property name="font">
         <font>
          <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -4580,12 +4716,12 @@ border: none;</string>
         <rect>
          <x>110</x>
          <y>180</y>
-         <width>21</width>
+         <width>31</width>
          <height>16</height>
         </rect>
        </property>
        <property name="text">
-        <string>0am</string>
+        <string>12am</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_14">
@@ -4940,9 +5076,9 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>510</x>
-         <y>30</y>
-         <width>111</width>
-         <height>41</height>
+         <y>20</y>
+         <width>121</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -4960,6 +5096,8 @@ border: none;</string>
        <property name="font">
         <font>
          <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -4972,14 +5110,14 @@ border: none;</string>
       <widget class="QLabel" name="temp_warnLABEL">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>250</y>
+         <x>270</x>
+         <y>220</y>
          <width>141</width>
-         <height>61</height>
+         <height>31</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Out of range: [1s,65000s]&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;No floating points!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Out of range: [1s,65000s]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_11">
@@ -5463,7 +5601,7 @@ border: none;</string>
         </rect>
        </property>
        <property name="text">
-        <string>0am</string>
+        <string>12am</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_92">
@@ -5915,7 +6053,7 @@ color: rgb(0, 0, 0);
 border: none;</string>
      </property>
      <property name="text">
-      <string>TEMP/LIGHT</string>
+      <string>TEMP &amp;&amp; LIGHT</string>
      </property>
      <property name="autoDefault">
       <bool>false</bool>

@@ -14,7 +14,7 @@ void maindialog::ekg_Disable(bool disable)
 {
     ui->ekg_odr128->setDisabled(disable);
     ui->ekg_odr256->setDisabled(disable);
-    ui->ekg_odr128->setDisabled(disable);
+    ui->ekg_odr512->setDisabled(disable);
     ui->ekg_gainBox->setDisabled(disable);
     ui->ekg_LPfreqBox->setDisabled(disable);
     ekg_disable_button(disable);

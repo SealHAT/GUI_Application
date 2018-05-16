@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     ekg_config.cpp \
     gps_config.cpp \
     mag_config.cpp \
-    xcel_config.cpp
+    xcel_config.cpp \
+    config_list.cpp
 
 FORMS    += \
     maindialog.ui

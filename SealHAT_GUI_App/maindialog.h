@@ -258,6 +258,9 @@ private slots:
 
     void on_completeButton_clicked();
 
+//Configuration list
+    void setConfigList();
+
 private:
     Ui::maindialog *ui;
 };
