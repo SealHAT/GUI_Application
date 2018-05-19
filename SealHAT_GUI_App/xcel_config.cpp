@@ -1,5 +1,6 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
+
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDoubleValidator>
@@ -9,6 +10,72 @@
 /* Enable/Disable xcel sensor.
  * Disable all the configuration option if this button is clicked.
 */
+
+/*void maindialog::IMUxcel_collectdata(bool disable)
+{
+    Xcel xcel;
+    xcel = {0, 0, 0, 0};
+
+    if(ui->xcel_sixD_button->isChecked())
+    {
+        xcel.mode |= ACC_6D_ENABLE;
+    }else if(ui->xcel_fourD_button->isChecked())
+    {
+        xcel.mode |= ACC_4D_ENABLE;
+    }
+
+    if(ui->xcel_scaleBox->currentIndex() == ACC_2G)
+    {
+        xcel.mode |= ACC_2G_SCALE;
+    }else if(ui->xcel_scaleBox->currentIndex() == ACC_4G)
+    {
+        xcel.mode |= ACC_4G_SCALE;
+    }else if(ui->xcel_scaleBox->currentIndex() == ACC_8G)
+    {
+        xcel.mode |= ACC_8G_SCALE;
+    }
+
+    if(ui->xcel_pwrBox->currentIndex() == ACC_HR)
+    {
+        xcel.mode |= ACC_HR_PWR;
+    }else if(ui->xcel_pwrBox->currentIndex() == ACC_NORMAL)
+    {
+        xcel.mode |= ACC_NORM_PWR;
+    }else if(ui->xcel_pwrBox->currentIndex() == ACC_LP)
+    {
+        xcel.mode |= ACC_LP_PWR;
+    }
+
+    if(ui->xcel_freqBox->currentIndex() == FREQ_1HZ)
+    {
+        xcel.mode |= ACC_1HZ_FREQ;
+    }else if(ui->xcel_freqBox->currentIndex() == FREQ_10HZ)
+    {
+        xcel.mode |= ACC_10HZ_FREQ;
+    }else if(ui->xcel_freqBox->currentIndex() == FREQ_25HZ)
+    {
+        xcel.mode |= ACC_25HZ_FREQ;
+    }else if(ui->xcel_freqBox->currentIndex() == FREQ_50HZ)
+    {
+        xcel.mode |= ACC_50HZ_FREQ;
+    }else if(ui->xcel_freqBox->currentIndex() == FREQ_100HZ)
+    {
+        xcel.mode |= ACC_100HZ_FREQ;
+    }else if(ui->xcel_freqBox->currentIndex() == FREQ_200HZ)
+    {
+        xcel.mode |= ACC_200HZ_FREQ;
+    }else if(ui->xcel_freqBox->currentIndex() == FREQ_400HZ)
+    {
+        xcel.mode |= ACC_400HZ_FREQ;
+    }
+
+    xcel.threshold = (ui->xcel_thres->text()).toUInt()/(0.016);
+    xcel.duration = (ui->xcel_duration->text()).toUInt();
+    qDebug() << QString("mode:") << quint8(xcel.mode) << endl;
+    //QDebug() << "thres:" << quint8(xcel.threshold) << endl;
+    //QDebug() << "duration:" << quint8(xcel.duration) << endl;
+    //store xcel value
+}*/
 
 void maindialog::IMUxcel_Disable(bool disable)
 {
@@ -47,6 +114,11 @@ void maindialog::on_xcel_SW_clicked()
         IMUxcel_Disable(true);
         xcel_disable_button(true);
     }
+}
+
+void maindialog::on_xcel_timeclear_button_clicked()
+{
+    xcel_disable_button(true);
 }
 
 /*Check the value in threshold blank and enable the warning

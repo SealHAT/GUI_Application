@@ -29,7 +29,19 @@ FORMS    += \
 
 
 HEADERS  += \
-    maindialog.h
+    maindialog.h \
+    LSM303AGRTypes.h \
+    LSM303AGR.h \
+    sensor_header/LSM303AGR.h \
+    sensor_header/LSM303AGRTypes.h \
+    sensor_header/max44009.h \
+    sensor_header/max44009Types.h \
+    sensor_header/seal_Types.h \
+    sensor_header/si705x.h \
+    sensor_header/si705xTypes.h \
+    sensor_header/gps.h \
+    sensor_header/max30003types.h \
+    sensor_header/ubxmessage.h
 
 RESOURCES += \
     images.qrc

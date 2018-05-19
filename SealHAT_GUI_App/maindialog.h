@@ -1,11 +1,15 @@
 #ifndef MAINDIALOG_H
 #define MAINDIALOG_H
 
+#include "sensor_header/seal_Types.h"
+#include "sensor_header/gps.h"
+#include "sensor_header/max30003types.h"
+#include "sensor_header/max44009.h"
+#include "sensor_header/max44009Types.h"
 #include <QDialog>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <list>
-
 
 namespace Ui {
 class maindialog;
@@ -15,32 +19,44 @@ class maindialog : public QDialog
 {
     Q_OBJECT
 
-    struct Xcel{
-        uint32_t time;
-        //uint8_t dimension;
-        //uint8_t scale;
-        // uint8_t power;
+ /***********************GUI------------->MICROCONTROLLER*****************/
+    typedef struct __attribute__((__packed__)){
+        uint16_t srtSym;    // symbol to indicate start of packet
+        uint16_t id;	    // Upper four bits is the device ID, lower four are device specific event flags
+        uint16_t size;		// size of data packet to follow. in bytes or samples? (worst case IMU size in bytes would need a uint16 :( )
+    } DATA_HEADER_t;
 
-        uint8_t mode; //  6D/4D [7]/scale[6:5]/power[4:3]/sampling rate[2:0]
+    struct Xcel_TX{
+        DATA_HEADER_t acc_headerData;
+        uint32_t acc_activeHour;
+
+        ACC_FULL_SCALE_t acc_scale;
+        ACC_OPMODE_t    acc_mode;
+        ACC_INT2_type_t acc_dimension;
         uint8_t threshold;
         uint8_t duration;
     };
 
-    struct Temp{
-        uint32_t time = 0;
-        uint8_t mode = 0;
+    struct Mag_TX{
+        DATA_HEADER_t mag_headerData;
+        uint32_t mag_activeHour;
 
+        MAG_OPMODE_t    mag_mode;
     };
 
-    Temp finalTemp;
-    Temp temporaryTemp;
+    struct TempLight_TX{
+        DATA_HEADER_t templight_headerData;
+        uint32_t temp_activeHour;
 
-    struct Ekg{
-        bool disable = false;
-        uint32_t time = 0;
-        uint8_t mode = 0;
+        uint32_t sample_period = 0;
     };
-    Ekg temporaryEkg;
+
+    struct Ekg_TX{
+        DATA_HEADER_t ekg_headerData;
+        uint32_t ekg_activeHour;
+
+        uint32_t sample_period = 0;
+    };
 
     enum CONFIGURE_PAGES {
         CONFIGURE_DEV_HOME_PAGE     = 0,
@@ -260,6 +276,8 @@ private slots:
 
 //Configuration list
     void setConfigList();
+
+    void on_xcel_timeclear_button_clicked();
 
 private:
     Ui::maindialog *ui;
