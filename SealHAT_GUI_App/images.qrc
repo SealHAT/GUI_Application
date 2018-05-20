@@ -1,9 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>great Job.jpg</file>
-        <file>rewind44.png</file>
         <file>arrows.png</file>
-        <file>shop.png</file>
         <file>UCSC.png</file>
         <file>bananaslug.png</file>
     </qresource>

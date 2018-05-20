@@ -1,10 +1,8 @@
-#include "maindialog.h"
-#include "ui_maindialog.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
-
 #include <QDebug>
-
+#include "maindialog.h"
+#include "ui_maindialog.h"
 
 void maindialog::on_backButton2_clicked()
 {

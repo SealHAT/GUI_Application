@@ -1,9 +1,8 @@
-#include "maindialog.h"
-#include "ui_maindialog.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
-
 #include <QDebug>
+#include "maindialog.h"
+#include "ui_maindialog.h"
 
 /**************************************************************
  * FUNCTION: on_backButton_clicked
