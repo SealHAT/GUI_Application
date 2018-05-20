@@ -1,7 +1,7 @@
 #ifndef MAINDIALOG_H
 #define MAINDIALOG_H
 
-#include "rx_gui.h"
+#include "tx_gui.h"
 #include <QDialog>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>

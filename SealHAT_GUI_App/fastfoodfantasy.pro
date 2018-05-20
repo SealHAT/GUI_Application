@@ -30,7 +30,6 @@ FORMS    += \
 
 HEADERS  += \
     maindialog.h \
-    rx_gui.h \
     sensor_header/LSM303AGR.h \
     sensor_header/LSM303AGRTypes.h \
     sensor_header/max44009.h \
@@ -48,7 +47,8 @@ HEADERS  += \
     sensor_header/ubx/ubxrxm.h \
     sensor_header/ubx/ubxutils.h \
     sensor_header/ubx/ubx.h \
-    sensor_header/ubx/ubxmessage.h
+    sensor_header/ubx/ubxmessage.h \
+    tx_gui.h
 
 RESOURCES += \
     images.qrc

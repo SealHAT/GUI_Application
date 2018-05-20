@@ -1,7 +1,7 @@
-#ifndef RX_GUI_H
-#define RX_GUI_H
+#ifndef TX_GUI_H
+#define TX_GUI_H
 
-#include "rx_gui.h"
+#include "tx_gui.h"
 #include "sensor_header/seal_Types.h"
 #include "sensor_header/LSM303AGR.h"
 #include "sensor_header/LSM303AGRTypes.h"
@@ -70,4 +70,4 @@ enum SENSOR_OP {
 
 
 
-#endif // RX_GUI_H
+#endif // TX_GUI_H
