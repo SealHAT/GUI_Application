@@ -1,10 +1,9 @@
-#include "maindialog.h"
-#include "ui_maindialog.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDoubleValidator>
-
 #include <QDebug>
+#include "maindialog.h"
+#include "ui_maindialog.h"
 
 /* Enable/Disable mag sensor.
  * Disable all the configuration option if this button is clicked.
@@ -12,12 +11,13 @@
 
 void maindialog::mag_dataCollection(Mag_TX *mag)
 {
+    (void) mag;
     //mag->acc_activeHour = ;
 }
 
 void maindialog::on_mag_pwrBox_currentIndexChanged(int index)
 {
-
+    (void) index;
 }
 
 void maindialog::IMUmag_Disable(bool disable)
@@ -33,10 +33,10 @@ void maindialog::mag_setDefault()
     ui->mag_pwrBox->setCurrentIndex(MAG_LP);
     ui->mag_freqBox->setCurrentIndex(MAG_FREQ_50HZ);
 
-    magList = {
-              {MSG_START_SYM,DEVICE_ID_MAGNETIC_FIELD, sizeof(MAG_OPMODE_t)},
-              0,
-              MAG_LP_50_HZ
+    configuration_settings.magnetometer_config = {
+              {MSG_START_SYM, DEVICE_ID_MAGNETIC_FIELD, 0, 0, sizeof(MAG_OPMODE_t)},// header
+              0,                                                                    // active hours
+              MAG_LP_50_HZ                                                          // mode
               };
 }
 
@@ -81,13 +81,13 @@ void maindialog::mag_hour_clicked()
 
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
-            magList.mag_activeHour |= 1 << button->property("button_shift").toInt();
+            configuration_settings.magnetometer_config.mag_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
-            magList.mag_activeHour &= ~(1 << button->property("button_shift").toInt());
+            configuration_settings.magnetometer_config.mag_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
-        qDebug() << "mag time is :" << magList.mag_activeHour << endl;
+        qDebug() << "mag time is :" << configuration_settings.magnetometer_config.mag_activeHour << endl;
 
 }
 
@@ -98,7 +98,7 @@ void maindialog::mag_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                magList.mag_activeHour = 0;
+                configuration_settings.magnetometer_config.mag_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -114,11 +114,11 @@ void maindialog::on_mag_timeclear_button_clicked()
     {
         if(button->property("button_shift").isValid())
         {
-            magList.mag_activeHour = 0;
+            configuration_settings.magnetometer_config.mag_activeHour = 0;
             button->setProperty("clicked", false);
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    qDebug() << "mag time is :" << magList.mag_activeHour << endl;
+    qDebug() << "mag time is :" << configuration_settings.magnetometer_config.mag_activeHour << endl;
 }
 

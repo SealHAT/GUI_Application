@@ -1,10 +1,10 @@
-#include "maindialog.h"
-#include "ui_maindialog.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDoubleValidator>
 #include <QTextCursor>
 #include <QDebug>
+#include "maindialog.h"
+#include "ui_maindialog.h"
 
 /* Enable/Disable Ekg sensor.
  * Disable all the configuration option if this button is clicked.

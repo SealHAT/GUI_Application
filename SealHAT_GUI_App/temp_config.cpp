@@ -1,10 +1,9 @@
-#include "maindialog.h"
-#include "ui_maindialog.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QIntValidator>
-
 #include <QDebug>
+#include "maindialog.h"
+#include "ui_maindialog.h"
 
 void maindialog::on_temp_SW_clicked()
 {
@@ -23,10 +22,10 @@ void maindialog::temp_setDefault()
 {
    ui->temp_freq->setText("1");
 
-   tempList = {
-       {MSG_START_SYM, DEVICE_ID_LIGHT, sizeof(uint16_t)},
-       0,
-       1
+   configuration_settings.temperature_config = {
+       {MSG_START_SYM, DEVICE_ID_LIGHT, 0, 0, sizeof(uint16_t)},// header data
+       0,                                                       // active hours
+       1                                                        // sample period
    };
 }
 
@@ -44,7 +43,7 @@ void maindialog::temp_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                tempList.temp_activeHour = 0;
+                configuration_settings.temperature_config.temp_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -65,13 +64,13 @@ void maindialog::temp_hour_clicked()
     button->setProperty("clicked", !clicked);
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
-            tempList.temp_activeHour |= 1 << button->property("button_shift").toInt();
+            configuration_settings.temperature_config.temp_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
-            tempList.temp_activeHour &= ~(1 << button->property("button_shift").toInt());
+            configuration_settings.temperature_config.temp_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
-        qDebug() << "temp time is :" << tempList.temp_activeHour << endl;
+        qDebug() << "temp time is :" << configuration_settings.temperature_config.temp_activeHour << endl;
 
 }
 
@@ -110,10 +109,10 @@ void maindialog::on_temp_timeclear_button_clicked()
     {
         if(button->property("button_shift").isValid())
         {
-            tempList.temp_activeHour = 0;
+            configuration_settings.temperature_config.temp_activeHour = 0;
             button->setProperty("clicked", false);
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    qDebug() << "temp time is :" << tempList.temp_activeHour << endl;
+    qDebug() << "temp time is :" << configuration_settings.temperature_config.temp_activeHour << endl;
 }

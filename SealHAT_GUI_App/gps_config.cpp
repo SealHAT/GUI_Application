@@ -1,10 +1,9 @@
-#include "maindialog.h"
-#include "ui_maindialog.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDoubleValidator>
-
 #include <QDebug>
+#include "maindialog.h"
+#include "ui_maindialog.h"
 
 /* Enable/Disable GPS sensor.
  * Disable all the configuration option if this button is clicked.
@@ -12,10 +11,10 @@
 
 void maindialog::gps_setDefault()
 {
-    gpsList = {
-        {MSG_START_SYM,DEVICE_ID_GPS,sizeof(GPS_PROFILE)},
-        0,
-        GPS_PSMOO30S
+    configuration_settings.gps_config = {
+        {MSG_START_SYM, DEVICE_ID_GPS, 0, 0, sizeof(GPS_PROFILE)},  // header
+        0,                                                          // active hours
+        GPS_PSMOO30S                                                // profile
     };
 }
 
@@ -30,13 +29,13 @@ void maindialog::gps_hour_clicked()
     button->setProperty("clicked", !clicked);
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
-            gpsList.gps_activeHour |= 1 << button->property("button_shift").toInt();
+            configuration_settings.gps_config.gps_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
-            gpsList.gps_activeHour &= ~(1 << button->property("button_shift").toInt());
+            configuration_settings.gps_config.gps_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
-        qDebug() << "gps time is :" << gpsList.gps_activeHour << endl;
+        qDebug() << "gps time is :" << configuration_settings.gps_config.gps_activeHour << endl;
 
 }
 
@@ -77,7 +76,7 @@ void maindialog::gps_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                gpsList.gps_activeHour = 0;
+                configuration_settings.gps_config.gps_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -93,12 +92,12 @@ void maindialog::on_gps_timeclear_button_clicked()
     {
         if(button->property("button_shift").isValid())
         {
-            gpsList.gps_activeHour = 0;
+            configuration_settings.gps_config.gps_activeHour = 0;
             button->setProperty("clicked", false);
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    qDebug() << "gps time is :" << gpsList.gps_activeHour << endl;
+    qDebug() << "gps time is :" << configuration_settings.gps_config.gps_activeHour << endl;
 }
 
 

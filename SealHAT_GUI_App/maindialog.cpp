@@ -1,13 +1,11 @@
+#include <QDesktopWidget>
+#include <QMessageBox>
+#include <QDebug>
 #include "maindialog.h"
 #include "ui_maindialog.h"
 #include "sensor_header/seal_Types.h"
-//Sensor header
 #include "sensor_header/LSM303AGR.h"
 #include "sensor_header/LSM303AGRTypes.h"
-#include <QDesktopWidget>
-#include <QMessageBox>
-
-#include <QDebug>
 
 /**
  * Initial GUI setup.

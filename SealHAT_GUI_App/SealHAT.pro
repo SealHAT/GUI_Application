@@ -48,7 +48,7 @@ HEADERS  += \
     sensor_header/ubx/ubxutils.h \
     sensor_header/ubx/ubx.h \
     sensor_header/ubx/ubxmessage.h \
-    tx_gui.h
+    seal_Types.h
 
 RESOURCES += \
     images.qrc

@@ -1,11 +1,11 @@
 #ifndef MAINDIALOG_H
 #define MAINDIALOG_H
 
-#include "tx_gui.h"
 #include <QDialog>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <list>
+#include "seal_Types.h"
 
 namespace Ui {
 class maindialog;
@@ -15,16 +15,14 @@ class maindialog : public QDialog
 {
     Q_OBJECT
 
-    Xcel_TX xcelList;
-
+    /*Xcel_TX xcelList;
     Mag_TX magList;
-
     GPS_TX gpsList;
-
     Temp_TX tempList;
+    Ekg_TX ekgList;*/
 
-    Ekg_TX ekgList;
-
+    /* Struct containing all sensor and micro configuration data. */
+    SENSOR_CONFIGS configuration_settings;
 
     enum CONFIGURE_PAGES {
         CONFIGURE_DEV_HOME_PAGE     = 0,

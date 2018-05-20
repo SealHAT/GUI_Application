@@ -1,10 +1,9 @@
-#include "maindialog.h"
-#include "ui_maindialog.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDoubleValidator>
-
 #include <QDebug>
+#include "maindialog.h"
+#include "ui_maindialog.h"
 
 /* Enable/Disable Ekg sensor.
  * Disable all the configuration option if this button is clicked.
@@ -46,12 +45,12 @@ void maindialog::ekg_setDefault()
     ui->ekg_LPfreqBox->setCurrentIndex(EKG_LP_FREQ_40HZ);
 
     size = sizeof(CNFGECG_RATE_VAL) + sizeof(CNFGECG_GAIN_VAL) + sizeof(CNFGECG_DLPF_VAL);
-    ekgList = {
-        {MSG_START_SYM,DEVICE_ID_EKG, size},
-        0,
-        RATE_MIN_SPS,
-        GAIN_20_V,
-        DLPF_40_HZ
+    configuration_settings.ekg_config = {
+        {MSG_START_SYM,DEVICE_ID_EKG, 0, 0, size},  // header
+        0,                                          // active hours
+        RATE_MIN_SPS,                               // sampling rate
+        GAIN_20_V,                                  // gain
+        DLPF_40_HZ                                  // frequency
     };
 }
 
@@ -67,13 +66,13 @@ void maindialog::ekg_hour_clicked()
     button->setProperty("clicked", !clicked);
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
-            ekgList.ekg_activeHour |= 1 << button->property("button_shift").toInt();
+            configuration_settings.ekg_config.ekg_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ekgList.ekg_activeHour &= ~(1 << button->property("button_shift").toInt());
+            configuration_settings.ekg_config.ekg_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
-        qDebug() << "ekg time is :" << ekgList.ekg_activeHour << endl;
+        qDebug() << "ekg time is :" << configuration_settings.ekg_config.ekg_activeHour << endl;
 
 }
 
@@ -164,7 +163,7 @@ void maindialog::ekg_disable_button(bool disable)
         {
             button->setDisabled(disable);
             if(disable){
-                ekgList.ekg_activeHour = 0;
+                configuration_settings.ekg_config.ekg_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -181,11 +180,11 @@ void maindialog::on_ekg_timeclear_button_clicked()
     {
         if(button->property("button_shift").isValid())
         {
-            ekgList.ekg_activeHour = 0;
+            configuration_settings.ekg_config.ekg_activeHour = 0;
             button->setProperty("clicked", false);
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    qDebug() << "ekg time is :" << ekgList.ekg_activeHour << endl;
+    qDebug() << "ekg time is :" << configuration_settings.ekg_config.ekg_activeHour << endl;
 }
 
