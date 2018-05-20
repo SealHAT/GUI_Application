@@ -13,8 +13,9 @@
 void maindialog::gps_setDefault()
 {
     gpsList = {
-        {MSG_START_SYM,DEVICE_ID_GPS},
-        0
+        {MSG_START_SYM,DEVICE_ID_GPS,sizeof(GPS_PROFILE)},
+        0,
+        GPS_PSMOO30S
     };
 }
 
@@ -53,6 +54,7 @@ void maindialog::gps_timeTable_control()
 
 void maindialog::gps_disable(bool disable)
 {
+    ui->gps_timeclear_button->setDisabled(disable);
     gps_disable_button(disable);
 }
 

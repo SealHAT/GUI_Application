@@ -13,6 +13,7 @@
 
 void maindialog::IMUxcel_Disable(bool disable)
 {
+    ui->xcel_timeclear_button->setDisabled(disable);
     ui->xcel_scaleBox->setDisabled(disable);
     ui->xcel_pwrBox->setDisabled(disable);
     ui->xcel_freqBox->setDisabled(disable);
@@ -33,8 +34,17 @@ void maindialog::xcel_setDefault()
     ui->xcel_freqBox->setCurrentIndex(ACC_FREQ_50HZ);
     ui->xcel_thres->setText("0.5");
     ui->xcel_duration->setText("0");
+    uint16_t size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
 
-    //xcelList = {};
+    xcelList = {
+        {MSG_START_SYM,DEVICE_ID_ACCELEROMETER,size},
+        0,
+        ACC_SCALE_2G,
+        ACC_HR_50_HZ,
+        0x3F,
+        300,
+        0
+    };
 }
 
 void maindialog::on_xcel_SW_clicked()
@@ -56,8 +66,9 @@ void maindialog::on_xcel_timeclear_button_clicked()
 {
     for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
-                button->setProperty("clicked", false);
-                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            xcelList.xcel_activeHour = 0;
+            button->setProperty("clicked", false);
+            button->setStyleSheet("background-color:rgb(152, 162, 173)");
             }
         }
     qDebug() << "xcel time is :" << xcelList.xcel_activeHour << endl;
@@ -115,10 +126,10 @@ void maindialog::xcel_hour_clicked()
     button->setProperty("clicked", !clicked);
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
-            //xcelList.xcel_activeHour |= 1 << button->property("button_shift").toInt();
+            xcelList.xcel_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
-            //xcelList.xcel_activeHour &= ~(1 << button->property("button_shift").toInt());
+            xcelList.xcel_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
         qDebug() << "xcel time is :" << xcelList.xcel_activeHour << endl;
@@ -144,6 +155,7 @@ void maindialog::xcel_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
+                xcelList.xcel_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{

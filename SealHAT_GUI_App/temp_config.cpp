@@ -24,7 +24,7 @@ void maindialog::temp_setDefault()
    ui->temp_freq->setText("1");
 
    tempList = {
-       {MSG_START_SYM, DEVICE_ID_LIGHT},
+       {MSG_START_SYM, DEVICE_ID_LIGHT, sizeof(uint16_t)},
        0,
        1
    };
@@ -32,6 +32,7 @@ void maindialog::temp_setDefault()
 
 void maindialog::temp_disable(bool disable)
 {
+    ui->temp_timeclear_button->setDisabled(disable);
     temp_disable_button(disable);
     ui->temp_freq->setDisabled(disable);
     ui->temp_warnLABEL->hide();

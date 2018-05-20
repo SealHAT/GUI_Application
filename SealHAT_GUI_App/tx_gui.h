@@ -24,24 +24,24 @@ enum SENSOR_OP {
    typedef struct __attribute__((__packed__)){
        uint16_t srtSym;    // symbol to indicate start of packet
        DEVICE_ID_t id;	    // Upper four bits is the device ID, lower four are device specific event flags
-       //uint16_t size;		// size of data packet to follow. in bytes or samples? (worst case IMU size in bytes would need a uint16 :( )
+       uint16_t size;		// size of data packet to follow. in bytes or samples? (worst case IMU size in bytes would need a uint16 :( )
    } DATA_HEADER_t;
 
    struct Xcel_TX{
        DATA_HEADER_t acc_headerData;
 
-       uint32_t xcel_activeHour;
+       uint32_t xcel_activeHour:24;
        ACC_FULL_SCALE_t acc_scale;
        ACC_OPMODE_t    acc_mode;
        uint8_t acc_sensitivity;
-       uint8_t threshold;
+       uint16_t threshold;
        uint8_t duration;
    };
 
    struct Mag_TX{
        DATA_HEADER_t mag_headerData;
 
-       uint32_t mag_activeHour;
+       uint32_t mag_activeHour:24;
        MAG_OPMODE_t    mag_mode;
    };
 
@@ -49,14 +49,14 @@ enum SENSOR_OP {
    struct Temp_TX{
        DATA_HEADER_t temp_headerData;
 
-       uint32_t temp_activeHour;
+       uint32_t temp_activeHour:24;
        uint16_t temp_samplePeriod;
    };
 
    struct Ekg_TX{
        DATA_HEADER_t ekg_headerData;
 
-       uint32_t ekg_activeHour;
+       uint32_t ekg_activeHour:24;
        CNFGECG_RATE_VAL ekg_sampleRate;
        CNFGECG_GAIN_VAL ekg_gain;
        CNFGECG_DLPF_VAL ekg_lpFreq;
@@ -65,7 +65,8 @@ enum SENSOR_OP {
    struct GPS_TX{
        DATA_HEADER_t gps_headerData;
 
-       uint32_t gps_activeHour;
+       uint32_t gps_activeHour:24;
+       GPS_PROFILE default_profile;
    };
 
 

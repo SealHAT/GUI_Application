@@ -104,3 +104,5 @@ void maindialog::hour_clicked()
         }
 }
 
+
+

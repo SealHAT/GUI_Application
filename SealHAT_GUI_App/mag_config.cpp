@@ -14,8 +14,15 @@ void maindialog::mag_dataCollection(Mag_TX *mag)
 {
     //mag->acc_activeHour = ;
 }
+
+void maindialog::on_mag_pwrBox_currentIndexChanged(int index)
+{
+
+}
+
 void maindialog::IMUmag_Disable(bool disable)
 {
+    ui->mag_timeclear_button->setDisabled(disable);
     ui->mag_pwrBox->setDisabled(disable);
     ui->mag_freqBox->setDisabled(disable);
     //ui->mag_finishButton->setDisabled(true);
@@ -27,7 +34,7 @@ void maindialog::mag_setDefault()
     ui->mag_freqBox->setCurrentIndex(MAG_FREQ_50HZ);
 
     magList = {
-              {MSG_START_SYM,DEVICE_ID_MAGNETIC_FIELD},
+              {MSG_START_SYM,DEVICE_ID_MAGNETIC_FIELD, sizeof(MAG_OPMODE_t)},
               0,
               MAG_LP_50_HZ
               };
@@ -51,16 +58,12 @@ void maindialog::on_mag_SW_clicked()
 
 void maindialog::mag_timeTable_control()
 {
-    //DATA_HEADER_t head;
     for(QPushButton* button : ui->magConfigPage->findChildren<QPushButton*>())
     {
 
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(mag_hour_clicked()));
-
-            //hour_clicked_timeConfig(&(magList->mag_headerData))
-
         }
     }
 
@@ -75,6 +78,7 @@ void maindialog::mag_hour_clicked()
     }
     bool clicked = button->property("clicked").toBool();
     button->setProperty("clicked", !clicked);
+
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
             magList.mag_activeHour |= 1 << button->property("button_shift").toInt();

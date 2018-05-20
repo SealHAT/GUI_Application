@@ -277,6 +277,8 @@ private slots:
     void setConfigList();
 
 
+    void on_mag_pwrBox_currentIndexChanged(int index);
+
 private:
     Ui::maindialog *ui;
 };

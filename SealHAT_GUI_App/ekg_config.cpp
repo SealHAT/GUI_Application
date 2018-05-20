@@ -27,6 +27,7 @@ void maindialog::ekg_setDefault()
 {
     int rmIndex1;
     int rmIndex2;
+    uint16_t size;
     ui->ekg_odr128->setChecked(true);
     if(ui->ekg_odr128->isChecked())
     {
@@ -44,8 +45,9 @@ void maindialog::ekg_setDefault()
     ui->ekg_gainBox->setCurrentIndex(EKG_20_GAIN);
     ui->ekg_LPfreqBox->setCurrentIndex(EKG_LP_FREQ_40HZ);
 
+    size = sizeof(CNFGECG_RATE_VAL) + sizeof(CNFGECG_GAIN_VAL) + sizeof(CNFGECG_DLPF_VAL);
     ekgList = {
-        {MSG_START_SYM,DEVICE_ID_EKG},
+        {MSG_START_SYM,DEVICE_ID_EKG, size},
         0,
         RATE_MIN_SPS,
         GAIN_20_V,
@@ -88,6 +90,7 @@ void maindialog::ekg_timeTable_control()
 
 void maindialog::ekg_Disable(bool disable)
 {
+    ui->ekg_timeclear_button->setDisabled(disable);
     ui->ekg_odr128->setDisabled(disable);
     ui->ekg_odr256->setDisabled(disable);
     ui->ekg_odr512->setDisabled(disable);
