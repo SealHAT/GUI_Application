@@ -1,7 +1,7 @@
 #ifndef __SI705X_H__
 #define __SI705X_H__
 
-#include <atmel_start.h>    /* where the IO functions live */
+//#include <atmel_start.h>    /* where the IO functions live */
 #include <stdint.h>
 #include <stdbool.h>
 #include "si705xTypes.h"

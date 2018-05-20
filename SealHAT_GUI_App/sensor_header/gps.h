@@ -8,11 +8,11 @@
 #ifndef GPSINTERFACE_H_
 #define GPSINTERFACE_H_
 
-#include "driver_init.h"
+//#include "driver_init.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
-#include "ubx.h"
+#include "ubx/ubx.h"
 
 #ifdef __cplusplus
 extern "C" {

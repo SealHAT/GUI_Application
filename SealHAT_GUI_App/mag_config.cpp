@@ -10,6 +10,10 @@
  * Disable all the configuration option if this button is clicked.
 */
 
+void maindialog::mag_dataCollection(Mag_TX *mag)
+{
+    //mag->acc_activeHour = ;
+}
 void maindialog::IMUmag_Disable(bool disable)
 {
     ui->mag_pwrBox->setDisabled(disable);
@@ -21,6 +25,12 @@ void maindialog::mag_setDefault()
 {
     ui->mag_pwrBox->setCurrentIndex(MAG_LP);
     ui->mag_freqBox->setCurrentIndex(MAG_FREQ_50HZ);
+
+    magList = {
+              {MSG_START_SYM,DEVICE_ID_MAGNETIC_FIELD},
+              0,
+              MAG_LP_50_HZ
+              };
 }
 
 void maindialog::on_mag_SW_clicked()
@@ -41,13 +51,39 @@ void maindialog::on_mag_SW_clicked()
 
 void maindialog::mag_timeTable_control()
 {
+    //DATA_HEADER_t head;
     for(QPushButton* button : ui->magConfigPage->findChildren<QPushButton*>())
     {
+
         if(button->property("button_shift").isValid())
         {
-            connect(button,SIGNAL(clicked()), this, SLOT(hour_clicked()));
+            connect(button,SIGNAL(clicked()), this, SLOT(mag_hour_clicked()));
+
+            //hour_clicked_timeConfig(&(magList->mag_headerData))
+
         }
     }
+
+}
+
+void maindialog::mag_hour_clicked()
+{
+
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    if(!button->property("clicked").isValid()) {
+        button->setProperty("clicked", false);
+    }
+    bool clicked = button->property("clicked").toBool();
+    button->setProperty("clicked", !clicked);
+        if(!clicked) {
+            button->setStyleSheet("background-color:rgb(34,139,34)");
+            magList.mag_activeHour |= 1 << button->property("button_shift").toInt();
+        } else {
+            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            magList.mag_activeHour &= ~(1 << button->property("button_shift").toInt());
+        }
+
+        qDebug() << "mag time is :" << magList.mag_activeHour << endl;
 
 }
 
@@ -58,6 +94,7 @@ void maindialog::mag_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
+                magList.mag_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -65,5 +102,19 @@ void maindialog::mag_disable_button(bool disable)
             }
         }
     }
+}
+
+void maindialog::on_mag_timeclear_button_clicked()
+{
+    for(QPushButton* button : ui->magConfigPage->findChildren<QPushButton*>())
+    {
+        if(button->property("button_shift").isValid())
+        {
+            magList.mag_activeHour = 0;
+            button->setProperty("clicked", false);
+            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+        }
+    }
+    qDebug() << "mag time is :" << magList.mag_activeHour << endl;
 }
 

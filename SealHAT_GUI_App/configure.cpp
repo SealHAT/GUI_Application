@@ -27,9 +27,8 @@ void maindialog::on_backButton_clicked()
     this->centerDialog();
 }
 
-void maindialog::on_completeButton_clicked()
+void maindialog::goto_DEV()
 {
-    //this->setFixedSize(850, 558);
 
     setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 

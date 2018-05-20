@@ -30,8 +30,7 @@ FORMS    += \
 
 HEADERS  += \
     maindialog.h \
-    LSM303AGRTypes.h \
-    LSM303AGR.h \
+    rx_gui.h \
     sensor_header/LSM303AGR.h \
     sensor_header/LSM303AGRTypes.h \
     sensor_header/max44009.h \
@@ -41,7 +40,15 @@ HEADERS  += \
     sensor_header/si705xTypes.h \
     sensor_header/gps.h \
     sensor_header/max30003types.h \
-    sensor_header/ubxmessage.h
+    sensor_header/ubx/ubxaid.h \
+    sensor_header/ubx/ubxcfg.h \
+    sensor_header/ubx/ubxlog.h \
+    sensor_header/ubx/ubxmon.h \
+    sensor_header/ubx/ubxnav.h \
+    sensor_header/ubx/ubxrxm.h \
+    sensor_header/ubx/ubxutils.h \
+    sensor_header/ubx/ubx.h \
+    sensor_header/ubx/ubxmessage.h
 
 RESOURCES += \
     images.qrc

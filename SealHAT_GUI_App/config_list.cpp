@@ -11,6 +11,13 @@
 */
 
 
+void maindialog::on_completeButton_clicked()
+{
+    goto_DEV();
+
+}
+
+
 void maindialog::setConfigList()
 {
     QString xcel_scale = ui->xcel_scaleBox->currentText();

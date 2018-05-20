@@ -10,14 +10,17 @@
  * Disable all the configuration option if this button is clicked.
 */
 
-void maindialog::ekg_Disable(bool disable)
+void maindialog::on_ekg_SW_clicked()
 {
-    ui->ekg_odr128->setDisabled(disable);
-    ui->ekg_odr256->setDisabled(disable);
-    ui->ekg_odr512->setDisabled(disable);
-    ui->ekg_gainBox->setDisabled(disable);
-    ui->ekg_LPfreqBox->setDisabled(disable);
-    ekg_disable_button(disable);
+    QString title = ui->ekg_SW->text();
+    if(title == "Enable")
+    {
+        ekg_Disable(false);
+        ui->ekg_SW->setText("Disable");
+    }else{
+        ui->ekg_SW->setText("Enable");
+        ekg_Disable(true);
+    }
 }
 
 void maindialog::ekg_setDefault()
@@ -40,21 +43,58 @@ void maindialog::ekg_setDefault()
     }
     ui->ekg_gainBox->setCurrentIndex(EKG_20_GAIN);
     ui->ekg_LPfreqBox->setCurrentIndex(EKG_LP_FREQ_40HZ);
+
+    ekgList = {
+        {MSG_START_SYM,DEVICE_ID_EKG},
+        0,
+        RATE_MIN_SPS,
+        GAIN_20_V,
+        DLPF_40_HZ
+    };
 }
 
-void maindialog::on_ekg_SW_clicked()
+
+void maindialog::ekg_hour_clicked()
 {
-    QString title = ui->ekg_SW->text();
-    if(title == "Enable")
+
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    if(!button->property("clicked").isValid()) {
+        button->setProperty("clicked", false);
+    }
+    bool clicked = button->property("clicked").toBool();
+    button->setProperty("clicked", !clicked);
+        if(!clicked) {
+            button->setStyleSheet("background-color:rgb(34,139,34)");
+            ekgList.ekg_activeHour |= 1 << button->property("button_shift").toInt();
+        } else {
+            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            ekgList.ekg_activeHour &= ~(1 << button->property("button_shift").toInt());
+        }
+
+        qDebug() << "ekg time is :" << ekgList.ekg_activeHour << endl;
+
+}
+
+void maindialog::ekg_timeTable_control()
+{
+    for(QPushButton* button : ui->ekgConfigPage->findChildren<QPushButton*>())
     {
-        ekg_Disable(false);
-        ui->ekg_SW->setText("Disable");
-    }else{
-        ui->ekg_SW->setText("Enable");
-        ekg_Disable(true);
+        if(button->property("button_shift").isValid())
+        {
+            connect(button,SIGNAL(clicked()), this, SLOT(ekg_hour_clicked()));
+        }
     }
 }
 
+void maindialog::ekg_Disable(bool disable)
+{
+    ui->ekg_odr128->setDisabled(disable);
+    ui->ekg_odr256->setDisabled(disable);
+    ui->ekg_odr512->setDisabled(disable);
+    ui->ekg_gainBox->setDisabled(disable);
+    ui->ekg_LPfreqBox->setDisabled(disable);
+    ekg_disable_button(disable);
+}
 
 
 void maindialog::on_ekg_odr128_clicked()
@@ -121,6 +161,7 @@ void maindialog::ekg_disable_button(bool disable)
         {
             button->setDisabled(disable);
             if(disable){
+                ekgList.ekg_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -130,13 +171,18 @@ void maindialog::ekg_disable_button(bool disable)
     }
 }
 
-void maindialog::ekg_timeTable_control()
+
+void maindialog::on_ekg_timeclear_button_clicked()
 {
     for(QPushButton* button : ui->ekgConfigPage->findChildren<QPushButton*>())
     {
         if(button->property("button_shift").isValid())
         {
-            connect(button,SIGNAL(clicked()), this, SLOT(hour_clicked()));
+            ekgList.ekg_activeHour = 0;
+            button->setProperty("clicked", false);
+            button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
+    qDebug() << "ekg time is :" << ekgList.ekg_activeHour << endl;
 }
+

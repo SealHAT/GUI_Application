@@ -11,6 +11,148 @@
  * Disable all the configuration option if this button is clicked.
 */
 
+void maindialog::IMUxcel_Disable(bool disable)
+{
+    ui->xcel_scaleBox->setDisabled(disable);
+    ui->xcel_pwrBox->setDisabled(disable);
+    ui->xcel_freqBox->setDisabled(disable);
+    ui->xcel_sixD_button->setDisabled(disable);
+    ui->xcel_fourD_button->setDisabled(disable);
+    ui->xcel_thres->setDisabled(disable);
+    ui->xcel_duration->setDisabled(disable);
+    if(disable){
+        ui->thres_warnLABEL->setVisible(!disable);
+        ui->dur_warnLABEL->setVisible(!disable);
+    }
+}
+
+void maindialog::xcel_setDefault()
+{
+    ui->xcel_scaleBox->setCurrentIndex(ACC_2G);
+    ui->xcel_pwrBox->setCurrentIndex(ACC_HR);
+    ui->xcel_freqBox->setCurrentIndex(ACC_FREQ_50HZ);
+    ui->xcel_thres->setText("0.5");
+    ui->xcel_duration->setText("0");
+
+    //xcelList = {};
+}
+
+void maindialog::on_xcel_SW_clicked()
+{
+    QString title = ui->xcel_SW->text();
+    if(title == "Enable")
+    {
+        ui->xcel_SW->setText("Disable");
+        IMUxcel_Disable(false);
+        xcel_disable_button(false);
+    }else{
+        ui->xcel_SW->setText("Enable");
+        IMUxcel_Disable(true);
+        xcel_disable_button(true);
+    }
+}
+
+void maindialog::on_xcel_timeclear_button_clicked()
+{
+    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
+        if(button->property("button_shift").isValid()) {
+                button->setProperty("clicked", false);
+                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            }
+        }
+    qDebug() << "xcel time is :" << xcelList.xcel_activeHour << endl;
+}
+
+/*Check the value in threshold blank and enable the warning
+ * if the value user put in is not is the range [0,16] with
+ * less than or equal to 5 digits after the decimal point
+*/
+void maindialog::on_xcel_thres_editingFinished()
+{
+    int valid;
+    int pos;
+    QDoubleValidator v(0, 16, 5,this);
+
+    QString thres = ui->xcel_thres->text();
+    valid = v.validate(thres, pos);
+
+    if(valid != ACCEPTABLE){
+        ui->thres_warnLABEL->show();
+    }else{
+        ui->thres_warnLABEL->hide();
+    }
+}
+
+/*Check the value in duration blank and enable the warning
+ * if the value user put in is not is the range [0.32, 128] with
+ * less than or equal to 5 digits after the decimal point
+*/
+void maindialog::on_xcel_duration_editingFinished()
+{
+    int valid;
+    int pos;
+    QDoubleValidator v(0.32, 128, 5,this);
+
+    QString thres = ui->xcel_duration->text();
+    valid = v.validate(thres, pos);
+    qDebug() << valid;
+    if(valid != ACCEPTABLE){
+        ui->dur_warnLABEL->show();
+
+    }else{
+        ui->dur_warnLABEL->hide();
+    }
+}
+
+void maindialog::xcel_hour_clicked()
+{
+
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    if(!button->property("clicked").isValid()) {
+        button->setProperty("clicked", false);
+    }
+    bool clicked = button->property("clicked").toBool();
+    button->setProperty("clicked", !clicked);
+        if(!clicked) {
+            button->setStyleSheet("background-color:rgb(34,139,34)");
+            //xcelList.xcel_activeHour |= 1 << button->property("button_shift").toInt();
+        } else {
+            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            //xcelList.xcel_activeHour &= ~(1 << button->property("button_shift").toInt());
+        }
+
+        qDebug() << "xcel time is :" << xcelList.xcel_activeHour << endl;
+
+}
+
+
+void maindialog::xcel_timeTable_control()
+{
+    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>())
+    {
+        if(button->property("button_shift").isValid())
+        {
+            connect(button,SIGNAL(clicked()), this, SLOT(xcel_hour_clicked()));
+        }
+    }
+}
+
+
+void maindialog::xcel_disable_button(bool disable)
+{
+    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
+        if(button->property("button_shift").isValid()) {
+            button->setDisabled(disable);
+            if(disable){
+                button->setProperty("clicked", false);
+                button->setStyleSheet("background-color:rgb(105, 105,105)");
+            }else{
+                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            }
+        }
+    }
+}
+
 /*void maindialog::IMUxcel_collectdata(bool disable)
 {
     Xcel xcel;
@@ -76,120 +218,6 @@
     //QDebug() << "duration:" << quint8(xcel.duration) << endl;
     //store xcel value
 }*/
-
-void maindialog::IMUxcel_Disable(bool disable)
-{
-    ui->xcel_scaleBox->setDisabled(disable);
-    ui->xcel_pwrBox->setDisabled(disable);
-    ui->xcel_freqBox->setDisabled(disable);
-    ui->xcel_sixD_button->setDisabled(disable);
-    ui->xcel_fourD_button->setDisabled(disable);
-    ui->xcel_thres->setDisabled(disable);
-    ui->xcel_duration->setDisabled(disable);
-    if(disable){
-        ui->thres_warnLABEL->setVisible(!disable);
-        ui->dur_warnLABEL->setVisible(!disable);
-    }
-}
-
-void maindialog::xcel_setDefault()
-{
-    ui->xcel_scaleBox->setCurrentIndex(ACC_2G);
-    ui->xcel_pwrBox->setCurrentIndex(ACC_HR);
-    ui->xcel_freqBox->setCurrentIndex(ACC_FREQ_50HZ);
-    ui->xcel_thres->setText("0.5");
-    ui->xcel_duration->setText("0");
-}
-
-void maindialog::on_xcel_SW_clicked()
-{
-    QString title = ui->xcel_SW->text();
-    if(title == "Enable")
-    {
-        ui->xcel_SW->setText("Disable");
-        IMUxcel_Disable(false);
-        xcel_disable_button(false);
-    }else{
-        ui->xcel_SW->setText("Enable");
-        IMUxcel_Disable(true);
-        xcel_disable_button(true);
-    }
-}
-
-void maindialog::on_xcel_timeclear_button_clicked()
-{
-    xcel_disable_button(true);
-}
-
-/*Check the value in threshold blank and enable the warning
- * if the value user put in is not is the range [0,16] with
- * less than or equal to 5 digits after the decimal point
-*/
-void maindialog::on_xcel_thres_editingFinished()
-{
-    int valid;
-    int pos;
-    QDoubleValidator v(0, 16, 5,this);
-
-    QString thres = ui->xcel_thres->text();
-    valid = v.validate(thres, pos);
-
-    if(valid != ACCEPTABLE){
-        ui->thres_warnLABEL->show();
-    }else{
-        ui->thres_warnLABEL->hide();
-    }
-}
-
-/*Check the value in duration blank and enable the warning
- * if the value user put in is not is the range [0.32, 128] with
- * less than or equal to 5 digits after the decimal point
-*/
-void maindialog::on_xcel_duration_editingFinished()
-{
-    int valid;
-    int pos;
-    QDoubleValidator v(0.32, 128, 5,this);
-
-    QString thres = ui->xcel_duration->text();
-    valid = v.validate(thres, pos);
-    qDebug() << valid;
-    if(valid != ACCEPTABLE){
-        ui->dur_warnLABEL->show();
-
-    }else{
-        ui->dur_warnLABEL->hide();
-    }
-}
-
-
-
-void maindialog::xcel_timeTable_control()
-{
-    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>())
-    {
-        if(button->property("button_shift").isValid())
-        {
-            connect(button,SIGNAL(clicked()), this, SLOT(hour_clicked()));
-        }
-    }
-}
-
-
-void maindialog::xcel_disable_button(bool disable)
-{
-    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
-        if(button->property("button_shift").isValid()) {
-            button->setDisabled(disable);
-            if(disable){
-                button->setProperty("clicked", false);
-                button->setStyleSheet("background-color:rgb(105, 105,105)");
-            }else{
-                button->setStyleSheet("background-color:rgb(152, 162, 173)");
-            }
-        }
-    }
-}
 
 /*
 void maindialog::on_xcel_finishButton_clicked()

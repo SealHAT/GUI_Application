@@ -26,6 +26,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     mag_setDefault();
     ekg_setDefault();
     temp_setDefault();
+    gps_setDefault();
     // Hide all the warning label on the IMU page
     labels_hide();
 
@@ -36,12 +37,6 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     xcel_timeTable_control();
     mag_timeTable_control();
     setConfigList();
-
-    //ekg_LPFreq_CombinationSet();
-
-    //connect(ui->ekg_odr128,SIGNAL(clicked()), this, SLOT(ekg_LPFreq_CombinationSet()));
-    //connect(ui->ekg_odr256,SIGNAL(clicked()), this, SLOT(ekg_LPFreq_CombinationSet()));
-    //connect(ui->ekg_odr256,SIGNAL(clicked()), this, SLOT(ekg_LPFreq_CombinationSet()));
 }
 
 void maindialog::labels_hide()
@@ -99,24 +94,13 @@ void maindialog::hour_clicked()
         button->setProperty("clicked", false);
     }
     bool clicked = button->property("clicked").toBool();
-    //qDebug() << "1. click before setproperty is :" << clicked << endl;
     button->setProperty("clicked", !clicked);
-    qDebug() << "2. click after setproperty is :" << clicked << endl;
-    //qDebug() << "time is :" << temporaryTemp.time << endl;
+    qDebug() << "click after setproperty is :" << clicked << endl;
+
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
-            //temporaryTemp.time |= 1 << button->property("button_shift").toInt();
-            //temporaryEkg.time |= 1 << button->property("button_shift").toInt();
         } else {
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
-            //temporaryTemp.time &= ~(1 << button->property("button_shift").toInt());
-            //temporaryEkg.time &= ~(1 << button->property("button_shift").toInt());
         }
-    //qDebug() << "time is :" << temporaryTemp.time << endl;
-    //qDebug() << "time is :" << temporaryEkg.time << endl;
 }
-
-
-
-
 

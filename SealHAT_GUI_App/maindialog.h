@@ -1,11 +1,7 @@
 #ifndef MAINDIALOG_H
 #define MAINDIALOG_H
 
-#include "sensor_header/seal_Types.h"
-#include "sensor_header/gps.h"
-#include "sensor_header/max30003types.h"
-#include "sensor_header/max44009.h"
-#include "sensor_header/max44009Types.h"
+#include "rx_gui.h"
 #include <QDialog>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -19,44 +15,16 @@ class maindialog : public QDialog
 {
     Q_OBJECT
 
- /***********************GUI------------->MICROCONTROLLER*****************/
-    typedef struct __attribute__((__packed__)){
-        uint16_t srtSym;    // symbol to indicate start of packet
-        uint16_t id;	    // Upper four bits is the device ID, lower four are device specific event flags
-        uint16_t size;		// size of data packet to follow. in bytes or samples? (worst case IMU size in bytes would need a uint16 :( )
-    } DATA_HEADER_t;
+    Xcel_TX xcelList;
 
-    struct Xcel_TX{
-        DATA_HEADER_t acc_headerData;
-        uint32_t acc_activeHour;
+    Mag_TX magList;
 
-        ACC_FULL_SCALE_t acc_scale;
-        ACC_OPMODE_t    acc_mode;
-        ACC_INT2_type_t acc_dimension;
-        uint8_t threshold;
-        uint8_t duration;
-    };
+    GPS_TX gpsList;
 
-    struct Mag_TX{
-        DATA_HEADER_t mag_headerData;
-        uint32_t mag_activeHour;
+    Temp_TX tempList;
 
-        MAG_OPMODE_t    mag_mode;
-    };
+    Ekg_TX ekgList;
 
-    struct TempLight_TX{
-        DATA_HEADER_t templight_headerData;
-        uint32_t temp_activeHour;
-
-        uint32_t sample_period = 0;
-    };
-
-    struct Ekg_TX{
-        DATA_HEADER_t ekg_headerData;
-        uint32_t ekg_activeHour;
-
-        uint32_t sample_period = 0;
-    };
 
     enum CONFIGURE_PAGES {
         CONFIGURE_DEV_HOME_PAGE     = 0,
@@ -163,11 +131,13 @@ public:
     explicit maindialog(QWidget *parent = 0);
     void centerDialog();
 
+
+
     ~maindialog();
 
 private slots:
 
-//Button
+//Page switch
     void on_backButton_clicked(); //
 
     void on_configureDevOptionButton_clicked(); //
@@ -192,8 +162,12 @@ private slots:
 
     void on_xcelButton_clicked();
 
-//Main_funct_control
+    void goto_DEV();
+
+//Main function control
     void hour_clicked();
+
+    //void hour_clicked_timeConfig(DEVICE_ID_t id);
 
     void labels_hide();
 
@@ -212,8 +186,14 @@ private slots:
 
     void xcel_disable_button(bool disable);
 
+    void on_xcel_timeclear_button_clicked();
+
+    void xcel_hour_clicked();
+
 
 //Magnetometer
+    void mag_dataCollection(Mag_TX *mag);
+
     void on_mag_SW_clicked();
 
     void mag_setDefault();
@@ -224,6 +204,9 @@ private slots:
 
     void mag_timeTable_control();
 
+    void on_mag_timeclear_button_clicked();
+
+
 //EKG
     void on_ekg_SW_clicked();
 
@@ -233,11 +216,22 @@ private slots:
 
     void ekg_disable_button(bool disable);
 
+    void on_ekg_odr256_clicked();
+
+    void on_ekg_odr128_clicked();
+
+    void on_ekg_odr512_clicked();
+
     void ekg_timeTable_control();
 
-    //void ekg_LPFreq_CombinationSet();
+    void on_ekg_timeclear_button_clicked();
+
+    void ekg_hour_clicked();
+
 
 //GPS
+    void gps_setDefault();
+
     void on_gps_SW_clicked();
 
     void gps_disable(bool disable);
@@ -245,6 +239,13 @@ private slots:
     void gps_disable_button(bool disable);
 
     void gps_timeTable_control();
+
+    void on_gps_timeclear_button_clicked();
+
+    void mag_hour_clicked();
+
+    void gps_hour_clicked();
+
 
 //Temperature
     void on_temp_SW_clicked();
@@ -259,25 +260,22 @@ private slots:
 
     void on_temp_freq_editingFinished();
 
+    void on_temp_timeclear_button_clicked();
+
+    void temp_hour_clicked();
 
 
-
-    void on_ekg_odr256_clicked();
-
-    void on_ekg_odr128_clicked();
-
-    void on_ekg_odr512_clicked();
-
+//Data-Retrival Page
     void on_chooseDestButton_clicked();
 
     void on_storeData_destinationEdit_editingFinished();
 
     void on_completeButton_clicked();
 
+
 //Configuration list
     void setConfigList();
 
-    void on_xcel_timeclear_button_clicked();
 
 private:
     Ui::maindialog *ui;
