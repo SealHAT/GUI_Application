@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>great Job.jpg</file>
-        <file>arrows.png</file>
         <file>UCSC.png</file>
         <file>bananaslug.png</file>
     </qresource>
