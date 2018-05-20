@@ -1,5 +1,9 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
+#include "sensor_header/seal_Types.h"
+//Sensor header
+#include "sensor_header/LSM303AGR.h"
+#include "sensor_header/LSM303AGRTypes.h"
 #include <QDesktopWidget>
 #include <QMessageBox>
 
@@ -17,7 +21,32 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     // Set size for smaller welcome screen.
     this->setFixedSize(421, 421);
+
+    xcel_setDefault();
+    mag_setDefault();
+    ekg_setDefault();
+    temp_setDefault();
+    gps_setDefault();
+    // Hide all the warning label on the IMU page
+    labels_hide();
+
+    ui->PwrStorageText->setReadOnly(true);
+    temp_timeTable_control();
+    ekg_timeTable_control();
+    gps_timeTable_control();
+    xcel_timeTable_control();
+    mag_timeTable_control();
+    setConfigList();
 }
+
+void maindialog::labels_hide()
+{
+    ui->thres_warnLABEL->hide();
+    ui->dur_warnLABEL->hide();
+    ui->temp_warnLABEL->hide();
+}
+
+
 
 /**
  * Delete GUI on exit.
@@ -35,6 +64,8 @@ void maindialog::on_configureDevOptionButton_clicked()
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
     this->centerDialog();
 }
+
+
 
 void maindialog::on_retrieveDataButton_clicked()
 {
@@ -54,3 +85,24 @@ void maindialog::centerDialog() {
     int y = (screenGeometry.height() - this->height()) / 2;
     this->move(x, y);
 }
+
+void maindialog::hour_clicked()
+{
+
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    if(!button->property("clicked").isValid()) {
+        button->setProperty("clicked", false);
+    }
+    bool clicked = button->property("clicked").toBool();
+    button->setProperty("clicked", !clicked);
+    qDebug() << "click after setproperty is :" << clicked << endl;
+
+        if(!clicked) {
+            button->setStyleSheet("background-color:rgb(34,139,34)");
+        } else {
+            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+        }
+}
+
+
+
