@@ -4,7 +4,7 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
-void maindialog::on_backButton2_clicked()
+void maindialog::on_backButton_retrieveData_clicked()
 {
     on_backButton_clicked();
 }

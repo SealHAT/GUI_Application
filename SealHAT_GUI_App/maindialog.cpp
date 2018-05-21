@@ -3,7 +3,7 @@
 #include <QDebug>
 #include "maindialog.h"
 #include "ui_maindialog.h"
-#include "sensor_header/seal_Types.h"
+#include "seal_Types.h"
 #include "sensor_header/LSM303AGR.h"
 #include "sensor_header/LSM303AGRTypes.h"
 
@@ -44,8 +44,6 @@ void maindialog::labels_hide()
     ui->temp_warnLABEL->hide();
 }
 
-
-
 /**
  * Delete GUI on exit.
  **/
@@ -58,7 +56,7 @@ void maindialog::on_configureDevOptionButton_clicked()
 {
     this->setFixedSize(850, 558);
 
-    ui->mainStacked->setCurrentIndex(1);
+    ui->mainStacked->setCurrentIndex(CONFIGURE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
     this->centerDialog();
 }
@@ -69,7 +67,7 @@ void maindialog::on_retrieveDataButton_clicked()
 {
     this->setFixedSize(850, 558);
 
-    ui->mainStacked->setCurrentIndex(2);
+    ui->mainStacked->setCurrentIndex(RETRIEVE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(RETRIEVE_DATA_HOME_PAGE);
     this->centerDialog();
 }
@@ -103,4 +101,16 @@ void maindialog::hour_clicked()
 }
 
 
+void maindialog::on_streamDataButton_clicked()
+{
+    this->setFixedSize(850, 558);
 
+    ui->mainStacked->setCurrentIndex(STREAM_MAIN_STACK);
+    ui->ConfigurePages->setCurrentIndex(STREAM_DATA_HOME_PAGE);
+    this->centerDialog();
+}
+
+void maindialog::on_backButton_StreamPage_clicked()
+{
+    on_backButton_clicked();
+}

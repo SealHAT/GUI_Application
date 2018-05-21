@@ -20,7 +20,7 @@ void maindialog::on_backButton_clicked()
     // Sets the dialog back to a login screen
     this->setFixedSize(421, 421);
 
-    ui->mainStacked->setCurrentIndex(0);
+    ui->mainStacked->setCurrentIndex(WELCOME_MAIN_STACK);
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
     this->centerDialog();
@@ -28,9 +28,7 @@ void maindialog::on_backButton_clicked()
 
 void maindialog::goto_DEV()
 {
-
     setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
-
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
 }
 
