@@ -12,7 +12,6 @@
 
 #define MSG_START_SYM           (0xADDE)
 
-#include "sensor_header/seal_Types.h"
 #include "sensor_header/LSM303AGR.h"
 #include "sensor_header/LSM303AGRTypes.h"
 #include "sensor_header/gps.h"
