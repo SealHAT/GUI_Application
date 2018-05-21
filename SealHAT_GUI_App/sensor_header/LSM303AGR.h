@@ -84,6 +84,7 @@ typedef enum {
     MAG_LP_20_HZ        = 0x14,
     MAG_LP_50_HZ        = 0x18,
     MAG_LP_100_HZ       = 0x1C
+	
 } MAG_OPMODE_t;
 
 typedef enum {

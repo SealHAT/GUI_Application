@@ -49,43 +49,17 @@ class maindialog : public QDialog
         STREAM_DATA_HOME_PAGE   = 0,
     };
 
-    /****************
-     * SENSOR ENUMS *
-     ****************/
-    enum IMU_MODE {
-        ACC_6D_ENABLE       = 0x80,
-        ACC_4D_ENABLE       = 0x00,
-
-        ACC_2G_SCALE        = 0x00,
-        ACC_4G_SCALE        = 0x20,
-        ACC_8G_SCALE        = 0x40,
-
-        ACC_HR_PWR          = 0x00,
-        ACC_NORM_PWR        = 0x08,
-        ACC_LP_PWR          = 0x10,
-
-        ACC_1HZ_FREQ        = 0x000,
-        ACC_10HZ_FREQ       = 0x001,
-        ACC_25HZ_FREQ       = 0x010,
-        ACC_50HZ_FREQ       = 0x011,
-        ACC_100HZ_FREQ      = 0x100,
-        ACC_200HZ_FREQ      = 0x101,
-        ACC_400HZ_FREQ      = 0x110,
-    };
-
-    enum IMU_PAGES {
-    };
-
     enum ACC_PWR_MODE {
-        ACC_LP              = 0,
+        ACC_HR              = 0,
         ACC_NORMAL          = 1,
-        ACC_HR              = 2,
+        ACC_LP              = 2,
     };
 
     enum ACC_SCALE {
         ACC_2G              = 0,
         ACC_4G              = 1,
         ACC_8G              = 2,
+        ACC_16G             = 3,
     };
 
     enum ACC_FREQUENCY_VALUES {
@@ -156,7 +130,8 @@ private slots:
 
 //Main function control
     void hour_clicked();
-    //void hour_clicked_timeConfig(DEVICE_ID_t id);
+    void sensors_setDefault();
+    void sensors_timeTable_control();
     void labels_hide();
 
 //Accelerometer
@@ -164,14 +139,26 @@ private slots:
     void xcel_setDefault();
     void IMUxcel_Disable(bool disable);
     void on_xcel_thres_editingFinished();
-    void on_xcel_duration_editingFinished();
     void xcel_timeTable_control();
     void xcel_disable_button(bool disable);
     void on_xcel_timeclear_button_clicked();
     void xcel_hour_clicked();
+    void on_xcel_XL_checkBox_clicked(bool checked);
+    void on_xcel_XH_checkBox_clicked(bool checked);
+    void on_xcel_YL_checkBox_clicked(bool checked);
+    void on_xcel_YH_checkBox_clicked(bool checked);
+    void on_xcel_ZL_checkBox_clicked(bool checked);
+    void on_xcel_ZH_checkBox_clicked(bool checked);
+    void on_xcel_scaleBox_currentIndexChanged(int index);
+    void xcel_changeMode();
+    void on_xcel_pwrBox_currentIndexChanged();
+    void on_xcel_freqBox_currentIndexChanged();
+
 
 //Magnetometer
-    void mag_dataCollection(Mag_TX *mag);
+    void on_mag_pwrBox_currentIndexChanged();
+    void on_mag_freqBox_currentIndexChanged();
+    void mag_dataCollect();
     void on_mag_SW_clicked();
     void mag_setDefault();
     void IMUmag_Disable(bool disable);
@@ -180,6 +167,7 @@ private slots:
     void on_mag_timeclear_button_clicked();
 
 //EKG
+    void ekg_dataCollect();
     void on_ekg_SW_clicked();
     void ekg_setDefault();
     void ekg_Disable(bool disable);
@@ -192,6 +180,7 @@ private slots:
     void ekg_hour_clicked();
 
 //GPS
+    void gps_dataCollect();
     void gps_setDefault();
     void on_gps_SW_clicked();
     void gps_disable(bool disable);
@@ -218,7 +207,10 @@ private slots:
 
 //Configuration list
     void setConfigList();
-    void on_mag_pwrBox_currentIndexChanged(int index);
+
+
+
+
 
 private:
     Ui::maindialog *ui;

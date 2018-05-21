@@ -9,6 +9,50 @@
  * Disable all the configuration option if this button is clicked.
 */
 
+void maindialog::ekg_dataCollect()
+{
+    uint8_t pwrIndex = 0;
+    uint8_t freq;
+
+    //pwrIndex= ui->mag_pwrBox->currentIndex();
+    freq = ui->mag_freqBox->currentIndex();
+
+    if(pwrIndex == MAG_LP)
+    {
+        switch(freq){
+        case MAG_FREQ_10HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_10_HZ;
+        break;
+        case MAG_FREQ_20HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_20_HZ;
+        break;
+        case MAG_FREQ_50HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_50_HZ;
+        break;
+        case MAG_FREQ_100HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_100_HZ;
+        break;
+        }
+
+    }else if(pwrIndex == MAG_NORMAL){
+            switch(freq){
+            case MAG_FREQ_10HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_10_HZ;
+            break;
+            case MAG_FREQ_20HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_20_HZ;
+            break;
+            case MAG_FREQ_50HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_50_HZ;
+            break;
+            case MAG_FREQ_100HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_100_HZ;
+            break;
+            }
+    }
+     qDebug() << "mag mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
+}
+
 void maindialog::on_ekg_SW_clicked()
 {
     QString title = ui->ekg_SW->text();
@@ -24,25 +68,13 @@ void maindialog::on_ekg_SW_clicked()
 
 void maindialog::ekg_setDefault()
 {
-    int rmIndex1;
-    int rmIndex2;
     uint16_t size;
     ui->ekg_odr128->setChecked(true);
-    if(ui->ekg_odr128->isChecked())
-    {
-        rmIndex1 = ui->ekg_LPfreqBox->findText("100 Hz");
-        if(rmIndex1 >= 0)
-        {
-            ui->ekg_LPfreqBox->removeItem(rmIndex1);
-        }
-        rmIndex2 = ui->ekg_LPfreqBox->findText("150 Hz");
-        if(rmIndex2 >= 0)
-        {
-            ui->ekg_LPfreqBox->removeItem(rmIndex2);
-        }
-    }
+    on_ekg_odr128_clicked();
+
     ui->ekg_gainBox->setCurrentIndex(EKG_20_GAIN);
     ui->ekg_LPfreqBox->setCurrentIndex(EKG_LP_FREQ_40HZ);
+    on_ekg_timeclear_button_clicked();
 
     size = sizeof(CNFGECG_RATE_VAL) + sizeof(CNFGECG_GAIN_VAL) + sizeof(CNFGECG_DLPF_VAL);
     configuration_settings.ekg_config = {

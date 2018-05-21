@@ -403,7 +403,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -658,32 +658,6 @@ border: none;</string>
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#2b68ca; vertical-align:super;&quot;&gt;Accelerometer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_8">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>440</y>
-         <width>71</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; color:#000000;&quot;&gt;Duration&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_6">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>380</y>
-         <width>181</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Motion Detection Mode&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label">
        <property name="geometry">
         <rect>
@@ -697,23 +671,10 @@ border: none;</string>
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Time&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_7">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>410</y>
-         <width>81</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Threshold&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>20</x>
          <y>320</y>
          <width>111</width>
          <height>20</height>
@@ -747,26 +708,6 @@ border: none;</string>
        </property>
        <property name="text">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Full Scale&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="xcel_thres">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>410</y>
-         <width>113</width>
-         <height>20</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="xcel_duration">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>440</y>
-         <width>113</width>
-         <height>20</height>
-        </rect>
        </property>
       </widget>
       <widget class="QPushButton" name="xcel_b_18">
@@ -1156,7 +1097,7 @@ border: none;</string>
       <widget class="QComboBox" name="xcel_scaleBox">
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>170</x>
          <y>220</y>
          <width>69</width>
          <height>22</height>
@@ -1175,6 +1116,11 @@ border: none;</string>
        <item>
         <property name="text">
          <string>8g</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>16g</string>
         </property>
        </item>
       </widget>
@@ -1226,55 +1172,10 @@ border: none;</string>
         </property>
        </item>
       </widget>
-      <widget class="QLabel" name="thres_warnLABEL">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>300</x>
-         <y>410</y>
-         <width>181</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;Invalid threshold value! (0-16)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="dur_warnLABEL">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>300</x>
-         <y>440</y>
-         <width>201</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;Invalid time input! (0.32s - 128s)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="xcel_fourD_button">
-       <property name="geometry">
-        <rect>
-         <x>330</x>
-         <y>380</y>
-         <width>82</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>4D Mode</string>
-       </property>
-      </widget>
       <widget class="QComboBox" name="xcel_pwrBox">
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>170</x>
          <y>270</y>
          <width>101</width>
          <height>22</height>
@@ -1295,22 +1196,6 @@ border: none;</string>
          <string>Low Power</string>
         </property>
        </item>
-      </widget>
-      <widget class="QRadioButton" name="xcel_sixD_button">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>380</y>
-         <width>82</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>6D Mode</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
       </widget>
       <widget class="QLabel" name="label_64">
        <property name="geometry">
@@ -1666,6 +1551,181 @@ border: none;</string>
         <bool>false</bool>
        </property>
       </widget>
+      <widget class="QFrame" name="frame">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>350</y>
+         <width>611</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(139, 154, 172);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Motion Detection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>110</y>
+          <width>81</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Threshold&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>101</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Axes Selection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="xcel_XL_checkBox">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>50</y>
+          <width>41</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>- X</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="xcel_XH_checkBox">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>70</y>
+          <width>41</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>+ X</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="xcel_thres">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>110</y>
+          <width>113</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="xcel_ZL_checkBox">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>50</y>
+          <width>41</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>- Z</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="xcel_ZH_checkBox">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>70</y>
+          <width>41</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>+ Z</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="xcel_YL_checkBox">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>50</y>
+          <width>31</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>- Y</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="xcel_YH_checkBox">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>70</y>
+          <width>41</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>+ Y</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="thres_warnLABEL">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>110</y>
+          <width>181</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;Invalid threshold value! (0-2)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>0</y>
+          <width>191</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>  Picture calirification coming soon!</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
      <widget class="QWidget" name="magConfigPage">
       <widget class="QPushButton" name="mag_SW">
@@ -1734,7 +1794,7 @@ border: none;</string>
        </item>
        <item>
         <property name="text">
-         <string>25 Hz</string>
+         <string>20 Hz</string>
         </property>
        </item>
        <item>
@@ -2514,7 +2574,7 @@ border: none;</string>
          <x>30</x>
          <y>30</y>
          <width>251</width>
-         <height>31</height>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -4248,7 +4308,7 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>220</y>
+         <y>240</y>
          <width>121</width>
          <height>20</height>
         </rect>
@@ -4260,8 +4320,8 @@ border: none;</string>
       <widget class="QLabel" name="label_143">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>270</y>
+         <x>50</x>
+         <y>290</y>
          <width>51</width>
          <height>20</height>
         </rect>
@@ -4273,8 +4333,8 @@ border: none;</string>
       <widget class="QComboBox" name="ekg_gainBox">
        <property name="geometry">
         <rect>
-         <x>230</x>
-         <y>270</y>
+         <x>220</x>
+         <y>290</y>
          <width>69</width>
          <height>22</height>
         </rect>
@@ -4309,7 +4369,7 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>320</y>
+         <y>340</y>
          <width>191</width>
          <height>20</height>
         </rect>
@@ -4321,8 +4381,8 @@ border: none;</string>
       <widget class="QComboBox" name="ekg_LPfreqBox">
        <property name="geometry">
         <rect>
-         <x>230</x>
-         <y>320</y>
+         <x>220</x>
+         <y>340</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -4359,8 +4419,8 @@ border: none;</string>
       <widget class="QRadioButton" name="ekg_odr128">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>220</y>
+         <x>160</x>
+         <y>240</y>
          <width>82</width>
          <height>17</height>
         </rect>
@@ -4375,8 +4435,8 @@ border: none;</string>
       <widget class="QRadioButton" name="ekg_odr256">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>220</y>
+         <x>270</x>
+         <y>240</y>
          <width>82</width>
          <height>17</height>
         </rect>
@@ -4388,8 +4448,8 @@ border: none;</string>
       <widget class="QRadioButton" name="ekg_odr512">
        <property name="geometry">
         <rect>
-         <x>380</x>
-         <y>220</y>
+         <x>390</x>
+         <y>240</y>
          <width>82</width>
          <height>17</height>
         </rect>

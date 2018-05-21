@@ -5,31 +5,82 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
+
+
+void maindialog::mag_dataCollect()
+{
+    uint8_t pwrIndex = 0;
+    uint8_t freq;
+
+    pwrIndex= ui->mag_pwrBox->currentIndex();
+    freq = ui->mag_freqBox->currentIndex();
+
+    if(pwrIndex == MAG_LP)
+    {
+        switch(freq){
+        case MAG_FREQ_10HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_10_HZ;
+        break;
+        case MAG_FREQ_20HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_20_HZ;
+        break;
+        case MAG_FREQ_50HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_50_HZ;
+        break;
+        case MAG_FREQ_100HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_100_HZ;
+        break;
+        }
+
+    }else if(pwrIndex == MAG_NORMAL){
+            switch(freq){
+            case MAG_FREQ_10HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_10_HZ;
+            break;
+            case MAG_FREQ_20HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_20_HZ;
+            break;
+            case MAG_FREQ_50HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_50_HZ;
+            break;
+            case MAG_FREQ_100HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_100_HZ;
+            break;
+            }
+    }
+     qDebug() << "mag mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
+}
+
+/*
+ * Whenever the user changed power setting for magnetometer
+*/
+void maindialog::on_mag_pwrBox_currentIndexChanged()
+{
+    mag_dataCollect();
+}
+
+/*
+ * Whenever the user changed frequency setting for magnetometer
+*/
+void maindialog::on_mag_freqBox_currentIndexChanged()
+{
+    mag_dataCollect();
+}
+
 /* Enable/Disable mag sensor.
  * Disable all the configuration option if this button is clicked.
 */
-
-void maindialog::mag_dataCollection(Mag_TX *mag)
-{
-    (void) mag;
-    //mag->acc_activeHour = ;
-}
-
-void maindialog::on_mag_pwrBox_currentIndexChanged(int index)
-{
-    (void) index;
-}
-
 void maindialog::IMUmag_Disable(bool disable)
 {
     ui->mag_timeclear_button->setDisabled(disable);
     ui->mag_pwrBox->setDisabled(disable);
     ui->mag_freqBox->setDisabled(disable);
-    //ui->mag_finishButton->setDisabled(true);
 }
 
+/**/
 void maindialog::mag_setDefault()
 {
+    on_mag_timeclear_button_clicked();
     ui->mag_pwrBox->setCurrentIndex(MAG_LP);
     ui->mag_freqBox->setCurrentIndex(MAG_FREQ_50HZ);
 
@@ -99,6 +150,7 @@ void maindialog::mag_disable_button(bool disable)
             button->setDisabled(disable);
             if(disable){
                 configuration_settings.magnetometer_config.mag_activeHour = 0;
+                configuration_settings.magnetometer_config.mag_mode = MAG_IDLE;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{

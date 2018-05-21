@@ -5,33 +5,213 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
+void maindialog::xcel_changeMode()
+{
+    uint8_t pwrIndex = 0;
+    uint8_t freq;
+
+    pwrIndex= ui->xcel_pwrBox->currentIndex();
+    freq = ui->xcel_freqBox->currentIndex();
+
+    if(pwrIndex == ACC_LP)
+    {
+        switch(freq){
+        case ACC_FREQ_1HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_LP_1_HZ;
+        break;
+        case ACC_FREQ_10HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_LP_10_HZ;
+        break;
+        case ACC_FREQ_25HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_LP_25_HZ;
+        break;
+        case ACC_FREQ_50HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_LP_50_HZ;
+        break;
+        case ACC_FREQ_100HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_LP_100_HZ;
+        break;
+        case ACC_FREQ_200HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_LP_200_HZ;
+        break;
+        case ACC_FREQ_400HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_LP_400_HZ;
+        break;
+        }
+
+    }else if(pwrIndex == ACC_NORMAL){
+        switch(freq){
+        case ACC_FREQ_1HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_NORM_1_HZ;
+        break;
+        case ACC_FREQ_10HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_NORM_10_HZ;
+        break;
+        case ACC_FREQ_25HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_NORM_25_HZ;
+        break;
+        case ACC_FREQ_50HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_NORM_50_HZ;
+        break;
+        case ACC_FREQ_100HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_NORM_100_HZ;
+        break;
+        case ACC_FREQ_200HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_NORM_200_HZ;
+        break;
+        case ACC_FREQ_400HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_NORM_400_HZ;
+        break;
+        }
+
+    }else if(pwrIndex == ACC_HR){
+        switch(freq){
+        case ACC_FREQ_1HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_HR_1_HZ;
+        break;
+        case ACC_FREQ_10HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_HR_10_HZ;
+        break;
+        case ACC_FREQ_25HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_HR_25_HZ;
+        break;
+        case ACC_FREQ_50HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_HR_50_HZ;
+        break;
+        case ACC_FREQ_100HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_HR_100_HZ;
+        break;
+        case ACC_FREQ_200HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_HR_200_HZ;
+        break;
+        case ACC_FREQ_400HZ:
+            configuration_settings.accelerometer_config.acc_mode = ACC_HR_400_HZ;
+        break;
+        }
+    }
+    qDebug() << QString::number(configuration_settings.accelerometer_config.acc_mode, 16) << endl;
+}
+
+void maindialog::on_xcel_scaleBox_currentIndexChanged(int index)
+{
+    switch(index){
+    case ACC_2G:    configuration_settings.accelerometer_config.acc_scale = ACC_SCALE_2G;
+        break;
+    case ACC_4G:    configuration_settings.accelerometer_config.acc_scale = ACC_SCALE_4G;
+        break;
+    case ACC_8G:    configuration_settings.accelerometer_config.acc_scale = ACC_SCALE_8G;
+        break;
+    case ACC_16G:    configuration_settings.accelerometer_config.acc_scale = ACC_SCALE_16G;
+        break;
+    }
+}
+
+void maindialog::on_xcel_pwrBox_currentIndexChanged()
+{
+    xcel_changeMode();
+}
+
+void maindialog::on_xcel_freqBox_currentIndexChanged()
+{
+    xcel_changeMode();
+}
+
+void maindialog::on_xcel_XL_checkBox_clicked(bool checked)
+{
+    //qDebug() << checked << endl;
+    ui->xcel_XH_checkBox->setDisabled(checked);
+    if(checked){
+        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_X_LOW;
+    }else{
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_X_LOW);
+    }
+    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
+
+}
+
+void maindialog::on_xcel_XH_checkBox_clicked(bool checked)
+{
+    ui->xcel_XL_checkBox->setDisabled(checked);
+    if(checked){
+        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_X_HIGH;
+    }else{
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_X_HIGH);
+    }
+    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
+}
+
+void maindialog::on_xcel_YL_checkBox_clicked(bool checked)
+{
+    ui->xcel_YH_checkBox->setDisabled(checked);
+    if(checked){
+        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_Y_LOW;
+    }else{
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_Y_LOW);
+    }
+    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
+}
+
+void maindialog::on_xcel_YH_checkBox_clicked(bool checked)
+{
+    ui->xcel_YL_checkBox->setDisabled(checked);
+    if(checked){
+        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_Y_HIGH;
+    }else{
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_Y_HIGH);
+    }
+    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
+}
+
+void maindialog::on_xcel_ZL_checkBox_clicked(bool checked)
+{
+    ui->xcel_ZH_checkBox->setDisabled(checked);
+    if(checked){
+        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_Z_LOW;
+    }else{
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_Z_LOW);
+    }
+    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
+}
+
+void maindialog::on_xcel_ZH_checkBox_clicked(bool checked)
+{
+    ui->xcel_ZL_checkBox->setDisabled(checked);
+    if(checked){
+        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_Z_HIGH;
+    }else{
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_Z_HIGH);
+    }
+    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
+}
+
 /* Enable/Disable xcel sensor.
  * Disable all the configuration option if this button is clicked.
 */
-
 void maindialog::IMUxcel_Disable(bool disable)
 {
     ui->xcel_timeclear_button->setDisabled(disable);
     ui->xcel_scaleBox->setDisabled(disable);
     ui->xcel_pwrBox->setDisabled(disable);
     ui->xcel_freqBox->setDisabled(disable);
-    ui->xcel_sixD_button->setDisabled(disable);
-    ui->xcel_fourD_button->setDisabled(disable);
+    ui->xcel_XL_checkBox->setDisabled(disable);
+    ui->xcel_XH_checkBox->setDisabled(disable);
+    ui->xcel_YL_checkBox->setDisabled(disable);
+    ui->xcel_YH_checkBox->setDisabled(disable);
+    ui->xcel_ZL_checkBox->setDisabled(disable);
+    ui->xcel_ZH_checkBox->setDisabled(disable);
     ui->xcel_thres->setDisabled(disable);
-    ui->xcel_duration->setDisabled(disable);
     if(disable){
         ui->thres_warnLABEL->setVisible(!disable);
-        ui->dur_warnLABEL->setVisible(!disable);
     }
 }
 
 void maindialog::xcel_setDefault()
 {
+    on_xcel_timeclear_button_clicked();
     ui->xcel_scaleBox->setCurrentIndex(ACC_2G);
     ui->xcel_pwrBox->setCurrentIndex(ACC_HR);
     ui->xcel_freqBox->setCurrentIndex(ACC_FREQ_50HZ);
     ui->xcel_thres->setText("0.5");
-    ui->xcel_duration->setText("0");
     uint16_t size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
 
     configuration_settings.accelerometer_config = {
@@ -39,7 +219,7 @@ void maindialog::xcel_setDefault()
         0,                                                      // active hours
         ACC_SCALE_2G,                                           // scale
         ACC_HR_50_HZ,                                           // mode
-        0x3F,                                                   // sensitivity
+        0x00,                                                   // sensitivity
         300,                                                    // threshold
         0                                                       // duration
     };
@@ -72,46 +252,62 @@ void maindialog::on_xcel_timeclear_button_clicked()
     qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.xcel_activeHour << endl;
 }
 
+/*Check the value in duration blank and enable the warning
+ * if the value user put in is not is the range [0.32, 128] with
+ * less than or equal to 5 digits after the decimal point
+*/
+
+
+
 /*Check the value in threshold blank and enable the warning
  * if the value user put in is not is the range [0,16] with
  * less than or equal to 5 digits after the decimal point
 */
 void maindialog::on_xcel_thres_editingFinished()
 {
+    QPalette sample_palette;
+    sample_palette.setColor(QPalette::WindowText, Qt::red);
+
     int valid;
     int pos;
-    QDoubleValidator v(0, 16, 5,this);
 
-    QString thres = ui->xcel_thres->text();
-    valid = v.validate(thres, pos);
+    if(ui->xcel_scaleBox->currentIndex() == ACC_2G)
+    {
+        QDoubleValidator v(0, 2, 5,this);
+        QString thres = ui->xcel_thres->text();
+        valid = v.validate(thres, pos);
+        ui->thres_warnLABEL->setText("Invalid threshold value! (0-2)");
+
+    }else if(ui->xcel_scaleBox->currentIndex() == ACC_4G)
+    {
+        QDoubleValidator v(0, 4, 5,this);
+        QString thres = ui->xcel_thres->text();
+        valid = v.validate(thres, pos);
+        ui->thres_warnLABEL->setText("Invalid threshold value! (0-4)");
+    }else if(ui->xcel_scaleBox->currentIndex() == ACC_8G)
+    {
+        QDoubleValidator v(0, 8, 5,this);
+        QString thres = ui->xcel_thres->text();
+        valid = v.validate(thres, pos);
+        ui->thres_warnLABEL->setText("Invalid threshold value! (0-8)");
+    }else if(ui->xcel_scaleBox->currentIndex() == ACC_16G)
+    {
+        QDoubleValidator v(0, 16, 5,this);
+        QString thres = ui->xcel_thres->text();
+        valid = v.validate(thres, pos);
+        ui->thres_warnLABEL->setText("Invalid threshold value! (0-16)");
+    }
+    ui->thres_warnLABEL->setAutoFillBackground(true);
+    ui->thres_warnLABEL->setPalette(sample_palette);
 
     if(valid != ACCEPTABLE){
         ui->thres_warnLABEL->show();
     }else{
         ui->thres_warnLABEL->hide();
     }
+
 }
 
-/*Check the value in duration blank and enable the warning
- * if the value user put in is not is the range [0.32, 128] with
- * less than or equal to 5 digits after the decimal point
-*/
-void maindialog::on_xcel_duration_editingFinished()
-{
-    int valid;
-    int pos;
-    QDoubleValidator v(0.32, 128, 5,this);
-
-    QString thres = ui->xcel_duration->text();
-    valid = v.validate(thres, pos);
-    qDebug() << valid;
-    if(valid != ACCEPTABLE){
-        ui->dur_warnLABEL->show();
-
-    }else{
-        ui->dur_warnLABEL->hide();
-    }
-}
 
 void maindialog::xcel_hour_clicked()
 {
@@ -154,6 +350,7 @@ void maindialog::xcel_disable_button(bool disable)
             button->setDisabled(disable);
             if(disable){
                 configuration_settings.accelerometer_config.xcel_activeHour = 0;
+                configuration_settings.accelerometer_config.acc_mode = ACC_POWER_DOWN;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -162,137 +359,3 @@ void maindialog::xcel_disable_button(bool disable)
         }
     }
 }
-
-/*void maindialog::IMUxcel_collectdata(bool disable)
-{
-    Xcel xcel;
-    xcel = {0, 0, 0, 0};
-
-    if(ui->xcel_sixD_button->isChecked())
-    {
-        xcel.mode |= ACC_6D_ENABLE;
-    }else if(ui->xcel_fourD_button->isChecked())
-    {
-        xcel.mode |= ACC_4D_ENABLE;
-    }
-
-    if(ui->xcel_scaleBox->currentIndex() == ACC_2G)
-    {
-        xcel.mode |= ACC_2G_SCALE;
-    }else if(ui->xcel_scaleBox->currentIndex() == ACC_4G)
-    {
-        xcel.mode |= ACC_4G_SCALE;
-    }else if(ui->xcel_scaleBox->currentIndex() == ACC_8G)
-    {
-        xcel.mode |= ACC_8G_SCALE;
-    }
-
-    if(ui->xcel_pwrBox->currentIndex() == ACC_HR)
-    {
-        xcel.mode |= ACC_HR_PWR;
-    }else if(ui->xcel_pwrBox->currentIndex() == ACC_NORMAL)
-    {
-        xcel.mode |= ACC_NORM_PWR;
-    }else if(ui->xcel_pwrBox->currentIndex() == ACC_LP)
-    {
-        xcel.mode |= ACC_LP_PWR;
-    }
-
-    if(ui->xcel_freqBox->currentIndex() == FREQ_1HZ)
-    {
-        xcel.mode |= ACC_1HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_10HZ)
-    {
-        xcel.mode |= ACC_10HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_25HZ)
-    {
-        xcel.mode |= ACC_25HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_50HZ)
-    {
-        xcel.mode |= ACC_50HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_100HZ)
-    {
-        xcel.mode |= ACC_100HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_200HZ)
-    {
-        xcel.mode |= ACC_200HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_400HZ)
-    {
-        xcel.mode |= ACC_400HZ_FREQ;
-    }
-
-    xcel.threshold = (ui->xcel_thres->text()).toUInt()/(0.016);
-    xcel.duration = (ui->xcel_duration->text()).toUInt();
-    qDebug() << QString("mode:") << quint8(xcel.mode) << endl;
-    //QDebug() << "thres:" << quint8(xcel.threshold) << endl;
-    //QDebug() << "duration:" << quint8(xcel.duration) << endl;
-    //store xcel value
-}*/
-
-/*
-void maindialog::on_xcel_finishButton_clicked()
-{
-    Xcel xcel;
-    xcel = {0, 0, 0, 0};
-
-    if(ui->xcel_sixD_button->isChecked())
-    {
-        xcel.mode |= ACC_6D_ENABLE;
-    }else if(ui->xcel_fourD_button->isChecked())
-    {
-        xcel.mode |= ACC_4D_ENABLE;
-    }
-
-    if(ui->xcel_scaleBox->currentIndex() == ACC_2G)
-    {
-        xcel.mode |= ACC_2G_SCALE;
-    }else if(ui->xcel_scaleBox->currentIndex() == ACC_4G)
-    {
-        xcel.mode |= ACC_4G_SCALE;
-    }else if(ui->xcel_scaleBox->currentIndex() == ACC_8G)
-    {
-        xcel.mode |= ACC_8G_SCALE;
-    }
-
-    if(ui->xcel_pwrBox->currentIndex() == ACC_HR)
-    {
-        xcel.mode |= ACC_HR_PWR;
-    }else if(ui->xcel_pwrBox->currentIndex() == ACC_NORMAL)
-    {
-        xcel.mode |= ACC_NORM_PWR;
-    }else if(ui->xcel_pwrBox->currentIndex() == ACC_LP)
-    {
-        xcel.mode |= ACC_LP_PWR;
-    }
-
-    if(ui->xcel_freqBox->currentIndex() == FREQ_1HZ)
-    {
-        xcel.mode |= ACC_1HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_10HZ)
-    {
-        xcel.mode |= ACC_10HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_25HZ)
-    {
-        xcel.mode |= ACC_25HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_50HZ)
-    {
-        xcel.mode |= ACC_50HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_100HZ)
-    {
-        xcel.mode |= ACC_100HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_200HZ)
-    {
-        xcel.mode |= ACC_200HZ_FREQ;
-    }else if(ui->xcel_freqBox->currentIndex() == FREQ_400HZ)
-    {
-        xcel.mode |= ACC_400HZ_FREQ;
-    }
-
-    xcel.threshold = (ui->xcel_thres->text()).toUInt()/(0.016);
-    xcel.duration = (ui->xcel_duration->text()).toUInt();
-    qDebug() << QString("mode:") << quint8(xcel.mode) << endl;
-    //QDebug() << "thres:" << quint8(xcel.threshold) << endl;
-    //QDebug() << "duration:" << quint8(xcel.duration) << endl;
-    //store xcel value
-}*/
-

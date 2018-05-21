@@ -20,8 +20,8 @@ void maindialog::on_temp_SW_clicked()
 
 void maindialog::temp_setDefault()
 {
+   on_temp_timeclear_button_clicked();
    ui->temp_freq->setText("1");
-
    configuration_settings.temperature_config = {
        {MSG_START_SYM, DEVICE_ID_LIGHT, 0, 0, sizeof(uint16_t)},// header data
        0,                                                       // active hours

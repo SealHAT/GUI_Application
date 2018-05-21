@@ -9,8 +9,53 @@
  * Disable all the configuration option if this button is clicked.
 */
 
+void maindialog::gps_dataCollect()
+{
+    uint8_t pwrIndex = 0;
+    uint8_t freq;
+
+    pwrIndex= ui->mag_pwrBox->currentIndex();
+    freq = ui->mag_freqBox->currentIndex();
+
+    if(pwrIndex == MAG_LP)
+    {
+        switch(freq){
+        case MAG_FREQ_10HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_10_HZ;
+        break;
+        case MAG_FREQ_20HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_20_HZ;
+        break;
+        case MAG_FREQ_50HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_50_HZ;
+        break;
+        case MAG_FREQ_100HZ:
+            configuration_settings.magnetometer_config.mag_mode = MAG_LP_100_HZ;
+        break;
+        }
+
+    }else if(pwrIndex == MAG_NORMAL){
+            switch(freq){
+            case MAG_FREQ_10HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_10_HZ;
+            break;
+            case MAG_FREQ_20HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_20_HZ;
+            break;
+            case MAG_FREQ_50HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_50_HZ;
+            break;
+            case MAG_FREQ_100HZ:
+                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_100_HZ;
+            break;
+            }
+
+    }
+}
+
 void maindialog::gps_setDefault()
 {
+    on_gps_timeclear_button_clicked();
     configuration_settings.gps_config = {
         {MSG_START_SYM, DEVICE_ID_GPS, 0, 0, sizeof(GPS_PROFILE)},  // header
         0,                                                          // active hours

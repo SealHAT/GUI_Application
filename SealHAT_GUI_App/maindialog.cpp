@@ -19,28 +19,41 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     // Set size for smaller welcome screen.
     this->setFixedSize(421, 421);
+    sensors_setDefault();
 
+
+    labels_hide();
+    sensors_timeTable_control();
+    ui->PwrStorageText->setReadOnly(true);
+
+    setConfigList();
+}
+
+/*Set all the sensors to default configuration*/
+void maindialog::sensors_setDefault()
+{
     xcel_setDefault();
     mag_setDefault();
     ekg_setDefault();
     temp_setDefault();
     gps_setDefault();
-    // Hide all the warning label on the IMU page
-    labels_hide();
+}
 
-    ui->PwrStorageText->setReadOnly(true);
+/*Set all the sensors to default configuration*/
+void maindialog::sensors_timeTable_control()
+{
     temp_timeTable_control();
     ekg_timeTable_control();
     gps_timeTable_control();
     xcel_timeTable_control();
     mag_timeTable_control();
-    setConfigList();
 }
 
+
+/* Hide all the warning label*/
 void maindialog::labels_hide()
 {
     ui->thres_warnLABEL->hide();
-    ui->dur_warnLABEL->hide();
     ui->temp_warnLABEL->hide();
 }
 
@@ -114,3 +127,5 @@ void maindialog::on_backButton_StreamPage_clicked()
 {
     on_backButton_clicked();
 }
+
+

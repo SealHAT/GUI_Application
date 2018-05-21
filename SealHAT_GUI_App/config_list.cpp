@@ -14,7 +14,8 @@
 void maindialog::on_completeButton_clicked()
 {
     goto_DEV();
-
+    //mag_dataCollect();
+    //qDebug() << "mag mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
 }
 
 
