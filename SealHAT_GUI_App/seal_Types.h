@@ -15,6 +15,7 @@
 #include "sensor_header/LSM303AGR.h"
 #include "sensor_header/LSM303AGRTypes.h"
 #include "sensor_header/gps.h"
+//#include "sensor_header/ecg.h"
 #include "sensor_header/max30003types.h"
 #include "sensor_header/max44009.h"
 #include "sensor_header/max44009Types.h"
@@ -92,12 +93,11 @@ struct calendar_date {
 /***********************GUI------------->MICROCONTROLLER*****************/
 struct Xcel_TX {
    DATA_HEADER_t    acc_headerData;
-   uint32_t         xcel_activeHour;
+   uint32_t         acc_activeHour;
    ACC_FULL_SCALE_t acc_scale;
    ACC_OPMODE_t     acc_mode;
    uint8_t          acc_sensitivity;
-   uint16_t         threshold;
-   uint8_t          duration;
+   uint16_t         acc_threshold;
 };
 
 struct Mag_TX {
@@ -118,7 +118,7 @@ struct Ekg_TX {
    uint32_t         ekg_activeHour;
    CNFGECG_RATE_VAL ekg_sampleRate;
    CNFGECG_GAIN_VAL ekg_gain;
-   CNFGECG_DLPF_VAL ekg_lpFreq;
+   CNFGECG_DLPF_VAL ekg_lowpassFreq;
 };
 
 struct GPS_TX {

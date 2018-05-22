@@ -9,49 +9,26 @@
  * Disable all the configuration option if this button is clicked.
 */
 
-void maindialog::ekg_dataCollect()
+void maindialog::on_ekg_gainBox_currentIndexChanged(int index)
 {
-    uint8_t pwrIndex = 0;
-    uint8_t freq;
-
-    //pwrIndex= ui->mag_pwrBox->currentIndex();
-    freq = ui->mag_freqBox->currentIndex();
-
-    if(pwrIndex == MAG_LP)
-    {
-        switch(freq){
-        case MAG_FREQ_10HZ:
-            configuration_settings.magnetometer_config.mag_mode = MAG_LP_10_HZ;
+    switch(index){
+    case EKG_20_GAIN:
+        configuration_settings.ekg_config.ekg_gain = GAIN_20_V;
         break;
-        case MAG_FREQ_20HZ:
-            configuration_settings.magnetometer_config.mag_mode = MAG_LP_20_HZ;
+    case EKG_40_GAIN:
+        configuration_settings.ekg_config.ekg_gain = GAIN_40_V;
         break;
-        case MAG_FREQ_50HZ:
-            configuration_settings.magnetometer_config.mag_mode = MAG_LP_50_HZ;
+    case EKG_80_GAIN:
+        configuration_settings.ekg_config.ekg_gain = GAIN_80_V;
         break;
-        case MAG_FREQ_100HZ:
-            configuration_settings.magnetometer_config.mag_mode = MAG_LP_100_HZ;
+    case EKG_160_GAIN:
+        configuration_settings.ekg_config.ekg_gain = GAIN_160_V;
         break;
-        }
-
-    }else if(pwrIndex == MAG_NORMAL){
-            switch(freq){
-            case MAG_FREQ_10HZ:
-                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_10_HZ;
-            break;
-            case MAG_FREQ_20HZ:
-                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_20_HZ;
-            break;
-            case MAG_FREQ_50HZ:
-                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_50_HZ;
-            break;
-            case MAG_FREQ_100HZ:
-                configuration_settings.magnetometer_config.mag_mode = MAG_NORM_100_HZ;
-            break;
-            }
     }
-     qDebug() << "mag mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
+    qDebug() << "ekg gain is 0x:" << QString::number(configuration_settings.ekg_config.ekg_gain, 16) << endl;
+
 }
+
 
 void maindialog::on_ekg_SW_clicked()
 {
@@ -137,6 +114,7 @@ void maindialog::on_ekg_odr128_clicked()
     int rmIndex2;
     if(ui->ekg_odr128->isChecked())
     {
+        configuration_settings.ekg_config.ekg_sampleRate = RATE_MIN_SPS;
         rmIndex1 = ui->ekg_LPfreqBox->findText("100 Hz");
         if(rmIndex1 >= 0)
         {
@@ -148,6 +126,10 @@ void maindialog::on_ekg_odr128_clicked()
             ui->ekg_LPfreqBox->removeItem(rmIndex2);
         }
     }
+    qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
+
+
+
 }
 
 void maindialog::on_ekg_odr256_clicked()
@@ -156,6 +138,7 @@ void maindialog::on_ekg_odr256_clicked()
     int rmIndex2;
     if(ui->ekg_odr256->isChecked())
     {
+        configuration_settings.ekg_config.ekg_sampleRate = RATE_MED_SPS;
         addIndex = ui->ekg_LPfreqBox->findText("100 Hz");
         if(addIndex < 0)
         {
@@ -167,6 +150,7 @@ void maindialog::on_ekg_odr256_clicked()
             ui->ekg_LPfreqBox->removeItem(rmIndex2);
         }
     }
+    qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
 }
 
 void maindialog::on_ekg_odr512_clicked()
@@ -175,6 +159,7 @@ void maindialog::on_ekg_odr512_clicked()
     int addIndex2;
     if(ui->ekg_odr512->isChecked())
     {
+        configuration_settings.ekg_config.ekg_sampleRate = RATE_MAX_SPS;
         addIndex1 = ui->ekg_LPfreqBox->findText("100 Hz");
         addIndex2 = ui->ekg_LPfreqBox->findText("150 Hz");
         if(addIndex1 < 0)
@@ -186,16 +171,25 @@ void maindialog::on_ekg_odr512_clicked()
             ui->ekg_LPfreqBox->addItem("150 Hz");
         }
     }
+    qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
 }
 
 void maindialog::ekg_disable_button(bool disable)
 {
+    uint16_t size;
     for(QPushButton* button : ui->ekgConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid())
         {
             button->setDisabled(disable);
             if(disable){
-                configuration_settings.ekg_config.ekg_activeHour = 0;
+                size = sizeof(CNFGECG_RATE_VAL) + sizeof(CNFGECG_GAIN_VAL) + sizeof(CNFGECG_DLPF_VAL);
+                configuration_settings.ekg_config = {
+                    {MSG_START_SYM,DEVICE_ID_EKG, 0, 0, size},  // header
+                    0,                                          // active hours
+                    RATE_MIN_SPS,                               // sampling rate
+                    GAIN_20_V,                                  // gain
+                    DLPF_40_HZ                                  // frequency
+                };
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -204,6 +198,67 @@ void maindialog::ekg_disable_button(bool disable)
         }
     }
 }
+
+void maindialog::on_ekg_LPfreqBox_currentIndexChanged(int index)
+{
+    switch (index) {
+    case EKG_LP_FREQ_BYPASS:
+        configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_BYPASS;
+        break;
+    case EKG_LP_FREQ_40HZ:
+        configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_40_HZ;
+        break;
+    case EKG_LP_FREQ_100HZ:
+        configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_100_HZ;
+        break;
+    case EKG_LP_FREQ_150HZ:
+        configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_150_HZ;
+        break;
+    }
+    qDebug() << configuration_settings.ekg_config.ekg_lowpassFreq << endl;
+    /*if(ui->ekg_odr128->isChecked())
+    {
+        switch (index) {
+        case EKG_LP_FREQ_BYPASS:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_BYPASS;
+            break;
+        case EKG_LP_FREQ_40HZ:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_40_HZ;
+            break;
+        }
+    }else if(ui->ekg_odr256->isChecked())
+    {
+        switch (index) {
+        case EKG_LP_FREQ_BYPASS:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_BYPASS;
+            break;
+        case EKG_LP_FREQ_40HZ:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_40_HZ;
+            break;
+        case EKG_LP_FREQ_100HZ:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_100_HZ;
+            break;
+        }
+    }else if(ui->ekg_odr512->isChecked())
+    {
+        switch (index) {
+        case EKG_LP_FREQ_BYPASS:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_BYPASS;
+            break;
+        case EKG_LP_FREQ_40HZ:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_40_HZ;
+            break;
+        case EKG_LP_FREQ_100HZ:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_100_HZ;
+            break;
+        case EKG_LP_FREQ_150HZ:
+            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_150_HZ;
+            break;
+        }
+    }*/
+
+}
+
 
 
 void maindialog::on_ekg_timeclear_button_clicked()

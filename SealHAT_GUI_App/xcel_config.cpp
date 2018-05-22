@@ -211,7 +211,7 @@ void maindialog::xcel_setDefault()
     ui->xcel_scaleBox->setCurrentIndex(ACC_2G);
     ui->xcel_pwrBox->setCurrentIndex(ACC_HR);
     ui->xcel_freqBox->setCurrentIndex(ACC_FREQ_50HZ);
-    ui->xcel_thres->setText("0.5");
+    ui->xcel_thres->setText("0.3");
     uint16_t size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
 
     configuration_settings.accelerometer_config = {
@@ -220,8 +220,7 @@ void maindialog::xcel_setDefault()
         ACC_SCALE_2G,                                           // scale
         ACC_HR_50_HZ,                                           // mode
         0x00,                                                   // sensitivity
-        300,                                                    // threshold
-        0                                                       // duration
+        300                                                    // threshold
     };
 }
 
@@ -240,24 +239,21 @@ void maindialog::on_xcel_SW_clicked()
     }
 }
 
+/*
+ * Reset all the time buttons in accelerometer page and set all the color back to default
+ * Reset time configuration to zero for accelerometer
+*/
 void maindialog::on_xcel_timeclear_button_clicked()
 {
     for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
-            configuration_settings.accelerometer_config.xcel_activeHour = 0;
+            configuration_settings.accelerometer_config.acc_activeHour = 0;
             button->setProperty("clicked", false);
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
             }
         }
-    qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.xcel_activeHour << endl;
+    qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
 }
-
-/*Check the value in duration blank and enable the warning
- * if the value user put in is not is the range [0.32, 128] with
- * less than or equal to 5 digits after the decimal point
-*/
-
-
 
 /*Check the value in threshold blank and enable the warning
  * if the value user put in is not is the range [0,16] with
@@ -304,6 +300,8 @@ void maindialog::on_xcel_thres_editingFinished()
         ui->thres_warnLABEL->show();
     }else{
         ui->thres_warnLABEL->hide();
+        configuration_settings.accelerometer_config.acc_threshold = (ui->xcel_thres->text().toDouble())*1000;
+        qDebug() << configuration_settings.accelerometer_config.acc_threshold << endl;
     }
 
 }
@@ -320,13 +318,13 @@ void maindialog::xcel_hour_clicked()
     button->setProperty("clicked", !clicked);
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(34,139,34)");
-            configuration_settings.accelerometer_config.xcel_activeHour |= 1 << button->property("button_shift").toInt();
+            configuration_settings.accelerometer_config.acc_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
-            configuration_settings.accelerometer_config.xcel_activeHour &= ~(1 << button->property("button_shift").toInt());
+            configuration_settings.accelerometer_config.acc_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
-        qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.xcel_activeHour << endl;
+        qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
 
 }
 
@@ -345,12 +343,20 @@ void maindialog::xcel_timeTable_control()
 
 void maindialog::xcel_disable_button(bool disable)
 {
+    uint16_t size;
+    size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
     for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                configuration_settings.accelerometer_config.xcel_activeHour = 0;
-                configuration_settings.accelerometer_config.acc_mode = ACC_POWER_DOWN;
+                configuration_settings.accelerometer_config = {
+                    {MSG_START_SYM, DEVICE_ID_ACCELEROMETER, 0, 0, size},   // header
+                    0,                                                      // active hours
+                    ACC_SCALE_2G,                                           // scale
+                    ACC_POWER_DOWN,                                           // POWER DOWN
+                    0x00,                                                   // sensitivity
+                    0                                                    // threshold
+                };
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{

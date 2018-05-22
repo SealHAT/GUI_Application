@@ -43,7 +43,11 @@ void maindialog::temp_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                configuration_settings.temperature_config.temp_activeHour = 0;
+                configuration_settings.temperature_config = {
+                    {MSG_START_SYM, DEVICE_ID_LIGHT, 0, 0, sizeof(uint16_t)},// header data
+                    0,                                                       // active hours
+                    0                                                        // sample period
+                };
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -83,7 +87,6 @@ void maindialog::temp_timeTable_control()
             connect(button,SIGNAL(clicked()), this, SLOT(temp_hour_clicked()));
         }
     }
-
 }
 
 void maindialog::on_temp_freq_editingFinished()
@@ -94,11 +97,12 @@ void maindialog::on_temp_freq_editingFinished()
 
     QString thres = ui->temp_freq->text();
     valid = v.validate(thres, pos);
-    //qDebug() << valid;
     if(valid != ACCEPTABLE){
         ui->temp_warnLABEL->show();
 
     }else{
+        configuration_settings.temperature_config.temp_samplePeriod = (ui->temp_freq->text().toDouble());
+        qDebug() << configuration_settings.temperature_config.temp_samplePeriod << endl;
         ui->temp_warnLABEL->hide();
     }
 }

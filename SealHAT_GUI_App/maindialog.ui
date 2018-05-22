@@ -403,7 +403,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -6629,38 +6629,6 @@ border: none;</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QPushButton" name="chooseDestButton">
-       <property name="geometry">
-        <rect>
-         <x>420</x>
-         <y>250</y>
-         <width>141</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Futura</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 69, 140);
-color: rgb(0, 0, 0);
-border: none;</string>
-       </property>
-       <property name="text">
-        <string>Choose Data Destination</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
       <widget class="QPushButton" name="getDataButton">
        <property name="geometry">
         <rect>
@@ -6725,6 +6693,19 @@ border: none;</string>
          <width>291</width>
          <height>20</height>
         </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="chooseDestButton">
+       <property name="geometry">
+        <rect>
+         <x>420</x>
+         <y>260</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>PushButton</string>
        </property>
       </widget>
      </widget>

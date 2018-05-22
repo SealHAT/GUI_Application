@@ -167,7 +167,6 @@ private slots:
     void on_mag_timeclear_button_clicked();
 
 //EKG
-    void ekg_dataCollect();
     void on_ekg_SW_clicked();
     void ekg_setDefault();
     void ekg_Disable(bool disable);
@@ -178,6 +177,7 @@ private slots:
     void ekg_timeTable_control();
     void on_ekg_timeclear_button_clicked();
     void ekg_hour_clicked();
+    void on_ekg_gainBox_currentIndexChanged(int index);
 
 //GPS
     void gps_dataCollect();
@@ -210,7 +210,7 @@ private slots:
 
 
 
-
+    void on_ekg_LPfreqBox_currentIndexChanged(int index);
 
 private:
     Ui::maindialog *ui;

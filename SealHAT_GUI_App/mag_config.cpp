@@ -149,8 +149,11 @@ void maindialog::mag_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                configuration_settings.magnetometer_config.mag_activeHour = 0;
-                configuration_settings.magnetometer_config.mag_mode = MAG_IDLE;
+                configuration_settings.magnetometer_config = {
+                          {MSG_START_SYM, DEVICE_ID_MAGNETIC_FIELD, 0, 0, sizeof(MAG_OPMODE_t)},// header
+                          0,                                                                    // active hours
+                          MAG_IDLE                                                          // mode
+                          };
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{

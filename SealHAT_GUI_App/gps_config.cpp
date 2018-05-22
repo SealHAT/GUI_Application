@@ -121,7 +121,11 @@ void maindialog::gps_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                configuration_settings.gps_config.gps_activeHour = 0;
+                configuration_settings.gps_config = {
+                    {MSG_START_SYM, DEVICE_ID_GPS, 0, 0, sizeof(GPS_PROFILE)},  // header
+                    0,                                                          // active hours
+                    GPS_PSMOO30S                                                // profile
+                };
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
