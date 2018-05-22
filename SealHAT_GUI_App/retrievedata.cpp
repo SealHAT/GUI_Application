@@ -1,8 +1,10 @@
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDebug>
+#include <QFileDialog>
 #include <Qdir>
 #include <QFile>
+#include <QMessageBox>
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
@@ -23,12 +25,25 @@ void maindialog::on_storeData_destinationEdit_editingFinished()
             qDebug()<<"file now exists";
         }
     }*/
-    //ui->storeData_destinationEdit->setText();
+    //ui->storeData_destinationEdit->setText("/Users/Doris/Desktop/gui/");
 }
 
 void maindialog::on_chooseDestButton_clicked()
 {
-    QString path = "/c/User/hpan5/Desktop/";
+
+    QString dir = QFileDialog::getExistingDirectory(
+                this,
+                tr("Open Directory"),
+                "/Users/Doris/Desktop/",
+                QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
+            );
+
+    ui->storeData_destinationEdit->setText(dir);
+
+
+    //QMessageBox::information(this,tr("File Name"), filename);
+    /*
+    QString path = ui->storeData_destinationEdit->text();
     QDir dir;
     QFile file(path +"file");
     if(!dir.exists(path)){
@@ -37,5 +52,5 @@ void maindialog::on_chooseDestButton_clicked()
         if(file.open(QIODevice::ReadWrite)){
             qDebug()<<"file now exists";
         }
-    }
+    }*/
 }
