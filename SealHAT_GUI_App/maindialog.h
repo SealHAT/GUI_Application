@@ -178,6 +178,7 @@ private slots:
     void on_ekg_timeclear_button_clicked();
     void ekg_hour_clicked();
     void on_ekg_gainBox_currentIndexChanged(int index);
+    void on_ekg_LPfreqBox_currentIndexChanged(int index);
 
 //GPS
     void gps_dataCollect();
@@ -202,15 +203,18 @@ private slots:
 
 //Data-Retrival Page
     void on_chooseDestButton_clicked();
-    void on_storeData_destinationEdit_editingFinished();
     void on_completeButton_clicked();
+    void on_storeData_destinationEdit_returnPressed();
+
 
 //Configuration list
     void setConfigList();
 
 
 
-    void on_ekg_LPfreqBox_currentIndexChanged(int index);
+
+
+    void on_getDataButton_clicked();
 
 private:
     Ui::maindialog *ui;

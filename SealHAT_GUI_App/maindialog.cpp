@@ -128,5 +128,3 @@ void maindialog::on_backButton_StreamPage_clicked()
     on_backButton_clicked();
 }
 
-
-
