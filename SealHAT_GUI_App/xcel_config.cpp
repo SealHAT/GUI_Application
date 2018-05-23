@@ -264,7 +264,7 @@ void maindialog::on_xcel_thres_editingFinished()
     QPalette sample_palette;
     sample_palette.setColor(QPalette::WindowText, Qt::red);
 
-    int valid;
+    int valid = INVALID;
     int pos;
 
     if(ui->xcel_scaleBox->currentIndex() == ACC_2G)
