@@ -9,8 +9,8 @@ void maindialog::mag_powerEstimation_control()
 {
     for(QComboBox* box : ui->magConfigPage->findChildren<QComboBox*>())
     {
-            connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(powerEstimation()));
-
+        connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(storageEstimation()));
+        connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(powerEstimation()));
     }
 }
 
@@ -55,7 +55,7 @@ void maindialog::mag_dataCollect()
             break;
             }
     }
-     qDebug() << "mag mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
+     //qDebug << "mag mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
 }
 
 /*
@@ -96,6 +96,8 @@ void maindialog::mag_setDefault()
               0,                                                                    // active hours
               MAG_LP_50_HZ                                                          // mode
               };
+    //powerEstimation();
+    //storageEstimation();
 }
 
 void maindialog::on_mag_SW_clicked()
@@ -122,6 +124,8 @@ void maindialog::mag_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(mag_hour_clicked()));
+            connect(button,SIGNAL(clicked()), this, SLOT(storageEstimation()));
+            connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
         }
     }
 
@@ -144,9 +148,6 @@ void maindialog::mag_hour_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
             configuration_settings.magnetometer_config.mag_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
-
-        qDebug() << "mag time is :" << configuration_settings.magnetometer_config.mag_activeHour << endl;
-
 }
 
 
@@ -181,6 +182,8 @@ void maindialog::on_mag_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    qDebug() << "mag time is :" << configuration_settings.magnetometer_config.mag_activeHour << endl;
+    //powerEstimation();
+    //storageEstimation();
+    //qDebug << "mag time is :" << configuration_settings.magnetometer_config.mag_activeHour << endl;
 }
 

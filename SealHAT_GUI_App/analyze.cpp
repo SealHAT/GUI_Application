@@ -2,76 +2,10 @@
 #include <QMessageBox>
 #include <QDoubleValidator>
 #include <QDebug>
+#include <QPalette>
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
-#define EKG_I_AVDV  100/1000000
-#define EKG_I_OV    1.6/1000000
-#define EKG_I_SAVDV 2.5/1000000
-#define EKG_I_SOV   1.1/1000000
-#define EKG_OSCILLATOR  (1.4/1000000)*24
-
-uint16_t ekg_sampleNumber;
-double ekg_activeHour;
-double ekg_activePower;
-double ekg_inactivePower;
-double ekg_totalPower;
-
-#define myqDebug() qDebug() << fixed << qSetRealNumberPrecision(10)
-
-uint16_t temp_sampleNumber;
-double temp_activeHour;
-double temp_activePower;
-double temp_inactivePower;
-double temp_totalPower;
-
-uint16_t light_sampleNumber;
-double light_activeHour;
-double light_activePower;
-double light_inactivePower;
-double light_totalPower;
-
-uint16_t acc_sampleNumber;
-double acc_activeHour;
-double acc_activePower;
-double acc_inactivePower;
-double acc_totalPower;
-
-uint16_t mag_sampleNumber;
-double mag_activeHour;
-double mag_activePower;
-double mag_inactivePower;
-double mag_totalPower;
-
-uint16_t gps_sampleNumber;
-double gps_activeHour;
-double gps_activePower;
-double gps_inactivePower;
-double gps_totalPower;
-
-uint16_t accFrequency[8] = {1,10,25,50,100,200,400};
-double acc_actPower[3][8] = {
-                        (3.7/1000000), (5.4/1000000), (8/1000000), (12.6/1000000), (22/1000000), (40/1000000), (75/1000000),
-                         (3.7/1000000), (4.4/1000000), (5.6/1000000), (7.7/1000000),(11.7/1000000),(20/1000000),(36/1000000),
-                         (3.7/1000000), (5.4/1000000), (8/1000000), (12.6/1000000), (22/1000000), (40/1000000), (75/1000000)};
-/*
-double accHR_NORM_Power[8] = {3.7/1000000,
-                             5.4/1000000,
-                             8/1000000,
-                             12.6/1000000,
-                             22/1000000,
-                             40/1000000,
-                             75/1000000,};
-
-*/
-uint16_t magFrequency[4] = {1,20,50,100};
-double magPower[2][4] = {(100/1000000), (200/1000000), (475/1000000), (950/1000000),
-                         (25/1000000), (50/1000000), (125/1000000), (250/1000000)};
-
-/*double magNormPower[4] = {25/1000000,
-                        50/1000000,
-                        125/1000000,
-                        250/1000000};*/
 uint8_t maindialog::num_Hours(uint32_t x) {
   uint8_t hours =0;
   while(x!=0) {
@@ -81,7 +15,7 @@ uint8_t maindialog::num_Hours(uint32_t x) {
   }
   return hours;
 }
-
+/*Power estimation base on changing configuation setting*/
 void maindialog::powerEstimation(){
    /*TEMPERATURE POWER*/
     temp_sampleNumber = 3600/(configuration_settings.temperature_config.temp_samplePeriod);
@@ -101,7 +35,7 @@ void maindialog::powerEstimation(){
      light_inactivePower = (24 - light_activeHour) * LIGHT_INACT_PWR;
      light_totalPower = light_activePower + light_inactivePower;   //light power per day//
      //qDebug() << "light activehour is" << light_activeHour << endl;
-    // myqDebug() << "light inactive power is"<< light_totalPower << endl;
+    // floatDebug() << "light inactive power is"<< light_totalPower << endl;
 
      /*EKG POWER*/
      ekg_sampleNumber = 512/(2<<(configuration_settings.ekg_config.ekg_sampleRate - 1));
@@ -120,18 +54,18 @@ void maindialog::powerEstimation(){
      acc_inactivePower = IMU_SB_PWR * (24 - acc_activeHour);
      acc_activePower = acc_actPower[acc_pwrMode][acc_tens] * acc_activeHour ;//(EKG_I_AVDV + EKG_I_OV) * ekg_activeHour;
      acc_totalPower = acc_inactivePower + acc_activePower;
+     floatDebug() << "acc_totalPower is" << acc_totalPower << endl;
 
      /*MAGNETOMETER POWER*/
      uint8_t mag_ones = (configuration_settings.magnetometer_config.mag_mode%16)/4;
-     uint8_t mag_powerMode = (configuration_settings.magnetometer_config.mag_mode/16)/10;
+     uint8_t mag_pwrMode = (configuration_settings.magnetometer_config.mag_mode/16)%10;
      mag_sampleNumber = 3600/(magFrequency[mag_ones]);
 
      mag_activeHour = num_Hours(configuration_settings.magnetometer_config.mag_activeHour);
      mag_inactivePower = IMU_SB_PWR*(24 - mag_activeHour);
-     mag_activePower = magPower[mag_powerMode][mag_ones] * ekg_activeHour;
-     mag_totalPower = acc_inactivePower + acc_activePower;
-     qDebug() << "mag tens is" << magFrequency[mag_ones];
-     qDebug() << "mag accelerometer_sampleNumber is" << mag_sampleNumber << endl;
+     mag_activePower = magPower[mag_pwrMode][mag_ones] * mag_activeHour;
+     mag_totalPower = mag_inactivePower + mag_activePower;
+     floatDebug() << "mag_totalPower is" << mag_totalPower << endl;
 
      /*GPS POWER*/
      gps_sampleNumber = (2*3600)/(30) + (22*3600)/3600;
@@ -139,23 +73,30 @@ void maindialog::powerEstimation(){
      gps_inactivePower = GPS_SB_PWR * (24 - gps_activeHour);
      gps_activePower = (77.9/1000000)/30 * gps_activeHour;
      gps_totalPower = gps_inactivePower + gps_activePower;
+     floatDebug() << "gps_totalPower is" << gps_totalPower << endl;
+
+     /*MEMORY POWER*/  //what is the correct SPI time
+     memory_totalpower = storageEst * SPI_SPEED * SPI_CURRENT
+                         + (24 - 1/SPI_SPEED) * SPI_SB_CURRENT
+                         + (24 * SPI_SB_CURRENT * 3);
+
+     /*MICRO POWER*/
+     //micro_activehour //How to caculate activehour for micro
+     micro_totalpower = micro_activehour * MICRO_ACT_PWR * (1.0/12000000) + ((24-micro_activehour) * MICRO_SB_PWR);
 
 
+     powerEst = (temp_totalPower + light_totalPower + ekg_totalPower + acc_totalPower + mag_totalPower + gps_totalPower
+                 + memory_totalpower + micro_totalpower) * 1000;
 
+     qDebug() << "memory_totalpower is" << memory_totalpower << endl;
+     qDebug() << "powerEst is" << powerEst << endl;
+     ui->pwrEst_Text->setText((QString::number(powerEst,'f',5)));
 }
 
-uint64_t templight_storage;
-uint64_t acc_storage;
-uint64_t mag_storage;
-uint64_t gps_storage;
-uint64_t ekg_storage;
 
-uint64_t templight_groupNum;
-uint64_t acc_groupNum;
-uint64_t mag_groupNum;
-uint64_t gps_groupNum;
-uint64_t ekg_groupNum;
 
+
+/*Storage caculate in bits = total Bits*/
 void maindialog::storageEstimation(){
     /*Environment*/
     templight_storage = (4 * configuration_settings.temperature_config.temp_headerData.size + sizeof(DATA_HEADER_t));
@@ -170,9 +111,12 @@ void maindialog::storageEstimation(){
     gps_groupNum = (gps_sampleNumber)/(configuration_settings.gps_config.gps_headerData.size);
     ekg_groupNum = (ekg_sampleNumber)/(configuration_settings.ekg_config.ekg_headerData.size);
 
-    powerEst = templight_storage * templight_groupNum
+    storageEst = (templight_storage * templight_groupNum
              + acc_storage * acc_groupNum
              + mag_storage * mag_groupNum
              + gps_storage * gps_groupNum
-             + ekg_storage * ekg_groupNum;
+             + ekg_storage * ekg_groupNum) * 8;
+
+    floatDebug() << "storageEst is" << storageEst << endl;
+    ui->storageEst_Text->setText(QString::number(storageEst));
 }

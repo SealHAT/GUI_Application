@@ -8,8 +8,10 @@
 #include <list>
 #include "seal_Types.h"
 
+
 #define	TOHOUR				3600
-#define I2C_Speed           1/400000
+#define I2C_Speed           1.0/400000
+#define SPI_SPEED           1.0/1000000
 
 #define TEMP_CONV_TIME  0.0108
 #define TEMP_CONV_PWR 0.00012
@@ -21,9 +23,24 @@
 #define LIGHT_INACT_PWR   0.0000012
 #define LIGHT_ACT_PWR   0.0000016
 
-#define IMU_SB_PWR  2/1000000
-#define GPS_SB_PWR  20/1000000
+#define IMU_SB_PWR  2.0/1000000
 
+#define EKG_I_AVDV  100/1000000
+#define EKG_I_OV    1.6/1000000
+#define EKG_I_SAVDV 2.5/1000000
+#define EKG_I_SOV   1.1/1000000
+#define EKG_OSCILLATOR  (1.4/1000000)*24
+
+#define floatDebug() qDebug() << fixed << qSetRealNumberPrecision(10)
+
+#define GPS_SB_PWR  20.0/1000000
+
+#define SPI_CURRENT     25.0/1000
+#define SPI_SB_CURRENT  50.0/1000000
+
+
+#define MICRO_ACT_PWR   31.0/1000000
+#define MICRO_SB_PWR    4.6/1000000
 namespace Ui {class maindialog;}
 
 class maindialog : public QDialog
@@ -32,8 +49,77 @@ class maindialog : public QDialog
 
     /* Struct containing all sensor and micro configuration data. */
     SENSOR_CONFIGS configuration_settings;
-    uint64_t storageEst;
-    uint64_t powerEst;
+
+    uint64_t templight_storage;
+    uint64_t acc_storage;
+    uint64_t mag_storage;
+    uint64_t gps_storage;
+    uint64_t ekg_storage;
+
+    uint64_t templight_groupNum;
+    uint64_t acc_groupNum;
+    uint64_t mag_groupNum;
+    uint64_t gps_groupNum;
+    uint64_t ekg_groupNum;
+
+    uint16_t temp_sampleNumber;
+    double temp_activeHour;
+    double temp_activePower;
+    double temp_inactivePower;
+    double temp_totalPower;
+
+    uint16_t light_sampleNumber;
+    double light_activeHour;
+    double light_activePower;
+    double light_inactivePower;
+    double light_totalPower;
+
+    uint16_t acc_sampleNumber;
+    double acc_activeHour;
+    double acc_activePower;
+    double acc_inactivePower;
+    double acc_totalPower;
+
+    uint16_t mag_sampleNumber;
+    double mag_activeHour;
+    double mag_activePower;
+    double mag_inactivePower;
+    double mag_totalPower;
+
+    uint16_t ekg_sampleNumber;
+    double ekg_activeHour;
+    double ekg_activePower;
+    double ekg_inactivePower;
+    double ekg_totalPower;
+
+    uint16_t gps_sampleNumber;
+    double gps_activeHour;
+    double gps_activePower;
+    double gps_inactivePower;
+    double gps_totalPower;
+
+    uint16_t memory_totalpower;
+
+
+    uint16_t micro_totalpower;
+    double micro_activehour;
+
+    uint16_t accFrequency[7] = {1,10,25,50,100,200,400};
+    double acc_actPower[3][7] = {
+                                 {(3.7/1000000), (5.4/1000000), (8/1000000), (12.6/1000000), (22/1000000), (40/1000000), (75/1000000)},
+                                 {(3.7/1000000), (4.4/1000000), (5.6/1000000), (7.7/1000000),(11.7/1000000),(20/1000000),(36/1000000)},
+                                 {(3.7/1000000), (5.4/1000000), (8/1000000), (12.6/1000000), (22/1000000), (40/1000000), (75/1000000)}
+                                };
+
+    uint16_t magFrequency[4] = {1,20,50,100};
+    double magPower[2][4] = {
+                                 {(100/1000000), (200/1000000), (475/1000000), (950/1000000)},
+                                 {(25/1000000), (50/1000000), (125/1000000), (250/1000000)}
+                                };
+
+    double powerEst;
+    uint32_t storageEst;
+
 
     /*************
      * GUI PAGES *

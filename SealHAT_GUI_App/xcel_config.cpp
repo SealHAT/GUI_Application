@@ -259,7 +259,8 @@ void maindialog::xcel_powerEstimation_control()
 {
     for(QComboBox* box : ui->xcelConfigPage->findChildren<QComboBox*>())
     {
-            connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(powerEstimation()));
+        connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(storageEstimation()));
+        connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(powerEstimation()));
 
     }
 }
@@ -345,6 +346,8 @@ void maindialog::xcel_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(xcel_hour_clicked()));
+            connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
+            connect(button,SIGNAL(clicked()), this, SLOT(storageEstimation()));
         }
     }
 }

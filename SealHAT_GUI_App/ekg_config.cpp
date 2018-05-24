@@ -1,7 +1,7 @@
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDoubleValidator>
-#include <QDebug>
+#include <qDebug>
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
@@ -25,7 +25,6 @@ void maindialog::on_ekg_gainBox_currentIndexChanged(int index)
         configuration_settings.ekg_config.ekg_gain = GAIN_160_V;
         break;
     }
-    qDebug() << "ekg gain is 0x:" << QString::number(configuration_settings.ekg_config.ekg_gain, 16) << endl;
 
 }
 
@@ -41,6 +40,8 @@ void maindialog::on_ekg_SW_clicked()
         ui->ekg_SW->setText("Enable");
         ekg_Disable(true);
     }
+    //powerEstimation();
+    //storageEstimation();
 }
 
 void maindialog::ekg_setDefault()
@@ -61,6 +62,8 @@ void maindialog::ekg_setDefault()
         GAIN_20_V,                                  // gain
         DLPF_40_HZ                                  // frequency
     };
+    //powerEstimation();
+    //storageEstimation();
 }
 
 
@@ -81,8 +84,6 @@ void maindialog::ekg_hour_clicked()
             configuration_settings.ekg_config.ekg_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
-        qDebug() << "ekg time is :" << configuration_settings.ekg_config.ekg_activeHour << endl;
-
 }
 
 void maindialog::ekg_timeTable_control()
@@ -92,6 +93,8 @@ void maindialog::ekg_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(ekg_hour_clicked()));
+            connect(button,SIGNAL(clicked()), this, SLOT(storageEstimation()));
+            connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
         }
     }
 }
@@ -100,8 +103,8 @@ void maindialog::ekg_powerEstimation_control()
 {
     for(QRadioButton* button : ui->ekgConfigPage->findChildren<QRadioButton*>())
     {
-            connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
-
+        connect(button,SIGNAL(clicked()), this, SLOT(storageEstimation()));
+        connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
     }
 }
 
@@ -176,7 +179,7 @@ void maindialog::on_ekg_odr512_clicked()
             ui->ekg_LPfreqBox->addItem("150 Hz");
         }
     }
-    //qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
+    ////qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
 
 }
 
@@ -221,7 +224,7 @@ void maindialog::on_ekg_LPfreqBox_currentIndexChanged(int index)
         configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_150_HZ;
         break;
     }
-    qDebug() << configuration_settings.ekg_config.ekg_lowpassFreq << endl;
+    //qDebug() << configuration_settings.ekg_config.ekg_lowpassFreq << endl;
 
 }
 
@@ -238,6 +241,7 @@ void maindialog::on_ekg_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    qDebug() << "ekg time is :" << configuration_settings.ekg_config.ekg_activeHour << endl;
+    //powerEstimation();
+    //storageEstimation();
 }
 

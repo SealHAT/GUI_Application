@@ -80,7 +80,7 @@ void maindialog::gps_hour_clicked()
             configuration_settings.gps_config.gps_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
-        qDebug() << "gps time is :" << configuration_settings.gps_config.gps_activeHour << endl;
+        //qDebug << "gps time is :" << configuration_settings.gps_config.gps_activeHour << endl;
 
 }
 
@@ -113,6 +113,8 @@ void maindialog::on_gps_SW_clicked()
         ui->gps_SW->setText("Enable");
         gps_disable(true);
     }
+    powerEstimation();
+    storageEstimation();
 }
 
 void maindialog::gps_disable_button(bool disable)
@@ -146,7 +148,9 @@ void maindialog::on_gps_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    qDebug() << "gps time is :" << configuration_settings.gps_config.gps_activeHour << endl;
+    //powerEstimation();
+    //storageEstimation();
+    //qDebug << "gps time is :" << configuration_settings.gps_config.gps_activeHour << endl;
 }
 
 

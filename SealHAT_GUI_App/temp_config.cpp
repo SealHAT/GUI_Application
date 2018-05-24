@@ -86,6 +86,8 @@ void maindialog::temp_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(temp_hour_clicked()));
+            connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
+            connect(button,SIGNAL(clicked()), this, SLOT(storageEstimation()));
         }
     }
 }
@@ -106,7 +108,8 @@ void maindialog::on_temp_freq_editingFinished()
         qDebug() << configuration_settings.temperature_config.temp_samplePeriod << endl;
         ui->temp_warnLABEL->hide();
     }
-    //powerEstimation();
+    powerEstimation();
+    storageEstimation();
 }
 
 void maindialog::on_temp_timeclear_button_clicked()
@@ -121,5 +124,5 @@ void maindialog::on_temp_timeclear_button_clicked()
         }
     }
     //powerEstimation();
-    qDebug() << "temp time is :" << configuration_settings.temperature_config.temp_activeHour << endl;
+    //storageEstimation();
 }
