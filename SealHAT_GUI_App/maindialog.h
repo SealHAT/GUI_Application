@@ -17,10 +17,12 @@
 #define TEMP_SB_PWR   0.00000062
 #define TEMP_I2C_PWR         0.004
 
-
 #define LIGHT_BIT_NUM        16
 #define LIGHT_INACT_PWR   0.0000012
 #define LIGHT_ACT_PWR   0.0000016
+
+#define IMU_SB_PWR  2/1000000
+#define GPS_SB_PWR  20/1000000
 
 namespace Ui {class maindialog;}
 
@@ -242,7 +244,7 @@ private slots:
 
 private:
     Ui::maindialog *ui;
-    QMap<int, QString> config;
+    QMap<QString, QString> config;
 };
 
 #endif // MAINDIALOG_H
