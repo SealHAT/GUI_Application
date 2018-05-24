@@ -5,7 +5,14 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
+void maindialog::mag_powerEstimation_control()
+{
+    for(QComboBox* box : ui->magConfigPage->findChildren<QComboBox*>())
+    {
+            connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(powerEstimation()));
 
+    }
+}
 
 void maindialog::mag_dataCollect()
 {

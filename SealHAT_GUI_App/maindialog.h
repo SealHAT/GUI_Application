@@ -2,10 +2,25 @@
 #define MAINDIALOG_H
 
 #include <QDialog>
+#include <QMap>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <list>
 #include "seal_Types.h"
+
+#define	TOHOUR				3600
+#define I2C_Speed           1/400000
+
+#define TEMP_CONV_TIME  0.0108
+#define TEMP_CONV_PWR 0.00012
+#define TEMP_BIT_NUM        16
+#define TEMP_SB_PWR   0.00000062
+#define TEMP_I2C_PWR         0.004
+
+
+#define LIGHT_BIT_NUM        16
+#define LIGHT_INACT_PWR   0.0000012
+#define LIGHT_ACT_PWR   0.0000016
 
 namespace Ui {class maindialog;}
 
@@ -15,6 +30,8 @@ class maindialog : public QDialog
 
     /* Struct containing all sensor and micro configuration data. */
     SENSOR_CONFIGS configuration_settings;
+    uint64_t storageEst;
+    uint64_t powerEst;
 
     /*************
      * GUI PAGES *
@@ -61,6 +78,7 @@ class maindialog : public QDialog
         ACC_8G              = 2,
         ACC_16G             = 3,
     };
+
 
     enum ACC_FREQUENCY_VALUES {
         ACC_FREQ_1HZ        = 0,
@@ -153,6 +171,7 @@ private slots:
     void xcel_changeMode();
     void on_xcel_pwrBox_currentIndexChanged();
     void on_xcel_freqBox_currentIndexChanged();
+    void xcel_powerEstimation_control();
 
 
 //Magnetometer
@@ -165,6 +184,7 @@ private slots:
     void mag_disable_button(bool disable);
     void mag_timeTable_control();
     void on_mag_timeclear_button_clicked();
+    void mag_powerEstimation_control();
 
 //EKG
     void on_ekg_SW_clicked();
@@ -179,6 +199,7 @@ private slots:
     void ekg_hour_clicked();
     void on_ekg_gainBox_currentIndexChanged(int index);
     void on_ekg_LPfreqBox_currentIndexChanged(int index);
+    void ekg_powerEstimation_control();
 
 //GPS
     void gps_dataCollect();
@@ -205,19 +226,23 @@ private slots:
     void on_chooseDestButton_clicked();
     void on_completeButton_clicked();
     void on_storeData_destinationEdit_returnPressed();
+    void on_saveButton_clicked();
+    void on_loadButton_clicked();
+    //void saveList();
 
 
 //Configuration list
     void setConfigList();
-
-
-
-
-
     void on_getDataButton_clicked();
+
+//Estimation
+    uint8_t num_Hours(uint32_t x) ;
+    void powerEstimation();
+    void storageEstimation();
 
 private:
     Ui::maindialog *ui;
+    QMap<int, QString> config;
 };
 
 #endif // MAINDIALOG_H

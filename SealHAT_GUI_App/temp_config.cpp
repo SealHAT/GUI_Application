@@ -73,8 +73,9 @@ void maindialog::temp_hour_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
             configuration_settings.temperature_config.temp_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
+        //powerEstimation();
 
-        qDebug() << "temp time is :" << configuration_settings.temperature_config.temp_activeHour << endl;
+        //qDebug() << "temp time is :" << configuration_settings.temperature_config.temp_activeHour << endl;
 
 }
 
@@ -105,6 +106,7 @@ void maindialog::on_temp_freq_editingFinished()
         qDebug() << configuration_settings.temperature_config.temp_samplePeriod << endl;
         ui->temp_warnLABEL->hide();
     }
+    //powerEstimation();
 }
 
 void maindialog::on_temp_timeclear_button_clicked()
@@ -118,5 +120,6 @@ void maindialog::on_temp_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
+    //powerEstimation();
     qDebug() << "temp time is :" << configuration_settings.temperature_config.temp_activeHour << endl;
 }

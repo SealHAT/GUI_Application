@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     gps_config.cpp \
     mag_config.cpp \
     xcel_config.cpp \
-    config_list.cpp
+    config_list.cpp \
+    analyze.cpp
 
 FORMS    += \
     maindialog.ui

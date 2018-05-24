@@ -24,7 +24,11 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     labels_hide();
     sensors_timeTable_control();
+    ekg_powerEstimation_control();
+    xcel_powerEstimation_control();
+    mag_powerEstimation_control();
     ui->PwrStorageText->setReadOnly(true);
+    qDebug() << "Final accelerometer size is :" << configuration_settings.accelerometer_config.acc_headerData.size << endl;
 
     setConfigList();
 }
@@ -127,4 +131,5 @@ void maindialog::on_backButton_StreamPage_clicked()
 {
     on_backButton_clicked();
 }
+
 

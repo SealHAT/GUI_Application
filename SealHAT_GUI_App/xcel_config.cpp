@@ -89,7 +89,7 @@ void maindialog::xcel_changeMode()
         break;
         }
     }
-    qDebug() << QString::number(configuration_settings.accelerometer_config.acc_mode, 16) << endl;
+   //qDebug() << QString::number(configuration_settings.accelerometer_config.acc_mode, 16) << endl;
 }
 
 void maindialog::on_xcel_scaleBox_currentIndexChanged(int index)
@@ -253,6 +253,15 @@ void maindialog::on_xcel_timeclear_button_clicked()
             }
         }
     qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
+}
+
+void maindialog::xcel_powerEstimation_control()
+{
+    for(QComboBox* box : ui->xcelConfigPage->findChildren<QComboBox*>())
+    {
+            connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(powerEstimation()));
+
+    }
 }
 
 /*Check the value in threshold blank and enable the warning

@@ -96,6 +96,15 @@ void maindialog::ekg_timeTable_control()
     }
 }
 
+void maindialog::ekg_powerEstimation_control()
+{
+    for(QRadioButton* button : ui->ekgConfigPage->findChildren<QRadioButton*>())
+    {
+            connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
+
+    }
+}
+
 void maindialog::ekg_Disable(bool disable)
 {
     ui->ekg_timeclear_button->setDisabled(disable);
@@ -126,9 +135,6 @@ void maindialog::on_ekg_odr128_clicked()
             ui->ekg_LPfreqBox->removeItem(rmIndex2);
         }
     }
-    qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
-
-
 
 }
 
@@ -150,7 +156,6 @@ void maindialog::on_ekg_odr256_clicked()
             ui->ekg_LPfreqBox->removeItem(rmIndex2);
         }
     }
-    qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
 }
 
 void maindialog::on_ekg_odr512_clicked()
@@ -171,7 +176,8 @@ void maindialog::on_ekg_odr512_clicked()
             ui->ekg_LPfreqBox->addItem("150 Hz");
         }
     }
-    qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
+    //qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
+
 }
 
 void maindialog::ekg_disable_button(bool disable)
@@ -216,46 +222,6 @@ void maindialog::on_ekg_LPfreqBox_currentIndexChanged(int index)
         break;
     }
     qDebug() << configuration_settings.ekg_config.ekg_lowpassFreq << endl;
-    /*if(ui->ekg_odr128->isChecked())
-    {
-        switch (index) {
-        case EKG_LP_FREQ_BYPASS:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_BYPASS;
-            break;
-        case EKG_LP_FREQ_40HZ:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_40_HZ;
-            break;
-        }
-    }else if(ui->ekg_odr256->isChecked())
-    {
-        switch (index) {
-        case EKG_LP_FREQ_BYPASS:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_BYPASS;
-            break;
-        case EKG_LP_FREQ_40HZ:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_40_HZ;
-            break;
-        case EKG_LP_FREQ_100HZ:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_100_HZ;
-            break;
-        }
-    }else if(ui->ekg_odr512->isChecked())
-    {
-        switch (index) {
-        case EKG_LP_FREQ_BYPASS:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_BYPASS;
-            break;
-        case EKG_LP_FREQ_40HZ:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_40_HZ;
-            break;
-        case EKG_LP_FREQ_100HZ:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_100_HZ;
-            break;
-        case EKG_LP_FREQ_150HZ:
-            configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_150_HZ;
-            break;
-        }
-    }*/
 
 }
 
