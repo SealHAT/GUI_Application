@@ -27,10 +27,12 @@ void maindialog::generalEstimation(){
     ekg_activeHour = num_Hours(configuration_settings.ekg_config.ekg_activeHour);
     ekg_sampleNumber = ekg_activeHour*3600*(512/(2<<(configuration_settings.ekg_config.ekg_sampleRate - 1)));
 
-    acc_tens = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1;
-    acc_pwrMode = (configuration_settings.accelerometer_config.acc_mode%16)%4;
+    acc_tens = (configuration_settings.accelerometer_config.acc_mode/16)%10;
+    acc_pwrMode = ((uint8_t)configuration_settings.accelerometer_config.acc_mode%16)/4;
     acc_activeHour = num_Hours(configuration_settings.accelerometer_config.acc_activeHour);
     acc_sampleNumber = acc_activeHour*(3600)*(accFrequency[acc_tens]);
+    //qDebug() << "acc_tens is" << acc_tens << endl;
+    //qDebug() << "acc_pwrMode is" << acc_pwrMode << endl;
 
     mag_ones = (configuration_settings.magnetometer_config.mag_mode%16)/4;
     mag_pwrMode = (configuration_settings.magnetometer_config.mag_mode/16)%10;
@@ -86,7 +88,7 @@ void maindialog::powerEstimation(){
      //uint8_t acc_pwrMode = (configuration_settings.accelerometer_config.acc_mode%16)%4;
      //acc_activeHour = num_Hours(configuration_settings.accelerometer_config.acc_activeHour);
      //acc_sampleNumber = acc_activeHour*(3600)*(accFrequency[acc_tens]);
-     acc_inactivePower = IMU_SB_PWR * (24 - acc_activeHour);
+     acc_inactivePower = 0;//IMU_SB_PWR * (24 - acc_activeHour);
      acc_activePower = acc_actPower[acc_pwrMode][acc_tens] * acc_activeHour ;//(EKG_I_AVDV + EKG_I_OV) * ekg_activeHour;
      acc_totalPower = acc_inactivePower + acc_activePower;
      //floatDebug() << "acc_totalPower is" << acc_totalPower << endl;
@@ -101,7 +103,7 @@ void maindialog::powerEstimation(){
 
      //mag_activeHour = num_Hours(configuration_settings.magnetometer_config.mag_activeHour);
      //mag_sampleNumber = mag_activeHour*3600*(magFrequency[mag_ones]);
-     mag_inactivePower = IMU_SB_PWR*(24 - mag_activeHour);
+     mag_inactivePower = 0;//IMU_SB_PWR*(24 - mag_activeHour);
      mag_activePower = magPower[mag_pwrMode][mag_ones] * mag_activeHour;
      mag_totalPower = mag_inactivePower + mag_activePower;
      //floatDebug() << "mag_totalPower is" << mag_totalPower << endl;

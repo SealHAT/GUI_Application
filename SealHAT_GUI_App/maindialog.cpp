@@ -26,9 +26,9 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     generalEstimation();
 
     sensors_timeTable_control();
-    ekg_estimation_control();
-    xcel_estimation_control();
-    mag_estimation_control();
+    //ekg_estimation_control();
+    //xcel_estimation_control();
+    //mag_estimation_control();
 
     ui->pwrEst_Text->setReadOnly(true);
     ui->storageEst_Text->setReadOnly(true);

@@ -58,7 +58,6 @@ void maindialog::mag_dataCollect()
             break;
             }
     }
-     //qDebug << "mag mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
 }
 
 /*
