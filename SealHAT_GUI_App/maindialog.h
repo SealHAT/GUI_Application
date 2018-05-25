@@ -273,7 +273,7 @@ private slots:
     void xcel_changeMode();
     void on_xcel_pwrBox_currentIndexChanged();
     void on_xcel_freqBox_currentIndexChanged();
-    void xcel_powerEstimation_control();
+    void xcel_estimation_control();
 
 
 //Magnetometer
@@ -286,7 +286,7 @@ private slots:
     void mag_disable_button(bool disable);
     void mag_timeTable_control();
     void on_mag_timeclear_button_clicked();
-    void mag_powerEstimation_control();
+    void mag_estimation_control();
 
 //EKG
     void on_ekg_SW_clicked();
@@ -301,7 +301,7 @@ private slots:
     void ekg_hour_clicked();
     void on_ekg_gainBox_currentIndexChanged(int index);
     void on_ekg_LPfreqBox_currentIndexChanged(int index);
-    void ekg_powerEstimation_control();
+    void ekg_estimation_control();
 
 //GPS
     void gps_dataCollect();
@@ -328,14 +328,17 @@ private slots:
     void on_chooseDestButton_clicked();
     void on_completeButton_clicked();
     void on_storeData_destinationEdit_returnPressed();
-    void on_saveButton_clicked();
-    void on_loadButton_clicked();
     //void saveList();
 
 
 //Configuration list
     void setConfigList();
     void on_getDataButton_clicked();
+    void submitConfig();
+    void on_saveButton_clicked();
+    void on_loadButton_clicked();
+    void configureSettingListDisplay();
+    void collectLoadingData_fromFile();
 
 //Estimation&Analyzation
     uint8_t num_Hours(uint32_t x) ;
@@ -344,7 +347,7 @@ private slots:
 
 private:
     Ui::maindialog *ui;
-    QMap<QString, QString> config;
+    QMap<QString, uint32_t> config;
 };
 
 #endif // MAINDIALOG_H

@@ -105,7 +105,7 @@ void maindialog::on_temp_freq_editingFinished()
 
     }else{
         configuration_settings.temperature_config.temp_samplePeriod = (ui->temp_freq->text().toDouble());
-        qDebug() << configuration_settings.temperature_config.temp_samplePeriod << endl;
+        //qDebug() << configuration_settings.temperature_config.temp_samplePeriod << endl;
         ui->temp_warnLABEL->hide();
     }
     generalEstimation();

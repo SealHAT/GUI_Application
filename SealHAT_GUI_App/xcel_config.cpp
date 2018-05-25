@@ -235,7 +235,6 @@ void maindialog::on_xcel_SW_clicked()
         IMUxcel_Disable(true);
         xcel_disable_button(true);
     }
-    generalEstimation();
 }
 
 /*
@@ -251,14 +250,16 @@ void maindialog::on_xcel_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
             }
         }
-    //generalEstimation();
 }
 
-void maindialog::xcel_powerEstimation_control()
+void maindialog::xcel_estimation_control()
 {
     for(QComboBox* box : ui->xcelConfigPage->findChildren<QComboBox*>())
     {
         connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(generalEstimation()));
+    }
+    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()){
+        connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
     }
 }
 
@@ -308,7 +309,7 @@ void maindialog::on_xcel_thres_editingFinished()
     }else{
         ui->thres_warnLABEL->hide();
         configuration_settings.accelerometer_config.acc_threshold = (ui->xcel_thres->text().toDouble())*1000;
-        qDebug() << configuration_settings.accelerometer_config.acc_threshold << endl;
+        //qDebug() << configuration_settings.accelerometer_config.acc_threshold << endl;
     }
 
 }
@@ -331,7 +332,7 @@ void maindialog::xcel_hour_clicked()
             configuration_settings.accelerometer_config.acc_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 
-        qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
+        //qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
 
 }
 
@@ -343,7 +344,6 @@ void maindialog::xcel_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(xcel_hour_clicked()));
-            connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
         }
     }
 }
@@ -351,8 +351,7 @@ void maindialog::xcel_timeTable_control()
 
 void maindialog::xcel_disable_button(bool disable)
 {
-    uint16_t size;
-    size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
+    uint16_t size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
     for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
@@ -372,5 +371,4 @@ void maindialog::xcel_disable_button(bool disable)
             }
         }
     }
-    generalEstimation();
 }

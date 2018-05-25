@@ -57,7 +57,7 @@ void maindialog::powerEstimation(){
     temp_totalPower = (temp_activePower + temp_inactivePower);   //temp power per day//
     //qDebug() << "configuration_settings.temperature_config.temp_activeHour is" << configuration_settings.temperature_config.temp_activeHour << endl;
     //qDebug() << "temp_activeHour is" << temp_activeHour << endl;
-    qDebug() << "temp_sampleNumber is" << temp_sampleNumber << endl;
+    //qDebug() << "temp_sampleNumber is" << temp_sampleNumber << endl;
 
     /*LIGHT POWER*/
      //light_activeHour = num_Hours(configuration_settings.temperature_config.temp_activeHour);
@@ -172,12 +172,12 @@ void maindialog::storageEstimation(){
              + gps_storage * gps_groupNum
              + ekg_storage * ekg_groupNum) * 8;
     //qDebug() << "templight_storage is" << templight_storage << endl;
-    qDebug() << "temp_sampleNumber is" << temp_sampleNumber << endl;
-    qDebug() << "configuration_settings.temperature_config.temp_headerData.size is" << configuration_settings.temperature_config.temp_headerData.size << endl;
-    qDebug() << "templight_groupNum is" << templight_groupNum << endl;
+    //qDebug() << "temp_sampleNumber is" << temp_sampleNumber << endl;
+    //qDebug() << "configuration_settings.temperature_config.temp_headerData.size is" << configuration_settings.temperature_config.temp_headerData.size << endl;
+    //qDebug() << "templight_groupNum is" << templight_groupNum << endl;
    // qDebug() << "configuration_settings.ekg_config.ekg_headerData.size is" << configuration_settings.ekg_config.ekg_headerData.size << endl;
 
 
-    floatDebug() << "storageEst is" << storageEst << endl;
+    //floatDebug() << "storageEst is" << storageEst << endl;
     ui->storageEst_Text->setText(QString::number(storageEst));
 }

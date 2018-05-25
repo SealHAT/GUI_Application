@@ -403,7 +403,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -458,9 +458,14 @@ border: none;</string>
         <rect>
          <x>40</x>
          <y>140</y>
-         <width>47</width>
-         <height>13</height>
+         <width>31</width>
+         <height>20</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>GPS:</string>
@@ -469,11 +474,16 @@ border: none;</string>
       <widget class="QLabel" name="label_173">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>190</y>
-         <width>81</width>
+         <x>30</x>
+         <y>200</y>
+         <width>91</width>
          <height>16</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Accelerometer:</string>
@@ -483,10 +493,15 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>240</y>
-         <width>81</width>
+         <y>280</y>
+         <width>91</width>
          <height>16</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Magnetemeter:</string>
@@ -495,11 +510,16 @@ border: none;</string>
       <widget class="QLabel" name="label_175">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>300</y>
+         <x>80</x>
+         <y>330</y>
          <width>41</width>
-         <height>16</height>
+         <height>21</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>EKG:</string>
@@ -508,11 +528,16 @@ border: none;</string>
       <widget class="QLabel" name="label_176">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>350</y>
+         <x>40</x>
+         <y>380</y>
          <width>81</width>
          <height>16</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Temp&amp;Light:</string>
@@ -521,8 +546,8 @@ border: none;</string>
       <widget class="QTextEdit" name="GPS_ConfigList">
        <property name="geometry">
         <rect>
-         <x>110</x>
-         <y>130</y>
+         <x>150</x>
+         <y>140</y>
          <width>311</width>
          <height>31</height>
         </rect>
@@ -531,8 +556,8 @@ border: none;</string>
       <widget class="QTextEdit" name="GPS_ConfigList_2">
        <property name="geometry">
         <rect>
-         <x>110</x>
-         <y>180</y>
+         <x>150</x>
+         <y>190</y>
          <width>311</width>
          <height>31</height>
         </rect>
@@ -541,8 +566,8 @@ border: none;</string>
       <widget class="QTextEdit" name="GPS_ConfigList_3">
        <property name="geometry">
         <rect>
-         <x>110</x>
-         <y>230</y>
+         <x>140</x>
+         <y>270</y>
          <width>311</width>
          <height>31</height>
         </rect>
@@ -551,8 +576,8 @@ border: none;</string>
       <widget class="QTextEdit" name="GPS_ConfigList_4">
        <property name="geometry">
         <rect>
-         <x>110</x>
-         <y>290</y>
+         <x>140</x>
+         <y>320</y>
          <width>311</width>
          <height>31</height>
         </rect>
@@ -561,24 +586,53 @@ border: none;</string>
       <widget class="QTextEdit" name="GPS_ConfigList_5">
        <property name="geometry">
         <rect>
-         <x>110</x>
-         <y>340</y>
+         <x>140</x>
+         <y>370</y>
          <width>311</width>
          <height>31</height>
         </rect>
        </property>
       </widget>
-      <widget class="QLabel" name="label_177">
+      <widget class="QPushButton" name="saveButton">
        <property name="geometry">
         <rect>
-         <x>470</x>
-         <y>250</y>
-         <width>121</width>
-         <height>21</height>
+         <x>490</x>
+         <y>430</y>
+         <width>101</width>
+         <height>31</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(85, 170, 255);</string>
+       </property>
        <property name="text">
-        <string>Coming Soon! :)</string>
+        <string>Save Settings</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="loadButton">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>430</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(85, 170, 255);</string>
+       </property>
+       <property name="text">
+        <string>load Settings</string>
        </property>
       </widget>
      </widget>
@@ -6459,7 +6513,7 @@ border: none;</string>
     <widget class="QTextEdit" name="storageEst_Text">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>30</x>
        <y>470</y>
        <width>141</width>
        <height>31</height>
@@ -6482,8 +6536,8 @@ p, li { white-space: pre-wrap; }
     <widget class="QTextEdit" name="pwrEst_Text">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>420</y>
+       <x>30</x>
+       <y>410</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -6505,8 +6559,8 @@ p, li { white-space: pre-wrap; }
     <widget class="QLabel" name="label_178">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>400</y>
+       <x>30</x>
+       <y>390</y>
        <width>141</width>
        <height>16</height>
       </rect>
@@ -6518,7 +6572,7 @@ p, li { white-space: pre-wrap; }
     <widget class="QLabel" name="label_179">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>30</x>
        <y>450</y>
        <width>151</width>
        <height>16</height>
@@ -6747,38 +6801,6 @@ border: none;</string>
        </property>
        <property name="text">
         <string>GET DATA</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="saveButton">
-       <property name="geometry">
-        <rect>
-         <x>410</x>
-         <y>320</y>
-         <width>75</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(11, 21, 255);</string>
-       </property>
-       <property name="text">
-        <string>save</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="loadButton">
-       <property name="geometry">
-        <rect>
-         <x>410</x>
-         <y>370</y>
-         <width>75</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(11, 21, 255);</string>
-       </property>
-       <property name="text">
-        <string>load</string>
        </property>
       </widget>
      </widget>

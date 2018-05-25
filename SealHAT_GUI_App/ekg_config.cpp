@@ -93,14 +93,17 @@ void maindialog::ekg_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(ekg_hour_clicked()));
-            connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
         }
     }
 }
 
-void maindialog::ekg_powerEstimation_control()
+void maindialog::ekg_estimation_control()
 {
     for(QRadioButton* button : ui->ekgConfigPage->findChildren<QRadioButton*>())
+    {
+        connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
+    }
+    for(QPushButton* button : ui->ekgConfigPage->findChildren<QPushButton*>())
     {
         connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
     }
@@ -239,6 +242,5 @@ void maindialog::on_ekg_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    generalEstimation();
 }
 

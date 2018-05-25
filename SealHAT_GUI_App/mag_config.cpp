@@ -5,11 +5,15 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
-void maindialog::mag_powerEstimation_control()
+void maindialog::mag_estimation_control()
 {
     for(QComboBox* box : ui->magConfigPage->findChildren<QComboBox*>())
     {
         connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(generalEstimation()));
+    }
+    for(QPushButton* button : ui->magConfigPage->findChildren<QPushButton*>())
+    {
+            connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
     }
 }
 
@@ -121,7 +125,6 @@ void maindialog::mag_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(mag_hour_clicked()));
-            connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
         }
     }
 
