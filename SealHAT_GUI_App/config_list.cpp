@@ -22,13 +22,7 @@ void maindialog::submitConfig(){
     uint32_t sensor_sensitivityValue = configuration_settings.accelerometer_config.acc_sensitivity;
     QString acc_thresholdName = "Accelerometer Threshold";
     uint32_t sensor_thresholdValue = configuration_settings.accelerometer_config.acc_threshold;
-    /*
-    qDebug() << "TEMPERATURE&LIGHT" << endl;
-        qDebug() << "temp_activeHour is :" << configuration_settings.temperature_config.temp_activeHour << endl;
-        qDebug() << "temp_samplePeriod is 0x:" << configuration_settings.temperature_config.temp_samplePeriod << endl;
 
-    qDebug() << "GPS" << endl;
-        qDebug() << "gps_activeHour is :" << configuration_settings.gps_config.gps_activeHour << endl;*/
     QString mag_timeName = "Magnetometer Time";
     uint32_t mag_timeValue = configuration_settings.accelerometer_config.acc_activeHour;
     QString mag_mode = "Magnetometer Mode";
@@ -152,10 +146,10 @@ void maindialog::on_loadButton_clicked()
 
 void maindialog::collectLoadingData_fromFile()
 {
-    /*configuration_settings.accelerometer_config.acc_activeHour = config[ "Accelerometer Time"];
-    configuration_settings.accelerometer_config.acc_scale = config[ "Accelerometer Scale"];
+    configuration_settings.accelerometer_config.acc_activeHour = config[ "Accelerometer Time"];
+    configuration_settings.accelerometer_config.acc_scale = (ACC_FULL_SCALE_t)config[ "Accelerometer Scale"];
     configuration_settings.accelerometer_config.acc_sensitivity = config[ "Accelerometer Sensitivity"];
-    configuration_settings.accelerometer_config.acc_threshold = config["Accelerometer Threshold"];*/
+    configuration_settings.accelerometer_config.acc_threshold = config["Accelerometer Threshold"];
 
 
 }
