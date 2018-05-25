@@ -49,6 +49,7 @@ class maindialog : public QDialog
 
     /* Struct containing all sensor and micro configuration data. */
     SENSOR_CONFIGS configuration_settings;
+    uint32_t total_sampleNumber;
 
     uint64_t templight_storage;
     uint64_t acc_storage;
@@ -56,52 +57,64 @@ class maindialog : public QDialog
     uint64_t gps_storage;
     uint64_t ekg_storage;
 
+    double micro_lightActiveTime;
+    double micro_tempActiveTime;
+    double micro_accActiveTime;
+    double micro_magActiveTime;
+    double micro_gpsActiveTime;
+    double micro_ekgActiveTime;
+
+
     uint64_t templight_groupNum;
     uint64_t acc_groupNum;
     uint64_t mag_groupNum;
     uint64_t gps_groupNum;
     uint64_t ekg_groupNum;
 
-    uint16_t temp_sampleNumber;
+    uint32_t temp_sampleNumber;
     double temp_activeHour;
     double temp_activePower;
     double temp_inactivePower;
     double temp_totalPower;
 
-    uint16_t light_sampleNumber;
+    uint32_t light_sampleNumber;
     double light_activeHour;
     double light_activePower;
     double light_inactivePower;
     double light_totalPower;
 
-    uint16_t acc_sampleNumber;
+    uint8_t acc_tens;
+    uint8_t acc_pwrMode;
+    uint32_t acc_sampleNumber;
     double acc_activeHour;
     double acc_activePower;
     double acc_inactivePower;
     double acc_totalPower;
 
-    uint16_t mag_sampleNumber;
+    uint8_t mag_ones;
+    uint8_t mag_pwrMode;
+    uint32_t mag_sampleNumber;
     double mag_activeHour;
     double mag_activePower;
     double mag_inactivePower;
     double mag_totalPower;
 
-    uint16_t ekg_sampleNumber;
+    uint32_t ekg_sampleNumber;
     double ekg_activeHour;
     double ekg_activePower;
     double ekg_inactivePower;
     double ekg_totalPower;
 
-    uint16_t gps_sampleNumber;
+    uint32_t gps_sampleNumber;
     double gps_activeHour;
     double gps_activePower;
     double gps_inactivePower;
     double gps_totalPower;
 
-    uint16_t memory_totalpower;
+    double memory_totalpower;
 
 
-    uint16_t micro_totalpower;
+    double micro_totalpower;
     double micro_activehour;
 
     uint16_t accFrequency[7] = {1,10,25,50,100,200,400};
@@ -239,6 +252,7 @@ private slots:
     void sensors_setDefault();
     void sensors_timeTable_control();
     void labels_hide();
+    void generalEstimation();
 
 //Accelerometer
     void on_xcel_SW_clicked();
@@ -323,7 +337,7 @@ private slots:
     void setConfigList();
     void on_getDataButton_clicked();
 
-//Estimation
+//Estimation&Analyzation
     uint8_t num_Hours(uint32_t x) ;
     void powerEstimation();
     void storageEstimation();

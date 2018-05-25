@@ -89,7 +89,6 @@ void maindialog::xcel_changeMode()
         break;
         }
     }
-   //qDebug() << QString::number(configuration_settings.accelerometer_config.acc_mode, 16) << endl;
 }
 
 void maindialog::on_xcel_scaleBox_currentIndexChanged(int index)
@@ -118,7 +117,6 @@ void maindialog::on_xcel_freqBox_currentIndexChanged()
 
 void maindialog::on_xcel_XL_checkBox_clicked(bool checked)
 {
-    //qDebug() << checked << endl;
     ui->xcel_XH_checkBox->setDisabled(checked);
     if(checked){
         configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_X_LOW;
@@ -237,6 +235,7 @@ void maindialog::on_xcel_SW_clicked()
         IMUxcel_Disable(true);
         xcel_disable_button(true);
     }
+    generalEstimation();
 }
 
 /*
@@ -252,16 +251,14 @@ void maindialog::on_xcel_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
             }
         }
-    qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
+    //generalEstimation();
 }
 
 void maindialog::xcel_powerEstimation_control()
 {
     for(QComboBox* box : ui->xcelConfigPage->findChildren<QComboBox*>())
     {
-        connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(storageEstimation()));
-        connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(powerEstimation()));
-
+        connect(box,SIGNAL(currentIndexChanged(int)), this, SLOT(generalEstimation()));
     }
 }
 
@@ -346,8 +343,7 @@ void maindialog::xcel_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(xcel_hour_clicked()));
-            connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
-            connect(button,SIGNAL(clicked()), this, SLOT(storageEstimation()));
+            connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
         }
     }
 }
@@ -376,4 +372,5 @@ void maindialog::xcel_disable_button(bool disable)
             }
         }
     }
+    generalEstimation();
 }

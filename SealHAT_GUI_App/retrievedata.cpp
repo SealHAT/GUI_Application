@@ -87,28 +87,6 @@ void maindialog::on_saveButton_clicked()
 
 
             out << sensor_name << endl;
-                out << "Final accelerometer time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
-                out << "acc_scale is 0x:" << QString::number(configuration_settings.accelerometer_config.acc_activeHour, 16) << endl;
-                out << "acc_mode is 0x:" << QString::number(configuration_settings.accelerometer_config.acc_mode, 16) << endl;
-                out << "acc_sensitivity is 0x:" <<QString::number(configuration_settings.accelerometer_config.acc_sensitivity, 16) << endl;
-                out << "acc_threshold is 0x:" << configuration_settings.accelerometer_config.acc_threshold << endl;
-
-            out << "MAGNETOEMTER" << endl;
-                out << "mag_activeHour is :" << configuration_settings.magnetometer_config.mag_activeHour << endl;
-                out << "mag_mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
-
-            out << "EKG" << endl;
-                out << "ekg_activeHour is :" << configuration_settings.ekg_config.ekg_activeHour << endl;
-                out << "ekg_sampleRate is 0x:" << QString::number(configuration_settings.ekg_config.ekg_sampleRate, 16) << endl;
-                out << "ekg_gain is 0x:" << QString::number(configuration_settings.ekg_config.ekg_gain, 16) << endl;
-                out << "ekg_lowpassFreq is 0x:" << QString::number(configuration_settings.ekg_config.ekg_lowpassFreq, 16) << endl;
-
-            out << "TEMPERATURE&LIGHT" << endl;
-                out << "temp_activeHour is :" << configuration_settings.temperature_config.temp_activeHour << endl;
-                out << "temp_samplePeriod is 0x:" << configuration_settings.temperature_config.temp_samplePeriod << endl;
-
-            out << "GPS" << endl;
-                out << "gps_activeHour is :" << configuration_settings.gps_config.gps_activeHour << endl;
                 }
 }
 

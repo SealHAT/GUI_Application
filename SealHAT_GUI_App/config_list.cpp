@@ -16,7 +16,7 @@ void maindialog::on_completeButton_clicked()
 {
 
     goto_DEV();
-    qDebug() << "ACCELEROMETER" << endl;
+    /*qDebug() << "ACCELEROMETER" << endl;
         qDebug() << "Final accelerometer time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
         qDebug() << "acc_scale is 0x:" << QString::number(configuration_settings.accelerometer_config.acc_activeHour, 16) << endl;
         qDebug() << "acc_mode is 0x:" << QString::number(configuration_settings.accelerometer_config.acc_mode, 16) << endl;
@@ -38,7 +38,7 @@ void maindialog::on_completeButton_clicked()
         qDebug() << "temp_samplePeriod is 0x:" << configuration_settings.temperature_config.temp_samplePeriod << endl;
 
     qDebug() << "GPS" << endl;
-        qDebug() << "gps_activeHour is :" << configuration_settings.gps_config.gps_activeHour << endl;
+        qDebug() << "gps_activeHour is :" << configuration_settings.gps_config.gps_activeHour << endl;*/
 }
 
 

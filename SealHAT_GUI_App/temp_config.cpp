@@ -16,6 +16,7 @@ void maindialog::on_temp_SW_clicked()
         ui->temp_SW->setText("Enable");
         temp_disable(true);
     }
+    generalEstimation();
 }
 
 void maindialog::temp_setDefault()
@@ -86,8 +87,7 @@ void maindialog::temp_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(temp_hour_clicked()));
-            connect(button,SIGNAL(clicked()), this, SLOT(powerEstimation()));
-            connect(button,SIGNAL(clicked()), this, SLOT(storageEstimation()));
+            connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
         }
     }
 }
@@ -108,8 +108,7 @@ void maindialog::on_temp_freq_editingFinished()
         qDebug() << configuration_settings.temperature_config.temp_samplePeriod << endl;
         ui->temp_warnLABEL->hide();
     }
-    powerEstimation();
-    storageEstimation();
+    generalEstimation();
 }
 
 void maindialog::on_temp_timeclear_button_clicked()
@@ -123,6 +122,5 @@ void maindialog::on_temp_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    //powerEstimation();
-    //storageEstimation();
+    generalEstimation();
 }
