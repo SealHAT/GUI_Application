@@ -351,19 +351,20 @@ void maindialog::xcel_timeTable_control()
 
 void maindialog::xcel_disable_button(bool disable)
 {
-    uint16_t size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
+    //uint16_t size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
     for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                configuration_settings.accelerometer_config = {
+                configuration_settings.accelerometer_config.acc_activeHour = 0;
+                /*configuration_settings.accelerometer_config = {
                     {MSG_START_SYM, DEVICE_ID_ACCELEROMETER, 0, 0, size},   // header
                     0,                                                      // active hours
                     ACC_SCALE_2G,                                           // scale
                     ACC_POWER_DOWN,                                           // POWER DOWN
                     0x00,                                                   // sensitivity
                     0                                                    // threshold
-                };
+                };*/
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{

@@ -8,6 +8,7 @@
 #include <QMap>
 #include <QMessageBox>
 #include <QDataStream>
+#include <cmath>
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
@@ -18,15 +19,17 @@ void maindialog::submitConfig(){
     uint32_t acc_timeValue = configuration_settings.accelerometer_config.acc_activeHour;
     QString acc_scaleName = "Accelerometer Scale";
     uint32_t acc_scaleValue = configuration_settings.accelerometer_config.acc_scale;
+    QString acc_modeName = "Accelerometer Mode";
+    uint32_t acc_modeValue = configuration_settings.accelerometer_config.acc_mode;
     QString acc_sensitivityName = "Accelerometer Sensitivity";
     uint32_t sensor_sensitivityValue = configuration_settings.accelerometer_config.acc_sensitivity;
     QString acc_thresholdName = "Accelerometer Threshold";
     uint32_t sensor_thresholdValue = configuration_settings.accelerometer_config.acc_threshold;
 
     QString mag_timeName = "Magnetometer Time";
-    uint32_t mag_timeValue = configuration_settings.accelerometer_config.acc_activeHour;
+    uint32_t mag_timeValue = configuration_settings.magnetometer_config.mag_activeHour;
     QString mag_mode = "Magnetometer Mode";
-    uint32_t mag_modeValue = configuration_settings.accelerometer_config.acc_scale;
+    uint32_t mag_modeValue = configuration_settings.magnetometer_config.mag_mode;
 
     QString ekg_timeName = "EKG Time";
     uint32_t ekg_timeValue = configuration_settings.ekg_config.ekg_activeHour;
@@ -47,6 +50,7 @@ void maindialog::submitConfig(){
 
     config.insert(acc_timeName,acc_timeValue);
     config.insert(acc_scaleName,acc_scaleValue);
+    config.insert(acc_modeName,acc_modeValue);
     config.insert(acc_sensitivityName,sensor_sensitivityValue);
     config.insert(acc_thresholdName,sensor_thresholdValue);
 
@@ -134,12 +138,13 @@ void maindialog::on_loadButton_clicked()
                         QMessageBox::information(this, tr("No contacts in file"),
                             tr("The file you are attempting to open contains no settings."));
                     } else {
-                        QMap<QString, uint32_t>::iterator i = config.begin();
+                        /*QMap<QString, uint32_t>::iterator i = config.begin();
 
                         while (i != config.constEnd()) {
                             qDebug() << i.key() << ": " << i.value() << endl;
                             ++i;
-                        }
+                            collectLoadingData_fromFile();
+                        }*/
                     }
     }
 }
@@ -148,14 +153,94 @@ void maindialog::collectLoadingData_fromFile()
 {
     configuration_settings.accelerometer_config.acc_activeHour = config[ "Accelerometer Time"];
     configuration_settings.accelerometer_config.acc_scale = (ACC_FULL_SCALE_t)config[ "Accelerometer Scale"];
+    configuration_settings.accelerometer_config.acc_mode = (ACC_OPMODE_t)config[ "Accelerometer Mode"];
     configuration_settings.accelerometer_config.acc_sensitivity = config[ "Accelerometer Sensitivity"];
     configuration_settings.accelerometer_config.acc_threshold = config["Accelerometer Threshold"];
 
+    configuration_settings.magnetometer_config.mag_activeHour = config["Magnetometer Time"];
+    configuration_settings.magnetometer_config.mag_mode = (MAG_OPMODE_t)config["Magnetometer Mode"];
+
+    configuration_settings.ekg_config.ekg_activeHour = config["EKG Time"];
+    configuration_settings.ekg_config.ekg_sampleRate = (CNFGECG_RATE_VAL)config["EKG Sample Rate"];
+    configuration_settings.ekg_config.ekg_gain = (CNFGECG_GAIN_VAL)config["EKG Gain"];
+    configuration_settings.ekg_config.ekg_lowpassFreq = (CNFGECG_DLPF_VAL)config["EKG Low Pass Frequency"];
+
+    configuration_settings.temperature_config.temp_activeHour = config["Temperature and Light Time"];
+    configuration_settings.temperature_config.temp_samplePeriod = config[ "Temperature and Light Sample Period"];
+
+    configuration_settings.gps_config.gps_activeHour = config["GPS Time"];
 
 }
 
 void maindialog::configureSettingListDisplay()
 {
+    ui->acc_configList->clear();
+
+    uint8_t acc_freqSelect = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1;
+    uint8_t acc_pwrSelect = (configuration_settings.accelerometer_config.acc_mode%16)/4;
+    QString acc_PWRMode[3]{"Normal", "High Resolution", "Low Power"};
+
+    QString acc_timeName = "Time : ";
+    QString acc_timeValue = QString::number(num_Hours(configuration_settings.accelerometer_config.acc_activeHour)) + " h ";
+    QString acc_scaleName = "               Accelerometer Scale : ";
+    QString acc_scaleValue = QString::number(2 << ((configuration_settings.accelerometer_config.acc_scale/16)%10 - 1)) + " g ";
+    QString acc_powerMode = "\nPower Mode : " + acc_PWRMode[acc_pwrSelect];
+
+    QString acc_freqName = "            Sampling rate : ";
+    QString acc_freqValue = QString::number(accFrequency[acc_freqSelect]) + " Hz ";
+    QString acc_sensitivityName = "\nSensitivity : ";
+    QString sensor_sensitivityValue = QString::number(configuration_settings.accelerometer_config.acc_sensitivity);
+    QString acc_thresholdName = "       Threshold : ";
+    QString sensor_thresholdValue = QString::number(configuration_settings.accelerometer_config.acc_threshold/1000) + " g ";
+
+    ui->acc_configList->setText(acc_timeName + acc_timeValue +
+                                acc_scaleName + acc_scaleValue +
+                                acc_powerMode +
+                                acc_freqName + acc_freqValue +
+                                acc_sensitivityName + sensor_sensitivityValue +
+                                acc_thresholdName + sensor_thresholdValue);
+
+
+
+
+    QString mag_timeName = "Magnetometer Time : ";
+    QString mag_timeValue = QString::number(num_Hours(configuration_settings.magnetometer_config.mag_activeHour)) + " h ";
+    QString mag_modeName = "               Magnetometer Mode : ";
+    QString mag_modeValue = QString::number(configuration_settings.magnetometer_config.mag_mode,16);
+
+    ui->mag_configList->setText(mag_timeName + mag_timeValue +
+                                mag_modeName + mag_modeValue );
+
+    uint8_t ekg_lowpassFrequencyValue[4] = {0,40,100,150};
+
+    QString ekg_timeName = "EKG Time : ";
+    QString ekg_timeValue = QString::number(num_Hours(configuration_settings.ekg_config.ekg_activeHour))+ " h ";
+    QString ekg_spsName = "                       EKG Sample Rate : ";
+    QString ekg_spsValue = QString::number( (512/(2<<(configuration_settings.ekg_config.ekg_sampleRate - 1))) ) + " samples/s ";
+    QString ekg_gainName = "\nEKG Gain : ";
+    QString ekg_gainValue = QString::number( 20 * (pow(2,configuration_settings.ekg_config.ekg_gain) +1) ) + " V ";
+    QString ekg_lpfreqName = "                   EKG Low Pass Frequency : ";
+    QString ekg_lpfreqValue = QString::number(ekg_lowpassFrequencyValue[configuration_settings.ekg_config.ekg_lowpassFreq]) + " Hz ";
+
+    ui->ekg_configList->setText(ekg_timeName + ekg_timeValue +
+                                ekg_spsName + ekg_spsValue +
+                                ekg_gainName + ekg_gainValue +
+                                ekg_lpfreqName + ekg_lpfreqValue
+                                );
+
+
+    QString templight_timeName = "Temperature & Light Time : ";
+    QString templight_timeValue = QString::number(num_Hours(configuration_settings.temperature_config.temp_activeHour)) + " h ";
+    QString templight_sampleperiodName = "\nTemperature and Light Sample Period : ";
+    QString templight_sampleperiodValue = QString::number(configuration_settings.temperature_config.temp_samplePeriod) + " s ";
+    ui->temp_configList->setText(templight_timeName + templight_timeValue +
+                                templight_sampleperiodName + templight_sampleperiodValue
+                                );
+
+    QString gps_timeName = "GPS Time : ";
+    QString gps_timeValue = QString::number(num_Hours(configuration_settings.gps_config.gps_activeHour)) + " h ";
+    ui->gps_configList->setText(gps_timeName + gps_timeValue);
+
 
 }
 
@@ -191,6 +276,6 @@ void maindialog::on_completeButton_clicked()
 
 void maindialog::setConfigList()
 {
-    QString xcel_scale = ui->xcel_scaleBox->currentText();
+    configureSettingListDisplay();
     //ui->xcel_ConfigList->append(xcel_scale);
 }

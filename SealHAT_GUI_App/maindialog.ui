@@ -403,7 +403,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -456,7 +456,7 @@ border: none;</string>
       <widget class="QLabel" name="label_12">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>90</x>
          <y>140</y>
          <width>31</width>
          <height>20</height>
@@ -475,7 +475,7 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>200</y>
+         <y>180</y>
          <width>91</width>
          <height>16</height>
         </rect>
@@ -492,8 +492,8 @@ border: none;</string>
       <widget class="QLabel" name="label_174">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>280</y>
+         <x>30</x>
+         <y>260</y>
          <width>91</width>
          <height>16</height>
         </rect>
@@ -510,9 +510,9 @@ border: none;</string>
       <widget class="QLabel" name="label_175">
        <property name="geometry">
         <rect>
-         <x>80</x>
-         <y>330</y>
-         <width>41</width>
+         <x>90</x>
+         <y>300</y>
+         <width>31</width>
          <height>21</height>
         </rect>
        </property>
@@ -528,8 +528,8 @@ border: none;</string>
       <widget class="QLabel" name="label_176">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>380</y>
+         <x>50</x>
+         <y>360</y>
          <width>81</width>
          <height>16</height>
         </rect>
@@ -543,53 +543,53 @@ border: none;</string>
         <string>Temp&amp;Light:</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GPS_ConfigList">
+      <widget class="QTextEdit" name="gps_configList">
        <property name="geometry">
         <rect>
-         <x>150</x>
+         <x>130</x>
          <y>140</y>
-         <width>311</width>
+         <width>411</width>
          <height>31</height>
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GPS_ConfigList_2">
+      <widget class="QTextEdit" name="acc_configList">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>190</y>
-         <width>311</width>
-         <height>31</height>
+         <x>130</x>
+         <y>180</y>
+         <width>411</width>
+         <height>51</height>
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GPS_ConfigList_3">
+      <widget class="QTextEdit" name="mag_configList">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>270</y>
-         <width>311</width>
-         <height>31</height>
+         <x>130</x>
+         <y>240</y>
+         <width>411</width>
+         <height>51</height>
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GPS_ConfigList_4">
+      <widget class="QTextEdit" name="ekg_configList">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>320</y>
-         <width>311</width>
-         <height>31</height>
+         <x>130</x>
+         <y>300</y>
+         <width>411</width>
+         <height>51</height>
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GPS_ConfigList_5">
+      <widget class="QTextEdit" name="temp_configList">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>370</y>
-         <width>311</width>
-         <height>31</height>
+         <x>130</x>
+         <y>360</y>
+         <width>411</width>
+         <height>51</height>
         </rect>
        </property>
       </widget>

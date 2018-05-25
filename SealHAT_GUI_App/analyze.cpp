@@ -27,10 +27,12 @@ void maindialog::generalEstimation(){
     ekg_activeHour = num_Hours(configuration_settings.ekg_config.ekg_activeHour);
     ekg_sampleNumber = ekg_activeHour*3600*(512/(2<<(configuration_settings.ekg_config.ekg_sampleRate - 1)));
 
-    acc_tens = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1;
-    acc_pwrMode = (configuration_settings.accelerometer_config.acc_mode%16)%4;
+    acc_tens = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1; //logic Rethink
+    acc_pwrMode = (configuration_settings.accelerometer_config.acc_mode%16)/4;
     acc_activeHour = num_Hours(configuration_settings.accelerometer_config.acc_activeHour);
     acc_sampleNumber = acc_activeHour*(3600)*(accFrequency[acc_tens]);
+    qDebug() << "acc_tens is" << acc_tens << endl;
+    qDebug() << "acc_pwrMode is" << acc_pwrMode << endl;
 
     mag_ones = (configuration_settings.magnetometer_config.mag_mode%16)/4;
     mag_pwrMode = (configuration_settings.magnetometer_config.mag_mode/16)%10;
@@ -56,18 +58,18 @@ void maindialog::powerEstimation(){
     temp_inactivePower = (24 - temp_activeHour) * TEMP_SB_PWR;
     temp_totalPower = (temp_activePower + temp_inactivePower);   //temp power per day//
     //qDebug() << "configuration_settings.temperature_config.temp_activeHour is" << configuration_settings.temperature_config.temp_activeHour << endl;
-    //qDebug() << "temp_activeHour is" << temp_activeHour << endl;
+    //qDebug() << "temp_activePower is" << temp_activePower << endl;
     //qDebug() << "temp_sampleNumber is" << temp_sampleNumber << endl;
 
     /*LIGHT POWER*/
      //light_activeHour = num_Hours(configuration_settings.temperature_config.temp_activeHour);
      //light_sampleNumber = light_activeHour*3600/(configuration_settings.temperature_config.temp_samplePeriod);
-     light_activePower = (((3600 - (light_sampleNumber * LIGHT_BIT_NUM * I2C_Speed)) * LIGHT_INACT_PWR/3600)
-                        + ((3600 * light_sampleNumber * LIGHT_BIT_NUM * I2C_Speed) * LIGHT_ACT_PWR/3600)) * light_activeHour;
+     light_activePower = (((3600 - (light_sampleNumber * LIGHT_BIT_NUM * I2C_Speed)) * LIGHT_INACT_PWR)
+                        + (( light_sampleNumber * LIGHT_BIT_NUM * I2C_Speed) * LIGHT_ACT_PWR)) * light_activeHour/3600;
      light_inactivePower = (24 - light_activeHour) * LIGHT_INACT_PWR;
      light_totalPower = light_activePower + light_inactivePower;   //light power per day//
      //qDebug() << "configuration_settings.temperature_config.temp_activeHour is" << configuration_settings.temperature_config.temp_activeHour << endl;
-     //qDebug() << "light activehour is" << light_activeHour << endl;
+     //qDebug() << "light_activePower is" << light_activePower << endl;
      //qDebug() << "light_sampleNumber is" << light_sampleNumber << endl;
      //qDebug() << "light inactive power is"<< light_totalPower << endl;
 
@@ -89,9 +91,10 @@ void maindialog::powerEstimation(){
      acc_inactivePower = IMU_SB_PWR * (24 - acc_activeHour);
      acc_activePower = acc_actPower[acc_pwrMode][acc_tens] * acc_activeHour ;//(EKG_I_AVDV + EKG_I_OV) * ekg_activeHour;
      acc_totalPower = acc_inactivePower + acc_activePower;
-     //floatDebug() << "acc_totalPower is" << acc_totalPower << endl;
+     qDebug() << "acc_totalPower is" << acc_totalPower << endl;
+     qDebug() << "acc_sampleNumber is" << acc_sampleNumber << endl;
      //qDebug() << "acc_activeHour is" << acc_activeHour << endl;
-     //qDebug() << "accFrequency[acc_tens] is" << accFrequency[acc_tens] << endl;
+     qDebug() << "accFrequency[acc_tens] is" << accFrequency[acc_tens] << endl;
      //qDebug() << "acc_sampleNumber is" << acc_sampleNumber << endl;
 
      /*MAGNETOMETER POWER*/
@@ -104,7 +107,8 @@ void maindialog::powerEstimation(){
      mag_inactivePower = IMU_SB_PWR*(24 - mag_activeHour);
      mag_activePower = magPower[mag_pwrMode][mag_ones] * mag_activeHour;
      mag_totalPower = mag_inactivePower + mag_activePower;
-     //floatDebug() << "mag_totalPower is" << mag_totalPower << endl;
+     //qDebug() << "mag_sampleNumber is" << mag_sampleNumber << endl;
+     //qDebug() << "mag_activePower is" << mag_activePower << endl;
 
      /*GPS POWER*/
 
