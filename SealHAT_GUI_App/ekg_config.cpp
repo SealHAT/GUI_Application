@@ -1,13 +1,53 @@
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDoubleValidator>
-#include <qDebug>
+#include <QDebug>
+#include <cmath>
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
 /* Enable/Disable Ekg sensor.
  * Disable all the configuration option if this button is clicked.
 */
+
+void maindialog::ekg_getloadData(){
+    for(QPushButton* button : ui->ekgConfigPage->findChildren<QPushButton*>()) {
+        if(button->property("button_shift").isValid()) {
+            shift_property = button->property("button_shift").toInt();
+            bit_Mask = (0x01 << shift_property);
+            if((configuration_settings.ekg_config.ekg_activeHour&bit_Mask))
+            {
+                      button->setProperty("clicked", true);
+                      button->setStyleSheet("background-color:rgb(34,139,34)");
+
+            }else{
+                button->setProperty("clicked", false);
+                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            }
+        }
+    }
+
+    uint16_t ekg_spsSelect = 512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate));
+        uint8_t ekg_gainSelect = pow(2,(uint8_t)configuration_settings.ekg_config.ekg_gain);
+        uint8_t ekg_lpFreqSelect = configuration_settings.ekg_config.ekg_lowpassFreq;
+        switch(ekg_spsSelect){
+        case 512:
+            ui->ekg_odr128->setChecked(false);
+            ui->ekg_odr256->setChecked(false);
+            ui->ekg_odr512->setChecked(true);
+        case 256:
+            ui->ekg_odr128->setChecked(false);
+            ui->ekg_odr256->setChecked(true);
+            ui->ekg_odr512->setChecked(false);
+        case 128:
+            ui->ekg_odr128->setChecked(true);
+            ui->ekg_odr256->setChecked(false);
+            ui->ekg_odr512->setChecked(false);
+        }
+        ui->ekg_gainBox->setCurrentIndex(ekg_gainSelect);
+        ui->ekg_LPfreqBox->setCurrentIndex(ekg_lpFreqSelect);
+
+}
 
 void maindialog::on_ekg_gainBox_currentIndexChanged(int index)
 {
@@ -180,7 +220,7 @@ void maindialog::on_ekg_odr512_clicked()
             ui->ekg_LPfreqBox->addItem("150 Hz");
         }
     }
-    ////qDebug() << "ekg sps is :" << configuration_settings.ekg_config.ekg_sampleRate << endl;
+    /*//*/
 
 }
 
@@ -228,6 +268,7 @@ void maindialog::on_ekg_LPfreqBox_currentIndexChanged(int index)
     //qDebug() << configuration_settings.ekg_config.ekg_lowpassFreq << endl;
 
 }
+
 
 
 

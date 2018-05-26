@@ -63,9 +63,15 @@ void maindialog::gps_setDefault()
     };
 }
 
+
+/*
+ * Check if the gps button had been clicked,
+ * If clicked, set the corresponding hour button
+ * to be green and change the active time in GPS
+ * configuration.
+*/
 void maindialog::gps_hour_clicked()
 {
-
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     if(!button->property("clicked").isValid()) {
         button->setProperty("clicked", false);
@@ -79,9 +85,6 @@ void maindialog::gps_hour_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
             configuration_settings.gps_config.gps_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
-
-        //qDebug << "gps time is :" << configuration_settings.gps_config.gps_activeHour << endl;
-
 }
 
 void maindialog::gps_timeTable_control()
@@ -124,24 +127,65 @@ void maindialog::on_gps_SW_clicked()
     storageEstimation();
 }
 
-void maindialog::gps_disable_button(bool disable)
-{
+
+void maindialog::gps_getloadData(){
+
     for(QPushButton* button : ui->gpsConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
-            button->setDisabled(disable);
-            if(disable){
-                configuration_settings.gps_config = {
-                    {MSG_START_SYM, DEVICE_ID_GPS, 0, 0, sizeof(GPS_PROFILE)},  // header
-                    0,                                                          // active hours
-                    GPS_PSMOO30S                                                // profile
-                };
-                button->setProperty("clicked", false);
-                button->setStyleSheet("background-color:rgb(105, 105,105)");
+            shift_property = button->property("button_shift").toInt();
+            bit_Mask = (0x01 << shift_property);
+            if((configuration_settings.gps_config.gps_activeHour&bit_Mask))
+            {
+                      button->setProperty("clicked", true);
+                      button->setStyleSheet("background-color:rgb(34,139,34)");
+
             }else{
+                button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(152, 162, 173)");
             }
         }
     }
+
+}
+void maindialog::gps_disable_button(bool disable)
+{
+    for(QPushButton* button : ui->gpsConfigPage->findChildren<QPushButton*>()) {
+
+        if(button->property("button_shift").isValid()) {
+            button->setDisabled(disable);
+            if(disable){
+
+                configuration_settings.gps_config = {
+                                    {MSG_START_SYM, DEVICE_ID_GPS, 0, 0, sizeof(GPS_PROFILE)},  // header
+                                    0,                                                          // active hours
+                                    GPS_PSMOO30S                                                // profile
+                                };
+                button->setProperty("clicked", false);
+                button->setStyleSheet("background-color:rgb(105, 105,105)");
+            }else{
+                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+                /*shift_property = button->property("button_shift").toInt();
+                bit_Mask = (0x01 << shift_property);
+                if((configuration_settings.gps_config.gps_activeHour&bit_Mask))
+                {
+                          button->setProperty("clicked", true);
+                          button->setStyleSheet("background-color:rgb(34,139,34)");
+
+                }else{
+                    button->setProperty("clicked", false);
+                    button->setStyleSheet("background-color:rgb(152, 162, 173)");
+                }*/
+            }
+        }
+    }
+}
+void maindialog::gps_checkButtonProperty()
+{
+
+    //qDebug() << "bit_mask is" << bit_Mask;
+
+
+
 }
 
 void maindialog::on_gps_timeclear_button_clicked()

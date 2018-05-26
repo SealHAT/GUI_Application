@@ -7,43 +7,7 @@
 #include <QTreeWidgetItem>
 #include <list>
 #include "seal_Types.h"
-
-#define IMU_DATA_SIZE           25
-#define GPS_DATA_SIZE           12
-#define EKG_DATA_SIZE           32
-#define LIGHT_TEMP_SIZE         12
-
-#define	TOHOUR				3600.0
-#define I2C_Speed           1.0/400000
-#define SPI_SPEED           1.0/1000000
-
-#define TEMP_CONV_TIME      7.0/1000
-#define TEMP_CONV_PWR       90/1000000
-#define TEMP_BIT_NUM        16.0
-#define TEMP_SB_PWR         0.06/1000000
-#define TEMP_I2C_PWR        3.5/1000
-
-#define LIGHT_BIT_NUM       16.0
-#define LIGHT_INACT_PWR     0.65/1000000
-#define LIGHT_ACT_PWR       0.0000016
-
-#define IMU_SB_PWR          2.0/1000000
-
-#define EKG_I_AVDV          100.0/1000000
-#define EKG_I_OV            0.6/1000000
-#define EKG_I_SAVDV         0.51/1000000
-#define EKG_I_SOV           1.1/1000000
-#define EKG_OSCILLATOR      (1.4/1000000)*(24.0)
-
-#define floatDebug() qDebug() << fixed << qSetRealNumberPrecision(10)
-
-#define GPS_SB_PWR  20.0/1000000
-
-#define SPI_CURRENT     20.0/1000
-#define SPI_SB_CURRENT  15.0/1000000
-
-#define MICRO_ACT_PWR   32.0/1000000
-#define MICRO_SB_PWR    4.6/1000000
+#include "analyze.h"
 
 namespace Ui {class maindialog;}
 
@@ -53,6 +17,8 @@ class maindialog : public QDialog
 
     /* Struct containing all sensor and micro configuration data. */
     SENSOR_CONFIGS configuration_settings;
+
+  //Analyzation Variables
     uint32_t total_sampleNumber;
 
     uint64_t templight_storage;
@@ -122,10 +88,10 @@ class maindialog : public QDialog
     double micro_activehour;
 
     uint16_t accFrequency[7] = {1,10,25,50,100,200,400};
-    double acc_actPower[3][7] = {
-                                 {(3.7/1000000), (5.4/1000000), (8/1000000), (12.6/1000000), (22.0/1000000), (40.0/1000000), (75.0/1000000)},
-                                 {(3.7/1000000), (5.4/1000000), (8.0/1000000), (12.6/1000000), (22.0/1000000), (40.0/1000000), (75.0/1000000)},
-                                  {(3.7/1000000), (4.4/1000000), (5.6/1000000), (7.7/1000000),(11.7/1000000),(20.0/1000000),(36.0/1000000)}
+    double acc_actPower[3][8] = {
+                                 {(0.0), (3.7/1000000), (5.4/1000000), (8.0/1000000), (12.6/1000000), (22.0/1000000), (40.0/1000000), (75.0/1000000)},
+                                 {(0.0), (3.7/1000000), (5.4/1000000), (8.0/1000000), (12.6/1000000), (22.0/1000000), (40.0/1000000), (75.0/1000000)},
+                                  {(0.0), (3.7/1000000), (4.4/1000000), (5.6/1000000), (7.7/1000000),(11.7/1000000),(20.0/1000000),(36.0/1000000)}
                                 };
 
     uint16_t magFrequency[4] = {1,20,50,100};
@@ -136,6 +102,10 @@ class maindialog : public QDialog
 
     double powerEst;
     uint32_t storageEst;
+
+    //Time button mask and setting
+    uint8_t shift_property;
+    uint32_t bit_Mask;
 
 
     /*************
@@ -172,8 +142,8 @@ class maindialog : public QDialog
     };
 
     enum ACC_PWR_MODE {
-        ACC_HR              = 0,
-        ACC_NORMAL          = 1,
+        ACC_NORMAL          = 0,
+        ACC_HR              = 1,
         ACC_LP              = 2,
     };
 
@@ -196,8 +166,8 @@ class maindialog : public QDialog
     };
 
     enum MAG_PWR_MODE {
-        MAG_LP              = 0,
-        MAG_NORMAL          = 1,
+        MAG_NORMAL          = 0,
+        MAG_LP              = 1
     };
 
     enum MAG_FREQUENCY_VALUES {
@@ -238,7 +208,6 @@ private slots:
     void on_backButton_clicked(); //
     void on_configureDevOptionButton_clicked(); //
     void on_retrieveDataButton_clicked(); //
-    void on_configureHomeButton_clicked();
     void on_lightButton_clicked();
     void on_temperatureButton_clicked();
     void on_ekgButton_clicked();
@@ -257,6 +226,7 @@ private slots:
     void sensors_timeTable_control();
     void labels_hide();
     void generalEstimation();
+    void sensor_esitimation_control();
     void display_setReadOnly();
 
 //Accelerometer
@@ -276,15 +246,16 @@ private slots:
     void on_xcel_ZH_checkBox_clicked(bool checked);
     void on_xcel_scaleBox_currentIndexChanged(int index);
     void xcel_changeMode();
-    void on_xcel_pwrBox_currentIndexChanged();
-    void on_xcel_freqBox_currentIndexChanged();
+    void on_xcel_pwrBox_currentIndexChanged(int);
+    void on_xcel_freqBox_currentIndexChanged(int);
     void xcel_estimation_control();
+    void xcel_getloadData();
 
 
 //Magnetometer
     void mag_hour_clicked();
-    void on_mag_pwrBox_currentIndexChanged();
-    void on_mag_freqBox_currentIndexChanged();
+    void on_mag_pwrBox_currentIndexChanged(int);
+    void on_mag_freqBox_currentIndexChanged(int);
     void mag_dataCollect();
     void on_mag_SW_clicked();
     void mag_setDefault();
@@ -293,6 +264,7 @@ private slots:
     void mag_timeTable_control();
     void on_mag_timeclear_button_clicked();
     void mag_estimation_control();
+    void mag_getloadData();
 
 //EKG
     void on_ekg_SW_clicked();
@@ -308,6 +280,7 @@ private slots:
     void on_ekg_gainBox_currentIndexChanged(int index);
     void on_ekg_LPfreqBox_currentIndexChanged(int index);
     void ekg_estimation_control();
+    void ekg_getloadData();
 
 //GPS
     void gps_dataCollect();
@@ -319,6 +292,8 @@ private slots:
     void on_gps_timeclear_button_clicked();
     void gps_hour_clicked();
     void gps_estimation_control();
+    void gps_checkButtonProperty();
+    void gps_getloadData();
 
 //Temperature
     void on_temp_SW_clicked();
@@ -326,24 +301,27 @@ private slots:
     void temp_disable(bool disable);
     void temp_disable_button(bool disable);
     void temp_timeTable_control();
-    void on_temp_freq_editingFinished();
+    void on_temp_samplePeriod_editingFinished();
     void on_temp_timeclear_button_clicked();
     void temp_hour_clicked();
+    void temp_getloadData();
 
 //Data-Retrival Page
     void on_chooseDestButton_clicked();
     void on_completeButton_clicked();
     void on_storeData_destinationEdit_returnPressed();
-    //void saveList();
-
 
 //Configuration list
     void on_getDataButton_clicked();
     void submitConfig();
     void on_saveButton_clicked();
-    void on_loadButton_clicked();
     void configureSettingListDisplay();
+    void on_loadButton_clicked();
+
+
+//Load data and reset sensors display
     void collectLoadingData_fromFile();
+    void loaddata_fromSensors();
 
 //Estimation&Analyzation
     uint8_t num_Hours(uint32_t x) ;

@@ -144,38 +144,7 @@ void maindialog::on_loadButton_clicked()
     }
 }
 
-/**************************************************************
- * FUNCTION: collectLoadingData_fromFile
- * ------------------------------------------------------------
- * This function gets called file is loaded back from clicking
- * the load button on the Device Configure pages.
- *
- *  Parameters: none
- *
- *  Returns: void
- **************************************************************/
-void maindialog::collectLoadingData_fromFile()
-{
-    configuration_settings.accelerometer_config.acc_activeHour = config[ "Accelerometer Time"];
-    configuration_settings.accelerometer_config.acc_scale = (ACC_FULL_SCALE_t)config[ "Accelerometer Scale"];
-    configuration_settings.accelerometer_config.acc_mode = (ACC_OPMODE_t)config[ "Accelerometer Mode"];
-    configuration_settings.accelerometer_config.acc_sensitivity = config[ "Accelerometer Sensitivity"];
-    configuration_settings.accelerometer_config.acc_threshold = config["Accelerometer Threshold"];
 
-    configuration_settings.magnetometer_config.mag_activeHour = config["Magnetometer Time"];
-    configuration_settings.magnetometer_config.mag_mode = (MAG_OPMODE_t)config["Magnetometer Mode"];
-
-    configuration_settings.ekg_config.ekg_activeHour = config["EKG Time"];
-    configuration_settings.ekg_config.ekg_sampleRate = (CNFGECG_RATE_VAL)config["EKG Sample Rate"];
-    configuration_settings.ekg_config.ekg_gain = (CNFGECG_GAIN_VAL)config["EKG Gain"];
-    configuration_settings.ekg_config.ekg_lowpassFreq = (CNFGECG_DLPF_VAL)config["EKG Low Pass Frequency"];
-
-    configuration_settings.temperature_config.temp_activeHour = config["Temperature and Light Time"];
-    configuration_settings.temperature_config.temp_samplePeriod = config[ "Temperature and Light Sample Period"];
-
-    configuration_settings.gps_config.gps_activeHour = config["GPS Time"];
-
-}
 
 /**************************************************************
  * FUNCTION: configureSettingListDisplay
@@ -238,9 +207,9 @@ void maindialog::configureSettingListDisplay()
     QString ekg_timeName = "EKG Time : ";
     QString ekg_timeValue = QString::number(num_Hours(configuration_settings.ekg_config.ekg_activeHour))+ " h ";
     QString ekg_spsName = "                       EKG Sample Rate : ";
-    QString ekg_spsValue = QString::number( (512/(2<<(configuration_settings.ekg_config.ekg_sampleRate - 1))) ) + " samples/s ";
+    QString ekg_spsValue = QString::number( (512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate))) ) + " samples/s ";
     QString ekg_gainName = "\nEKG Gain : ";
-    QString ekg_gainValue = QString::number( 20 * (pow(2,configuration_settings.ekg_config.ekg_gain) +1) ) + " V ";
+    QString ekg_gainValue = QString::number( 20 * (pow(2,(uint8_t)configuration_settings.ekg_config.ekg_gain) +1) ) + " V ";
     QString ekg_lpfreqName = "                   EKG Low Pass Frequency : ";
     QString ekg_lpfreqValue = QString::number(ekg_lowpassFrequencyValue[configuration_settings.ekg_config.ekg_lowpassFreq]) + " Hz ";
 
@@ -274,28 +243,3 @@ void maindialog::on_completeButton_clicked()
    ui->welcomeHeadingLabel->setText("Completed configuration List");
 }
 
-
-
-/*qDebug() << "ACCELEROMETER" << endl;
-    qDebug() << "Final accelerometer time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
-    qDebug() << "acc_scale is 0x:" << QString::number(configuration_settings.accelerometer_config.acc_activeHour, 16) << endl;
-    qDebug() << "acc_mode is 0x:" << QString::number(configuration_settings.accelerometer_config.acc_mode, 16) << endl;
-    qDebug() << "acc_sensitivity is 0x:" <<QString::number(configuration_settings.accelerometer_config.acc_sensitivity, 16) << endl;
-    qDebug() << "acc_threshold is 0x:" << configuration_settings.accelerometer_config.acc_threshold << endl;
-
-qDebug() << "MAGNETOEMTER" << endl;
-    qDebug() << "mag_activeHour is :" << configuration_settings.magnetometer_config.mag_activeHour << endl;
-    qDebug() << "mag_mode is 0x:" << QString::number(configuration_settings.magnetometer_config.mag_mode, 16) << endl;
-
-qDebug() << "EKG" << endl;
-    qDebug() << "ekg_activeHour is :" << configuration_settings.ekg_config.ekg_activeHour << endl;
-    qDebug() << "ekg_sampleRate is 0x:" << QString::number(configuration_settings.ekg_config.ekg_sampleRate, 16) << endl;
-    qDebug() << "ekg_gain is 0x:" << QString::number(configuration_settings.ekg_config.ekg_gain, 16) << endl;
-    qDebug() << "ekg_lowpassFreq is 0x:" << QString::number(configuration_settings.ekg_config.ekg_lowpassFreq, 16) << endl;
-
-qDebug() << "TEMPERATURE&LIGHT" << endl;
-    qDebug() << "temp_activeHour is :" << configuration_settings.temperature_config.temp_activeHour << endl;
-    qDebug() << "temp_samplePeriod is 0x:" << configuration_settings.temperature_config.temp_samplePeriod << endl;
-
-qDebug() << "GPS" << endl;
-    qDebug() << "gps_activeHour is :" << configuration_settings.gps_config.gps_activeHour << endl;*/

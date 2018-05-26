@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     mag_config.cpp \
     xcel_config.cpp \
     config_list.cpp \
-    analyze.cpp
+    analyze.cpp \
+    loading_data.cpp
 
 FORMS    += \
     maindialog.ui
@@ -46,7 +47,8 @@ HEADERS  += \
     sensor_header/ubx/ubxutils.h \
     sensor_header/ubx/ubx.h \
     sensor_header/ubx/ubxmessage.h \
-    seal_Types.h
+    seal_Types.h \
+    analyze.h
 
 RESOURCES += \
     images.qrc

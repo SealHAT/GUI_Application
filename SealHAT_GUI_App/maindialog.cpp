@@ -19,25 +19,25 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     // Set size for smaller welcome screen.
     this->setFixedSize(421, 421);
-
-    sensors_setDefault();
+    //Hide all the warning labels
     labels_hide();
 
+    //Set all the sensor configuration back to default
+    sensors_setDefault();
     generalEstimation();
 
     sensors_timeTable_control();
+    sensor_esitimation_control();
 
-    ekg_estimation_control();
-    xcel_estimation_control();
-    mag_estimation_control();
-    gps_estimation_control();
 
     display_setReadOnly();
-
     configureSettingListDisplay();
 }
 
-/*Set all the sensors to default configuration*/
+/*
+ * Set all the sensors to default configuration
+ * and default display
+*/
 void maindialog::sensors_setDefault()
 {
     xcel_setDefault();
@@ -47,9 +47,18 @@ void maindialog::sensors_setDefault()
     gps_setDefault();
 }
 
+void maindialog::sensor_esitimation_control(){
+    ekg_estimation_control();
+    xcel_estimation_control();
+    mag_estimation_control();
+    gps_estimation_control();
+}
+
 /**/
 void maindialog::display_setReadOnly()
 {
+    ui->gps_highSamplingRateValue->setReadOnly(true);
+    ui->gps_lowSamplingRateValue->setReadOnly(true);
     ui->pwrEst_Text->setReadOnly(true);
     ui->storageEst_Text->setReadOnly(true);
     ui->gps_configList->setReadOnly(true);

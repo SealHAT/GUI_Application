@@ -5,6 +5,28 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
+void maindialog::temp_getloadData(){
+    for(QPushButton* button : ui->tempConfigPage->findChildren<QPushButton*>()) {
+        if(button->property("button_shift").isValid()) {
+            shift_property = button->property("button_shift").toInt();
+            bit_Mask = (0x01 << shift_property);
+            if((configuration_settings.temperature_config.temp_activeHour&bit_Mask))
+            {
+                      button->setProperty("clicked", true);
+                      button->setStyleSheet("background-color:rgb(34,139,34)");
+
+            }else{
+                button->setProperty("clicked", false);
+                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            }
+        }
+    }
+
+    QString temp_samplePeriod = QString::number(configuration_settings.temperature_config.temp_samplePeriod);
+    ui->temp_samplePeriod->setText(temp_samplePeriod);
+
+}
+
 void maindialog::on_temp_SW_clicked()
 {
     QString title = ui->temp_SW->text();
@@ -22,7 +44,7 @@ void maindialog::on_temp_SW_clicked()
 void maindialog::temp_setDefault()
 {
    on_temp_timeclear_button_clicked();
-   ui->temp_freq->setText("1");
+   ui->temp_samplePeriod->setText("1");
    configuration_settings.temperature_config = {
        {MSG_START_SYM, DEVICE_ID_LIGHT, 0, 0, sizeof(uint16_t)},// header data
        0,                                                       // active hours
@@ -35,7 +57,7 @@ void maindialog::temp_disable(bool disable)
 {
     ui->temp_timeclear_button->setDisabled(disable);
     temp_disable_button(disable);
-    ui->temp_freq->setDisabled(disable);
+    ui->temp_samplePeriod->setDisabled(disable);
     ui->temp_warnLABEL->hide();
 }
 
@@ -93,20 +115,19 @@ void maindialog::temp_timeTable_control()
     }
 }
 
-void maindialog::on_temp_freq_editingFinished()
+void maindialog::on_temp_samplePeriod_editingFinished()
 {
     int valid;
     int pos;
     QIntValidator v(1, 65000, this);
 
-    QString thres = ui->temp_freq->text();
+    QString thres = ui->temp_samplePeriod->text();
     valid = v.validate(thres, pos);
     if(valid != ACCEPTABLE){
         ui->temp_warnLABEL->show();
 
     }else{
-        configuration_settings.temperature_config.temp_samplePeriod = (ui->temp_freq->text().toDouble());
-        //qDebug() << configuration_settings.temperature_config.temp_samplePeriod << endl;
+        configuration_settings.temperature_config.temp_samplePeriod = (ui->temp_samplePeriod->text().toUInt());
         ui->temp_warnLABEL->hide();
     }
     generalEstimation();

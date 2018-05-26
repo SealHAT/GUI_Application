@@ -32,25 +32,7 @@ void maindialog::goto_DEV()
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
 }
 
-/**************************************************************
- * FUNCTION: on_configureHomeButton_clicked
- * ------------------------------------------------------------
- * This function gets called when the Configure Home Button is
- * pressed. It sets the active page to the Configure Device
- * Home page. On this page, battery life and storage estimates
- * may be seen.
- *
- *  Parameters: none
- *
- *  Returns: void
- **************************************************************/
-void maindialog::on_configureHomeButton_clicked()
-{
-    //set button colors. selected tab will be highlighted
-    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 
-    ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
-}
 
 /**************************************************************
  * FUNCTION: on_lightButton_clicked

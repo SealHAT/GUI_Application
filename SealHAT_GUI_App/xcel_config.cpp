@@ -105,12 +105,12 @@ void maindialog::on_xcel_scaleBox_currentIndexChanged(int index)
     }
 }
 
-void maindialog::on_xcel_pwrBox_currentIndexChanged()
+void maindialog::on_xcel_pwrBox_currentIndexChanged(int)
 {
     xcel_changeMode();
 }
 
-void maindialog::on_xcel_freqBox_currentIndexChanged()
+void maindialog::on_xcel_freqBox_currentIndexChanged(int)
 {
     xcel_changeMode();
 }
@@ -284,19 +284,19 @@ void maindialog::on_xcel_thres_editingFinished()
 
     }else if(ui->xcel_scaleBox->currentIndex() == ACC_4G)
     {
-        QDoubleValidator v(0, 4, 5,this);
+        QDoubleValidator v(0, 4, 3,this);
         QString thres = ui->xcel_thres->text();
         valid = v.validate(thres, pos);
         ui->thres_warnLABEL->setText("Invalid threshold value! (0-4)");
     }else if(ui->xcel_scaleBox->currentIndex() == ACC_8G)
     {
-        QDoubleValidator v(0, 8, 5,this);
+        QDoubleValidator v(0, 8, 3,this);
         QString thres = ui->xcel_thres->text();
         valid = v.validate(thres, pos);
         ui->thres_warnLABEL->setText("Invalid threshold value! (0-8)");
     }else if(ui->xcel_scaleBox->currentIndex() == ACC_16G)
     {
-        QDoubleValidator v(0, 16, 5,this);
+        QDoubleValidator v(0, 16, 3,this);
         QString thres = ui->xcel_thres->text();
         valid = v.validate(thres, pos);
         ui->thres_warnLABEL->setText("Invalid threshold value! (0-16)");
@@ -331,9 +331,6 @@ void maindialog::xcel_hour_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
             configuration_settings.accelerometer_config.acc_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
-
-        //qDebug() << "xcel time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
-
 }
 
 
@@ -348,6 +345,32 @@ void maindialog::xcel_timeTable_control()
     }
 }
 
+void maindialog::xcel_getloadData(){
+    for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
+        if(button->property("button_shift").isValid()) {
+            shift_property = button->property("button_shift").toInt();
+            bit_Mask = (0x01 << shift_property);
+            if((configuration_settings.accelerometer_config.acc_activeHour&bit_Mask))
+            {
+                      button->setProperty("clicked", true);
+                      button->setStyleSheet("background-color:rgb(34,139,34)");
+
+            }else{
+                button->setProperty("clicked", false);
+                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            }
+        }
+    }
+
+    uint8_t acc_freqSelect = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1;
+    uint8_t xcel_pwrSelect = (configuration_settings.accelerometer_config.acc_mode%16)/4;
+    QString xcel_threshold = QString::number((double)configuration_settings.accelerometer_config.acc_threshold/1000,'f',2);
+
+    ui->xcel_pwrBox->setCurrentIndex(xcel_pwrSelect);
+    ui->xcel_freqBox->setCurrentIndex(acc_freqSelect);
+    ui->xcel_thres->setText(xcel_threshold);
+
+}
 
 void maindialog::xcel_disable_button(bool disable)
 {
@@ -357,14 +380,6 @@ void maindialog::xcel_disable_button(bool disable)
             button->setDisabled(disable);
             if(disable){
                 configuration_settings.accelerometer_config.acc_activeHour = 0;
-                /*configuration_settings.accelerometer_config = {
-                    {MSG_START_SYM, DEVICE_ID_ACCELEROMETER, 0, 0, size},   // header
-                    0,                                                      // active hours
-                    ACC_SCALE_2G,                                           // scale
-                    ACC_POWER_DOWN,                                           // POWER DOWN
-                    0x00,                                                   // sensitivity
-                    0                                                    // threshold
-                };*/
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{

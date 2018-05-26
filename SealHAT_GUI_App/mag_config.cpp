@@ -5,6 +5,31 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
+void maindialog::mag_getloadData(){
+    for(QPushButton* button : ui->magConfigPage->findChildren<QPushButton*>()) {
+        if(button->property("button_shift").isValid()) {
+            shift_property = button->property("button_shift").toInt();
+            bit_Mask = (0x01 << shift_property);
+            if((configuration_settings.magnetometer_config.mag_activeHour&bit_Mask))
+            {
+                      button->setProperty("clicked", true);
+                      button->setStyleSheet("background-color:rgb(34,139,34)");
+
+            }else{
+                button->setProperty("clicked", false);
+                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            }
+        }
+    }
+
+    uint8_t mag_freqSelect = (configuration_settings.magnetometer_config.mag_mode%16)/4;
+    uint8_t mag_pwrSelect = (configuration_settings.magnetometer_config.mag_mode/16)%10;
+
+    ui->mag_pwrBox->setCurrentIndex(mag_pwrSelect);
+    ui->mag_freqBox->setCurrentIndex(mag_freqSelect);
+
+}
+
 void maindialog::mag_estimation_control()
 {
     for(QComboBox* box : ui->magConfigPage->findChildren<QComboBox*>())
@@ -64,7 +89,7 @@ void maindialog::mag_dataCollect()
 /*
  * Whenever the user changed power setting for magnetometer
 */
-void maindialog::on_mag_pwrBox_currentIndexChanged()
+void maindialog::on_mag_pwrBox_currentIndexChanged(int)
 {
     mag_dataCollect();
 }
@@ -72,7 +97,7 @@ void maindialog::on_mag_pwrBox_currentIndexChanged()
 /*
  * Whenever the user changed frequency setting for magnetometer
 */
-void maindialog::on_mag_freqBox_currentIndexChanged()
+void maindialog::on_mag_freqBox_currentIndexChanged(int)
 {
     mag_dataCollect();
 }
