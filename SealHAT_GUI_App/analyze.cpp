@@ -31,8 +31,8 @@ void maindialog::generalEstimation(){
     acc_pwrMode = (configuration_settings.accelerometer_config.acc_mode%16)/4;
     acc_activeHour = num_Hours(configuration_settings.accelerometer_config.acc_activeHour);
     acc_sampleNumber = acc_activeHour*(3600)*(accFrequency[acc_tens]);
-    qDebug() << "acc_tens is" << acc_tens << endl;
-    qDebug() << "acc_pwrMode is" << acc_pwrMode << endl;
+    //qDebug() << "acc_tens is" << acc_tens << endl;
+    //qDebug() << "acc_pwrMode is" << acc_pwrMode << endl;
 
     mag_ones = (configuration_settings.magnetometer_config.mag_mode%16)/4;
     mag_pwrMode = (configuration_settings.magnetometer_config.mag_mode/16)%10;

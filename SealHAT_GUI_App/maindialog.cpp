@@ -30,6 +30,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     ekg_estimation_control();
     xcel_estimation_control();
     mag_estimation_control();
+    gps_estimation_control();
 
     display_setReadOnly();
 
@@ -89,6 +90,7 @@ void maindialog::on_configureDevOptionButton_clicked()
     ui->mainStacked->setCurrentIndex(CONFIGURE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
     this->centerDialog();
+    ui->completeButton->hide();
 }
 
 

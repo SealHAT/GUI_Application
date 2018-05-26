@@ -6259,6 +6259,9 @@ border: none;</string>
      <property name="flat">
       <bool>false</bool>
      </property>
+     <property name="SensorButton" stdset="0">
+      <string>gps</string>
+     </property>
     </widget>
     <widget class="QPushButton" name="xcelButton">
      <property name="geometry">
@@ -6290,6 +6293,9 @@ border: none;</string>
      </property>
      <property name="flat">
       <bool>false</bool>
+     </property>
+     <property name="SensorButton" stdset="0">
+      <string>accelerometer</string>
      </property>
     </widget>
     <widget class="QPushButton" name="ekgButton">
@@ -6323,6 +6329,9 @@ border: none;</string>
      <property name="flat">
       <bool>false</bool>
      </property>
+     <property name="SensorButton" stdset="0">
+      <string>ekg</string>
+     </property>
     </widget>
     <widget class="QPushButton" name="temperatureButton">
      <property name="geometry">
@@ -6354,6 +6363,9 @@ border: none;</string>
      </property>
      <property name="flat">
       <bool>false</bool>
+     </property>
+     <property name="SensorButton" stdset="0">
+      <string>templight</string>
      </property>
     </widget>
     <widget class="QPushButton" name="configureHomeButton">
@@ -6421,6 +6433,9 @@ border: none;</string>
      </property>
      <property name="flat">
       <bool>false</bool>
+     </property>
+     <property name="SensorButton" stdset="0">
+      <string>magnetometer</string>
      </property>
     </widget>
     <widget class="QPushButton" name="completeButton">

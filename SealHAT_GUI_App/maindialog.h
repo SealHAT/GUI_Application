@@ -278,6 +278,7 @@ private slots:
 
 
 //Magnetometer
+    void mag_hour_clicked();
     void on_mag_pwrBox_currentIndexChanged();
     void on_mag_freqBox_currentIndexChanged();
     void mag_dataCollect();
@@ -312,8 +313,8 @@ private slots:
     void gps_disable_button(bool disable);
     void gps_timeTable_control();
     void on_gps_timeclear_button_clicked();
-    void mag_hour_clicked();
     void gps_hour_clicked();
+    void gps_estimation_control();
 
 //Temperature
     void on_temp_SW_clicked();
