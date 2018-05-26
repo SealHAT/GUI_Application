@@ -75,13 +75,21 @@ void maindialog::on_ekg_SW_clicked()
     if(title == "Enable")
     {
         ekg_Disable(false);
+        ekg_disable_button(false);
         ui->ekg_SW->setText("Disable");
     }else{
         ui->ekg_SW->setText("Enable");
         ekg_Disable(true);
+        ekg_disable_button(true);
     }
-    //powerEstimation();
-    //storageEstimation();
+}
+
+void maindialog::ekg_checkTimetoEnable(){
+    if(configuration_settings.ekg_config.ekg_activeHour){
+        ekg_Disable(false);
+    }else{
+        ekg_Disable(true);
+    }
 }
 
 void maindialog::ekg_setDefault()
@@ -102,8 +110,7 @@ void maindialog::ekg_setDefault()
         GAIN_20_V,                                  // gain
         DLPF_40_HZ                                  // frequency
     };
-    //powerEstimation();
-    //storageEstimation();
+    ekg_checkTimetoEnable();
 }
 
 
@@ -123,7 +130,6 @@ void maindialog::ekg_hour_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
             configuration_settings.ekg_config.ekg_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
-
 }
 
 void maindialog::ekg_timeTable_control()
@@ -146,18 +152,18 @@ void maindialog::ekg_estimation_control()
     for(QPushButton* button : ui->ekgConfigPage->findChildren<QPushButton*>())
     {
         connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
+        connect(button,SIGNAL(clicked()), this, SLOT(ekg_checkTimetoEnable()));
     }
 }
 
 void maindialog::ekg_Disable(bool disable)
 {
-    ui->ekg_timeclear_button->setDisabled(disable);
+    //ui->ekg_timeclear_button->setDisabled(disable);
     ui->ekg_odr128->setDisabled(disable);
     ui->ekg_odr256->setDisabled(disable);
     ui->ekg_odr512->setDisabled(disable);
     ui->ekg_gainBox->setDisabled(disable);
     ui->ekg_LPfreqBox->setDisabled(disable);
-    ekg_disable_button(disable);
 }
 
 
@@ -226,20 +232,12 @@ void maindialog::on_ekg_odr512_clicked()
 
 void maindialog::ekg_disable_button(bool disable)
 {
-    uint16_t size;
     for(QPushButton* button : ui->ekgConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid())
         {
             button->setDisabled(disable);
             if(disable){
-                size = sizeof(CNFGECG_RATE_VAL) + sizeof(CNFGECG_GAIN_VAL) + sizeof(CNFGECG_DLPF_VAL);
-                configuration_settings.ekg_config = {
-                    {MSG_START_SYM,DEVICE_ID_EKG, 0, 0, size},  // header
-                    0,                                          // active hours
-                    RATE_MIN_SPS,                               // sampling rate
-                    GAIN_20_V,                                  // gain
-                    DLPF_40_HZ                                  // frequency
-                };
+                configuration_settings.ekg_config.ekg_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{

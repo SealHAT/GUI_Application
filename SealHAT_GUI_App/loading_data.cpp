@@ -49,5 +49,9 @@ void maindialog::loaddata_fromSensors(){
     mag_getloadData();
     temp_getloadData();
 
+    xcel_checkTimetoEnable();
+    ekg_checkTimetoEnable();
+    mag_checkTimetoEnable();
+    temp_checkTimetoEnable();
 }
 

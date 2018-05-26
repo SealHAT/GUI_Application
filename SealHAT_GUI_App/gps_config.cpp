@@ -9,6 +9,8 @@
  * Disable all the configuration option if this button is clicked.
 */
 
+
+
 void maindialog::gps_dataCollect()
 {
     uint8_t pwrIndex = 0;
@@ -62,7 +64,6 @@ void maindialog::gps_setDefault()
         GPS_PSMOO30S                                                // profile
     };
 }
-
 
 /*
  * Check if the gps button had been clicked,

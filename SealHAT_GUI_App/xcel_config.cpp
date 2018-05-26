@@ -187,7 +187,7 @@ void maindialog::on_xcel_ZH_checkBox_clicked(bool checked)
 */
 void maindialog::IMUxcel_Disable(bool disable)
 {
-    ui->xcel_timeclear_button->setDisabled(disable);
+    //ui->xcel_timeclear_button->setDisabled(disable);
     ui->xcel_scaleBox->setDisabled(disable);
     ui->xcel_pwrBox->setDisabled(disable);
     ui->xcel_freqBox->setDisabled(disable);
@@ -220,6 +220,7 @@ void maindialog::xcel_setDefault()
         0x00,                                                   // sensitivity
         300                                                    // threshold
     };
+    xcel_checkTimetoEnable();
 }
 
 void maindialog::on_xcel_SW_clicked()
@@ -260,6 +261,7 @@ void maindialog::xcel_estimation_control()
     }
     for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()){
         connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
+        connect(button,SIGNAL(clicked()), this, SLOT(xcel_checkTimetoEnable()));
     }
 }
 
@@ -333,6 +335,13 @@ void maindialog::xcel_hour_clicked()
         }
 }
 
+void maindialog::xcel_checkTimetoEnable(){
+    if(configuration_settings.accelerometer_config.acc_activeHour){
+        IMUxcel_Disable(false);
+    }else{
+        IMUxcel_Disable(true);
+    }
+}
 
 void maindialog::xcel_timeTable_control()
 {
@@ -342,6 +351,7 @@ void maindialog::xcel_timeTable_control()
         {
             connect(button,SIGNAL(clicked()), this, SLOT(xcel_hour_clicked()));
         }
+
     }
 }
 
@@ -374,7 +384,6 @@ void maindialog::xcel_getloadData(){
 
 void maindialog::xcel_disable_button(bool disable)
 {
-    //uint16_t size = sizeof(ACC_FULL_SCALE_t) + sizeof(ACC_OPMODE_t) + 2*sizeof(uint8_t) + sizeof(uint16_t);
     for(QPushButton* button : ui->xcelConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);

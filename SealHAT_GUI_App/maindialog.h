@@ -250,6 +250,7 @@ private slots:
     void on_xcel_freqBox_currentIndexChanged(int);
     void xcel_estimation_control();
     void xcel_getloadData();
+    void xcel_checkTimetoEnable();
 
 
 //Magnetometer
@@ -265,6 +266,7 @@ private slots:
     void on_mag_timeclear_button_clicked();
     void mag_estimation_control();
     void mag_getloadData();
+    void mag_checkTimetoEnable();
 
 //EKG
     void on_ekg_SW_clicked();
@@ -281,6 +283,7 @@ private slots:
     void on_ekg_LPfreqBox_currentIndexChanged(int index);
     void ekg_estimation_control();
     void ekg_getloadData();
+    void ekg_checkTimetoEnable();
 
 //GPS
     void gps_dataCollect();
@@ -305,6 +308,7 @@ private slots:
     void on_temp_timeclear_button_clicked();
     void temp_hour_clicked();
     void temp_getloadData();
+    void temp_checkTimetoEnable();
 
 //Data-Retrival Page
     void on_chooseDestButton_clicked();

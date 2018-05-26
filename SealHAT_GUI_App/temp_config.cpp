@@ -33,9 +33,11 @@ void maindialog::on_temp_SW_clicked()
     if(title == "Enable")
     {
         temp_disable(false);
+        temp_disable_button(false);
         ui->temp_SW->setText("Disable");
     }else{
         ui->temp_SW->setText("Enable");
+        temp_disable_button(true);
         temp_disable(true);
     }
     generalEstimation();
@@ -51,12 +53,13 @@ void maindialog::temp_setDefault()
        1                                                        // sample period
    };
    qDebug() << sizeof(uint16_t);
+   temp_checkTimetoEnable();
 }
 
 void maindialog::temp_disable(bool disable)
 {
-    ui->temp_timeclear_button->setDisabled(disable);
-    temp_disable_button(disable);
+    //ui->temp_timeclear_button->setDisabled(disable);
+    //temp_disable_button(disable);
     ui->temp_samplePeriod->setDisabled(disable);
     ui->temp_warnLABEL->hide();
 }
@@ -112,6 +115,15 @@ void maindialog::temp_timeTable_control()
             connect(button,SIGNAL(clicked()), this, SLOT(temp_hour_clicked()));
             connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
         }
+        connect(button,SIGNAL(clicked()), this, SLOT(temp_checkTimetoEnable()));
+    }
+}
+
+void maindialog::temp_checkTimetoEnable(){
+    if(configuration_settings.temperature_config.temp_activeHour){
+        temp_disable(false);
+    }else{
+        temp_disable(true);
     }
 }
 

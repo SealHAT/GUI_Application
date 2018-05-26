@@ -30,6 +30,14 @@ void maindialog::mag_getloadData(){
 
 }
 
+void maindialog::mag_checkTimetoEnable(){
+    if(configuration_settings.magnetometer_config.mag_activeHour){
+        IMUmag_Disable(false);
+    }else{
+        IMUmag_Disable(true);
+    }
+}
+
 void maindialog::mag_estimation_control()
 {
     for(QComboBox* box : ui->magConfigPage->findChildren<QComboBox*>())
@@ -38,7 +46,8 @@ void maindialog::mag_estimation_control()
     }
     for(QPushButton* button : ui->magConfigPage->findChildren<QPushButton*>())
     {
-            connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
+        connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
+        connect(button,SIGNAL(clicked()), this, SLOT(mag_checkTimetoEnable()));
     }
 }
 
@@ -107,7 +116,7 @@ void maindialog::on_mag_freqBox_currentIndexChanged(int)
 */
 void maindialog::IMUmag_Disable(bool disable)
 {
-    ui->mag_timeclear_button->setDisabled(disable);
+    //ui->mag_timeclear_button->setDisabled(disable);
     ui->mag_pwrBox->setDisabled(disable);
     ui->mag_freqBox->setDisabled(disable);
 }
@@ -124,6 +133,7 @@ void maindialog::mag_setDefault()
               0,                                                                    // active hours
               MAG_LP_50_HZ                                                          // mode
               };
+    mag_checkTimetoEnable();
 }
 
 void maindialog::on_mag_SW_clicked()
