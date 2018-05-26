@@ -403,7 +403,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -4400,22 +4400,22 @@ border: none;</string>
        </property>
        <item>
         <property name="text">
-         <string>20</string>
+         <string>20 V</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>40</string>
+         <string>40 V</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>80</string>
+         <string>80 V</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>160</string>
+         <string>160 V</string>
         </property>
        </item>
       </widget>
@@ -5314,24 +5314,27 @@ border: none;</string>
       <widget class="QLabel" name="label_141">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>10</x>
          <y>220</y>
-         <width>101</width>
+         <width>151</width>
          <height>20</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Sampling rate&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Sampling Period (s)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="temp_freq">
        <property name="geometry">
         <rect>
-         <x>130</x>
+         <x>160</x>
          <y>220</y>
          <width>113</width>
          <height>20</height>
         </rect>
+       </property>
+       <property name="text">
+        <string>1</string>
        </property>
       </widget>
       <widget class="QPushButton" name="temp_SW">
@@ -5372,27 +5375,14 @@ border: none;</string>
       <widget class="QLabel" name="temp_warnLABEL">
        <property name="geometry">
         <rect>
-         <x>270</x>
-         <y>220</y>
+         <x>280</x>
+         <y>210</y>
          <width>141</width>
          <height>31</height>
         </rect>
        </property>
        <property name="text">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Out of range: [1s,65000s]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_11">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>220</y>
-         <width>16</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;s&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QPushButton" name="temp_timeclear_button">
@@ -5421,6 +5411,41 @@ border: none;</string>
         <string>Clear</string>
        </property>
        <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="configureHomeButton">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>410</y>
+         <width>141</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Futura</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(167,203,218);
+color: rgb(0, 0, 0);
+border: none;</string>
+       </property>
+       <property name="text">
+        <string>CONFIGURE HOME</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
         <bool>false</bool>
        </property>
       </widget>
@@ -6368,41 +6393,6 @@ border: none;</string>
       <string>templight</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="configureHomeButton">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>510</y>
-       <width>141</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Futura</family>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgb(167,203,218);
-color: rgb(0, 0, 0);
-border: none;</string>
-     </property>
-     <property name="text">
-      <string>CONFIGURE HOME</string>
-     </property>
-     <property name="autoDefault">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
     <widget class="QPushButton" name="magButton">
      <property name="geometry">
       <rect>
@@ -6529,7 +6519,7 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>470</y>
+       <y>510</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -6552,7 +6542,7 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>410</y>
+       <y>450</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -6575,7 +6565,7 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>390</y>
+       <y>430</y>
        <width>141</width>
        <height>16</height>
       </rect>
@@ -6588,13 +6578,49 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>450</y>
+       <y>490</y>
        <width>151</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#f1b535;&quot;&gt;Esimated Storage (Bits)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="BatteryCapacity_input">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>390</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(152, 162, 173);</string>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_180">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>370</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;Battery Capacity (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <zorder>ConfigureView</zorder>
@@ -6606,13 +6632,14 @@ p, li { white-space: pre-wrap; }
     <zorder>xcelButton</zorder>
     <zorder>ekgButton</zorder>
     <zorder>temperatureButton</zorder>
-    <zorder>configureHomeButton</zorder>
     <zorder>magButton</zorder>
     <zorder>completeButton</zorder>
     <zorder>storageEst_Text</zorder>
     <zorder>pwrEst_Text</zorder>
     <zorder>label_178</zorder>
     <zorder>label_179</zorder>
+    <zorder>BatteryCapacity_input</zorder>
+    <zorder>label_180</zorder>
    </widget>
    <widget class="QWidget" name="DataRetrieval">
     <widget class="QGraphicsView" name="adminTopHeadingBackground">

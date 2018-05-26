@@ -211,7 +211,7 @@ void maindialog::configureSettingListDisplay()
     QString acc_sensitivityName = "\nSensitivity : ";
     QString sensor_sensitivityValue = QString::number(configuration_settings.accelerometer_config.acc_sensitivity);
     QString acc_thresholdName = "       Threshold : ";
-    QString sensor_thresholdValue = QString::number(configuration_settings.accelerometer_config.acc_threshold/1000) + " g ";
+    QString sensor_thresholdValue = QString::number(((double)configuration_settings.accelerometer_config.acc_threshold/1000), 'f', 2) + " g ";
 
     ui->xcel_configList->setText(acc_timeName + acc_timeValue +
                                 acc_scaleName + acc_scaleValue +

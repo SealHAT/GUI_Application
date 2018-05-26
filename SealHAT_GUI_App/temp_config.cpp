@@ -28,6 +28,7 @@ void maindialog::temp_setDefault()
        0,                                                       // active hours
        1                                                        // sample period
    };
+   qDebug() << sizeof(uint16_t);
 }
 
 void maindialog::temp_disable(bool disable)

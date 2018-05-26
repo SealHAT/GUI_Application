@@ -8,6 +8,10 @@
 #include <list>
 #include "seal_Types.h"
 
+#define IMU_DATA_SIZE           25
+#define GPS_DATA_SIZE           12
+#define EKG_DATA_SIZE           32
+#define LIGHT_TEMP_SIZE         12
 
 #define	TOHOUR				3600.0
 #define I2C_Speed           1.0/400000

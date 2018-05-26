@@ -160,11 +160,11 @@ void maindialog::powerEstimation(){
 /*Storage caculate in bits = total Bits*/
 void maindialog::storageEstimation(){
     /*Environment*/
-    templight_storage = (4 * configuration_settings.temperature_config.temp_headerData.size + sizeof(DATA_HEADER_t));
-    acc_storage = (6 * configuration_settings.accelerometer_config.acc_headerData.size + sizeof(DATA_HEADER_t));
-    mag_storage = (6 * configuration_settings.magnetometer_config.mag_headerData.size + sizeof(DATA_HEADER_t));
-    gps_storage = (20 * configuration_settings.gps_config.gps_headerData.size + sizeof(DATA_HEADER_t));
-    ekg_storage = (3 * configuration_settings.ekg_config.ekg_headerData.size + sizeof(DATA_HEADER_t));
+    templight_storage = (4 * LIGHT_TEMP_SIZE + sizeof(DATA_HEADER_t));
+    acc_storage = (6 * IMU_DATA_SIZE + sizeof(DATA_HEADER_t));
+    mag_storage = (6 * IMU_DATA_SIZE + sizeof(DATA_HEADER_t));
+    gps_storage = (20 * GPS_DATA_SIZE + sizeof(DATA_HEADER_t));
+    ekg_storage = (3 * EKG_DATA_SIZE + sizeof(DATA_HEADER_t));
 
     templight_groupNum = (temp_sampleNumber+light_sampleNumber)/(configuration_settings.temperature_config.temp_headerData.size);
     acc_groupNum = (acc_sampleNumber)/(configuration_settings.accelerometer_config.acc_headerData.size);

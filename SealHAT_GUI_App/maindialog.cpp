@@ -90,7 +90,7 @@ void maindialog::on_configureDevOptionButton_clicked()
     ui->mainStacked->setCurrentIndex(CONFIGURE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
     this->centerDialog();
-    ui->completeButton->hide();
+    //ui->completeButton->hide();
 }
 
 
