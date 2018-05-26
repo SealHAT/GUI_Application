@@ -138,6 +138,8 @@ void maindialog::on_loadButton_clicked()
                         QMessageBox::information(this, tr("No contacts in file"),
                             tr("The file you are attempting to open contains no settings."));
                     } else {
+                collectLoadingData_fromFile();
+                configureSettingListDisplay();
                         /*QMap<QString, uint32_t>::iterator i = config.begin();
 
                         while (i != config.constEnd()) {
@@ -178,7 +180,12 @@ void maindialog::configureSettingListDisplay()
 
     uint8_t acc_freqSelect = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1;
     uint8_t acc_pwrSelect = (configuration_settings.accelerometer_config.acc_mode%16)/4;
+
+    uint8_t mag_freqSelect = (configuration_settings.magnetometer_config.mag_mode%16)/4;
+    uint8_t mag_pwrSelect = (configuration_settings.magnetometer_config.mag_mode/16)%10;
+
     QString acc_PWRMode[3]{"Normal", "High Resolution", "Low Power"};
+    QString mag_PWRMode[2]{"Normal", "Low Power"};
 
     QString acc_timeName = "Time : ";
     QString acc_timeValue = QString::number(num_Hours(configuration_settings.accelerometer_config.acc_activeHour)) + " h ";
@@ -205,11 +212,13 @@ void maindialog::configureSettingListDisplay()
 
     QString mag_timeName = "Magnetometer Time : ";
     QString mag_timeValue = QString::number(num_Hours(configuration_settings.magnetometer_config.mag_activeHour)) + " h ";
-    QString mag_modeName = "               Magnetometer Mode : ";
-    QString mag_modeValue = QString::number(configuration_settings.magnetometer_config.mag_mode,16);
+    QString mag_powerMode = "\nPower Mode : " + mag_PWRMode[mag_pwrSelect];
+    QString mag_freqName = "            Sampling rate : ";
+    QString mag_freqValue = QString::number(magFrequency[mag_freqSelect])  + " Hz ";
 
     ui->mag_configList->setText(mag_timeName + mag_timeValue +
-                                mag_modeName + mag_modeValue );
+                                mag_powerMode +
+                                mag_freqName + mag_freqValue);
 
     uint8_t ekg_lowpassFrequencyValue[4] = {0,40,100,150};
 

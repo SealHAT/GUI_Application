@@ -79,8 +79,8 @@ void maindialog::powerEstimation(){
      ekg_inactivePower = EKG_I_SAVDV * (24 - ekg_activeHour) + (EKG_I_OV * (24 - ekg_activeHour));
      ekg_activePower = (EKG_I_AVDV + EKG_I_OV) * ekg_activeHour;
      ekg_totalPower = ekg_inactivePower + ekg_activePower + EKG_OSCILLATOR;
-     //qDebug() << "ekg_activeHour is" << ekg_activeHour << endl;
-     //qDebug() << "ekg_sampleNumber is" << ekg_sampleNumber << endl;
+     qDebug() << "ekg_activePower is" << ekg_activePower << endl;
+     qDebug() << "ekg_sampleNumber is" << ekg_sampleNumber << endl;
      //qDebug() << "ekg_totalPower is" << ekg_totalPower << endl;
 
      /*ACCELEROMETER POWER*/
@@ -91,10 +91,11 @@ void maindialog::powerEstimation(){
      acc_inactivePower = IMU_SB_PWR * (24 - acc_activeHour);
      acc_activePower = acc_actPower[acc_pwrMode][acc_tens] * acc_activeHour ;//(EKG_I_AVDV + EKG_I_OV) * ekg_activeHour;
      acc_totalPower = acc_inactivePower + acc_activePower;
-     qDebug() << "acc_totalPower is" << acc_totalPower << endl;
-     qDebug() << "acc_sampleNumber is" << acc_sampleNumber << endl;
-     //qDebug() << "acc_activeHour is" << acc_activeHour << endl;
-     qDebug() << "accFrequency[acc_tens] is" << accFrequency[acc_tens] << endl;
+     //qDebug() << "acc_pwrMode is" << acc_pwrMode << endl;
+     //qDebug() << "acc_activePower is" << acc_activePower << endl;
+     //qDebug() << "acc_sampleNumber is" << acc_sampleNumber << endl;
+     //qDebug() << "acc_actPower[acc_pwrMode][acc_tens] is" << acc_actPower[acc_pwrMode][acc_tens] << endl;
+     //qDebug() << "accFrequency[acc_tens] is" << accFrequency[acc_tens] << endl;
      //qDebug() << "acc_sampleNumber is" << acc_sampleNumber << endl;
 
      /*MAGNETOMETER POWER*/
