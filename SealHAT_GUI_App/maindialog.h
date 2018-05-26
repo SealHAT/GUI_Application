@@ -253,6 +253,7 @@ private slots:
     void sensors_timeTable_control();
     void labels_hide();
     void generalEstimation();
+    void display_setReadOnly();
 
 //Accelerometer
     void on_xcel_SW_clicked();
@@ -332,7 +333,6 @@ private slots:
 
 
 //Configuration list
-    void setConfigList();
     void on_getDataButton_clicked();
     void submitConfig();
     void on_saveButton_clicked();

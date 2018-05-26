@@ -79,8 +79,9 @@ void maindialog::powerEstimation(){
      ekg_inactivePower = EKG_I_SAVDV * (24 - ekg_activeHour) + (EKG_I_OV * (24 - ekg_activeHour));
      ekg_activePower = (EKG_I_AVDV + EKG_I_OV) * ekg_activeHour;
      ekg_totalPower = ekg_inactivePower + ekg_activePower + EKG_OSCILLATOR;
-     qDebug() << "ekg_activePower is" << ekg_activePower << endl;
-     qDebug() << "ekg_sampleNumber is" << ekg_sampleNumber << endl;
+     //qDebug() << EKG_OSCILLATOR;
+     //qDebug() << "ekg_activePower is" << ekg_activePower << endl;
+     //qDebug() << "ekg_sampleNumber is" << ekg_sampleNumber << endl;
      //qDebug() << "ekg_totalPower is" << ekg_totalPower << endl;
 
      /*ACCELEROMETER POWER*/
@@ -118,13 +119,13 @@ void maindialog::powerEstimation(){
      gps_inactivePower = GPS_SB_PWR * (24 - gps_activeHour);
      gps_activePower = (77.9/1000000)/30 * gps_activeHour;
      gps_totalPower = gps_inactivePower + gps_activePower;
-     //floatDebug() << "gps_totalPower is" << gps_totalPower << endl;
+     floatDebug() << "gps_totalPower is" << gps_totalPower << endl;
 
      /*MEMORY POWER*/  //what is the correct SPI time
      memory_totalpower = storageEst * SPI_SPEED/3600 * SPI_CURRENT
                          + (24 - (storageEst * SPI_SPEED)/3600) * SPI_SB_CURRENT
                          + (24 * SPI_SB_CURRENT * 3);
-     //qDebug() << "memory_totalpower is" << memory_totalpower << endl;
+     qDebug() << "memory_totalpower is" << memory_totalpower << endl;
 
 
      /*MICRO POWER*/

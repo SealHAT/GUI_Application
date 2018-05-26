@@ -138,19 +138,22 @@ void maindialog::on_loadButton_clicked()
                         QMessageBox::information(this, tr("No contacts in file"),
                             tr("The file you are attempting to open contains no settings."));
                     } else {
-                collectLoadingData_fromFile();
-                configureSettingListDisplay();
-                        /*QMap<QString, uint32_t>::iterator i = config.begin();
-
-                        while (i != config.constEnd()) {
-                            qDebug() << i.key() << ": " << i.value() << endl;
-                            ++i;
                             collectLoadingData_fromFile();
-                        }*/
+                            configureSettingListDisplay();
                     }
     }
 }
 
+/**************************************************************
+ * FUNCTION: collectLoadingData_fromFile
+ * ------------------------------------------------------------
+ * This function gets called file is loaded back from clicking
+ * the load button on the Device Configure pages.
+ *
+ *  Parameters: none
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::collectLoadingData_fromFile()
 {
     configuration_settings.accelerometer_config.acc_activeHour = config[ "Accelerometer Time"];
@@ -174,9 +177,19 @@ void maindialog::collectLoadingData_fromFile()
 
 }
 
+/**************************************************************
+ * FUNCTION: configureSettingListDisplay
+ * ------------------------------------------------------------
+ * This function clear the configuration list
+ * on the Device Configure pages.
+ *
+ *  Parameters: none
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::configureSettingListDisplay()
 {
-    ui->acc_configList->clear();
+    ui->xcel_configList->clear();
 
     uint8_t acc_freqSelect = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1;
     uint8_t acc_pwrSelect = (configuration_settings.accelerometer_config.acc_mode%16)/4;
@@ -200,7 +213,7 @@ void maindialog::configureSettingListDisplay()
     QString acc_thresholdName = "       Threshold : ";
     QString sensor_thresholdValue = QString::number(configuration_settings.accelerometer_config.acc_threshold/1000) + " g ";
 
-    ui->acc_configList->setText(acc_timeName + acc_timeValue +
+    ui->xcel_configList->setText(acc_timeName + acc_timeValue +
                                 acc_scaleName + acc_scaleValue +
                                 acc_powerMode +
                                 acc_freqName + acc_freqValue +
@@ -257,6 +270,7 @@ void maindialog::on_completeButton_clicked()
 {
 
     goto_DEV();
+    configureSettingListDisplay();
     /*qDebug() << "ACCELEROMETER" << endl;
         qDebug() << "Final accelerometer time is :" << configuration_settings.accelerometer_config.acc_activeHour << endl;
         qDebug() << "acc_scale is 0x:" << QString::number(configuration_settings.accelerometer_config.acc_activeHour, 16) << endl;
@@ -282,9 +296,3 @@ void maindialog::on_completeButton_clicked()
         qDebug() << "gps_activeHour is :" << configuration_settings.gps_config.gps_activeHour << endl;*/
 }
 
-
-void maindialog::setConfigList()
-{
-    configureSettingListDisplay();
-    //ui->xcel_ConfigList->append(xcel_scale);
-}

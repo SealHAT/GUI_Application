@@ -553,7 +553,7 @@ border: none;</string>
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="acc_configList">
+      <widget class="QTextEdit" name="xcel_configList">
        <property name="geometry">
         <rect>
          <x>130</x>

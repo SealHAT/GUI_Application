@@ -91,6 +91,7 @@ void maindialog::gps_timeTable_control()
         if(button->property("button_shift").isValid())
         {
             connect(button,SIGNAL(clicked()), this, SLOT(gps_hour_clicked()));
+            connect(button,SIGNAL(clicked()), this, SLOT(generalEstimation()));
         }
     }
 

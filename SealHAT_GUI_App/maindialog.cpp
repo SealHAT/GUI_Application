@@ -26,14 +26,14 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     generalEstimation();
 
     sensors_timeTable_control();
+
     ekg_estimation_control();
     xcel_estimation_control();
     mag_estimation_control();
 
-    ui->pwrEst_Text->setReadOnly(true);
-    ui->storageEst_Text->setReadOnly(true);
+    display_setReadOnly();
 
-    setConfigList();
+    configureSettingListDisplay();
 }
 
 /*Set all the sensors to default configuration*/
@@ -44,6 +44,16 @@ void maindialog::sensors_setDefault()
     ekg_setDefault();
     temp_setDefault();
     gps_setDefault();
+}
+
+/**/
+void maindialog::display_setReadOnly()
+{
+    ui->pwrEst_Text->setReadOnly(true);
+    ui->storageEst_Text->setReadOnly(true);
+    ui->gps_configList->setReadOnly(true);
+    ui->xcel_configList->setReadOnly(true);
+    ui->mag_configList->setReadOnly(true);
 }
 
 /*Set all the sensors to default configuration*/
@@ -80,7 +90,6 @@ void maindialog::on_configureDevOptionButton_clicked()
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
     this->centerDialog();
 }
-
 
 
 void maindialog::on_retrieveDataButton_clicked()
