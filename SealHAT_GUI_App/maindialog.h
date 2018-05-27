@@ -202,6 +202,7 @@ public:
     ~maindialog();
 
 private slots:
+    void serialReceived();
 
 //Page switch
     void on_ekgButton_clicked();

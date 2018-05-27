@@ -6,7 +6,11 @@
 #include "seal_Types.h"
 #include "sensor_header/LSM303AGR.h"
 #include "sensor_header/LSM303AGRTypes.h"
+#include <QtSerialPort/QSerialPort>
 #include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QTextStream>
+
 QSerialPort serial;
 /**
  * Initial GUI setup.
@@ -14,18 +18,6 @@ QSerialPort serial;
 maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog)
 {
     ui->setupUi(this);
-    serial.setPortName("com4");
-    serial.setBaudRate(QSerialPort::Baud9600);
-    serial.setDataBits(QSerialPort::Data8);
-    serial.setParity(QSerialPort::NoParity);
-
-    serial.setStopBits(QSerialPort::OneStop);
-    serial.setFlowControl(QSerialPort::NoFlowControl);
-
-    serial.open(QIODevice::ReadWrite);
-    serial.write("ok");
-
-
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
@@ -44,6 +36,53 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     display_setReadOnly();
     configureSettingListDisplay();
+    //serial = new QSerialPort(this);
+
+    serial.open(QIODevice::ReadWrite);
+    serial.setPortName("COM1");
+    serial.setBaudRate(QSerialPort::Baud9600);
+    serial.setDataBits(QSerialPort::Data8);
+    serial.setParity(QSerialPort::NoParity);
+
+    serial.setStopBits(QSerialPort::OneStop);
+    serial.setFlowControl(QSerialPort::NoFlowControl);
+
+    serial.open(QIODevice::ReadWrite);
+    serial.write("Hello World");
+/*
+    serial = new QSerialPort(this);
+    serial.setPortName("COM4");
+    serial.setBaudRate(QSerialPort::Baud9600);
+    serial.setDataBits(QSerialPort::Data8);
+    serial.setParity(QSerialPort::NoParity);
+
+    serial.setStopBits(QSerialPort::OneStop);
+    serial.setFlowControl(QSerialPort::NoFlowControl);
+
+    serial.open(QIODevice::ReadWrite);
+    QString writeData = "ok*";
+    qint64 bytesWritten;
+    serial.write("ok*");
+
+    if (bytesWritten == -1) {
+            qDebug() << "Failed to write the data to port, error: " << endl;
+        } else if (bytesWritten != writeData.size()) {
+            qDebug() << "Failed to write all the data to port , error: " << endl;
+        } else if (!serial.waitForBytesWritten(5000)) {
+            qDebug() << "Operation timed out or an error ,occurred for port %1, error: %2" << endl;
+        }
+        connect(serial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
+        qDebug() << "Data successfully sent to port %1" << endl;
+*/
+}
+
+
+void maindialog::serialReceived()
+{
+    QByteArray ba;
+    ba = serial.readAll();
+    ui->serialLabel->setText(ba);
+    qDebug() << ba;
 }
 
 /*
@@ -104,7 +143,7 @@ void maindialog::labels_hide()
 maindialog::~maindialog()
 {
     delete ui;
-    //serial.close();
+    serial.close();
 }
 
 void maindialog::on_configureDevOptionButton_clicked()
