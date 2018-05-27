@@ -179,29 +179,28 @@ void maindialog::on_ekg_odr128_clicked()
 {
     int rmIndex1;
     int rmIndex2;
-    if(ui->ekg_odr128->isChecked())
-    {
         configuration_settings.ekg_config.ekg_sampleRate = RATE_MIN_SPS;
         rmIndex1 = ui->ekg_LPfreqBox->findText("100 Hz");
         if(rmIndex1 >= 0)
         {
+            ui->ekg_LPfreqBox->setCurrentIndex(EKG_LP_FREQ_40HZ);
+            on_ekg_LPfreqBox_currentIndexChanged(EKG_LP_FREQ_40HZ);
             ui->ekg_LPfreqBox->removeItem(rmIndex1);
         }
         rmIndex2 = ui->ekg_LPfreqBox->findText("150 Hz");
         if(rmIndex2 >= 0)
         {
+            ui->ekg_LPfreqBox->setCurrentIndex(EKG_LP_FREQ_40HZ);
+            on_ekg_LPfreqBox_currentIndexChanged(EKG_LP_FREQ_40HZ);
             ui->ekg_LPfreqBox->removeItem(rmIndex2);
         }
-    }
-
 }
 
 void maindialog::on_ekg_odr256_clicked()
 {
     int addIndex;
     int rmIndex2;
-    if(ui->ekg_odr256->isChecked())
-    {
+
         configuration_settings.ekg_config.ekg_sampleRate = RATE_MED_SPS;
         addIndex = ui->ekg_LPfreqBox->findText("100 Hz");
         if(addIndex < 0)
@@ -211,17 +210,17 @@ void maindialog::on_ekg_odr256_clicked()
         rmIndex2 = ui->ekg_LPfreqBox->findText("150 Hz");
         if(rmIndex2 >= 0)
         {
+            ui->ekg_LPfreqBox->setCurrentIndex(EKG_LP_FREQ_100HZ);
+            on_ekg_LPfreqBox_currentIndexChanged(EKG_LP_FREQ_100HZ);
             ui->ekg_LPfreqBox->removeItem(rmIndex2);
         }
-    }
 }
 
 void maindialog::on_ekg_odr512_clicked()
 {
     int addIndex1;
     int addIndex2;
-    if(ui->ekg_odr512->isChecked())
-    {
+
         configuration_settings.ekg_config.ekg_sampleRate = RATE_MAX_SPS;
         addIndex1 = ui->ekg_LPfreqBox->findText("100 Hz");
         addIndex2 = ui->ekg_LPfreqBox->findText("150 Hz");
@@ -233,8 +232,6 @@ void maindialog::on_ekg_odr512_clicked()
         {
             ui->ekg_LPfreqBox->addItem("150 Hz");
         }
-    }
-    /*//*/
 
 }
 
@@ -271,7 +268,6 @@ void maindialog::on_ekg_LPfreqBox_currentIndexChanged(int index)
         configuration_settings.ekg_config.ekg_lowpassFreq= DLPF_150_HZ;
         break;
     }
-    //qDebug() << configuration_settings.ekg_config.ekg_lowpassFreq << endl;
 
 }
 
