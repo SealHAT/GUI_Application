@@ -160,6 +160,7 @@ void maindialog::storageEstimation(){
 
     double StorageConsump = (storageEst)/STORAGECAPACITY;
     QString storageconsumpString = "   " + QString::number(StorageConsump,'f',2) + " % ";
+    //ui->storageEst_Text->clear();
     ui->storageEst_Text->setText(QString::number(storageEst) + storageconsumpString);
 
 }
