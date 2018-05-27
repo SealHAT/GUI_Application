@@ -8,6 +8,17 @@
 #include "analyze.h"
 #include "ui_maindialog.h"
 
+
+/**************************************************************
+ * FUNCTION: num_Hours
+ * ------------------------------------------------------------
+ * This function get the 32 bits binary time settings
+ * and calculate number of active hours for all the sensors.
+ *
+ *  Parameters: Time configuration setting.(23bits one hot encoding)
+ *
+ *  Returns: void
+ **************************************************************/
 uint8_t maindialog::num_Hours(uint32_t x) {
   uint8_t hours =0;
   while(x!=0) {
@@ -17,7 +28,23 @@ uint8_t maindialog::num_Hours(uint32_t x) {
   return hours;
 }
 
-/*Combination of power and storage calcualtion and display*/
+
+/**************************************************************
+ * FUNCTION: powerEstimation
+ * ------------------------------------------------------------
+ *  This function caculated number of active hours,
+ *  number of samples per hours when active for each sensor and
+ *  pass them to both storage and power caculation functions.
+ *  Both powerEstimation() and storageEstimation() get called in
+ *  this function.
+ *
+ *  It will get called whenever each configuration
+ *  setting that could affect power or storage got changed.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::generalEstimation(){
 
     temp_activeHour = num_Hours(configuration_settings.temperature_config.temp_activeHour);
@@ -45,7 +72,26 @@ void maindialog::generalEstimation(){
     storageEstimation();
     powerEstimation();
 }
-/*Power estimation base on changing configuation setting*/
+
+
+/**************************************************************
+ * FUNCTION: powerEstimation
+ * ------------------------------------------------------------
+ *  This function takes all the configuration setting factors for
+ *  all the sensors that could potentially affect power consumption.
+ *  It caculate active power and inactive power for accelerometer,
+ *  magnetometer, ekg, gps, temperature and light sensors respectively.
+ *  And then display the sum of the power to the frontend.
+ *  It will get called each configuration setting got changed.
+ *  It gets called inside generalEstimation() function.
+ *
+ *  generalEstimation() will get called whenever each configuration
+ *  setting that could affect power or storage got changed.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::powerEstimation(){
    /*TEMPERATURE POWER*/
     temp_activePower = ((((3600 - (temp_sampleNumber * TEMP_CONV_TIME)) - (temp_sampleNumber * TEMP_BIT_NUM * I2C_Speed)) * TEMP_SB_PWR)
@@ -97,7 +143,7 @@ void maindialog::powerEstimation(){
                       + micro_gpsActiveTime + micro_ekgActiveTime)*8/3600;
      micro_totalpower = micro_activehour * MICRO_ACT_PWR * (12) + ((24-micro_activehour) * MICRO_SB_PWR);
 
-//SUM OF POWER
+    //SUM OF POWER
      powerEst = (temp_totalPower + light_totalPower + ekg_totalPower + acc_totalPower + mag_totalPower + gps_totalPower
                  + memory_totalpower + micro_totalpower) * 1000;
      QString powerEstString = (QString::number(powerEst,'f',5));
@@ -106,6 +152,19 @@ void maindialog::powerEstimation(){
 
 }
 
+/**************************************************************
+ * FUNCTION: on_batterySizeText_editingFinished
+ * ------------------------------------------------------------
+ *  This function gets called whenever user finish editing the
+ *  size of the battery capacity they are going to use.
+ *  This function will check estimated power value(in mA)
+ *  we got from powerEstimation() function and caculated power
+ *  consumption of the battery user choose to used.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_batterySizeText_editingFinished()
 {
     //QString powerEstString = (QString::number(powerEst,'f',5));
@@ -127,7 +186,23 @@ void maindialog::on_batterySizeText_editingFinished()
 
 
 
-/*Storage caculate in bits = total Bits*/
+/**************************************************************
+ * FUNCTION: storageEstimation
+ * ------------------------------------------------------------
+ *  This function takes all the configuration setting factors for
+ *  all the sensors that could potentially affect storage consumption.
+ *  It caculate active power and inactive power for accelerometer,
+ *  magnetometer, ekg, gps, temperature and light sensors respectively.
+ *  And then display the sum of the storgae to the frontend.
+ *  It gets called inside generalEstimation() function.
+ *
+ *  generalEstimation() will get called whenever each configuration
+ *  setting that could affect power or storage got changed.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::storageEstimation(){
     /*Environment*/
     templight_storage = (4 * LIGHT_TEMP_SIZE + sizeof(DATA_HEADER_t));
@@ -146,7 +221,7 @@ void maindialog::storageEstimation(){
              + acc_storage * acc_groupNum
              + mag_storage * mag_groupNum
              + gps_storage * gps_groupNum
-             + ekg_storage * ekg_groupNum) * 8;
+             + ekg_storage * ekg_groupNum) * 8; //Storage caculate in bits = total Bits
 
     double StorageConsump = (storageEst)/STORAGECAPACITY;
     QString storageconsumpString = QString::number(StorageConsump,'f',2) + " % ";
