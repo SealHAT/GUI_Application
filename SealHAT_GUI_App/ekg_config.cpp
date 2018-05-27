@@ -28,21 +28,29 @@ void maindialog::ekg_getloadData(){
     }
 
     uint16_t ekg_spsSelect = 512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate));
-        uint8_t ekg_gainSelect = pow(2,(uint8_t)configuration_settings.ekg_config.ekg_gain);
+        uint8_t ekg_gainSelect = configuration_settings.ekg_config.ekg_gain;
         uint8_t ekg_lpFreqSelect = configuration_settings.ekg_config.ekg_lowpassFreq;
-        switch(ekg_spsSelect){
-        case 512:
+        qDebug() << "ekg_gainSelect is" << ekg_gainSelect << endl;
+        qDebug() << "ekg_lpFreqSelect is" << ekg_lpFreqSelect << endl;
+
+        if(ekg_spsSelect== 512)
+        {
             ui->ekg_odr128->setChecked(false);
             ui->ekg_odr256->setChecked(false);
             ui->ekg_odr512->setChecked(true);
-        case 256:
+            on_ekg_odr512_clicked();
+        }else if(ekg_spsSelect == 256)
+        {
             ui->ekg_odr128->setChecked(false);
             ui->ekg_odr256->setChecked(true);
             ui->ekg_odr512->setChecked(false);
-        case 128:
+            on_ekg_odr256_clicked();
+        }else if(ekg_spsSelect == 128)
+        {
             ui->ekg_odr128->setChecked(true);
             ui->ekg_odr256->setChecked(false);
             ui->ekg_odr512->setChecked(false);
+            on_ekg_odr128_clicked();
         }
         ui->ekg_gainBox->setCurrentIndex(ekg_gainSelect);
         ui->ekg_LPfreqBox->setCurrentIndex(ekg_lpFreqSelect);

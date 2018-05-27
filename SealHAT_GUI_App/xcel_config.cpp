@@ -372,10 +372,12 @@ void maindialog::xcel_getloadData(){
         }
     }
 
+    uint8_t acc_scaleSelect =  (configuration_settings.accelerometer_config.acc_scale/16)%10 ;
     uint8_t acc_freqSelect = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1;
     uint8_t xcel_pwrSelect = (configuration_settings.accelerometer_config.acc_mode%16)/4;
     QString xcel_threshold = QString::number((double)configuration_settings.accelerometer_config.acc_threshold/1000,'f',2);
 
+    ui->xcel_scaleBox->setCurrentIndex(acc_scaleSelect);
     ui->xcel_pwrBox->setCurrentIndex(xcel_pwrSelect);
     ui->xcel_freqBox->setCurrentIndex(acc_freqSelect);
     ui->xcel_thres->setText(xcel_threshold);

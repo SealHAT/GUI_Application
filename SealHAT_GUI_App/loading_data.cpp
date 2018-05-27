@@ -39,9 +39,6 @@ void maindialog::collectLoadingData_fromFile()
     generalEstimation();
 
 }
-
-
-
 void maindialog::loaddata_fromSensors(){
     gps_getloadData();
     xcel_getloadData();

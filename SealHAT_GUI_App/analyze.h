@@ -1,6 +1,8 @@
 #ifndef ANALYZE_H
 #define ANALYZE_H
 
+#define STORAGECAPACITY         200000000*8
+
 #define IMU_DATA_SIZE           25
 #define GPS_DATA_SIZE           12
 #define EKG_DATA_SIZE           32

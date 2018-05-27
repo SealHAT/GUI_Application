@@ -172,7 +172,7 @@ void maindialog::configureSettingListDisplay()
     QString acc_timeName = "Time : ";
     QString acc_timeValue = QString::number(num_Hours(configuration_settings.accelerometer_config.acc_activeHour)) + " h ";
     QString acc_scaleName = "               Accelerometer Scale : ";
-    QString acc_scaleValue = QString::number(2 << ((configuration_settings.accelerometer_config.acc_scale/16)%10 - 1)) + " g ";
+    QString acc_scaleValue = QString::number(2 << ((configuration_settings.accelerometer_config.acc_scale/16)%10)) + " g ";
     QString acc_powerMode = "\nPower Mode : " + acc_PWRMode[acc_pwrSelect];
 
     QString acc_freqName = "            Sampling rate : ";
@@ -209,10 +209,13 @@ void maindialog::configureSettingListDisplay()
     QString ekg_spsName = "                       EKG Sample Rate : ";
     QString ekg_spsValue = QString::number( (512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate))) ) + " samples/s ";
     QString ekg_gainName = "\nEKG Gain : ";
-    QString ekg_gainValue = QString::number( 20 * (pow(2,(uint8_t)configuration_settings.ekg_config.ekg_gain) +1) ) + " V ";
+    QString ekg_gainValue = QString::number( 20 * (pow(2,(uint8_t)configuration_settings.ekg_config.ekg_gain) ) ) + " V ";
     QString ekg_lpfreqName = "                   EKG Low Pass Frequency : ";
     QString ekg_lpfreqValue = QString::number(ekg_lowpassFrequencyValue[configuration_settings.ekg_config.ekg_lowpassFreq]) + " Hz ";
 
+    qDebug() << "ekg_spsValue is" << ekg_spsValue << endl;
+    qDebug() << "ekg_gainValue is" << ekg_gainValue << endl;
+    qDebug() << "ekg_lpfreqValue is" << ekg_lpfreqValue << endl;
     ui->ekg_configList->setText(ekg_timeName + ekg_timeValue +
                                 ekg_spsName + ekg_spsValue +
                                 ekg_gainName + ekg_gainValue +
@@ -231,15 +234,13 @@ void maindialog::configureSettingListDisplay()
     QString gps_timeName = "GPS Time : ";
     QString gps_timeValue = QString::number(num_Hours(configuration_settings.gps_config.gps_activeHour)) + " h ";
     ui->gps_configList->setText(gps_timeName + gps_timeValue);
-
-
 }
 
 void maindialog::on_completeButton_clicked()
 {
     goto_DEV();
+    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
     configureSettingListDisplay();
-   //ui->welcomeHeadingLabel->adjustSize();
    ui->welcomeHeadingLabel->setText("Completed configuration List");
 }
 

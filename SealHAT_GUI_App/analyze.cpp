@@ -27,17 +27,13 @@ void maindialog::generalEstimation(){
     light_sampleNumber = light_activeHour*3600/(configuration_settings.temperature_config.temp_samplePeriod);
 
     ekg_activeHour = num_Hours(configuration_settings.ekg_config.ekg_activeHour);
-    //uint32_t ekg_spsmode = (512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate)));
+    uint32_t ekg_spsmode = (512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate)));
     ekg_sampleNumber = ekg_activeHour*3600*(512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate)));
-    //qDebug() << "ekg_sampleNumber is" << ekg_sampleNumber << endl;
-    //qDebug() << "ekg_spsmode is" << ekg_spsmode << endl;
 
-    acc_tens = (configuration_settings.accelerometer_config.acc_mode/16)%10; //logic Rethink
+    acc_tens = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1; //logic Rethink
     acc_pwrMode = (configuration_settings.accelerometer_config.acc_mode%16)/4;
     acc_activeHour = num_Hours(configuration_settings.accelerometer_config.acc_activeHour);
     acc_sampleNumber = acc_activeHour*(3600)*(accFrequency[acc_tens]);
-    //qDebug() << "acc_tens is" << acc_tens << endl;
-    //qDebug() << "acc_pwrMode is" << acc_pwrMode << endl;
 
     mag_ones = (configuration_settings.magnetometer_config.mag_mode%16)/4;
     mag_pwrMode = (configuration_settings.magnetometer_config.mag_mode/16)%10;
@@ -52,17 +48,12 @@ void maindialog::generalEstimation(){
 }
 /*Power estimation base on changing configuation setting*/
 void maindialog::powerEstimation(){
-    //HOUR Bug
    /*TEMPERATURE POWER*/
-
-    //temp_activeHour = num_Hours(configuration_settings.temperature_config.temp_activeHour);
-    //temp_sampleNumber = temp_activeHour*3600/(configuration_settings.temperature_config.temp_samplePeriod);
     temp_activePower = ((((3600 - (temp_sampleNumber * TEMP_CONV_TIME)) - (temp_sampleNumber * TEMP_BIT_NUM * I2C_Speed)) * TEMP_SB_PWR)
                         + (temp_sampleNumber * TEMP_CONV_TIME * TEMP_CONV_PWR)
                         + (temp_sampleNumber * TEMP_BIT_NUM * TEMP_I2C_PWR * I2C_Speed)) * temp_activeHour/3600;
     temp_inactivePower = (24 - temp_activeHour) * TEMP_SB_PWR;
     temp_totalPower = (temp_activePower + temp_inactivePower);   //temp power per day//
-
 
     /*LIGHT POWER*/
      light_activePower = (((3600 - (light_sampleNumber * LIGHT_BIT_NUM * I2C_Speed)) * LIGHT_INACT_PWR)
@@ -70,12 +61,10 @@ void maindialog::powerEstimation(){
      light_inactivePower = (24 - light_activeHour) * LIGHT_INACT_PWR;
      light_totalPower = light_activePower + light_inactivePower;   //light power per day//
 
-
      /*EKG POWER*/
      ekg_inactivePower = EKG_I_SAVDV * (24 - ekg_activeHour) + (EKG_I_OV * (24 - ekg_activeHour));
      ekg_activePower = (EKG_I_AVDV + EKG_I_OV) * ekg_activeHour;
      ekg_totalPower = ekg_inactivePower + ekg_activePower + EKG_OSCILLATOR;
-
 
      /*ACCELEROMETER POWER*/
      acc_inactivePower = IMU_SB_PWR * (24 - acc_activeHour);
@@ -97,7 +86,6 @@ void maindialog::powerEstimation(){
                          + (24 - (storageEst * SPI_SPEED)/3600) * SPI_SB_CURRENT
                          + (24 * SPI_SB_CURRENT * 3);
 
-
      /*MICRO POWER*/
      micro_tempActiveTime = temp_sampleNumber * 2 * (I2C_Speed + SPI_SPEED);
      micro_lightActiveTime = light_sampleNumber * 2 * (I2C_Speed + SPI_SPEED);
@@ -110,13 +98,42 @@ void maindialog::powerEstimation(){
                       + micro_gpsActiveTime + micro_ekgActiveTime)*8/3600;
      micro_totalpower = micro_activehour * MICRO_ACT_PWR * (12) + ((24-micro_activehour) * MICRO_SB_PWR);
 
-
+//SUM OF POWER
      powerEst = (temp_totalPower + light_totalPower + ekg_totalPower + acc_totalPower + mag_totalPower + gps_totalPower
                  + memory_totalpower + micro_totalpower) * 1000;
+     QString powerEstString = (QString::number(powerEst,'f',5));
 
-     ui->pwrEst_Text->setText((QString::number(powerEst,'f',5)));
+     double batterySize = ui->batterySizeText->text().toDouble();
+     double powerConsumptionValue = powerEst/(double)batterySize;
+     QString powerconsumpString = (QString::number(powerConsumptionValue,'f',2)) + " % ";
+
+     if(!(ui->batterySizeText->text().isEmpty()))
+     {
+         ui->pwrEst_Text->setText(powerEstString + "     " + powerconsumpString);
+     }else{
+         ui->pwrEst_Text->setText(powerEstString);
+     }
+
 }
 
+void maindialog::on_batterySizeText_editingFinished()
+{
+    QString powerEstString = (QString::number(powerEst,'f',5));
+    double batterySize = ui->batterySizeText->text().toDouble();
+    uint16_t timeDuration = batterySize/(powerEst);
+    uint16_t monthConsump = timeDuration/30;
+    uint16_t dayConsump = timeDuration%30;
+
+    QString powerconsumpString = (QString::number(monthConsump)) + " Months "
+                                + (QString::number(dayConsump)) + " Days ";
+
+    if(!(ui->batterySizeText->text().isEmpty()))
+    {
+        ui->pwrEst_Text->setText(powerEstString + "\n" + powerconsumpString);
+    }else{
+        ui->pwrEst_Text->setText(powerEstString);
+    }
+}
 
 
 
@@ -141,5 +158,8 @@ void maindialog::storageEstimation(){
              + gps_storage * gps_groupNum
              + ekg_storage * ekg_groupNum) * 8;
 
-    ui->storageEst_Text->setText(QString::number(storageEst));
+    double StorageConsump = (storageEst)/STORAGECAPACITY;
+    QString storageconsumpString = "   " + QString::number(StorageConsump,'f',2) + " % ";
+    ui->storageEst_Text->setText(QString::number(storageEst) + storageconsumpString);
+
 }

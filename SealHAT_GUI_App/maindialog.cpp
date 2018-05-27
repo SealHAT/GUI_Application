@@ -6,13 +6,25 @@
 #include "seal_Types.h"
 #include "sensor_header/LSM303AGR.h"
 #include "sensor_header/LSM303AGRTypes.h"
-
+#include <QSerialPort>
+QSerialPort serial;
 /**
  * Initial GUI setup.
  **/
 maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog)
 {
     ui->setupUi(this);
+    serial.setPortName("com4");
+    serial.setBaudRate(QSerialPort::Baud9600);
+    serial.setDataBits(QSerialPort::Data8);
+    serial.setParity(QSerialPort::NoParity);
+
+    serial.setStopBits(QSerialPort::OneStop);
+    serial.setFlowControl(QSerialPort::NoFlowControl);
+
+    serial.open(QIODevice::ReadWrite);
+    serial.write("ok");
+
 
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
@@ -90,6 +102,7 @@ void maindialog::labels_hide()
 maindialog::~maindialog()
 {
     delete ui;
+    //serial.close();
 }
 
 void maindialog::on_configureDevOptionButton_clicked()
@@ -154,5 +167,6 @@ void maindialog::on_backButton_StreamPage_clicked()
 {
     on_backButton_clicked();
 }
+
 
 

@@ -6484,9 +6484,9 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>510</y>
+       <y>500</y>
        <width>141</width>
-       <height>31</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -6507,9 +6507,9 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>450</y>
+       <y>430</y>
        <width>141</width>
-       <height>31</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -6526,25 +6526,25 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_178">
+    <widget class="QLabel" name="label_estPWR">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>430</y>
-       <width>141</width>
+       <x>20</x>
+       <y>410</y>
+       <width>161</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#f1b535;&quot;&gt;Esimated Power (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#d9a829;&quot;&gt;Esimated Power (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_179">
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>490</y>
-       <width>151</width>
+       <y>480</y>
+       <width>161</width>
        <height>16</height>
       </rect>
      </property>
@@ -6552,40 +6552,30 @@ p, li { white-space: pre-wrap; }
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#f1b535;&quot;&gt;Esimated Storage (Bits)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QTextEdit" name="BatteryCapacity_input">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>390</y>
-       <width>141</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(152, 162, 173);</string>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <property name="html">
-      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_180">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>370</y>
-       <width>141</width>
+       <x>20</x>
+       <y>360</y>
+       <width>161</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;Battery Capacity (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="batterySizeText">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>380</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(132, 142, 155);</string>
      </property>
     </widget>
     <zorder>ConfigureView</zorder>
@@ -6601,10 +6591,10 @@ p, li { white-space: pre-wrap; }
     <zorder>completeButton</zorder>
     <zorder>storageEst_Text</zorder>
     <zorder>pwrEst_Text</zorder>
-    <zorder>label_178</zorder>
+    <zorder>label_estPWR</zorder>
     <zorder>label_179</zorder>
-    <zorder>BatteryCapacity_input</zorder>
     <zorder>label_180</zorder>
+    <zorder>batterySizeText</zorder>
    </widget>
    <widget class="QWidget" name="DataRetrieval">
     <widget class="QGraphicsView" name="adminTopHeadingBackground">
