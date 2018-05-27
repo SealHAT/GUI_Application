@@ -191,11 +191,7 @@ void maindialog::mag_disable_button(bool disable)
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);
             if(disable){
-                configuration_settings.magnetometer_config = {
-                          {MSG_START_SYM, DEVICE_ID_MAGNETIC_FIELD, 0, 0, sizeof(MAG_OPMODE_t)},// header
-                          0,                                                                    // active hours
-                          MAG_IDLE                                                          // mode
-                          };
+                configuration_settings.magnetometer_config.mag_activeHour = 0;
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(105, 105,105)");
             }else{
@@ -203,7 +199,6 @@ void maindialog::mag_disable_button(bool disable)
             }
         }
     }
-    //generalEstimation();
 }
 
 void maindialog::on_mag_timeclear_button_clicked()
@@ -217,7 +212,5 @@ void maindialog::on_mag_timeclear_button_clicked()
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
     }
-    //generalEstimation();
-    //qDebug << "mag time is :" << configuration_settings.magnetometer_config.mag_activeHour << endl;
 }
 

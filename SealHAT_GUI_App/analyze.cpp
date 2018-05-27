@@ -27,7 +27,6 @@ void maindialog::generalEstimation(){
     light_sampleNumber = light_activeHour*3600/(configuration_settings.temperature_config.temp_samplePeriod);
 
     ekg_activeHour = num_Hours(configuration_settings.ekg_config.ekg_activeHour);
-    uint32_t ekg_spsmode = (512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate)));
     ekg_sampleNumber = ekg_activeHour*3600*(512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate)));
 
     acc_tens = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1; //logic Rethink
@@ -103,22 +102,13 @@ void maindialog::powerEstimation(){
                  + memory_totalpower + micro_totalpower) * 1000;
      QString powerEstString = (QString::number(powerEst,'f',5));
 
-     double batterySize = ui->batterySizeText->text().toDouble();
-     double powerConsumptionValue = powerEst/(double)batterySize;
-     QString powerconsumpString = (QString::number(powerConsumptionValue,'f',2)) + " % ";
-
-     if(!(ui->batterySizeText->text().isEmpty()))
-     {
-         ui->pwrEst_Text->setText(powerEstString + "     " + powerconsumpString);
-     }else{
-         ui->pwrEst_Text->setText(powerEstString);
-     }
+     ui->pwrEst_Text->setText(powerEstString);
 
 }
 
 void maindialog::on_batterySizeText_editingFinished()
 {
-    QString powerEstString = (QString::number(powerEst,'f',5));
+    //QString powerEstString = (QString::number(powerEst,'f',5));
     double batterySize = ui->batterySizeText->text().toDouble();
     uint16_t timeDuration = batterySize/(powerEst);
     uint16_t monthConsump = timeDuration/30;
@@ -129,9 +119,9 @@ void maindialog::on_batterySizeText_editingFinished()
 
     if(!(ui->batterySizeText->text().isEmpty()))
     {
-        ui->pwrEst_Text->setText(powerEstString + "\n" + powerconsumpString);
+        ui->pwrConsumption_Text->setText(powerconsumpString);
     }else{
-        ui->pwrEst_Text->setText(powerEstString);
+        ui->pwrConsumption_Text->clear();
     }
 }
 
@@ -159,8 +149,8 @@ void maindialog::storageEstimation(){
              + ekg_storage * ekg_groupNum) * 8;
 
     double StorageConsump = (storageEst)/STORAGECAPACITY;
-    QString storageconsumpString = "   " + QString::number(StorageConsump,'f',2) + " % ";
+    QString storageconsumpString = QString::number(StorageConsump,'f',2) + " % ";
     //ui->storageEst_Text->clear();
-    ui->storageEst_Text->setText(QString::number(storageEst) + storageconsumpString);
-
+    ui->storageEst_Text->setText(QString::number(storageEst));
+    ui->storageConsumption_Text->setText(storageconsumpString);
 }

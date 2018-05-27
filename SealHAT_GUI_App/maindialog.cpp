@@ -72,7 +72,9 @@ void maindialog::display_setReadOnly()
     ui->gps_highSamplingRateValue->setReadOnly(true);
     ui->gps_lowSamplingRateValue->setReadOnly(true);
     ui->pwrEst_Text->setReadOnly(true);
+    ui->pwrConsumption_Text->setReadOnly(true);
     ui->storageEst_Text->setReadOnly(true);
+    ui->storageConsumption_Text->setReadOnly(true);
     ui->gps_configList->setReadOnly(true);
     ui->xcel_configList->setReadOnly(true);
     ui->mag_configList->setReadOnly(true);
@@ -134,7 +136,7 @@ void maindialog::centerDialog() {
     int y = (screenGeometry.height() - this->height()) / 2;
     this->move(x, y);
 }
-
+/*
 void maindialog::hour_clicked()
 {
 
@@ -151,7 +153,7 @@ void maindialog::hour_clicked()
         } else {
             button->setStyleSheet("background-color:rgb(152, 162, 173)");
         }
-}
+}*/
 
 
 void maindialog::on_streamDataButton_clicked()

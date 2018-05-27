@@ -33,27 +33,6 @@ void maindialog::goto_DEV()
 }
 
 
-
-/**************************************************************
- * FUNCTION: on_lightButton_clicked
- * ------------------------------------------------------------
- * This function gets called when the Light Button is pressed.
- * It sets the active page to the Configure Light Sensor page.
- * On this page, different attributes of the light sensor may
- * be set.
- *
- *  Parameters: none
- *
- *  Returns: void
- **************************************************************/
-void maindialog::on_lightButton_clicked()
-{
-    //set button colors. selected tab will be highlighted
-    setActiveButtonColor(LIGHT_CONFIGURE);
-
-    ui->ConfigurePages->setCurrentIndex(LIGHT_CONFIGURE);
-}
-
 /**************************************************************
  * FUNCTION: on_temperatureButton_clicked
  * ------------------------------------------------------------
@@ -166,7 +145,6 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->gpsButton->setStyleSheet("background-color:rgb(241, 181, 33)");
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case XCEL_CONFIGURE: {
@@ -174,7 +152,6 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->xcelButton->setStyleSheet("background-color:rgb(241, 181, 33)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case MAG_CONFIGURE: {
@@ -182,7 +159,6 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(241, 181, 33)");
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case EKG_CONFIGURE: {
@@ -190,7 +166,6 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case TEMPERATURE_CONFIGURE: {
@@ -198,23 +173,13 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(241, 181, 33)");
-        } break;
-        case LIGHT_CONFIGURE: {
-            ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->lightButton->setStyleSheet("background-color:rgb(241, 181, 33)");
-            ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case CONFIGURE_DEV_HOME_PAGE: {
             ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->gpsButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
-            ui->lightButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
     }

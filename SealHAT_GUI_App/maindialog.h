@@ -129,7 +129,6 @@ class maindialog : public QDialog
         GPS_CONFIGURE           = 3,
         EKG_CONFIGURE           = 4,
         TEMPERATURE_CONFIGURE   = 5,
-        LIGHT_CONFIGURE         = 6,
     };
 
     enum DATA_RETRIEVAL_PAGES {
@@ -205,23 +204,24 @@ public:
 private slots:
 
 //Page switch
+    void on_ekgButton_clicked();
+    void on_gpsButton_clicked();
+    void on_magButton_clicked();
+    void on_xcelButton_clicked();
+    void on_temperatureButton_clicked();
+
+    void on_streamDataButton_clicked();
     void on_backButton_clicked(); //
     void on_configureDevOptionButton_clicked(); //
     void on_retrieveDataButton_clicked(); //
-    void on_lightButton_clicked();
-    void on_temperatureButton_clicked();
-    void on_ekgButton_clicked();
-    void on_gpsButton_clicked();
-    void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);
-    void on_backButton_retrieveData_clicked();
-    void on_magButton_clicked();
-    void on_xcelButton_clicked();
-    void goto_DEV();
-    void on_streamDataButton_clicked();
     void on_backButton_StreamPage_clicked();
 
+    void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);
+    void on_backButton_retrieveData_clicked();
+    void goto_DEV();
+
 //Main function control
-    void hour_clicked();
+    //void hour_clicked();
     void sensors_setDefault();
     void sensors_timeTable_control();
     void labels_hide();
