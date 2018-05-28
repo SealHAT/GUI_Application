@@ -3,10 +3,6 @@
 #include <QDebug>
 #include "maindialog.h"
 #include "ui_maindialog.h"
-#include "seal_Types.h"
-#include "sensor_header/LSM303AGR.h"
-#include "sensor_header/LSM303AGRTypes.h"
-#include <QtSerialPort/QSerialPort>
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QTextStream>

@@ -173,9 +173,14 @@ void maindialog::on_batterySizeText_editingFinished()
     uint16_t timeDuration = batterySize/(powerEst);
     uint16_t monthConsump = timeDuration/30;
     uint16_t dayConsump = timeDuration%30;
+    QString powerconsumpString;
+    if(monthConsump){
+        powerconsumpString = (QString::number(monthConsump)) + " Months "
+                                    + (QString::number(dayConsump)) + " Days ";
+    }else{
+        powerconsumpString = (QString::number(dayConsump)) + " Days ";
+    }
 
-    QString powerconsumpString = (QString::number(monthConsump)) + " Months "
-                                + (QString::number(dayConsump)) + " Days ";
 
     if(!(ui->batterySizeText->text().isEmpty()))
     {
@@ -230,7 +235,7 @@ void maindialog::storageEstimation(){
 
     double StorageConsump = ((double)storageEst*90.0)/(double)STORAGECAPACITY;
     QString storageconsumpString = QString::number(StorageConsump,'f',2) + " % ";
-    //ui->storageEst_Text->clear();
+
     ui->storageEst_Text->setText(QString::number(storageEst));
     ui->storageConsumption_Text->setText(storageconsumpString);
 }

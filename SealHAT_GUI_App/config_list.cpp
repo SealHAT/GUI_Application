@@ -13,8 +13,6 @@
 #include "ui_maindialog.h"
 
 void maindialog::submitConfig(){
-    QString acc_name = "Accelerometer";
-
     QString acc_timeName = "Accelerometer Time";
     uint32_t acc_timeValue = configuration_settings.accelerometer_config.acc_activeHour;
     QString acc_scaleName = "Accelerometer Scale";
@@ -69,20 +67,21 @@ void maindialog::submitConfig(){
     config.insert(ekg_lpfreqName,ekg_lpfreqValue);
 
     config.insert(gps_timeName,gps_timeValue);
-
+/*
     QMapIterator<QString, uint32_t> iter(config);
 
         while(iter.hasNext())
         {
             iter.next();
             qDebug() << iter.key() << " : " << iter.value();
-        }
+        }*/
 
 
 }
 
 void maindialog::on_saveButton_clicked()
 {
+    submitConfig();
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save Destination Address"),
                                                     "C:/Users/hpan5/Downloads/gui",
@@ -97,7 +96,7 @@ void maindialog::on_saveButton_clicked()
                 return;
             }
 
-            submitConfig();
+
 
             QDataStream out(&file);
             out.setVersion(QDataStream::Qt_4_5);
