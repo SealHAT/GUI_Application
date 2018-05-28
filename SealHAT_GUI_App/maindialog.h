@@ -5,7 +5,9 @@
 #include <QMap>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
-#include <list>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QTextStream>
 #include "seal_Types.h"
 #include "analyze.h"
 
@@ -226,7 +228,6 @@ private slots:
     void sensors_setDefault();
     void sensors_timeTable_control();
     void labels_hide();
-    void generalEstimation();
     void sensor_esitimation_control();
     void display_setReadOnly();
 
@@ -351,12 +352,20 @@ private slots:
     uint8_t num_Hours(uint32_t x) ;
     void powerEstimation();
     void storageEstimation();
+    void generalEstimation();
 
     void on_batterySizeText_editingFinished();
 
 private:
     Ui::maindialog *ui;
     QMap<QString, uint32_t> config;
+    QSerialPort *microSerial;
+    static const quint16 microSerial_vendor_id = 1003;
+    static const quint16 microSerial_product_id = 9220;
+
+    QString microSerial_port_name;
+    bool microSerial_is_available;
+
 };
 
 #endif // MAINDIALOG_H

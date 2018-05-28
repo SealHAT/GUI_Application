@@ -1,19 +1,18 @@
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDebug>
+#include <QtWidgets>
 #include "maindialog.h"
 #include "ui_maindialog.h"
-#include <QSerialPort>
-#include <QSerialPortInfo>
-#include <QTextStream>
 
-QSerialPort serial;
 /**
  * Initial GUI setup.
  **/
 maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog)
 {
     ui->setupUi(this);
+    microSerial_is_available = false;
+    microSerial_port_name = "";
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
@@ -29,56 +28,84 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     sensors_timeTable_control();
     sensor_esitimation_control();
 
-
     display_setReadOnly();
     configureSettingListDisplay();
-    //serial = new QSerialPort(this);
 
-    serial.open(QIODevice::ReadWrite);
-    serial.setPortName("COM8");
-    serial.setBaudRate(QSerialPort::Baud9600);
-    serial.setDataBits(QSerialPort::Data8);
-    serial.setParity(QSerialPort::NoParity);
+    microSerial = new QSerialPort(this);
 
-    serial.setStopBits(QSerialPort::OneStop);
-    serial.setFlowControl(QSerialPort::NoFlowControl);
-
-    serial.open(QIODevice::ReadWrite);
-    serial.write("Hello World");
-/*
-    serial = new QSerialPort(this);
-    serial.setPortName("COM4");
-    serial.setBaudRate(QSerialPort::Baud9600);
-    serial.setDataBits(QSerialPort::Data8);
-    serial.setParity(QSerialPort::NoParity);
-
-    serial.setStopBits(QSerialPort::OneStop);
-    serial.setFlowControl(QSerialPort::NoFlowControl);
-
-    serial.open(QIODevice::ReadWrite);
-    QString writeData = "ok*";
-    qint64 bytesWritten;
-    serial.write("ok*");
-
-    if (bytesWritten == -1) {
-            qDebug() << "Failed to write the data to port, error: " << endl;
-        } else if (bytesWritten != writeData.size()) {
-            qDebug() << "Failed to write all the data to port , error: " << endl;
-        } else if (!serial.waitForBytesWritten(5000)) {
-            qDebug() << "Operation timed out or an error ,occurred for port %1, error: %2" << endl;
+    /*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().length();
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
+        qDebug() << "Has Vender ID: " << serialPortInfo.hasVendorIdentifier();
+        if(serialPortInfo.hasVendorIdentifier()){
+            qDebug() << "Vender ID: " << serialPortInfo.vendorIdentifier();
         }
-        connect(serial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
-        qDebug() << "Data successfully sent to port %1" << endl;
-*/
+        qDebug() << "Has Product ID: " << serialPortInfo.hasProductIdentifier();
+        if(serialPortInfo.hasVendorIdentifier()){
+            qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
+        }
+         * Has Vender ID:  true
+         *  Vender ID:  1003
+         * Has Product ID:  true
+         * Product ID:  9220
+
+    }*/
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+    {
+        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
+        {
+            if(serialPortInfo.vendorIdentifier() == microSerial_vendor_id)
+            {
+                if(serialPortInfo.productIdentifier() == microSerial_product_id)
+                {
+                    microSerial_port_name = serialPortInfo.portName();
+                    microSerial_is_available = true;
+                }
+
+            }
+        }
+    }
+
+    if(microSerial_is_available)
+    {
+        //open and configure the port
+        microSerial->setPortName(microSerial_port_name);
+        microSerial->open(QSerialPort::ReadWrite);
+        microSerial->setBaudRate(QSerialPort::Baud9600);
+        microSerial->setDataBits(QSerialPort::Data8);
+        microSerial->setParity(QSerialPort::NoParity);
+
+        microSerial->setStopBits(QSerialPort::OneStop);
+        microSerial->setFlowControl(QSerialPort::NoFlowControl);
+
+        qDebug() << "Found Serial Port:  " << microSerial_port_name;
+        char arr[3] = {0x01, 0x02, 0x03};
+
+        QByteArray writeArray(arr,3);
+        /*for(int i = 0; i<25; i++){
+            writeArray[i] = 1;
+        }
+        writeArray[0] = 1;*/
+
+        microSerial->write(writeArray);
+
+        //QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
+
+        qDebug() << "Data successfully read" << endl;
+
+    }else{
+        QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
+    }
+
+    //microSerial->open(QIODevice::ReadWrite);
 }
 
 
 void maindialog::serialReceived()
 {
     QByteArray ba;
-    ba = serial.readAll();
+    ba = microSerial->readAll();
     ui->serialLabel->setText(ba);
-    qDebug() << ba;
+    qDebug() << "Serial is working";
 }
 
 /*
@@ -138,8 +165,10 @@ void maindialog::labels_hide()
  **/
 maindialog::~maindialog()
 {
+    if(microSerial->isOpen()){
+        microSerial->close();
+    }
     delete ui;
-    serial.close();
 }
 
 void maindialog::on_configureDevOptionButton_clicked()

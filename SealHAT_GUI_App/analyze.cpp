@@ -128,14 +128,12 @@ void maindialog::powerEstimation(){
      /*GPS POWER*/
      gps_inactivePower = GPS_SB_PWR * (24 - gps_activeHour);
      if(gps_activeHour <= 2){
-         gps_activePower = ((GPS_ACQ_PWR*30.0/15.0)  + (GPS_SB_PWR* (30*14.0/15.0)))  * gps_activeHour/3600;
+         gps_activePower = (((GPS_ACQ_PWR*30.0/15.0)  + (GPS_SB_PWR* (30*14.0/15.0)))/30)  * gps_activeHour;
      }else{
-         gps_activePower = ( (GPS_ACQ_PWR*30/15) + (GPS_SB_PWR* (30*14.0/15.0)) ) * 2/3600 + ((GPS_ACQ_PWR*3600.0/15.0)  + (GPS_SB_PWR* (3600*14.0/15.0)))  * (gps_activeHour-2)/3600;
+         gps_activePower = (( (GPS_ACQ_PWR*30/15) + (GPS_SB_PWR* (30*14.0/15.0)) )/30) * 2 + ((GPS_ACQ_PWR*45.0)  + (GPS_SB_PWR* (3600-45)))  * (gps_activeHour-2)/3600;
      }
 
      gps_totalPower = gps_inactivePower + gps_activePower;
-     qDebug() << "gps_activePower is" << gps_activePower;
-     qDebug() << "gps_activeHour is" << gps_activeHour;
 
      /*MEMORY POWER*/  //what is the correct SPI time
      memory_totalpower = storageEst * SPI_SPEED/3600 * SPI_CURRENT

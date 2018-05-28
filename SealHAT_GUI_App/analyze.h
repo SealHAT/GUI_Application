@@ -32,8 +32,8 @@
 
 #define floatDebug() qDebug() << fixed << qSetRealNumberPrecision(10)
 
-#define GPS_ACQ_PWR 300.0/1000
-#define GPS_SB_PWR  300.0/1000000
+#define GPS_ACQ_PWR     30.0/1000
+#define GPS_SB_PWR      300.0/1000000
 
 #define SPI_CURRENT     20.0/1000
 #define SPI_SB_CURRENT  15.0/1000000
