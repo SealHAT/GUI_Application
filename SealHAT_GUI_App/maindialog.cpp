@@ -39,7 +39,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     //serial = new QSerialPort(this);
 
     serial.open(QIODevice::ReadWrite);
-    serial.setPortName("COM1");
+    serial.setPortName("com8");
     serial.setBaudRate(QSerialPort::Baud9600);
     serial.setDataBits(QSerialPort::Data8);
     serial.setParity(QSerialPort::NoParity);

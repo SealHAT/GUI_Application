@@ -116,7 +116,7 @@ void maindialog::on_mag_freqBox_currentIndexChanged(int)
 */
 void maindialog::IMUmag_Disable(bool disable)
 {
-    //ui->mag_timeclear_button->setDisabled(disable);
+    ui->mag_timeclear_button->setDisabled(disable);
     ui->mag_pwrBox->setDisabled(disable);
     ui->mag_freqBox->setDisabled(disable);
 }

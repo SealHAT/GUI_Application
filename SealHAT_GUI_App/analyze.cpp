@@ -149,6 +149,7 @@ void maindialog::powerEstimation(){
      QString powerEstString = (QString::number(powerEst,'f',5));
 
      ui->pwrEst_Text->setText(powerEstString);
+     on_batterySizeText_editingFinished();
 
 }
 
@@ -216,6 +217,10 @@ void maindialog::storageEstimation(){
     mag_groupNum = (mag_sampleNumber)/IMU_DATA_SIZE;
     gps_groupNum = (gps_sampleNumber)/GPS_DATA_SIZE;
     ekg_groupNum = (ekg_sampleNumber)/EKG_DATA_SIZE;
+    qDebug() << "ekg_sampleNumber is " <<ekg_sampleNumber;
+    qDebug() << "ekg_storage is " <<ekg_storage;
+    qDebug() << "ekg_groupNum is " <<ekg_groupNum;
+
 
     storageEst = (templight_storage * templight_groupNum
              + acc_storage * acc_groupNum
@@ -223,7 +228,7 @@ void maindialog::storageEstimation(){
              + gps_storage * gps_groupNum
              + ekg_storage * ekg_groupNum) * 8; //Storage caculate in bits = total Bits
 
-    double StorageConsump = (storageEst)/STORAGECAPACITY;
+    double StorageConsump = ((double)storageEst)/(double)STORAGECAPACITY;
     QString storageconsumpString = QString::number(StorageConsump,'f',2) + " % ";
     //ui->storageEst_Text->clear();
     ui->storageEst_Text->setText(QString::number(storageEst));

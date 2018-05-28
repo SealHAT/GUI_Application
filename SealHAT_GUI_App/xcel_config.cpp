@@ -187,7 +187,7 @@ void maindialog::on_xcel_ZH_checkBox_clicked(bool checked)
 */
 void maindialog::IMUxcel_Disable(bool disable)
 {
-    //ui->xcel_timeclear_button->setDisabled(disable);
+    ui->xcel_timeclear_button->setDisabled(disable);
     ui->xcel_scaleBox->setDisabled(disable);
     ui->xcel_pwrBox->setDisabled(disable);
     ui->xcel_freqBox->setDisabled(disable);

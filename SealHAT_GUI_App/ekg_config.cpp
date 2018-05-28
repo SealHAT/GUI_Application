@@ -166,7 +166,7 @@ void maindialog::ekg_estimation_control()
 
 void maindialog::ekg_Disable(bool disable)
 {
-    //ui->ekg_timeclear_button->setDisabled(disable);
+    ui->ekg_timeclear_button->setDisabled(disable);
     ui->ekg_odr128->setDisabled(disable);
     ui->ekg_odr256->setDisabled(disable);
     ui->ekg_odr512->setDisabled(disable);
