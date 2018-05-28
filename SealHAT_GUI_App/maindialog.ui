@@ -422,9 +422,9 @@ border: none;</string>
       <widget class="QLabel" name="welcomeHeadingLabel">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>10</x>
          <y>20</y>
-         <width>591</width>
+         <width>621</width>
          <height>61</height>
         </rect>
        </property>
@@ -5695,9 +5695,9 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>420</y>
+       <y>375</y>
        <width>131</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="text">
@@ -5708,9 +5708,9 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>500</y>
+       <y>455</y>
        <width>121</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="text">
@@ -5734,7 +5734,7 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>370</y>
+       <y>330</y>
        <width>131</width>
        <height>21</height>
       </rect>
@@ -5747,9 +5747,9 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>460</y>
+       <y>415</y>
        <width>131</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="text">
@@ -5760,9 +5760,9 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>540</y>
+       <y>495</y>
        <width>131</width>
-       <height>16</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="text">
@@ -5773,7 +5773,7 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>400</y>
+       <y>390</y>
        <width>121</width>
        <height>20</height>
       </rect>
@@ -5786,7 +5786,7 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>440</y>
+       <y>430</y>
        <width>121</width>
        <height>20</height>
       </rect>
@@ -5799,7 +5799,7 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>480</y>
+       <y>470</y>
        <width>121</width>
        <height>20</height>
       </rect>
@@ -5812,7 +5812,7 @@ border: none;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>520</y>
+       <y>510</y>
        <width>121</width>
        <height>20</height>
       </rect>

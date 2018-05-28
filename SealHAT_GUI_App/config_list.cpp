@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QFile>
 #include <QList>
+#include <QFont>
 #include <QMap>
 #include <QMessageBox>
 #include <QDataStream>
@@ -95,8 +96,6 @@ void maindialog::on_saveButton_clicked()
                     file.errorString());
                 return;
             }
-
-
 
             QDataStream out(&file);
             out.setVersion(QDataStream::Qt_4_5);
@@ -237,9 +236,23 @@ void maindialog::configureSettingListDisplay()
 
 void maindialog::on_completeButton_clicked()
 {
-    goto_DEV();
-    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
-    configureSettingListDisplay();
-   ui->welcomeHeadingLabel->setText("Completed configuration List");
+    if(ui->completeButton->text() == "COMPLETE"){
+        goto_DEV();
+        setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+        configureSettingListDisplay();
+       ui->welcomeHeadingLabel->setText("Completed configuration List");
+       QFont f;
+       f.setPointSize(36);
+       ui->welcomeHeadingLabel->setFont(f);
+
+       ui->completeButton->setText("SUBMIT");
+       ui->backButton->hide();
+    }else{
+        setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+        QMessageBox::information(this, tr("Submission completed"),
+            tr("Thank you! Configuration Setting submitted!"));
+
+        ;//load configuration setting back to microcontroller
+    }
 }
 

@@ -35,7 +35,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     //serial = new QSerialPort(this);
 
     serial.open(QIODevice::ReadWrite);
-    serial.setPortName("com8");
+    serial.setPortName("COM8");
     serial.setBaudRate(QSerialPort::Baud9600);
     serial.setDataBits(QSerialPort::Data8);
     serial.setParity(QSerialPort::NoParity);
@@ -148,8 +148,8 @@ void maindialog::on_configureDevOptionButton_clicked()
 
     ui->mainStacked->setCurrentIndex(CONFIGURE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
+    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
     this->centerDialog();
-    //ui->completeButton->hide();
 }
 
 
@@ -171,24 +171,6 @@ void maindialog::centerDialog() {
     int y = (screenGeometry.height() - this->height()) / 2;
     this->move(x, y);
 }
-/*
-void maindialog::hour_clicked()
-{
-
-    QPushButton* button = qobject_cast<QPushButton*>(sender());
-    if(!button->property("clicked").isValid()) {
-        button->setProperty("clicked", false);
-    }
-    bool clicked = button->property("clicked").toBool();
-    button->setProperty("clicked", !clicked);
-    qDebug() << "click after setproperty is :" << clicked << endl;
-
-        if(!clicked) {
-            button->setStyleSheet("background-color:rgb(34,139,34)");
-        } else {
-            button->setStyleSheet("background-color:rgb(152, 162, 173)");
-        }
-}*/
 
 
 void maindialog::on_streamDataButton_clicked()

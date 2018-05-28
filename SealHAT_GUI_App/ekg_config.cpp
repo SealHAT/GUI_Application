@@ -30,8 +30,6 @@ void maindialog::ekg_getloadData(){
     uint16_t ekg_spsSelect = 512/(pow(2,(uint8_t)configuration_settings.ekg_config.ekg_sampleRate));
         uint8_t ekg_gainSelect = configuration_settings.ekg_config.ekg_gain;
         uint8_t ekg_lpFreqSelect = configuration_settings.ekg_config.ekg_lowpassFreq;
-        qDebug() << "ekg_gainSelect is" << ekg_gainSelect << endl;
-        qDebug() << "ekg_lpFreqSelect is" << ekg_lpFreqSelect << endl;
 
         if(ekg_spsSelect== 512)
         {

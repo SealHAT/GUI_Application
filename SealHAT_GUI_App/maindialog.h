@@ -42,13 +42,13 @@ class maindialog : public QDialog
     uint64_t ekg_groupNum;
 
     uint32_t temp_sampleNumber;
-    double temp_activeHour;
+    uint8_t temp_activeHour;
     double temp_activePower;
     double temp_inactivePower;
     double temp_totalPower;
 
     uint32_t light_sampleNumber;
-    double light_activeHour;
+    uint8_t light_activeHour;
     double light_activePower;
     double light_inactivePower;
     double light_totalPower;
@@ -56,7 +56,7 @@ class maindialog : public QDialog
     uint8_t acc_tens;
     uint8_t acc_pwrMode;
     uint32_t acc_sampleNumber;
-    double acc_activeHour;
+    uint8_t acc_activeHour;
     double acc_activePower;
     double acc_inactivePower;
     double acc_totalPower;
@@ -64,19 +64,19 @@ class maindialog : public QDialog
     uint8_t mag_ones;
     uint8_t mag_pwrMode;
     uint32_t mag_sampleNumber;
-    double mag_activeHour;
+    uint8_t mag_activeHour;
     double mag_activePower;
     double mag_inactivePower;
     double mag_totalPower;
 
     uint32_t ekg_sampleNumber;
-    double ekg_activeHour;
+    uint8_t ekg_activeHour;
     double ekg_activePower;
     double ekg_inactivePower;
     double ekg_totalPower;
 
     uint32_t gps_sampleNumber;
-    double gps_activeHour;
+    uint8_t gps_activeHour;
     double gps_activePower;
     double gps_inactivePower;
     double gps_totalPower;
@@ -231,98 +231,117 @@ private slots:
     void display_setReadOnly();
 
 //Accelerometer
-    void on_xcel_SW_clicked();
     void xcel_setDefault();
-    void IMUxcel_Disable(bool disable);
-    void on_xcel_thres_editingFinished();
-    void xcel_timeTable_control();
-    void xcel_disable_button(bool disable);
-    void on_xcel_timeclear_button_clicked();
-    void xcel_hour_clicked();
+
+    void on_xcel_SW_clicked();
+    void on_xcel_scaleBox_currentIndexChanged(int index);
+    void on_xcel_pwrBox_currentIndexChanged(int);
+    void on_xcel_freqBox_currentIndexChanged(int);
     void on_xcel_XL_checkBox_clicked(bool checked);
     void on_xcel_XH_checkBox_clicked(bool checked);
     void on_xcel_YL_checkBox_clicked(bool checked);
     void on_xcel_YH_checkBox_clicked(bool checked);
     void on_xcel_ZL_checkBox_clicked(bool checked);
     void on_xcel_ZH_checkBox_clicked(bool checked);
-    void on_xcel_scaleBox_currentIndexChanged(int index);
-    void xcel_changeMode();
-    void on_xcel_pwrBox_currentIndexChanged(int);
-    void on_xcel_freqBox_currentIndexChanged(int);
+    void on_xcel_thres_editingFinished();
+
+    void IMUxcel_Disable(bool disable);
+    void xcel_disable_button(bool disable);
+    void on_xcel_timeclear_button_clicked();
+
+    void xcel_timeTable_control();
     void xcel_estimation_control();
-    void xcel_getloadData();
+    void xcel_hour_clicked();
+    void xcel_changeMode();
     void xcel_checkTimetoEnable();
+
+    void xcel_getloadData();
 
 
 //Magnetometer
-    void mag_hour_clicked();
+    void mag_setDefault();
+
+    void on_mag_SW_clicked();
+    void on_mag_timeclear_button_clicked();
     void on_mag_pwrBox_currentIndexChanged(int);
     void on_mag_freqBox_currentIndexChanged(int);
-    void mag_dataCollect();
-    void on_mag_SW_clicked();
-    void mag_setDefault();
+
     void IMUmag_Disable(bool disable);
     void mag_disable_button(bool disable);
+
     void mag_timeTable_control();
-    void on_mag_timeclear_button_clicked();
     void mag_estimation_control();
-    void mag_getloadData();
+    void mag_hour_clicked();
+    void mag_dataCollect();
     void mag_checkTimetoEnable();
 
+    void mag_getloadData();
+
 //EKG
-    void on_ekg_SW_clicked();
     void ekg_setDefault();
-    void ekg_Disable(bool disable);
-    void ekg_disable_button(bool disable);
+
+    void on_ekg_SW_clicked();
+    void on_ekg_timeclear_button_clicked();
     void on_ekg_odr256_clicked();
     void on_ekg_odr128_clicked();
     void on_ekg_odr512_clicked();
-    void ekg_timeTable_control();
-    void on_ekg_timeclear_button_clicked();
-    void ekg_hour_clicked();
     void on_ekg_gainBox_currentIndexChanged(int index);
     void on_ekg_LPfreqBox_currentIndexChanged(int index);
+
+    void ekg_Disable(bool disable);
+    void ekg_disable_button(bool disable);
+
+    void ekg_timeTable_control();
     void ekg_estimation_control();
-    void ekg_getloadData();
+    void ekg_hour_clicked();
     void ekg_checkTimetoEnable();
 
+    void ekg_getloadData();
+
 //GPS
-    void gps_dataCollect();
+
     void gps_setDefault();
+
     void on_gps_SW_clicked();
+    void on_gps_timeclear_button_clicked();
+
     void gps_disable(bool disable);
     void gps_disable_button(bool disable);
+
     void gps_timeTable_control();
-    void on_gps_timeclear_button_clicked();
-    void gps_hour_clicked();
     void gps_estimation_control();
-    void gps_checkButtonProperty();
+    void gps_hour_clicked();
+    void gps_checkTimetoEnable();
+
     void gps_getloadData();
 
 //Temperature
-    void on_temp_SW_clicked();
     void temp_setDefault();
+
+    void on_temp_SW_clicked();
+    void on_temp_timeclear_button_clicked();
+    void on_temp_samplePeriod_editingFinished();
+
     void temp_disable(bool disable);
     void temp_disable_button(bool disable);
+
     void temp_timeTable_control();
-    void on_temp_samplePeriod_editingFinished();
-    void on_temp_timeclear_button_clicked();
     void temp_hour_clicked();
-    void temp_getloadData();
     void temp_checkTimetoEnable();
+
+    void temp_getloadData();
 
 //Data-Retrival Page
     void on_chooseDestButton_clicked();
     void on_completeButton_clicked();
     void on_storeData_destinationEdit_returnPressed();
 
-//Configuration list
+//Completed Configuration list setup and ready to submit
     void on_getDataButton_clicked();
     void submitConfig();
     void on_saveButton_clicked();
     void configureSettingListDisplay();
     void on_loadButton_clicked();
-
 
 //Load data and reset sensors display
     void collectLoadingData_fromFile();

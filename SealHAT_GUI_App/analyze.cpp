@@ -67,7 +67,11 @@ void maindialog::generalEstimation(){
     mag_sampleNumber = mag_activeHour*3600*(magFrequency[mag_ones]);
 
     gps_activeHour = num_Hours(configuration_settings.gps_config.gps_activeHour);
-    gps_sampleNumber = gps_activeHour*((2*3600)/(30) + (22*3600)/3600);
+    if(gps_activeHour <= 2){
+        gps_sampleNumber = (gps_activeHour*3600)/(30);
+    }else{
+        gps_sampleNumber = ((2*3600)/(30) + (gps_activeHour-2));
+    }
 
     storageEstimation();
     powerEstimation();
@@ -123,8 +127,15 @@ void maindialog::powerEstimation(){
 
      /*GPS POWER*/
      gps_inactivePower = GPS_SB_PWR * (24 - gps_activeHour);
-     gps_activePower = (77.9/1000000)/30 * gps_activeHour;
+     if(gps_activeHour <= 2){
+         gps_activePower = ((GPS_ACQ_PWR*30.0/15.0)  + (GPS_SB_PWR* (30*14.0/15.0)))  * gps_activeHour/3600;
+     }else{
+         gps_activePower = ( (GPS_ACQ_PWR*30/15) + (GPS_SB_PWR* (30*14.0/15.0)) ) * 2/3600 + ((GPS_ACQ_PWR*3600.0/15.0)  + (GPS_SB_PWR* (3600*14.0/15.0)))  * (gps_activeHour-2)/3600;
+     }
+
      gps_totalPower = gps_inactivePower + gps_activePower;
+     qDebug() << "gps_activePower is" << gps_activePower;
+     qDebug() << "gps_activeHour is" << gps_activeHour;
 
      /*MEMORY POWER*/  //what is the correct SPI time
      memory_totalpower = storageEst * SPI_SPEED/3600 * SPI_CURRENT
@@ -146,7 +157,7 @@ void maindialog::powerEstimation(){
     //SUM OF POWER
      powerEst = (temp_totalPower + light_totalPower + ekg_totalPower + acc_totalPower + mag_totalPower + gps_totalPower
                  + memory_totalpower + micro_totalpower) * 1000;
-     QString powerEstString = (QString::number(powerEst,'f',5));
+     QString powerEstString = " " + (QString::number(powerEst,'f',5));
 
      ui->pwrEst_Text->setText(powerEstString);
      on_batterySizeText_editingFinished();
@@ -169,16 +180,16 @@ void maindialog::powerEstimation(){
 void maindialog::on_batterySizeText_editingFinished()
 {
     //QString powerEstString = (QString::number(powerEst,'f',5));
-    double batterySize = ui->batterySizeText->text().toDouble();
+    double batterySize = (ui->batterySizeText->text().toDouble())*(0.85);
     uint16_t timeDuration = batterySize/(powerEst);
     uint16_t monthConsump = timeDuration/30;
     uint16_t dayConsump = timeDuration%30;
     QString powerconsumpString;
     if(monthConsump){
-        powerconsumpString = (QString::number(monthConsump)) + " Months "
+        powerconsumpString = " " + (QString::number(monthConsump)) + " Months "
                                     + (QString::number(dayConsump)) + " Days ";
     }else{
-        powerconsumpString = (QString::number(dayConsump)) + " Days ";
+        powerconsumpString = " " + (QString::number(dayConsump)) + " Days ";
     }
 
 
@@ -222,9 +233,6 @@ void maindialog::storageEstimation(){
     mag_groupNum = (mag_sampleNumber)/IMU_DATA_SIZE;
     gps_groupNum = (gps_sampleNumber)/GPS_DATA_SIZE;
     ekg_groupNum = (ekg_sampleNumber)/EKG_DATA_SIZE;
-    qDebug() << "ekg_sampleNumber is " <<ekg_sampleNumber;
-    qDebug() << "ekg_storage is " <<ekg_storage;
-    qDebug() << "ekg_groupNum is " <<ekg_groupNum;
 
 
     storageEst = (templight_storage * templight_groupNum
@@ -234,8 +242,8 @@ void maindialog::storageEstimation(){
              + ekg_storage * ekg_groupNum) * 8; //Storage caculate in bits = total Bits
 
     double StorageConsump = ((double)storageEst*90.0)/(double)STORAGECAPACITY;
-    QString storageconsumpString = QString::number(StorageConsump,'f',2) + " % ";
+    QString storageconsumpString = " " + QString::number(StorageConsump,'f',2) + " % ";
 
-    ui->storageEst_Text->setText(QString::number(storageEst));
+    ui->storageEst_Text->setText(" " + QString::number(storageEst));
     ui->storageConsumption_Text->setText(storageconsumpString);
 }
