@@ -228,7 +228,7 @@ void maindialog::storageEstimation(){
              + gps_storage * gps_groupNum
              + ekg_storage * ekg_groupNum) * 8; //Storage caculate in bits = total Bits
 
-    double StorageConsump = ((double)storageEst)/(double)STORAGECAPACITY;
+    double StorageConsump = ((double)storageEst*90.0)/(double)STORAGECAPACITY;
     QString storageconsumpString = QString::number(StorageConsump,'f',2) + " % ";
     //ui->storageEst_Text->clear();
     ui->storageEst_Text->setText(QString::number(storageEst));
