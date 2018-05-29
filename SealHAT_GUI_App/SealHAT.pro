@@ -51,6 +51,12 @@ HEADERS  += \
     sensor_header/ubx/ubxmessage.h \
     analyze.h \
     seal_Types.h \
+    retrieval_headers/seal_CTRL.h \
+    retrieval_headers/seal_DATA.h \
+    retrieval_headers/seal_ENV.h \
+    retrieval_headers/seal_GPS.h \
+    retrieval_headers/seal_IMU.h \
+    retrieval_headers/seal_SERIAL.h
 
 RESOURCES += \
     images.qrc

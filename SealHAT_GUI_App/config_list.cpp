@@ -258,11 +258,12 @@ void maindialog::on_completeButton_clicked()
         configureSettingListDisplay();
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 
+        ui->completeButton->setText("SUBMIT");
+
         ui->welcomeHeadingLabel->setText("Completed configuration List");
         QFont f;
         f.setPointSize(36);
         ui->welcomeHeadingLabel->setFont(f);
-        ui->completeButton->setText("SUBMIT");
     }else{
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
         sendSerial_Config();//load configuration setting back to microcontroller

@@ -36,13 +36,13 @@ void maindialog::collectLoadingData_fromFile()
 
     configuration_settings.gps_config.gps_activeHour = config["GPS Time"];
     QString tempSWtext = ui->temp_SW->text();
-    qDebug() << "temperature switch text is"<< tempSWtext << configuration_settings.temperature_config.temp_activeHour;
+    //qDebug() << "temperature switch text is"<< tempSWtext << configuration_settings.temperature_config.temp_activeHour;
 
     if((configuration_settings.temperature_config.temp_activeHour > 0) &&
             (tempSWtext== "Enable"))
     {
         ui->temp_SW->setText("Disable");
-        qDebug() << "temperature switch text is"<< tempSWtext;
+        //qDebug() << "temperature switch text is"<< tempSWtext;
     }
     if(configuration_settings.accelerometer_config.acc_activeHour > 0 &&
             ui->xcel_SW->text() == "Enable")

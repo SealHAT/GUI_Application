@@ -13,6 +13,8 @@
 
 void maindialog::receiveSerial_samples()
 {
+    serialSetup();
+    serialReceived();
     //retrieve_data;
 }
 
@@ -21,7 +23,7 @@ void maindialog::serialReceived()
     serial_readData = microSerial->readAll();
     serialBuffer = QString::fromStdString(serial_readData.toStdString());
     ui->serialLabel->setText(serial_readData);
-    qDebug() << serialBuffer;
+    //qDebug() << serialBuffer;
     //qDebug() << "Serial is working";
 }
 

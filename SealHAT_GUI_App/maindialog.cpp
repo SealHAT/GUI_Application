@@ -90,9 +90,9 @@ void maindialog::labels_hide()
  **/
 maindialog::~maindialog()
 {
-    if(microSerial->isOpen()){
-        microSerial->close();
-    }
+    //if(microSerial->isOpen()){
+        //microSerial->close();
+    //}
     delete ui;
 }
 
@@ -143,7 +143,9 @@ void maindialog::on_backButton_StreamPage_clicked()
 
 
 
-/*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().length();
+/*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().
+ *
+ * length();
 foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
     qDebug() << "Has Vender ID: " << serialPortInfo.hasVendorIdentifier();
     if(serialPortInfo.hasVendorIdentifier()){
