@@ -13,6 +13,18 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
+
+/**************************************************************
+ * FUNCTION: submitConfig
+ * ------------------------------------------------------------
+ *  This function store all the configuration setting and
+ *  submit to a Configuration QMap.
+ *  It gets called inside on_saveButton_clicked().
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::submitConfig(){
     QString acc_timeName = "Accelerometer Time";
     uint32_t acc_timeValue = configuration_settings.accelerometer_config.acc_activeHour;
@@ -68,18 +80,23 @@ void maindialog::submitConfig(){
     config.insert(ekg_lpfreqName,ekg_lpfreqValue);
 
     config.insert(gps_timeName,gps_timeValue);
-/*
-    QMapIterator<QString, uint32_t> iter(config);
-
-        while(iter.hasNext())
-        {
-            iter.next();
-            qDebug() << iter.key() << " : " << iter.value();
-        }*/
 
 
 }
 
+
+/**************************************************************
+ * FUNCTION: on_saveButton_clicked
+ * ------------------------------------------------------------
+ *  This function saved all the configuration setting as QMap and
+ *  save them into a file.
+ *
+ *  It gets called whenever saveButton is clicked.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_saveButton_clicked()
 {
     submitConfig();
@@ -101,19 +118,22 @@ void maindialog::on_saveButton_clicked()
             out.setVersion(QDataStream::Qt_4_5);
             out << config;
             file.close();
-            qDebug() <<"File size is:"<< file.size() << "now";
-                }
-
-    QMapIterator<QString, uint32_t> iter(config);
-
-        while(iter.hasNext())
-        {
-            iter.next();
-            qDebug() << iter.key() << " : " << iter.value();
-        }
+    }
 
 }
 
+/**************************************************************
+ * FUNCTION: on_loadButton_clicked
+ * ------------------------------------------------------------
+ *  This function load all the configuration setting as QMap
+ *  the configuration file users saved before.
+ *
+ *  It gets called whenever loadButoon is clicked.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_loadButton_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,tr("Open saved configuration setting"),

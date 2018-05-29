@@ -39,6 +39,6 @@
 #define SPI_SB_CURRENT  15.0/1000000
 
 #define MICRO_ACT_PWR   32.0/1000000
-#define MICRO_SB_PWR    4.6/1000000
+#define MICRO_SB_PWR    (13.0)/1000000 //
 
 #endif // ANALYZE_H

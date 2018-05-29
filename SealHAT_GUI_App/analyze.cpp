@@ -50,6 +50,7 @@ void maindialog::generalEstimation(){
     temp_activeHour = num_Hours(configuration_settings.temperature_config.temp_activeHour);
     temp_sampleNumber = temp_activeHour*3600/(configuration_settings.temperature_config.temp_samplePeriod);
 
+
     light_activeHour = num_Hours(configuration_settings.temperature_config.temp_activeHour);
     light_sampleNumber = light_activeHour*3600/(configuration_settings.temperature_config.temp_samplePeriod);
 
@@ -150,7 +151,10 @@ void maindialog::powerEstimation(){
 
      micro_activehour = (micro_tempActiveTime + micro_lightActiveTime + micro_accActiveTime + micro_magActiveTime
                       + micro_gpsActiveTime + micro_ekgActiveTime)*8/3600;
-     micro_totalpower = micro_activehour * MICRO_ACT_PWR * (12) + ((24-micro_activehour) * MICRO_SB_PWR);
+     micro_totalpower = micro_activehour * MICRO_ACT_PWR * (12) + ((24-micro_activehour) * MICRO_SB_PWR* (12));
+
+     qDebug() << "micro_totalpower" << micro_totalpower;
+     qDebug() << "memory_totalpower" << memory_totalpower;
 
     //SUM OF POWER
      powerEst = (temp_totalPower + light_totalPower + ekg_totalPower + acc_totalPower + mag_totalPower + gps_totalPower
@@ -219,14 +223,14 @@ void maindialog::on_batterySizeText_editingFinished()
  *  Returns: void
  **************************************************************/
 void maindialog::storageEstimation(){
-    /*Environment*/
-    templight_storage = (4 * LIGHT_TEMP_SIZE + sizeof(DATA_HEADER_t));
-    acc_storage = (6 * IMU_DATA_SIZE + sizeof(DATA_HEADER_t));
-    mag_storage = (6 * IMU_DATA_SIZE + sizeof(DATA_HEADER_t));
-    gps_storage = (20 * GPS_DATA_SIZE + sizeof(DATA_HEADER_t));
-    ekg_storage = (3 * EKG_DATA_SIZE + sizeof(DATA_HEADER_t));
 
-    templight_groupNum = (temp_sampleNumber+light_sampleNumber)/LIGHT_TEMP_SIZE;
+    templight_storage = (4 * LIGHT_TEMP_SIZE + sizeof(DATA_HEADER_t)); //Environment size(bytes) of samples per day
+    acc_storage = (6 * IMU_DATA_SIZE + sizeof(DATA_HEADER_t));  //Accelerometer size(bytes) of samples per day
+    mag_storage = (6 * IMU_DATA_SIZE + sizeof(DATA_HEADER_t));  //Magnetometer size(bytes) of samples per day
+    gps_storage = (20 * GPS_DATA_SIZE + sizeof(DATA_HEADER_t)); //Gps size(bytes) of samples per day
+    ekg_storage = (3 * EKG_DATA_SIZE + sizeof(DATA_HEADER_t));  //Ekg size(bytes) of samples per day
+
+    templight_groupNum = (temp_sampleNumber)/LIGHT_TEMP_SIZE; //
     acc_groupNum = (acc_sampleNumber)/IMU_DATA_SIZE;
     mag_groupNum = (mag_sampleNumber)/IMU_DATA_SIZE;
     gps_groupNum = (gps_sampleNumber)/GPS_DATA_SIZE;
@@ -238,6 +242,8 @@ void maindialog::storageEstimation(){
              + mag_storage * mag_groupNum
              + gps_storage * gps_groupNum
              + ekg_storage * ekg_groupNum) * 8; //Storage caculate in bits = total Bits
+
+
 
     double StorageConsump = ((double)storageEst*90.0)/(double)STORAGECAPACITY;
     QString storageconsumpString = " " + QString::number(StorageConsump,'f',2) + " % ";

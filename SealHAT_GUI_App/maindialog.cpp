@@ -33,22 +33,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     microSerial = new QSerialPort(this);
 
-    /*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().length();
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
-        qDebug() << "Has Vender ID: " << serialPortInfo.hasVendorIdentifier();
-        if(serialPortInfo.hasVendorIdentifier()){
-            qDebug() << "Vender ID: " << serialPortInfo.vendorIdentifier();
-        }
-        qDebug() << "Has Product ID: " << serialPortInfo.hasProductIdentifier();
-        if(serialPortInfo.hasVendorIdentifier()){
-            qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
-        }
-         * Has Vender ID:  true
-         *  Vender ID:  1003
-         * Has Product ID:  true
-         * Product ID:  9220
 
-    }*/
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
     {
         if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
@@ -218,3 +203,19 @@ void maindialog::on_backButton_StreamPage_clicked()
 
 
 
+/*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().length();
+foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
+    qDebug() << "Has Vender ID: " << serialPortInfo.hasVendorIdentifier();
+    if(serialPortInfo.hasVendorIdentifier()){
+        qDebug() << "Vender ID: " << serialPortInfo.vendorIdentifier();
+    }
+    qDebug() << "Has Product ID: " << serialPortInfo.hasProductIdentifier();
+    if(serialPortInfo.hasVendorIdentifier()){
+        qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
+    }
+     * Has Vender ID:  true
+     *  Vender ID:  1003
+     * Has Product ID:  true
+     * Product ID:  9220
+
+}*/
