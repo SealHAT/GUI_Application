@@ -121,6 +121,7 @@ struct Ekg_TX {
    CNFGECG_DLPF_VAL ekg_lowpassFreq;
 };
 
+
 struct GPS_TX {
    DATA_HEADER_t    gps_headerData;
    uint32_t         gps_activeHour;
@@ -129,7 +130,7 @@ struct GPS_TX {
 
 struct SENSOR_CONFIGS {
     DATA_HEADER_t   config_header;        // packet header for all configuration data
-    uint8_t         num_flash_chips;      // number of flash chips installed on device
+    uint8_t         num_flash_chips = 4;      // number of flash chips installed on device
     calendar_date   start_logging_day;    // day the device should begin data collection
     uint32_t        start_logging_time;   // time the device will start on the day given by start_logging_day
     Xcel_TX         accelerometer_config; // configuration data for the accelerometer

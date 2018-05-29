@@ -416,7 +416,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -3466,7 +3466,7 @@ border: none;</string>
         <string/>
        </property>
        <property name="button_shift" stdset="0">
-        <number>20</number>
+        <number>21</number>
        </property>
       </widget>
       <widget class="QLabel" name="label_2">

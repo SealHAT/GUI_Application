@@ -8,6 +8,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QTextStream>
+#include <QByteArray>
 #include "seal_Types.h"
 #include "analyze.h"
 
@@ -356,12 +357,17 @@ private slots:
 
     void on_batterySizeText_editingFinished();
 
+//data_serialization
+    QByteArray config_serialize();
+
 private:
     Ui::maindialog *ui;
     QMap<QString, uint32_t> config;
     QSerialPort *microSerial;
     static const quint16 microSerial_vendor_id = 1003;
     static const quint16 microSerial_product_id = 9220;
+    QByteArray serial_readData;
+    QString serialBuffer;
 
     QString microSerial_port_name;
     bool microSerial_is_available;

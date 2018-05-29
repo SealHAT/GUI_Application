@@ -13,6 +13,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     ui->setupUi(this);
     microSerial_is_available = false;
     microSerial_port_name = "";
+    serialBuffer = "";
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
@@ -81,16 +82,16 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
         QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
     }
 
-    //microSerial->open(QIODevice::ReadWrite);
 }
 
 
 void maindialog::serialReceived()
 {
-    QByteArray ba;
-    ba = microSerial->readAll();
-    ui->serialLabel->setText(ba);
-    qDebug() << "Serial is working";
+    serial_readData = microSerial->readAll();
+    serialBuffer = QString::fromStdString(serial_readData.toStdString());
+    ui->serialLabel->setText(serial_readData);
+    qDebug() << serialBuffer;
+    //qDebug() << "Serial is working";
 }
 
 /*

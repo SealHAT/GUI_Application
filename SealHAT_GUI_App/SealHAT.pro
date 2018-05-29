@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     xcel_config.cpp \
     config_list.cpp \
     analyze.cpp \
-    loading_data.cpp
+    loading_data.cpp \
+    data_serialization.cpp
 
 FORMS    += \
     maindialog.ui
