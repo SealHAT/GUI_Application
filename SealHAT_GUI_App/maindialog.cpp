@@ -16,6 +16,15 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
+    ui->batterySizeText->hide();
+    ui->label_180->hide();
+    ui->label_estPWR->hide();
+    ui->pwrEst_Text->hide();
+    ui->storageEst_Text->hide();
+    ui->label_179->hide();
+    ui->pwrConsumption_Text->hide();
+    ui->storageConsumption_Text->hide();
+
     // Set size for smaller welcome screen.
     this->setFixedSize(421, 421);
     //Hide all the warning labels
@@ -218,3 +227,8 @@ void maindialog::on_backButton_StreamPage_clicked()
 
 
 
+
+void maindialog::on_ekg_b_4_toggled(bool checked)
+{
+
+}

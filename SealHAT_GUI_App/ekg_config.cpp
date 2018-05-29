@@ -130,10 +130,10 @@ void maindialog::ekg_hour_clicked()
     bool clicked = button->property("clicked").toBool();
     button->setProperty("clicked", !clicked);
         if(!clicked) {
-            button->setStyleSheet("background-color:rgb(34,139,34)");
+            button->setStyleSheet("background-color:rgb(253,199,0);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");//background-color: rgb(172, 182, 193);
             configuration_settings.ekg_config.ekg_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
-            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            button->setStyleSheet("background-color:rgb(140, 140, 140)");
             configuration_settings.ekg_config.ekg_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 }
@@ -280,7 +280,19 @@ void maindialog::on_ekg_timeclear_button_clicked()
         {
             configuration_settings.ekg_config.ekg_activeHour = 0;
             button->setProperty("clicked", false);
-            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            button->setStyleSheet("background-color:rgb(172, 182, 193);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
+
+
+            /*
+             *background-color: rgb(172, 182, 193);
+border:none;
+border-right-style:solid;
+border-left-style:solid;
+border-color:rgb(132, 142, 153);
+border-width:1px;
+border-top-style:none;
+border-bottom-style:none;
+             */
         }
     }
 }

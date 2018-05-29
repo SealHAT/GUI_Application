@@ -356,6 +356,10 @@ private slots:
 
     void on_batterySizeText_editingFinished();
 
+    void on_ekg_b_4_clicked();
+
+    void on_ekg_b_4_toggled(bool checked);
+
 private:
     Ui::maindialog *ui;
     QMap<QString, uint32_t> config;
