@@ -19,7 +19,6 @@ class maindialog : public QDialog
     Q_OBJECT
 
     /* Struct containing all sensor and micro configuration data. */
-    SENSOR_CONFIGS configuration_settings;
 
   //Analyzation Variables
     uint32_t total_sampleNumber;
@@ -359,18 +358,29 @@ private slots:
 
 //data_serialization
     QByteArray config_serialize();
+    void serialSetup();
+    void sendSerial_Config();
+    void receiveSerial_samples();
+
+
+    friend QDataStream& operator>>(QDataStream& stream, const DATA_TRANSMISSION_t& rx_data);
 
 private:
     Ui::maindialog *ui;
     QMap<QString, uint32_t> config;
+    SENSOR_CONFIGS configuration_settings;
+
     QSerialPort *microSerial;
     static const quint16 microSerial_vendor_id = 1003;
     static const quint16 microSerial_product_id = 9220;
+
     QByteArray serial_readData;
     QString serialBuffer;
-
     QString microSerial_port_name;
     bool microSerial_is_available;
+
+//
+    DATA_TRANSMISSION_t retrieve_data;
 
 };
 

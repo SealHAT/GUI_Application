@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     config_list.cpp \
     analyze.cpp \
     loading_data.cpp \
-    data_serialization.cpp
+    sending_serialization.cpp \
+    receiving_serialization.cpp \
 
 FORMS    += \
     maindialog.ui
@@ -48,8 +49,8 @@ HEADERS  += \
     sensor_header/ubx/ubxutils.h \
     sensor_header/ubx/ubx.h \
     sensor_header/ubx/ubxmessage.h \
+    analyze.h \
     seal_Types.h \
-    analyze.h
 
 RESOURCES += \
     images.qrc

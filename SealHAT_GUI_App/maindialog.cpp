@@ -11,9 +11,8 @@
 maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog)
 {
     ui->setupUi(this);
-    microSerial_is_available = false;
-    microSerial_port_name = "";
-    serialBuffer = "";
+
+    //configuration_settings.temperature_config.temp_samplePeriod = 1;
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
@@ -23,6 +22,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     labels_hide();
 
     //Set all the sensor configuration back to default
+    //configuration_settings.temperature_config.temp_samplePeriod = 1;
     sensors_setDefault();
     generalEstimation();
 
@@ -31,67 +31,6 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     display_setReadOnly();
     configureSettingListDisplay();
-
-    microSerial = new QSerialPort(this);
-
-
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-    {
-        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
-        {
-            if(serialPortInfo.vendorIdentifier() == microSerial_vendor_id)
-            {
-                if(serialPortInfo.productIdentifier() == microSerial_product_id)
-                {
-                    microSerial_port_name = serialPortInfo.portName();
-                    microSerial_is_available = true;
-                }
-
-            }
-        }
-    }
-
-    if(microSerial_is_available)
-    {
-        //open and configure the port
-        microSerial->setPortName(microSerial_port_name);
-        microSerial->open(QSerialPort::ReadWrite);
-        microSerial->setBaudRate(QSerialPort::Baud9600);
-        microSerial->setDataBits(QSerialPort::Data8);
-        microSerial->setParity(QSerialPort::NoParity);
-
-        microSerial->setStopBits(QSerialPort::OneStop);
-        microSerial->setFlowControl(QSerialPort::NoFlowControl);
-
-        qDebug() << "Found Serial Port:  " << microSerial_port_name;
-        char arr[3] = {0x01, 0x02, 0x03};
-
-        QByteArray writeArray(arr,3);
-        /*for(int i = 0; i<25; i++){
-            writeArray[i] = 1;
-        }
-        writeArray[0] = 1;*/
-
-        microSerial->write(writeArray);
-
-        //QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
-
-        qDebug() << "Data successfully read" << endl;
-
-    }else{
-        QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
-    }
-
-}
-
-
-void maindialog::serialReceived()
-{
-    serial_readData = microSerial->readAll();
-    serialBuffer = QString::fromStdString(serial_readData.toStdString());
-    ui->serialLabel->setText(serial_readData);
-    qDebug() << serialBuffer;
-    //qDebug() << "Serial is working";
 }
 
 /*

@@ -416,7 +416,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -4471,7 +4471,7 @@ border: none;</string>
         </rect>
        </property>
        <property name="text">
-        <string>128 sps</string>
+        <string>128 Hz</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -4487,7 +4487,7 @@ border: none;</string>
         </rect>
        </property>
        <property name="text">
-        <string>256 sps</string>
+        <string>256 Hz</string>
        </property>
       </widget>
       <widget class="QRadioButton" name="ekg_odr512">
@@ -4500,7 +4500,7 @@ border: none;</string>
         </rect>
        </property>
        <property name="text">
-        <string>512 sps</string>
+        <string>512 Hz</string>
        </property>
       </widget>
       <widget class="QPushButton" name="ekg_timeclear_button">

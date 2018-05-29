@@ -45,9 +45,14 @@ void maindialog::on_temp_SW_clicked()
 
 void maindialog::temp_setDefault()
 {
+    configuration_settings.temperature_config.temp_samplePeriod = 1;
    on_temp_timeclear_button_clicked();
    ui->temp_samplePeriod->setText("1");
-   configuration_settings.temperature_config.temp_activeHour = 0;
+   configuration_settings.temperature_config = {
+       {MSG_START_SYM, DEVICE_ID_LIGHT, 0, 0, sizeof(uint16_t)},// header data
+       0,                                                       // active hours
+       1                                                        // sample period
+   };
    qDebug() << sizeof(uint16_t);
    temp_checkTimetoEnable();
 }

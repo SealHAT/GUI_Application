@@ -9,6 +9,10 @@
 #define SEAL_TYPES_H_
 
 #define SEAL_HAT_VERSION        (1.0)
+#define SEALHAT_BASE_YEAR       (2018)
+
+#define PAGE_SIZE_EXTRA         (2176)              /* Maximum NAND Flash page size (*including* extra space) */
+#define PAGE_SIZE_LESS          (2048)              /* Maximum NAND Flash page size (*excluding* extra space) */
 
 #define MSG_START_SYM           (0xADDE)
 
@@ -113,7 +117,7 @@ struct Temp_TX {
    uint16_t         temp_samplePeriod;
 };
 
-struct Ekg_TX {
+struct EKG_TX {
    DATA_HEADER_t    ekg_headerData;
    uint32_t         ekg_activeHour;
    CNFGECG_RATE_VAL ekg_sampleRate;
@@ -136,8 +140,19 @@ struct SENSOR_CONFIGS {
     Xcel_TX         accelerometer_config; // configuration data for the accelerometer
     Mag_TX          magnetometer_config;  // configuration data for the magnetometer
     Temp_TX         temperature_config;   // configuration data for the temperature sensor
-    Ekg_TX          ekg_config;           // configuration data for the EKG
+    EKG_TX          ekg_config;           // configuration data for the EKG
     GPS_TX          gps_config;           // configuration data for the GPS
+
+    friend QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs);
 };
+
+/** Packet that gets sent over USB to the host computer **/
+typedef struct __attribute__((__packed__)){
+    uint32_t startSymbol;           // start symbol for the data transmission
+    uint8_t  data[PAGE_SIZE_EXTRA]; // one page of data from flash
+    uint32_t crc;                   // crc32 of the DATA (not the start symbol) using IEEE CRC32 polynomial
+} DATA_TRANSMISSION_t;
+
+
 
 #endif /* SEAL_TYPES_H_ */

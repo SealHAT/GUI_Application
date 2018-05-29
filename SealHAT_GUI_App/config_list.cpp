@@ -231,9 +231,6 @@ void maindialog::configureSettingListDisplay()
     QString ekg_lpfreqName = "                   EKG Low Pass Frequency : ";
     QString ekg_lpfreqValue = QString::number(ekg_lowpassFrequencyValue[configuration_settings.ekg_config.ekg_lowpassFreq]) + " Hz ";
 
-    qDebug() << "ekg_spsValue is" << ekg_spsValue << endl;
-    qDebug() << "ekg_gainValue is" << ekg_gainValue << endl;
-    qDebug() << "ekg_lpfreqValue is" << ekg_lpfreqValue << endl;
     ui->ekg_configList->setText(ekg_timeName + ekg_timeValue +
                                 ekg_spsName + ekg_spsValue +
                                 ekg_gainName + ekg_gainValue +
@@ -258,21 +255,17 @@ void maindialog::on_completeButton_clicked()
 {
     if(ui->completeButton->text() == "COMPLETE"){
         goto_DEV();
-        setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
         configureSettingListDisplay();
-       ui->welcomeHeadingLabel->setText("Completed configuration List");
-       QFont f;
-       f.setPointSize(36);
-       ui->welcomeHeadingLabel->setFont(f);
+        setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 
-       ui->completeButton->setText("SUBMIT");
-       ui->backButton->hide();
+        ui->welcomeHeadingLabel->setText("Completed configuration List");
+        QFont f;
+        f.setPointSize(36);
+        ui->welcomeHeadingLabel->setFont(f);
+        ui->completeButton->setText("SUBMIT");
     }else{
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
-        QMessageBox::information(this, tr("Submission completed"),
-            tr("Thank you! Configuration Setting submitted!"));
-
-        ;//load configuration setting back to microcontroller
+        sendSerial_Config();//load configuration setting back to microcontroller
     }
 }
 

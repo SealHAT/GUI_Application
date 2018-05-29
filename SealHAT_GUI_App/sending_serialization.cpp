@@ -1,0 +1,175 @@
+#include <QDesktopWidget>
+#include <QMessageBox>
+#include <QDebug>
+#include <QtWidgets>
+#include <QByteArray>
+
+#include "maindialog.h"
+#include "ui_maindialog.h"
+
+/*Cast sensor configuration structures to QByteArray*/
+
+void maindialog::sendSerial_Config(){
+    QByteArray configData;
+    configData = config_serialize();
+
+    serialSetup();
+
+    microSerial->write(configData);
+}
+
+
+QByteArray maindialog::config_serialize(){
+    QByteArray byteArray;
+
+    QDataStream stream(&byteArray, QSerialPort::WriteOnly); //QIODevice:WriteOnly
+    stream.setVersion(QDataStream::Qt_4_5);
+
+    stream << configuration_settings;
+
+    return byteArray;
+}
+
+/**************************************************************
+ * FUNCTION: serialSetup
+ * ------------------------------------------------------------
+ *  This function gets called whenever user finish editing and
+ *  reviewed final configuration list.
+ *  This function will check estimated power value(in mA)
+ *  we got from powerEstimation() function and caculated power
+ *  consumption of the battery user choose to used.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
+void maindialog::serialSetup()
+{
+    microSerial_is_available = false;
+    microSerial_port_name = "";
+    serialBuffer = "";
+
+    microSerial = new QSerialPort(this);
+
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+    {
+        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
+        {
+            if(serialPortInfo.vendorIdentifier() == microSerial_vendor_id)
+            {
+                if(serialPortInfo.productIdentifier() == microSerial_product_id)
+                {
+                    microSerial_port_name = serialPortInfo.portName();
+                    microSerial_is_available = true;
+                }
+            }
+        }
+    }
+
+    if(microSerial_is_available)
+    {
+        //open and configure the port
+        microSerial->setPortName(microSerial_port_name);
+        microSerial->open(QSerialPort::ReadWrite);
+        microSerial->setBaudRate(QSerialPort::Baud9600);
+        microSerial->setDataBits(QSerialPort::Data8);
+        microSerial->setParity(QSerialPort::NoParity);
+
+        microSerial->setStopBits(QSerialPort::OneStop);
+        microSerial->setFlowControl(QSerialPort::NoFlowControl);
+
+        qDebug() << "Found Serial Port:  " << microSerial_port_name;
+        //QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
+
+    }else{
+        QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
+    }
+
+}
+
+
+
+QDataStream& operator<<(QDataStream& stream, const DATA_HEADER_t& header) {
+
+    stream << header.startSym
+           << header.id
+           << (quint32)header.timestamp
+           << (quint16)header.msTime
+           << (quint16)header.size;
+
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const Xcel_TX& xcel) {
+
+    stream << xcel.acc_headerData
+           << (quint32)xcel.acc_activeHour
+           << xcel.acc_scale
+           << xcel.acc_mode
+           << (quint8)xcel.acc_sensitivity
+           << (quint16)xcel.acc_sensitivity;
+
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const Mag_TX& mag) {
+
+    stream << mag.mag_headerData
+           << (quint32)mag.mag_activeHour
+           << mag.mag_mode;
+
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const Temp_TX& temp) {
+
+    stream << temp.temp_headerData
+           << (quint32)temp.temp_activeHour
+           << (quint32)temp.temp_samplePeriod;
+
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const EKG_TX& ekg) {
+
+    stream << ekg.ekg_headerData
+           << (quint32)ekg.ekg_activeHour
+           << ekg.ekg_sampleRate
+           << ekg.ekg_gain
+           << ekg.ekg_lowpassFreq;
+
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const GPS_TX& gps) {
+
+    stream << gps.gps_headerData
+           << (quint32)gps.gps_activeHour
+           << gps.default_profile;
+
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const calendar_date& calender) {
+
+    stream << (quint8)calender.day
+           << (quint8)calender.month
+           << (quint8)calender.year;
+
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs) {
+
+    stream << configs.config_header
+           << (quint8)configs.num_flash_chips
+           << configs.start_logging_day
+           << (quint32)configs.start_logging_time
+           << configs.accelerometer_config
+           << configs.magnetometer_config
+           << configs.temperature_config
+           << configs.ekg_config
+           << configs.gps_config;
+
+    return stream;
+}
