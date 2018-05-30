@@ -31,6 +31,12 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     display_setReadOnly();
     configureSettingListDisplay();
+
+    //sendSerial_Config();
+    receiveSerial_samples();
+
+    //receiveSerial_samples();
+
 }
 
 /*
@@ -90,9 +96,9 @@ void maindialog::labels_hide()
  **/
 maindialog::~maindialog()
 {
-    //if(microSerial->isOpen()){
-        //microSerial->close();
-    //}
+    if(microSerial->isOpen()){
+        microSerial->close();
+    }
     delete ui;
 }
 
@@ -159,5 +165,4 @@ foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()
      *  Vender ID:  1003
      * Has Product ID:  true
      * Product ID:  9220
-
 }*/

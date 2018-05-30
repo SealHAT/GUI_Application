@@ -8,6 +8,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QTextStream>
+#include <QDataStream>
 #include <QByteArray>
 #include "seal_Types.h"
 #include "analyze.h"
@@ -200,6 +201,7 @@ class maindialog : public QDialog
 
 public:
     explicit maindialog(QWidget *parent = 0);
+    friend QDataStream& operator>>(QDataStream& stream, const DATA_TRANSMISSION_t& txData);
     void centerDialog();
     ~maindialog();
 
@@ -361,9 +363,9 @@ private slots:
     void serialSetup();
     void sendSerial_Config();
     void receiveSerial_samples();
+    //void data_deserialize(const QByteArray& byteArray);
 
-
-    friend QDataStream& operator>>(QDataStream& stream, const DATA_TRANSMISSION_t& rx_data);
+    //
 
 private:
     Ui::maindialog *ui;
@@ -382,6 +384,10 @@ private:
 //
     DATA_TRANSMISSION_t retrieve_data;
 
+
 };
+
+QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs);
+//QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData);
 
 #endif // MAINDIALOG_H

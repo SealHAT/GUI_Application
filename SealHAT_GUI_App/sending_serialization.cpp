@@ -3,17 +3,21 @@
 #include <QDebug>
 #include <QtWidgets>
 #include <QByteArray>
-
+#include <QDataStream>
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
 /*Cast sensor configuration structures to QByteArray*/
 
 void maindialog::sendSerial_Config(){
-    QByteArray configData;
-    configData = config_serialize();
-
     serialSetup();
+    QByteArray configData;
+    configData[0] = 1;
+    configData[1] = 1;
+    configData[2] = 1;
+    //configData = config_serialize();
+
+
 
     microSerial->write(configData);
 }
@@ -22,7 +26,7 @@ void maindialog::sendSerial_Config(){
 QByteArray maindialog::config_serialize(){
     QByteArray byteArray;
 
-    QDataStream stream(&byteArray, QSerialPort::WriteOnly); //QIODevice:WriteOnly
+    QDataStream stream(&byteArray, QSerialPort::ReadWrite); //QIODevice:WriteOnly
     stream.setVersion(QDataStream::Qt_4_5);
 
     stream << configuration_settings;
@@ -79,7 +83,6 @@ void maindialog::serialSetup()
         microSerial->setFlowControl(QSerialPort::NoFlowControl);
 
         qDebug() << "Found Serial Port:  " << microSerial_port_name;
-        //QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
 
     }else{
         QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");

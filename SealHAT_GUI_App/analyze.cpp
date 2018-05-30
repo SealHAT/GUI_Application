@@ -153,14 +153,6 @@ void maindialog::powerEstimation(){
                       + micro_gpsActiveTime + micro_ekgActiveTime)*8/3600;
      micro_totalpower = micro_activehour * MICRO_ACT_PWR * (12) + ((24-micro_activehour) * MICRO_SB_PWR* (12));
 
-     /*qDebug() << "temp_activeHour" << temp_activeHour;
-     qDebug() << "acc_activeHour" << acc_activeHour;
-     qDebug() << "mag_activeHour" << mag_activeHour;
-     qDebug() << "gps_activeHour" << gps_activeHour;
-     qDebug() << "ekg_ativeHour" << ekg_activeHour;
-     qDebug() << "micro_activehour" << micro_activehour;
-     qDebug() << "memory_activehour" << storageEst * SPI_SPEED/3600;*/
-
     //SUM OF POWER
      powerEst = (temp_totalPower + light_totalPower + ekg_totalPower + acc_totalPower + mag_totalPower + gps_totalPower
                  + memory_totalpower + micro_totalpower) * 1000;

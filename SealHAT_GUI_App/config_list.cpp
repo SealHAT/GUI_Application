@@ -6,6 +6,8 @@
 #include <QFile>
 #include <QList>
 #include <QFont>
+#include <QDate>
+#include <QTime>
 #include <QMap>
 #include <QMessageBox>
 #include <QDataStream>
@@ -266,6 +268,16 @@ void maindialog::on_completeButton_clicked()
         ui->welcomeHeadingLabel->setFont(f);
     }else{
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+        //Need to fill in config id
+        //QDate date;
+        //QTime time;
+        //configuration_settings.start_logging_day.year = (uint16_t)date.year();
+        //configuration_settings.start_logging_day.month = (uint8_t)date.month();
+        //configuration_settings.start_logging_day.day = date.currentDate().toString().toUInt();
+        //configuration_settings.start_logging_time = time.currentTime().toString().toUInt();
+
+
+
         sendSerial_Config();//load configuration setting back to microcontroller
     }
 }
