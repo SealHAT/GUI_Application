@@ -363,7 +363,7 @@ private slots:
     void serialSetup();
     void sendSerial_Config();
     void receiveSerial_samples();
-    //void data_deserialize(const QByteArray& byteArray);
+    void data_deserialize(QByteArray& byteArray);
 
     //
 
@@ -388,6 +388,6 @@ private:
 };
 
 QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs);
-//QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData);
+QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData);
 
 #endif // MAINDIALOG_H

@@ -29,21 +29,22 @@ void maindialog::serialReceived()
 }
 
 
-/*
+
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 
-    stream >> txData.startSymbol
-           >> txData.data
-           >> txData.crc;
+    stream >> txData.startSymbol;
+    for(int i=0;i<PAGE_SIZE_EXTRA; i++){
+        stream >> txData.data[i];
+    }
+    stream >> txData.crc;
 
     return stream;
 }
 
-void maindialog::data_deserialize(const QByteArray& byteArray){
-    quint64 = read_size;
 
-    read_size = byteArray.size();
-     QDataStream stream(&byteArray);
+void maindialog::data_deserialize(QByteArray& byteArray){
+    //read_size = byteArray.size();
+     QDataStream stream(&byteArray,QSerialPort::ReadWrite);
     //QDataStream stream(byteArray); //QIODevice:ReadOnly
     stream.setVersion(QDataStream::Qt_4_5);
 
@@ -51,7 +52,7 @@ void maindialog::data_deserialize(const QByteArray& byteArray){
     stream >> retrieve_data;
     stream.commitTransaction();
 
-}*/
+}
 
 
 
