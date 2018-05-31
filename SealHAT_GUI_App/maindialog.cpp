@@ -17,16 +17,13 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
     ui->batterySizeText->hide();
-    ui->label_180->hide();
-    ui->label_estPWR->hide();
     ui->pwrEst_Text->hide();
     ui->storageEst_Text->hide();
-    ui->label_179->hide();
     ui->pwrConsumption_Text->hide();
     ui->storageConsumption_Text->hide();
 
     // Set size for smaller welcome screen.
-    this->setFixedSize(421, 421);
+    this->setFixedSize(350, 350);
     //Hide all the warning labels
     labels_hide();
 

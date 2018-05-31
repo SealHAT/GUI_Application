@@ -32,8 +32,8 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>421</width>
-       <height>421</height>
+       <width>350</width>
+       <height>350</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -46,8 +46,8 @@
       <widget class="QPushButton" name="retrieveDataButton">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>230</y>
+         <x>120</x>
+         <y>220</y>
          <width>113</width>
          <height>32</height>
         </rect>
@@ -78,9 +78,9 @@ border: none;</string>
       <widget class="QLabel" name="usernameTitle">
        <property name="geometry">
         <rect>
-         <x>70</x>
-         <y>110</y>
-         <width>281</width>
+         <x>30</x>
+         <y>100</y>
+         <width>291</width>
          <height>31</height>
         </rect>
        </property>
@@ -112,8 +112,8 @@ border: none;</string>
       <widget class="QPushButton" name="configureDevOptionButton">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>190</y>
+         <x>120</x>
+         <y>170</y>
          <width>113</width>
          <height>32</height>
         </rect>
@@ -144,9 +144,9 @@ border: none;</string>
       <widget class="QLabel" name="companyLogo">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>50</y>
-         <width>221</width>
+         <x>60</x>
+         <y>40</y>
+         <width>231</width>
          <height>51</height>
         </rect>
        </property>
@@ -174,7 +174,7 @@ border: none;</string>
       <widget class="QPushButton" name="streamDataButton">
        <property name="geometry">
         <rect>
-         <x>160</x>
+         <x>120</x>
          <y>270</y>
          <width>113</width>
          <height>32</height>
@@ -206,8 +206,8 @@ border: none;</string>
       <widget class="QLabel" name="serialLabel">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>340</y>
+         <x>260</x>
+         <y>230</y>
          <width>71</width>
          <height>41</height>
         </rect>
@@ -316,8 +316,8 @@ border: none;</string>
       <rect>
        <x>210</x>
        <y>30</y>
-       <width>751</width>
-       <height>531</height>
+       <width>641</width>
+       <height>471</height>
       </rect>
      </property>
      <property name="palette">
@@ -418,16 +418,16 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
-         <width>621</width>
-         <height>61</height>
+         <y>10</y>
+         <width>391</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -440,16 +440,16 @@ border: none;</string>
         <string notr="true">color:rgb(0, 0, 0)</string>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Configure SealHAT Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color: rgb(0, 60, 108); vertical-align:super;&quot;&gt;SealHAT Configurations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="homePageDescription">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>90</y>
-         <width>531</width>
-         <height>31</height>
+         <x>10</x>
+         <y>50</y>
+         <width>231</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="font">
@@ -462,100 +462,10 @@ border: none;</string>
         <string notr="true">color:rgb(0, 0, 0)</string>
        </property>
        <property name="text">
-        <string>This page will display configuratin list for EACH SENSOR.</string>
+        <string>Current SealHAT configuration settings.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_12">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>140</y>
-         <width>31</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>GPS:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_173">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>180</y>
-         <width>91</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Accelerometer:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_174">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>260</y>
-         <width>91</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Magnetemeter:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_175">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>300</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>EKG:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_176">
-       <property name="geometry">
-        <rect>
-         <x>50</x>
-         <y>360</y>
-         <width>81</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Temp&amp;Light:</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="gps_configList">
@@ -611,9 +521,9 @@ border: none;</string>
       <widget class="QPushButton" name="saveButton">
        <property name="geometry">
         <rect>
-         <x>490</x>
-         <y>430</y>
-         <width>101</width>
+         <x>370</x>
+         <y>90</y>
+         <width>121</width>
          <height>31</height>
         </rect>
        </property>
@@ -623,18 +533,19 @@ border: none;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 170, 255);</string>
+        <string notr="true">background-color: rgb(202, 212, 223);
+color:black;</string>
        </property>
        <property name="text">
-        <string>Save Settings</string>
+        <string>SAVE SETTINGS</string>
        </property>
       </widget>
       <widget class="QPushButton" name="loadButton">
        <property name="geometry">
         <rect>
-         <x>350</x>
-         <y>430</y>
-         <width>101</width>
+         <x>180</x>
+         <y>90</y>
+         <width>121</width>
          <height>31</height>
         </rect>
        </property>
@@ -644,10 +555,116 @@ border: none;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 170, 255);</string>
+        <string notr="true">background-color: rgb(202, 212, 223);
+color:black;</string>
        </property>
        <property name="text">
-        <string>load Settings</string>
+        <string>LOAD SETTINGS</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>109</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>GPS:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_173">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>109</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Accelerometer:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_174">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>240</y>
+         <width>109</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Magnetometer:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_175">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>300</y>
+         <width>109</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>EKG:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_176">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>360</y>
+         <width>109</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Temp&amp;Light:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </widget>
@@ -655,9 +672,9 @@ border: none;</string>
       <widget class="QLabel" name="imuPageDescription">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>80</y>
-         <width>261</width>
+         <x>10</x>
+         <y>50</y>
+         <width>421</width>
          <height>16</height>
         </rect>
        </property>
@@ -670,7 +687,7 @@ border: none;</string>
         <string notr="true">color:rgb(0, 0, 0)</string>
        </property>
        <property name="text">
-        <string>This page will be used to configure the IMU.</string>
+        <string>This page will be used to configure the accelerometer.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -679,10 +696,10 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_SW">
        <property name="geometry">
         <rect>
-         <x>500</x>
-         <y>20</y>
-         <width>121</width>
-         <height>51</height>
+         <x>490</x>
+         <y>10</y>
+         <width>141</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -693,24 +710,27 @@ border: none;</string>
        </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>9</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202,212,223);</string>
+       </property>
        <property name="text">
-        <string>Disable</string>
+        <string>DISABLE SENSOR</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="xcel_title">
+      <widget class="QLabel" name="label_accelerometerTitle">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>30</y>
-         <width>251</width>
+         <x>10</x>
+         <y>10</y>
+         <width>241</width>
          <height>31</height>
         </rect>
        </property>
@@ -721,69 +741,69 @@ border: none;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0,0,0);</string>
+        <string notr="true">color: rgb(0, 60, 108);</string>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#2b68ca; vertical-align:super;&quot;&gt;Accelerometer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color: rgb(0, 60, 108); vertical-align:super;&quot;&gt;Accelerometer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label">
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>160</y>
-         <width>91</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Time&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_5">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>320</y>
-         <width>111</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Sampling Rate&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_4">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>270</y>
+         <y>100</y>
          <width>101</width>
          <height>20</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Power Mode&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Hours:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>320</x>
+         <y>220</y>
+         <width>111</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Sampling Rate:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
          <y>220</y>
          <width>81</width>
          <height>20</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Full Scale&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Resolution:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>220</y>
+         <width>51</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Range:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QPushButton" name="xcel_b_18">
        <property name="geometry">
         <rect>
-         <x>460</x>
-         <y>150</y>
+         <x>470</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -798,8 +818,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_7">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>150</y>
+         <x>250</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -814,8 +834,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_19">
        <property name="geometry">
         <rect>
-         <x>480</x>
-         <y>150</y>
+         <x>490</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -830,8 +850,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_20">
        <property name="geometry">
         <rect>
-         <x>500</x>
-         <y>150</y>
+         <x>510</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -846,8 +866,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_22">
        <property name="geometry">
         <rect>
-         <x>540</x>
-         <y>150</y>
+         <x>550</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -862,8 +882,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_15">
        <property name="geometry">
         <rect>
-         <x>400</x>
-         <y>150</y>
+         <x>410</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -878,8 +898,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_5">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>150</y>
+         <x>210</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -894,8 +914,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_23">
        <property name="geometry">
         <rect>
-         <x>560</x>
-         <y>150</y>
+         <x>570</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -910,8 +930,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_13">
        <property name="geometry">
         <rect>
-         <x>360</x>
-         <y>150</y>
+         <x>370</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -926,8 +946,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_10">
        <property name="geometry">
         <rect>
-         <x>300</x>
-         <y>150</y>
+         <x>310</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -942,8 +962,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_21">
        <property name="geometry">
         <rect>
-         <x>520</x>
-         <y>150</y>
+         <x>530</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -958,8 +978,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_3">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>150</y>
+         <x>170</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -974,8 +994,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_17">
        <property name="geometry">
         <rect>
-         <x>440</x>
-         <y>150</y>
+         <x>450</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -990,8 +1010,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_24">
        <property name="geometry">
         <rect>
-         <x>580</x>
-         <y>150</y>
+         <x>590</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1006,8 +1026,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_12">
        <property name="geometry">
         <rect>
-         <x>340</x>
-         <y>150</y>
+         <x>350</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1022,8 +1042,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_9">
        <property name="geometry">
         <rect>
-         <x>280</x>
-         <y>150</y>
+         <x>290</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1038,8 +1058,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_11">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>150</y>
+         <x>330</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1054,8 +1074,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_2">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>150</y>
+         <x>150</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1070,8 +1090,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_16">
        <property name="geometry">
         <rect>
-         <x>420</x>
-         <y>150</y>
+         <x>430</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1086,8 +1106,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_8">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>150</y>
+         <x>270</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1102,8 +1122,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_4">
        <property name="geometry">
         <rect>
-         <x>180</x>
-         <y>150</y>
+         <x>190</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1118,8 +1138,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b">
        <property name="geometry">
         <rect>
-         <x>120</x>
-         <y>150</y>
+         <x>130</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1134,8 +1154,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_6">
        <property name="geometry">
         <rect>
-         <x>220</x>
-         <y>150</y>
+         <x>230</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1150,8 +1170,8 @@ border: none;</string>
       <widget class="QPushButton" name="xcel_b_14">
        <property name="geometry">
         <rect>
-         <x>380</x>
-         <y>150</y>
+         <x>390</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -1166,38 +1186,38 @@ border: none;</string>
       <widget class="QComboBox" name="xcel_scaleBox">
        <property name="geometry">
         <rect>
-         <x>170</x>
-         <y>220</y>
+         <x>20</x>
+         <y>250</y>
          <width>69</width>
          <height>22</height>
         </rect>
        </property>
        <item>
         <property name="text">
-         <string>2g</string>
+         <string>±2g</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>4g</string>
+         <string>±4g</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>8g</string>
+         <string>±8g</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>16g</string>
+         <string>±16g</string>
         </property>
        </item>
       </widget>
       <widget class="QComboBox" name="xcel_freqBox">
        <property name="geometry">
         <rect>
-         <x>170</x>
-         <y>320</y>
+         <x>320</x>
+         <y>250</y>
          <width>61</width>
          <height>22</height>
         </rect>
@@ -1244,12 +1264,17 @@ border: none;</string>
       <widget class="QComboBox" name="xcel_pwrBox">
        <property name="geometry">
         <rect>
-         <x>170</x>
-         <y>270</y>
+         <x>150</x>
+         <y>250</y>
          <width>101</width>
          <height>22</height>
         </rect>
        </property>
+       <item>
+        <property name="text">
+         <string>Low</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>Normal</string>
@@ -1257,20 +1282,15 @@ border: none;</string>
        </item>
        <item>
         <property name="text">
-         <string>High Resolution</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Low Power</string>
+         <string>High</string>
         </property>
        </item>
       </widget>
       <widget class="QLabel" name="label_64">
        <property name="geometry">
         <rect>
-         <x>510</x>
-         <y>190</y>
+         <x>520</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1282,8 +1302,8 @@ border: none;</string>
       <widget class="QLabel" name="label_65">
        <property name="geometry">
         <rect>
-         <x>450</x>
-         <y>130</y>
+         <x>460</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1295,8 +1315,8 @@ border: none;</string>
       <widget class="QLabel" name="label_66">
        <property name="geometry">
         <rect>
-         <x>390</x>
-         <y>190</y>
+         <x>400</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1308,8 +1328,8 @@ border: none;</string>
       <widget class="QLabel" name="label_67">
        <property name="geometry">
         <rect>
-         <x>490</x>
-         <y>130</y>
+         <x>500</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1321,8 +1341,8 @@ border: none;</string>
       <widget class="QLabel" name="label_68">
        <property name="geometry">
         <rect>
-         <x>230</x>
-         <y>190</y>
+         <x>240</x>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1334,8 +1354,8 @@ border: none;</string>
       <widget class="QLabel" name="label_69">
        <property name="geometry">
         <rect>
-         <x>170</x>
-         <y>130</y>
+         <x>180</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1347,8 +1367,8 @@ border: none;</string>
       <widget class="QLabel" name="label_70">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>130</y>
+         <x>260</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1360,8 +1380,8 @@ border: none;</string>
       <widget class="QLabel" name="label_71">
        <property name="geometry">
         <rect>
-         <x>350</x>
-         <y>190</y>
+         <x>360</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1373,8 +1393,8 @@ border: none;</string>
       <widget class="QLabel" name="label_72">
        <property name="geometry">
         <rect>
-         <x>530</x>
-         <y>130</y>
+         <x>540</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1386,8 +1406,8 @@ border: none;</string>
       <widget class="QLabel" name="label_73">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>190</y>
+         <x>160</x>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1399,8 +1419,8 @@ border: none;</string>
       <widget class="QLabel" name="label_74">
        <property name="geometry">
         <rect>
-         <x>410</x>
-         <y>130</y>
+         <x>420</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1412,8 +1432,8 @@ border: none;</string>
       <widget class="QLabel" name="label_75">
        <property name="geometry">
         <rect>
-         <x>570</x>
-         <y>130</y>
+         <x>580</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1425,8 +1445,8 @@ border: none;</string>
       <widget class="QLabel" name="label_76">
        <property name="geometry">
         <rect>
-         <x>590</x>
-         <y>190</y>
+         <x>600</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1438,8 +1458,8 @@ border: none;</string>
       <widget class="QLabel" name="label_77">
        <property name="geometry">
         <rect>
-         <x>210</x>
-         <y>130</y>
+         <x>220</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1451,8 +1471,8 @@ border: none;</string>
       <widget class="QLabel" name="label_78">
        <property name="geometry">
         <rect>
-         <x>190</x>
-         <y>190</y>
+         <x>200</x>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1464,8 +1484,8 @@ border: none;</string>
       <widget class="QLabel" name="label_79">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>190</y>
+         <x>110</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1477,8 +1497,8 @@ border: none;</string>
       <widget class="QLabel" name="label_80">
        <property name="geometry">
         <rect>
-         <x>290</x>
-         <y>130</y>
+         <x>300</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1490,8 +1510,8 @@ border: none;</string>
       <widget class="QLabel" name="label_81">
        <property name="geometry">
         <rect>
-         <x>430</x>
-         <y>190</y>
+         <x>440</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1503,8 +1523,8 @@ border: none;</string>
       <widget class="QLabel" name="label_82">
        <property name="geometry">
         <rect>
-         <x>270</x>
-         <y>190</y>
+         <x>280</x>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1516,8 +1536,8 @@ border: none;</string>
       <widget class="QLabel" name="label_83">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>130</y>
+         <x>140</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1529,8 +1549,8 @@ border: none;</string>
       <widget class="QLabel" name="label_84">
        <property name="geometry">
         <rect>
-         <x>470</x>
-         <y>190</y>
+         <x>480</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1542,8 +1562,8 @@ border: none;</string>
       <widget class="QLabel" name="label_85">
        <property name="geometry">
         <rect>
-         <x>310</x>
-         <y>190</y>
+         <x>320</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1555,8 +1575,8 @@ border: none;</string>
       <widget class="QLabel" name="label_86">
        <property name="geometry">
         <rect>
-         <x>330</x>
-         <y>130</y>
+         <x>340</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1568,8 +1588,8 @@ border: none;</string>
       <widget class="QLabel" name="label_87">
        <property name="geometry">
         <rect>
-         <x>550</x>
-         <y>190</y>
+         <x>560</x>
+         <y>170</y>
          <width>41</width>
          <height>16</height>
         </rect>
@@ -1581,8 +1601,8 @@ border: none;</string>
       <widget class="QLabel" name="label_88">
        <property name="geometry">
         <rect>
-         <x>370</x>
-         <y>130</y>
+         <x>380</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -1596,8 +1616,8 @@ border: none;</string>
         <rect>
          <x>30</x>
          <y>130</y>
-         <width>61</width>
-         <height>21</height>
+         <width>81</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -1613,8 +1633,11 @@ border: none;</string>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202,212,223);</string>
+       </property>
        <property name="text">
-        <string>Clear</string>
+        <string>CLEAR</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -1624,7 +1647,7 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>350</y>
+         <y>300</y>
          <width>611</width>
          <height>151</height>
         </rect>
@@ -1648,7 +1671,7 @@ border: none;</string>
          </rect>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Motion Detection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Motion Detection:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_7">
@@ -1656,12 +1679,12 @@ border: none;</string>
          <rect>
           <x>10</x>
           <y>110</y>
-          <width>91</width>
+          <width>101</width>
           <height>20</height>
          </rect>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Threshold (g)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Threshold (g):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_6">
@@ -1674,7 +1697,7 @@ border: none;</string>
          </rect>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Axes Selection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Axes Selection:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QCheckBox" name="xcel_XL_checkBox">
@@ -1706,7 +1729,7 @@ border: none;</string>
        <widget class="QLineEdit" name="xcel_thres">
         <property name="geometry">
          <rect>
-          <x>110</x>
+          <x>140</x>
           <y>110</y>
           <width>113</width>
           <height>20</height>
@@ -1771,10 +1794,10 @@ border: none;</string>
         </property>
         <property name="geometry">
          <rect>
-          <x>230</x>
+          <x>260</x>
           <y>110</y>
           <width>181</width>
-          <height>20</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="text">
@@ -1784,9 +1807,9 @@ border: none;</string>
        <widget class="QLineEdit" name="lineEdit">
         <property name="geometry">
          <rect>
-          <x>420</x>
+          <x>440</x>
           <y>0</y>
-          <width>191</width>
+          <width>171</width>
           <height>151</height>
          </rect>
         </property>
@@ -1795,15 +1818,76 @@ border: none;</string>
         </property>
        </widget>
       </widget>
+      <zorder>label_69</zorder>
+      <zorder>label_79</zorder>
+      <zorder>label_70</zorder>
+      <zorder>label_84</zorder>
+      <zorder>label_76</zorder>
+      <zorder>label_74</zorder>
+      <zorder>label_75</zorder>
+      <zorder>label_78</zorder>
+      <zorder>label_73</zorder>
+      <zorder>label_67</zorder>
+      <zorder>label_68</zorder>
+      <zorder>label_77</zorder>
+      <zorder>label_86</zorder>
+      <zorder>label_85</zorder>
+      <zorder>label_82</zorder>
+      <zorder>label_66</zorder>
+      <zorder>label_83</zorder>
+      <zorder>label_88</zorder>
+      <zorder>label_80</zorder>
+      <zorder>label_72</zorder>
+      <zorder>label_71</zorder>
+      <zorder>label_81</zorder>
+      <zorder>label_64</zorder>
+      <zorder>label_65</zorder>
+      <zorder>label_87</zorder>
+      <zorder>imuPageDescription</zorder>
+      <zorder>xcel_SW</zorder>
+      <zorder>label_accelerometerTitle</zorder>
+      <zorder>label</zorder>
+      <zorder>label_5</zorder>
+      <zorder>label_4</zorder>
+      <zorder>label_3</zorder>
+      <zorder>xcel_b_18</zorder>
+      <zorder>xcel_b_7</zorder>
+      <zorder>xcel_b_19</zorder>
+      <zorder>xcel_b_20</zorder>
+      <zorder>xcel_b_22</zorder>
+      <zorder>xcel_b_15</zorder>
+      <zorder>xcel_b_5</zorder>
+      <zorder>xcel_b_23</zorder>
+      <zorder>xcel_b_13</zorder>
+      <zorder>xcel_b_10</zorder>
+      <zorder>xcel_b_21</zorder>
+      <zorder>xcel_b_3</zorder>
+      <zorder>xcel_b_17</zorder>
+      <zorder>xcel_b_24</zorder>
+      <zorder>xcel_b_12</zorder>
+      <zorder>xcel_b_9</zorder>
+      <zorder>xcel_b_11</zorder>
+      <zorder>xcel_b_2</zorder>
+      <zorder>xcel_b_16</zorder>
+      <zorder>xcel_b_8</zorder>
+      <zorder>xcel_b_4</zorder>
+      <zorder>xcel_b</zorder>
+      <zorder>xcel_b_6</zorder>
+      <zorder>xcel_b_14</zorder>
+      <zorder>xcel_scaleBox</zorder>
+      <zorder>xcel_freqBox</zorder>
+      <zorder>xcel_pwrBox</zorder>
+      <zorder>xcel_timeclear_button</zorder>
+      <zorder>frame</zorder>
      </widget>
      <widget class="QWidget" name="magConfigPage">
       <widget class="QPushButton" name="mag_SW">
        <property name="geometry">
         <rect>
-         <x>500</x>
-         <y>20</y>
-         <width>121</width>
-         <height>51</height>
+         <x>490</x>
+         <y>10</y>
+         <width>141</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -1814,13 +1898,16 @@ border: none;</string>
        </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>9</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202,212,223);</string>
+       </property>
        <property name="text">
-        <string>Disable</string>
+        <string>DISABLE SENSOR</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -1829,21 +1916,21 @@ border: none;</string>
       <widget class="QLabel" name="label_145">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>130</y>
+         <x>20</x>
+         <y>100</y>
          <width>91</width>
          <height>20</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Time&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Hours:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QComboBox" name="mag_freqBox">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>290</y>
+         <x>20</x>
+         <y>340</y>
          <width>91</width>
          <height>22</height>
         </rect>
@@ -1880,22 +1967,22 @@ border: none;</string>
       <widget class="QLabel" name="label_147">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>290</y>
+         <x>20</x>
+         <y>310</y>
          <width>111</width>
          <height>20</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Sampling Rate&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Sampling Rate:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QComboBox" name="mag_pwrBox">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>220</y>
-         <width>111</width>
+         <x>20</x>
+         <y>250</y>
+         <width>91</width>
          <height>22</height>
         </rect>
        </property>
@@ -1906,12 +1993,12 @@ border: none;</string>
        </property>
        <item>
         <property name="text">
-         <string>Normal</string>
+         <string>Low</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Low Power</string>
+         <string>Medium</string>
         </property>
        </item>
       </widget>
@@ -1925,13 +2012,13 @@ border: none;</string>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Power Mode&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Resolution:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QPushButton" name="mag_b_6">
        <property name="geometry">
         <rect>
-         <x>220</x>
+         <x>230</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -1947,7 +2034,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_23">
        <property name="geometry">
         <rect>
-         <x>560</x>
+         <x>570</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -1963,7 +2050,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_22">
        <property name="geometry">
         <rect>
-         <x>540</x>
+         <x>550</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -1979,7 +2066,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_21">
        <property name="geometry">
         <rect>
-         <x>520</x>
+         <x>530</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -1995,7 +2082,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_11">
        <property name="geometry">
         <rect>
-         <x>320</x>
+         <x>330</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2011,7 +2098,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_17">
        <property name="geometry">
         <rect>
-         <x>440</x>
+         <x>450</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2027,7 +2114,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_5">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>210</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2043,7 +2130,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_15">
        <property name="geometry">
         <rect>
-         <x>400</x>
+         <x>410</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2059,7 +2146,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_9">
        <property name="geometry">
         <rect>
-         <x>280</x>
+         <x>290</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2075,7 +2162,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_20">
        <property name="geometry">
         <rect>
-         <x>500</x>
+         <x>510</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2091,7 +2178,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_12">
        <property name="geometry">
         <rect>
-         <x>340</x>
+         <x>350</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2107,7 +2194,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_7">
        <property name="geometry">
         <rect>
-         <x>240</x>
+         <x>250</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2123,7 +2210,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b">
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>130</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2139,7 +2226,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_19">
        <property name="geometry">
         <rect>
-         <x>480</x>
+         <x>490</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2155,7 +2242,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_24">
        <property name="geometry">
         <rect>
-         <x>580</x>
+         <x>590</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2171,7 +2258,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_2">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>150</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2187,7 +2274,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_13">
        <property name="geometry">
         <rect>
-         <x>360</x>
+         <x>370</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2203,7 +2290,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_4">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>190</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2219,7 +2306,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_16">
        <property name="geometry">
         <rect>
-         <x>420</x>
+         <x>430</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2235,7 +2322,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_3">
        <property name="geometry">
         <rect>
-         <x>160</x>
+         <x>170</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2251,7 +2338,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_18">
        <property name="geometry">
         <rect>
-         <x>460</x>
+         <x>470</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2267,7 +2354,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_14">
        <property name="geometry">
         <rect>
-         <x>380</x>
+         <x>390</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2283,7 +2370,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_8">
        <property name="geometry">
         <rect>
-         <x>260</x>
+         <x>270</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2299,7 +2386,7 @@ border: none;</string>
       <widget class="QPushButton" name="mag_b_10">
        <property name="geometry">
         <rect>
-         <x>300</x>
+         <x>310</x>
          <y>130</y>
          <width>21</width>
          <height>41</height>
@@ -2315,10 +2402,10 @@ border: none;</string>
       <widget class="QLabel" name="label_153">
        <property name="geometry">
         <rect>
-         <x>580</x>
+         <x>600</x>
          <y>170</y>
          <width>31</width>
-         <height>20</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -2328,7 +2415,7 @@ border: none;</string>
       <widget class="QLabel" name="label_165">
        <property name="geometry">
         <rect>
-         <x>170</x>
+         <x>180</x>
          <y>110</y>
          <width>21</width>
          <height>16</height>
@@ -2341,7 +2428,7 @@ border: none;</string>
       <widget class="QLabel" name="label_170">
        <property name="geometry">
         <rect>
-         <x>390</x>
+         <x>400</x>
          <y>170</y>
          <width>31</width>
          <height>16</height>
@@ -2354,7 +2441,7 @@ border: none;</string>
       <widget class="QLabel" name="label_156">
        <property name="geometry">
         <rect>
-         <x>470</x>
+         <x>480</x>
          <y>170</y>
          <width>31</width>
          <height>16</height>
@@ -2367,7 +2454,7 @@ border: none;</string>
       <widget class="QLabel" name="label_171">
        <property name="geometry">
         <rect>
-         <x>430</x>
+         <x>440</x>
          <y>170</y>
          <width>31</width>
          <height>16</height>
@@ -2380,7 +2467,7 @@ border: none;</string>
       <widget class="QLabel" name="label_149">
        <property name="geometry">
         <rect>
-         <x>150</x>
+         <x>160</x>
          <y>170</y>
          <width>21</width>
          <height>16</height>
@@ -2393,7 +2480,7 @@ border: none;</string>
       <widget class="QLabel" name="label_148">
        <property name="geometry">
         <rect>
-         <x>570</x>
+         <x>580</x>
          <y>110</y>
          <width>31</width>
          <height>16</height>
@@ -2406,7 +2493,7 @@ border: none;</string>
       <widget class="QLabel" name="label_169">
        <property name="geometry">
         <rect>
-         <x>530</x>
+         <x>540</x>
          <y>110</y>
          <width>31</width>
          <height>16</height>
@@ -2419,7 +2506,7 @@ border: none;</string>
       <widget class="QLabel" name="label_160">
        <property name="geometry">
         <rect>
-         <x>230</x>
+         <x>240</x>
          <y>170</y>
          <width>21</width>
          <height>16</height>
@@ -2432,7 +2519,7 @@ border: none;</string>
       <widget class="QLabel" name="label_157">
        <property name="geometry">
         <rect>
-         <x>330</x>
+         <x>340</x>
          <y>110</y>
          <width>31</width>
          <height>16</height>
@@ -2445,7 +2532,7 @@ border: none;</string>
       <widget class="QLabel" name="label_154">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>320</x>
          <y>170</y>
          <width>31</width>
          <height>16</height>
@@ -2458,7 +2545,7 @@ border: none;</string>
       <widget class="QLabel" name="label_150">
        <property name="geometry">
         <rect>
-         <x>100</x>
+         <x>110</x>
          <y>170</y>
          <width>31</width>
          <height>16</height>
@@ -2471,7 +2558,7 @@ border: none;</string>
       <widget class="QLabel" name="label_161">
        <property name="geometry">
         <rect>
-         <x>450</x>
+         <x>460</x>
          <y>110</y>
          <width>31</width>
          <height>16</height>
@@ -2484,7 +2571,7 @@ border: none;</string>
       <widget class="QLabel" name="label_152">
        <property name="geometry">
         <rect>
-         <x>510</x>
+         <x>520</x>
          <y>170</y>
          <width>31</width>
          <height>16</height>
@@ -2497,7 +2584,7 @@ border: none;</string>
       <widget class="QLabel" name="label_164">
        <property name="geometry">
         <rect>
-         <x>550</x>
+         <x>560</x>
          <y>170</y>
          <width>31</width>
          <height>16</height>
@@ -2510,7 +2597,7 @@ border: none;</string>
       <widget class="QLabel" name="label_158">
        <property name="geometry">
         <rect>
-         <x>190</x>
+         <x>200</x>
          <y>170</y>
          <width>21</width>
          <height>16</height>
@@ -2523,7 +2610,7 @@ border: none;</string>
       <widget class="QLabel" name="label_163">
        <property name="geometry">
         <rect>
-         <x>410</x>
+         <x>420</x>
          <y>110</y>
          <width>31</width>
          <height>16</height>
@@ -2536,7 +2623,7 @@ border: none;</string>
       <widget class="QLabel" name="label_167">
        <property name="geometry">
         <rect>
-         <x>370</x>
+         <x>380</x>
          <y>110</y>
          <width>31</width>
          <height>16</height>
@@ -2549,7 +2636,7 @@ border: none;</string>
       <widget class="QLabel" name="label_172">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>500</x>
          <y>110</y>
          <width>31</width>
          <height>16</height>
@@ -2562,7 +2649,7 @@ border: none;</string>
       <widget class="QLabel" name="label_168">
        <property name="geometry">
         <rect>
-         <x>250</x>
+         <x>260</x>
          <y>110</y>
          <width>21</width>
          <height>16</height>
@@ -2575,7 +2662,7 @@ border: none;</string>
       <widget class="QLabel" name="label_155">
        <property name="geometry">
         <rect>
-         <x>290</x>
+         <x>300</x>
          <y>110</y>
          <width>21</width>
          <height>16</height>
@@ -2588,7 +2675,7 @@ border: none;</string>
       <widget class="QLabel" name="label_159">
        <property name="geometry">
         <rect>
-         <x>270</x>
+         <x>280</x>
          <y>170</y>
          <width>21</width>
          <height>16</height>
@@ -2601,7 +2688,7 @@ border: none;</string>
       <widget class="QLabel" name="label_151">
        <property name="geometry">
         <rect>
-         <x>350</x>
+         <x>360</x>
          <y>170</y>
          <width>31</width>
          <height>16</height>
@@ -2614,7 +2701,7 @@ border: none;</string>
       <widget class="QLabel" name="label_162">
        <property name="geometry">
         <rect>
-         <x>210</x>
+         <x>220</x>
          <y>110</y>
          <width>21</width>
          <height>16</height>
@@ -2627,7 +2714,7 @@ border: none;</string>
       <widget class="QLabel" name="label_166">
        <property name="geometry">
         <rect>
-         <x>130</x>
+         <x>140</x>
          <y>110</y>
          <width>21</width>
          <height>16</height>
@@ -2640,8 +2727,8 @@ border: none;</string>
       <widget class="QLabel" name="mag_title">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>30</y>
+         <x>10</x>
+         <y>10</y>
          <width>251</width>
          <height>41</height>
         </rect>
@@ -2656,16 +2743,16 @@ border: none;</string>
         <string notr="true">color: rgb(0,0,0);</string>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#2b68ca; vertical-align:super;&quot;&gt;Magnetometer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:rgb(0,60,108); vertical-align:super;&quot;&gt;Magnetometer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QPushButton" name="mag_timeclear_button">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>100</y>
-         <width>61</width>
-         <height>21</height>
+         <x>30</x>
+         <y>130</y>
+         <width>81</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -2681,22 +2768,107 @@ border: none;</string>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202,212,223);</string>
+       </property>
        <property name="text">
-        <string>Clear</string>
+        <string>CLEAR</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
        </property>
       </widget>
+      <widget class="QLabel" name="imuPageDescription_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>331</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:rgb(0, 0, 0)</string>
+       </property>
+       <property name="text">
+        <string>This page will be used to configure the magnetometer.</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <zorder>label_171</zorder>
+      <zorder>label_158</zorder>
+      <zorder>label_150</zorder>
+      <zorder>label_156</zorder>
+      <zorder>label_154</zorder>
+      <zorder>label_153</zorder>
+      <zorder>label_160</zorder>
+      <zorder>label_170</zorder>
+      <zorder>label_151</zorder>
+      <zorder>label_159</zorder>
+      <zorder>label_164</zorder>
+      <zorder>label_152</zorder>
+      <zorder>label_149</zorder>
+      <zorder>mag_SW</zorder>
+      <zorder>label_145</zorder>
+      <zorder>mag_freqBox</zorder>
+      <zorder>label_147</zorder>
+      <zorder>mag_pwrBox</zorder>
+      <zorder>label_146</zorder>
+      <zorder>mag_b_6</zorder>
+      <zorder>mag_b_23</zorder>
+      <zorder>mag_b_22</zorder>
+      <zorder>mag_b_21</zorder>
+      <zorder>mag_b_11</zorder>
+      <zorder>mag_b_17</zorder>
+      <zorder>mag_b_5</zorder>
+      <zorder>mag_b_15</zorder>
+      <zorder>mag_b_9</zorder>
+      <zorder>mag_b_20</zorder>
+      <zorder>mag_b_12</zorder>
+      <zorder>mag_b_7</zorder>
+      <zorder>mag_b</zorder>
+      <zorder>mag_b_19</zorder>
+      <zorder>mag_b_24</zorder>
+      <zorder>mag_b_2</zorder>
+      <zorder>mag_b_13</zorder>
+      <zorder>mag_b_4</zorder>
+      <zorder>mag_b_16</zorder>
+      <zorder>mag_b_3</zorder>
+      <zorder>mag_b_18</zorder>
+      <zorder>mag_b_14</zorder>
+      <zorder>mag_b_8</zorder>
+      <zorder>mag_b_10</zorder>
+      <zorder>label_165</zorder>
+      <zorder>label_148</zorder>
+      <zorder>label_169</zorder>
+      <zorder>label_157</zorder>
+      <zorder>label_161</zorder>
+      <zorder>label_163</zorder>
+      <zorder>label_167</zorder>
+      <zorder>label_172</zorder>
+      <zorder>label_168</zorder>
+      <zorder>label_155</zorder>
+      <zorder>label_162</zorder>
+      <zorder>label_166</zorder>
+      <zorder>mag_title</zorder>
+      <zorder>mag_timeclear_button</zorder>
+      <zorder>imuPageDescription_2</zorder>
      </widget>
      <widget class="QWidget" name="gpsConfigPage">
       <widget class="QLabel" name="gpsPageDescription">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>80</y>
-         <width>541</width>
-         <height>31</height>
+         <x>10</x>
+         <y>50</y>
+         <width>311</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="font">
@@ -2717,8 +2889,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_18">
        <property name="geometry">
         <rect>
-         <x>460</x>
-         <y>140</y>
+         <x>470</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2733,8 +2905,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_16">
        <property name="geometry">
         <rect>
-         <x>420</x>
-         <y>140</y>
+         <x>430</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2749,8 +2921,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_4">
        <property name="geometry">
         <rect>
-         <x>180</x>
-         <y>140</y>
+         <x>190</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2765,8 +2937,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_20">
        <property name="geometry">
         <rect>
-         <x>500</x>
-         <y>140</y>
+         <x>510</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2781,8 +2953,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_5">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>140</y>
+         <x>210</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2797,8 +2969,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_21">
        <property name="geometry">
         <rect>
-         <x>520</x>
-         <y>140</y>
+         <x>530</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2813,8 +2985,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_24">
        <property name="geometry">
         <rect>
-         <x>580</x>
-         <y>140</y>
+         <x>590</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2829,8 +3001,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_2">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>140</y>
+         <x>150</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2845,8 +3017,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_8">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>140</y>
+         <x>270</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2861,8 +3033,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_19">
        <property name="geometry">
         <rect>
-         <x>480</x>
-         <y>140</y>
+         <x>490</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2877,8 +3049,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_9">
        <property name="geometry">
         <rect>
-         <x>280</x>
-         <y>140</y>
+         <x>290</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2893,8 +3065,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_6">
        <property name="geometry">
         <rect>
-         <x>220</x>
-         <y>140</y>
+         <x>230</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2909,8 +3081,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_11">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>140</y>
+         <x>330</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2925,8 +3097,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_23">
        <property name="geometry">
         <rect>
-         <x>560</x>
-         <y>140</y>
+         <x>570</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2941,8 +3113,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_13">
        <property name="geometry">
         <rect>
-         <x>360</x>
-         <y>140</y>
+         <x>370</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2957,8 +3129,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b">
        <property name="geometry">
         <rect>
-         <x>120</x>
-         <y>140</y>
+         <x>130</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2973,8 +3145,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_10">
        <property name="geometry">
         <rect>
-         <x>300</x>
-         <y>140</y>
+         <x>310</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -2989,8 +3161,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_17">
        <property name="geometry">
         <rect>
-         <x>440</x>
-         <y>140</y>
+         <x>450</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -3005,8 +3177,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_14">
        <property name="geometry">
         <rect>
-         <x>380</x>
-         <y>140</y>
+         <x>390</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -3021,8 +3193,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_3">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>140</y>
+         <x>170</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -3037,8 +3209,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_12">
        <property name="geometry">
         <rect>
-         <x>340</x>
-         <y>140</y>
+         <x>350</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -3053,8 +3225,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_7">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>140</y>
+         <x>250</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -3069,8 +3241,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_15">
        <property name="geometry">
         <rect>
-         <x>400</x>
-         <y>140</y>
+         <x>410</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -3085,8 +3257,8 @@ border: none;</string>
       <widget class="QLabel" name="label_139">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>120</y>
+         <x>140</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3098,8 +3270,8 @@ border: none;</string>
       <widget class="QLabel" name="label_123">
        <property name="geometry">
         <rect>
-         <x>450</x>
-         <y>120</y>
+         <x>460</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3111,8 +3283,8 @@ border: none;</string>
       <widget class="QLabel" name="label_120">
        <property name="geometry">
         <rect>
-         <x>290</x>
-         <y>120</y>
+         <x>300</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3124,8 +3296,8 @@ border: none;</string>
       <widget class="QLabel" name="label_118">
        <property name="geometry">
         <rect>
-         <x>330</x>
-         <y>120</y>
+         <x>340</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3137,8 +3309,8 @@ border: none;</string>
       <widget class="QLabel" name="label_125">
        <property name="geometry">
         <rect>
-         <x>510</x>
-         <y>180</y>
+         <x>520</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3150,21 +3322,21 @@ border: none;</string>
       <widget class="QLabel" name="label_137">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>150</y>
-         <width>111</width>
+         <x>20</x>
+         <y>100</y>
+         <width>101</width>
          <height>20</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Hours&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Hours:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_119">
        <property name="geometry">
         <rect>
-         <x>370</x>
-         <y>120</y>
+         <x>380</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3176,8 +3348,8 @@ border: none;</string>
       <widget class="QLabel" name="label_114">
        <property name="geometry">
         <rect>
-         <x>590</x>
-         <y>180</y>
+         <x>600</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3189,8 +3361,8 @@ border: none;</string>
       <widget class="QLabel" name="label_121">
        <property name="geometry">
         <rect>
-         <x>470</x>
-         <y>180</y>
+         <x>480</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3202,8 +3374,8 @@ border: none;</string>
       <widget class="QLabel" name="label_126">
        <property name="geometry">
         <rect>
-         <x>230</x>
-         <y>180</y>
+         <x>240</x>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3215,8 +3387,8 @@ border: none;</string>
       <widget class="QLabel" name="label_135">
        <property name="geometry">
         <rect>
-         <x>530</x>
-         <y>120</y>
+         <x>540</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3228,8 +3400,8 @@ border: none;</string>
       <widget class="QLabel" name="label_128">
        <property name="geometry">
         <rect>
-         <x>410</x>
-         <y>120</y>
+         <x>420</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3241,8 +3413,8 @@ border: none;</string>
       <widget class="QLabel" name="label_136">
        <property name="geometry">
         <rect>
-         <x>310</x>
-         <y>180</y>
+         <x>320</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3254,8 +3426,8 @@ border: none;</string>
       <widget class="QLabel" name="label_127">
        <property name="geometry">
         <rect>
-         <x>170</x>
-         <y>120</y>
+         <x>180</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3267,8 +3439,8 @@ border: none;</string>
       <widget class="QLabel" name="label_115">
        <property name="geometry">
         <rect>
-         <x>430</x>
-         <y>180</y>
+         <x>440</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3280,8 +3452,8 @@ border: none;</string>
       <widget class="QLabel" name="label_134">
        <property name="geometry">
         <rect>
-         <x>490</x>
-         <y>120</y>
+         <x>500</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3293,8 +3465,8 @@ border: none;</string>
       <widget class="QLabel" name="label_129">
        <property name="geometry">
         <rect>
-         <x>390</x>
-         <y>180</y>
+         <x>400</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3306,8 +3478,8 @@ border: none;</string>
       <widget class="QLabel" name="label_117">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>120</y>
+         <x>260</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3319,8 +3491,8 @@ border: none;</string>
       <widget class="QLabel" name="label_132">
        <property name="geometry">
         <rect>
-         <x>270</x>
-         <y>180</y>
+         <x>280</x>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3332,8 +3504,8 @@ border: none;</string>
       <widget class="QLabel" name="label_133">
        <property name="geometry">
         <rect>
-         <x>190</x>
-         <y>180</y>
+         <x>200</x>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3345,8 +3517,8 @@ border: none;</string>
       <widget class="QLabel" name="label_124">
        <property name="geometry">
         <rect>
-         <x>570</x>
-         <y>120</y>
+         <x>580</x>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3358,8 +3530,8 @@ border: none;</string>
       <widget class="QLabel" name="label_122">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>180</y>
+         <x>110</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3371,8 +3543,8 @@ border: none;</string>
       <widget class="QLabel" name="label_116">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>180</y>
+         <x>160</x>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3384,8 +3556,8 @@ border: none;</string>
       <widget class="QLabel" name="label_131">
        <property name="geometry">
         <rect>
-         <x>210</x>
-         <y>120</y>
+         <x>220</x>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3397,8 +3569,8 @@ border: none;</string>
       <widget class="QLabel" name="label_138">
        <property name="geometry">
         <rect>
-         <x>350</x>
-         <y>180</y>
+         <x>360</x>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -3410,8 +3582,8 @@ border: none;</string>
       <widget class="QLabel" name="label_130">
        <property name="geometry">
         <rect>
-         <x>550</x>
-         <y>180</y>
+         <x>560</x>
+         <y>170</y>
          <width>41</width>
          <height>16</height>
         </rect>
@@ -3423,10 +3595,10 @@ border: none;</string>
       <widget class="QPushButton" name="gps_SW">
        <property name="geometry">
         <rect>
-         <x>500</x>
-         <y>20</y>
-         <width>121</width>
-         <height>51</height>
+         <x>490</x>
+         <y>10</y>
+         <width>141</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -3443,13 +3615,16 @@ border: none;</string>
        </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>9</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202,212,223);</string>
+       </property>
        <property name="text">
-        <string>Disable</string>
+        <string>DISABLE SENSOR</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -3458,8 +3633,8 @@ border: none;</string>
       <widget class="QPushButton" name="gps_b_22">
        <property name="geometry">
         <rect>
-         <x>540</x>
-         <y>140</y>
+         <x>550</x>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -3475,55 +3650,61 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>250</y>
-         <width>281</width>
+         <y>220</y>
+         <width>211</width>
          <height>21</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
+       </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&amp;quot;Low&amp;quot; Sampling rate from IMU Sensor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Low Activity Sampling Rate:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>370</y>
-         <width>291</width>
+         <y>280</y>
+         <width>211</width>
          <height>21</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
+       </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&amp;quot;High&amp;quot; Sampling rate from IMU Sensor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;High Activity Sampling Rate:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="gps_lowSamplingRateValue">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>250</y>
+         <x>260</x>
+         <y>220</y>
          <width>104</width>
-         <height>71</height>
+         <height>31</height>
         </rect>
        </property>
       </widget>
       <widget class="QTextEdit" name="gps_highSamplingRateValue">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>370</y>
+         <x>260</x>
+         <y>280</y>
          <width>104</width>
-         <height>71</height>
+         <height>31</height>
         </rect>
        </property>
       </widget>
       <widget class="QPushButton" name="gps_timeclear_button">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>120</y>
-         <width>61</width>
-         <height>21</height>
+         <x>30</x>
+         <y>130</y>
+         <width>81</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -3539,8 +3720,11 @@ border: none;</string>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202,212,223);</string>
+       </property>
        <property name="text">
-        <string>Clear</string>
+        <string>CLEAR</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -3549,10 +3733,10 @@ border: none;</string>
       <widget class="QLabel" name="gps_title">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>30</y>
+         <x>10</x>
+         <y>10</y>
          <width>431</width>
-         <height>51</height>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -3562,12 +3746,70 @@ border: none;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0,0,0);</string>
+        <string notr="true">color: rgb(0, 60, 108);</string>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#2b68ca; vertical-align:super;&quot;&gt;Global Positioning System&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color: rgb(0, 60, 108); vertical-align:super;&quot;&gt;Global Positioning System&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
+      <zorder>label_132</zorder>
+      <zorder>label_121</zorder>
+      <zorder>label_122</zorder>
+      <zorder>label_115</zorder>
+      <zorder>label_133</zorder>
+      <zorder>label_126</zorder>
+      <zorder>label_129</zorder>
+      <zorder>label_136</zorder>
+      <zorder>label_125</zorder>
+      <zorder>label_138</zorder>
+      <zorder>label_114</zorder>
+      <zorder>label_116</zorder>
+      <zorder>label_130</zorder>
+      <zorder>gpsPageDescription</zorder>
+      <zorder>gps_b_18</zorder>
+      <zorder>gps_b_16</zorder>
+      <zorder>gps_b_4</zorder>
+      <zorder>gps_b_20</zorder>
+      <zorder>gps_b_5</zorder>
+      <zorder>gps_b_21</zorder>
+      <zorder>gps_b_24</zorder>
+      <zorder>gps_b_2</zorder>
+      <zorder>gps_b_8</zorder>
+      <zorder>gps_b_19</zorder>
+      <zorder>gps_b_9</zorder>
+      <zorder>gps_b_6</zorder>
+      <zorder>gps_b_11</zorder>
+      <zorder>gps_b_23</zorder>
+      <zorder>gps_b_13</zorder>
+      <zorder>gps_b</zorder>
+      <zorder>gps_b_10</zorder>
+      <zorder>gps_b_17</zorder>
+      <zorder>gps_b_14</zorder>
+      <zorder>gps_b_3</zorder>
+      <zorder>gps_b_12</zorder>
+      <zorder>gps_b_7</zorder>
+      <zorder>gps_b_15</zorder>
+      <zorder>label_139</zorder>
+      <zorder>label_123</zorder>
+      <zorder>label_120</zorder>
+      <zorder>label_118</zorder>
+      <zorder>label_137</zorder>
+      <zorder>label_119</zorder>
+      <zorder>label_135</zorder>
+      <zorder>label_128</zorder>
+      <zorder>label_127</zorder>
+      <zorder>label_134</zorder>
+      <zorder>label_117</zorder>
+      <zorder>label_124</zorder>
+      <zorder>label_131</zorder>
+      <zorder>gps_SW</zorder>
+      <zorder>gps_b_22</zorder>
+      <zorder>label_2</zorder>
+      <zorder>label_9</zorder>
+      <zorder>gps_lowSamplingRateValue</zorder>
+      <zorder>gps_highSamplingRateValue</zorder>
+      <zorder>gps_timeclear_button</zorder>
+      <zorder>gps_title</zorder>
      </widget>
      <widget class="QWidget" name="ekgConfigPage">
       <widget class="QLabel" name="ekgPageDescription">
@@ -3576,7 +3818,7 @@ border: none;</string>
          <x>10</x>
          <y>50</y>
          <width>481</width>
-         <height>31</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="font">
@@ -4192,7 +4434,7 @@ border-width:1px;</string>
          <x>160</x>
          <y>170</y>
          <width>21</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -4211,7 +4453,7 @@ border-width:1px;</string>
          <x>110</x>
          <y>170</y>
          <width>31</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="lineWidth">
@@ -4230,7 +4472,7 @@ border-width:1px;</string>
          <x>360</x>
          <y>170</y>
          <width>31</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4243,7 +4485,7 @@ border-width:1px;</string>
          <x>520</x>
          <y>170</y>
          <width>31</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4256,7 +4498,7 @@ border-width:1px;</string>
          <x>600</x>
          <y>170</y>
          <width>31</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4269,7 +4511,7 @@ border-width:1px;</string>
          <x>320</x>
          <y>170</y>
          <width>31</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4295,7 +4537,7 @@ border-width:1px;</string>
          <x>480</x>
          <y>170</y>
          <width>31</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4321,7 +4563,7 @@ border-width:1px;</string>
          <x>200</x>
          <y>170</y>
          <width>21</width>
-         <height>13</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="autoFillBackground">
@@ -4343,7 +4585,7 @@ border-width:1px;</string>
          <x>280</x>
          <y>170</y>
          <width>21</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4356,7 +4598,7 @@ border-width:1px;</string>
          <x>240</x>
          <y>170</y>
          <width>21</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4408,7 +4650,7 @@ border-width:1px;</string>
          <x>560</x>
          <y>170</y>
          <width>41</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4486,7 +4728,7 @@ border-width:1px;</string>
          <x>400</x>
          <y>170</y>
          <width>31</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4499,7 +4741,7 @@ border-width:1px;</string>
          <x>440</x>
          <y>170</y>
          <width>31</width>
-         <height>15</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -4560,6 +4802,9 @@ border-width:1px;</string>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202, 212, 223);</string>
+       </property>
        <property name="text">
         <string>DISABLE SENSOR</string>
        </property>
@@ -4589,6 +4834,9 @@ border-width:1px;</string>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202, 212, 223);</string>
+       </property>
        <property name="text">
         <string>CLEAR</string>
        </property>
@@ -4615,140 +4863,7 @@ border-width:1px;</string>
         <string notr="true">color: rgb(0, 60, 108);</string>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#003c6c; vertical-align:super;&quot;&gt;Electocardiogram&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QGraphicsView" name="topHeadingBackground_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>470</y>
-         <width>691</width>
-         <height>61</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(60, 60, 60);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="completeButton">
-       <property name="geometry">
-        <rect>
-         <x>510</x>
-         <y>480</y>
-         <width>121</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="palette">
-        <palette>
-         <active>
-          <colorrole role="Button">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-          <colorrole role="Window">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </active>
-         <inactive>
-          <colorrole role="Button">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-          <colorrole role="Window">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </inactive>
-         <disabled>
-          <colorrole role="Button">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-          <colorrole role="Window">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>152</red>
-             <green>162</green>
-             <blue>173</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </disabled>
-        </palette>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>COMPLETE</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#003c6c; vertical-align:super;&quot;&gt;Electrocardiogram&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_144">
@@ -4782,7 +4897,7 @@ border-width:1px;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(172, 182, 193);</string>
+        <string notr="true">background-color: rgb(202, 212, 223);</string>
        </property>
        <property name="currentText">
         <string>Bypass (0 Hz)</string>
@@ -4839,7 +4954,7 @@ border-width:1px;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(172, 182, 193);</string>
+        <string notr="true">background-color: rgb(202, 212, 223);</string>
        </property>
        <item>
         <property name="text">
@@ -4914,85 +5029,6 @@ border-width:1px;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QLineEdit" name="storageConsumption_Text_2">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>480</y>
-         <width>51</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(60, 60, 60);
-color:rgb(152, 162, 173);
-border:none;</string>
-       </property>
-       <property name="text">
-        <string>92 Days</string>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="storageConsumption_Text_3">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>500</y>
-         <width>31</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(60, 60, 60);
-color:rgb(152, 162, 173);
-border:none;</string>
-       </property>
-       <property name="text">
-        <string>78%</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_estPWR_2">
-       <property name="geometry">
-        <rect>
-         <x>-30</x>
-         <y>480</y>
-         <width>158</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(60, 60, 60);
-color:rgb(253, 199, 0);</string>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#d9a829;&quot;&gt;Battery Lifetime:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_181">
-       <property name="geometry">
-        <rect>
-         <x>-30</x>
-         <y>500</y>
-         <width>158</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(60, 60, 60);
-color:rgb(253, 199, 0);</string>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#f1b535;&quot;&gt;Storage Capacity:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
       <zorder>label_26</zorder>
       <zorder>label_53</zorder>
       <zorder>label_60</zorder>
@@ -5018,7 +5054,6 @@ color:rgb(253, 199, 0);</string>
       <zorder>label_24</zorder>
       <zorder>label_44</zorder>
       <zorder>label_62</zorder>
-      <zorder>topHeadingBackground_2</zorder>
       <zorder>ekgPageDescription</zorder>
       <zorder>ekg_b_18</zorder>
       <zorder>ekg_b_16</zorder>
@@ -5048,26 +5083,21 @@ color:rgb(253, 199, 0);</string>
       <zorder>ekg_SW</zorder>
       <zorder>ekg_timeclear_button</zorder>
       <zorder>xcel_title_2</zorder>
-      <zorder>completeButton</zorder>
       <zorder>label_144</zorder>
       <zorder>ekg_LPfreqBox</zorder>
       <zorder>label_143</zorder>
       <zorder>ekg_gainBox</zorder>
       <zorder>label_142</zorder>
       <zorder>gridLayoutWidget</zorder>
-      <zorder>storageConsumption_Text_2</zorder>
-      <zorder>storageConsumption_Text_3</zorder>
-      <zorder>label_estPWR_2</zorder>
-      <zorder>label_181</zorder>
      </widget>
      <widget class="QWidget" name="tempConfigPage">
       <widget class="QLabel" name="tempPageDescription">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>80</y>
-         <width>541</width>
-         <height>31</height>
+         <x>10</x>
+         <y>50</y>
+         <width>401</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="font">
@@ -5089,7 +5119,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5105,7 +5135,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>150</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5121,7 +5151,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>170</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5137,7 +5167,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5153,7 +5183,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>210</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5169,7 +5199,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>230</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5185,7 +5215,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>250</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5201,7 +5231,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>270</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5217,7 +5247,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>290</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5233,7 +5263,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>310</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5249,7 +5279,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>330</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5265,7 +5295,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>350</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5281,7 +5311,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>370</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5297,7 +5327,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>390</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5313,7 +5343,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>410</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5329,7 +5359,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>430</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5345,7 +5375,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>450</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5361,7 +5391,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>470</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5377,7 +5407,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>490</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5393,7 +5423,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>510</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5409,7 +5439,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>530</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5425,7 +5455,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>550</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5441,7 +5471,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>570</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5457,7 +5487,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>590</x>
-         <y>140</y>
+         <y>130</y>
          <width>21</width>
          <height>41</height>
         </rect>
@@ -5473,7 +5503,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>110</x>
-         <y>180</y>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5486,7 +5516,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>140</x>
-         <y>120</y>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5499,7 +5529,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>180</y>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5512,7 +5542,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>180</x>
-         <y>120</y>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5525,7 +5555,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>200</x>
-         <y>180</y>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5538,7 +5568,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>220</x>
-         <y>120</y>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5551,7 +5581,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>240</x>
-         <y>180</y>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5564,7 +5594,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>260</x>
-         <y>120</y>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5577,7 +5607,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>280</x>
-         <y>180</y>
+         <y>170</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5590,7 +5620,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>300</x>
-         <y>120</y>
+         <y>110</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -5603,7 +5633,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>320</x>
-         <y>180</y>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5616,7 +5646,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>360</x>
-         <y>180</y>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5629,7 +5659,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>340</x>
-         <y>120</y>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5642,7 +5672,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>400</x>
-         <y>180</y>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5655,7 +5685,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>420</x>
-         <y>120</y>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5668,7 +5698,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>480</x>
-         <y>180</y>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5681,7 +5711,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>380</x>
-         <y>120</y>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5694,7 +5724,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>440</x>
-         <y>180</y>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5707,7 +5737,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>120</y>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5720,7 +5750,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>560</x>
-         <y>180</y>
+         <y>170</y>
          <width>41</width>
          <height>16</height>
         </rect>
@@ -5733,7 +5763,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>580</x>
-         <y>120</y>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5746,7 +5776,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>500</x>
-         <y>120</y>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5759,7 +5789,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>600</x>
-         <y>180</y>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5772,7 +5802,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>520</x>
-         <y>180</y>
+         <y>170</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5785,7 +5815,7 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>540</x>
-         <y>120</y>
+         <y>110</y>
          <width>31</width>
          <height>16</height>
         </rect>
@@ -5798,34 +5828,34 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>150</y>
-         <width>91</width>
+         <y>100</y>
+         <width>101</width>
          <height>20</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Time&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Active Hours:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_141">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>20</x>
          <y>220</y>
          <width>151</width>
          <height>20</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Sampling Period (s)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Sampling Period (s):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="temp_samplePeriod">
        <property name="geometry">
         <rect>
-         <x>160</x>
+         <x>190</x>
          <y>220</y>
-         <width>113</width>
+         <width>61</width>
          <height>20</height>
         </rect>
        </property>
@@ -5836,10 +5866,10 @@ color:rgb(253, 199, 0);</string>
       <widget class="QPushButton" name="temp_SW">
        <property name="geometry">
         <rect>
-         <x>510</x>
-         <y>20</y>
-         <width>121</width>
-         <height>51</height>
+         <x>490</x>
+         <y>10</y>
+         <width>141</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -5856,13 +5886,16 @@ color:rgb(253, 199, 0);</string>
        </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>9</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202,212,223);</string>
+       </property>
        <property name="text">
-        <string>Disable</string>
+        <string>DISABLE SENSOR</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -5871,10 +5904,10 @@ color:rgb(253, 199, 0);</string>
       <widget class="QLabel" name="temp_warnLABEL">
        <property name="geometry">
         <rect>
-         <x>280</x>
-         <y>210</y>
+         <x>260</x>
+         <y>220</y>
          <width>141</width>
-         <height>31</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -5885,9 +5918,9 @@ color:rgb(253, 199, 0);</string>
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>120</y>
-         <width>61</width>
-         <height>21</height>
+         <y>130</y>
+         <width>81</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -5903,8 +5936,11 @@ color:rgb(253, 199, 0);</string>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(202,212,223);</string>
+       </property>
        <property name="text">
-        <string>Clear</string>
+        <string>CLEAR</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -5913,8 +5949,8 @@ color:rgb(253, 199, 0);</string>
       <widget class="QLabel" name="xcel_title_3">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>30</y>
+         <x>10</x>
+         <y>10</y>
          <width>351</width>
          <height>41</height>
         </rect>
@@ -5929,9 +5965,66 @@ color:rgb(253, 199, 0);</string>
         <string notr="true">color: rgb(0,0,0);</string>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#2b68ca; vertical-align:super;&quot;&gt;Temperature &amp;amp; Light&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:rgb(0,60,108); vertical-align:super;&quot;&gt;Temperature &amp;amp; Light&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
+      <zorder>label_19</zorder>
+      <zorder>label_28</zorder>
+      <zorder>label_15</zorder>
+      <zorder>label_40</zorder>
+      <zorder>label_36</zorder>
+      <zorder>label_30</zorder>
+      <zorder>label_27</zorder>
+      <zorder>label_39</zorder>
+      <zorder>label_21</zorder>
+      <zorder>label_34</zorder>
+      <zorder>label_32</zorder>
+      <zorder>label_13</zorder>
+      <zorder>label_17</zorder>
+      <zorder>tempPageDescription</zorder>
+      <zorder>b</zorder>
+      <zorder>b_2</zorder>
+      <zorder>b_3</zorder>
+      <zorder>b_4</zorder>
+      <zorder>b_5</zorder>
+      <zorder>b_6</zorder>
+      <zorder>b_7</zorder>
+      <zorder>b_8</zorder>
+      <zorder>b_9</zorder>
+      <zorder>b_10</zorder>
+      <zorder>b_11</zorder>
+      <zorder>b_12</zorder>
+      <zorder>b_13</zorder>
+      <zorder>b_14</zorder>
+      <zorder>b_15</zorder>
+      <zorder>b_16</zorder>
+      <zorder>b_17</zorder>
+      <zorder>b_18</zorder>
+      <zorder>b_19</zorder>
+      <zorder>b_20</zorder>
+      <zorder>b_21</zorder>
+      <zorder>b_22</zorder>
+      <zorder>b_23</zorder>
+      <zorder>b_24</zorder>
+      <zorder>label_14</zorder>
+      <zorder>label_16</zorder>
+      <zorder>label_18</zorder>
+      <zorder>label_20</zorder>
+      <zorder>label_22</zorder>
+      <zorder>label_29</zorder>
+      <zorder>label_31</zorder>
+      <zorder>label_33</zorder>
+      <zorder>label_35</zorder>
+      <zorder>label_37</zorder>
+      <zorder>label_38</zorder>
+      <zorder>label_41</zorder>
+      <zorder>label_23</zorder>
+      <zorder>label_141</zorder>
+      <zorder>temp_samplePeriod</zorder>
+      <zorder>temp_SW</zorder>
+      <zorder>temp_warnLABEL</zorder>
+      <zorder>temp_timeclear_button</zorder>
+      <zorder>xcel_title_3</zorder>
      </widget>
     </widget>
     <widget class="QPushButton" name="gpsButton">
@@ -6125,46 +6218,14 @@ border: none;</string>
      </property>
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>530</y>
+       <x>50</x>
+       <y>370</y>
        <width>121</width>
        <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(132, 142, 155);</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_180">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>520</y>
-       <width>131</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:7pt; font-weight:600; color:#ff0000;&quot;&gt;Battery Capacity (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_179">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>390</y>
-       <width>90</width>
-       <height>10</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(60, 60, 60);</string>
-     </property>
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:6pt; font-weight:600; color:#f1b535;&quot;&gt;Esimated Storage (kB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="storageEst_Text">
@@ -6180,35 +6241,11 @@ border: none;</string>
       <string notr="true">background-color:rgb(152, 162, 173);</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_estPWR">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>400</y>
-       <width>97</width>
-       <height>10</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>7</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(60, 60, 60);</string>
-     </property>
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:6pt; font-weight:600; color:#d9a829;&quot;&gt;Esimated Power (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="pwrEst_Text">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>410</y>
+       <x>20</x>
+       <y>430</y>
        <width>117</width>
        <height>16</height>
       </rect>
@@ -6235,8 +6272,8 @@ border:none;</string>
     <widget class="QLineEdit" name="storageConsumption_Text">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>470</y>
+       <x>30</x>
+       <y>460</y>
        <width>91</width>
        <height>22</height>
       </rect>
@@ -6245,10 +6282,224 @@ border:none;</string>
       <string notr="true">background-color:rgb(152, 162, 173);</string>
      </property>
     </widget>
-    <zorder>ConfigureView</zorder>
-    <zorder>topHeadingBackground</zorder>
-    <zorder>SensorHeadingLabel</zorder>
+    <widget class="QLineEdit" name="edit_batteryLifetime">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>510</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(60, 60, 60);
+color:rgb(152, 162, 173);
+border:none;</string>
+     </property>
+     <property name="text">
+      <string>92 Days</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QGraphicsView" name="statsFooterBackground">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>500</y>
+       <width>691</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(60, 60, 60);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_storageCapacity">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>530</y>
+       <width>158</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(60, 60, 60);
+color:rgb(253, 199, 0);</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#f1b535;&quot;&gt;Storage Capacity:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edit_storageCapacity">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>530</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(60, 60, 60);
+color:rgb(152, 162, 173);
+border:none;</string>
+     </property>
+     <property name="text">
+      <string>78%</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_batteryLifetime">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>510</y>
+       <width>158</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(60, 60, 60);
+color:rgb(253, 199, 0);</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#d9a829;&quot;&gt;Battery Lifetime:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="completeButton">
+     <property name="geometry">
+      <rect>
+       <x>720</x>
+       <y>510</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>152</red>
+           <green>162</green>
+           <blue>173</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>COMPLETE</string>
+     </property>
+    </widget>
     <zorder>ConfigurePages</zorder>
+    <zorder>statsFooterBackground</zorder>
+    <zorder>label_storageCapacity</zorder>
+    <zorder>label_batteryLifetime</zorder>
+    <zorder>ConfigureView</zorder>
+    <zorder>SensorHeadingLabel</zorder>
     <zorder>backButton</zorder>
     <zorder>gpsButton</zorder>
     <zorder>xcelButton</zorder>
@@ -6256,13 +6507,14 @@ border:none;</string>
     <zorder>temperatureButton</zorder>
     <zorder>magButton</zorder>
     <zorder>batterySizeText</zorder>
-    <zorder>label_180</zorder>
-    <zorder>label_179</zorder>
     <zorder>storageEst_Text</zorder>
-    <zorder>label_estPWR</zorder>
     <zorder>pwrEst_Text</zorder>
     <zorder>pwrConsumption_Text</zorder>
     <zorder>storageConsumption_Text</zorder>
+    <zorder>edit_batteryLifetime</zorder>
+    <zorder>edit_storageCapacity</zorder>
+    <zorder>completeButton</zorder>
+    <zorder>topHeadingBackground</zorder>
    </widget>
    <widget class="QWidget" name="DataRetrieval">
     <widget class="QGraphicsView" name="adminTopHeadingBackground">

@@ -78,13 +78,13 @@ void maindialog::on_ekg_gainBox_currentIndexChanged(int index)
 void maindialog::on_ekg_SW_clicked()
 {
     QString title = ui->ekg_SW->text();
-    if(title == "Enable")
+    if(title == "ENABLE SENSOR")
     {
         ekg_Disable(false);
         ekg_disable_button(false);
-        ui->ekg_SW->setText("Disable");
+        ui->ekg_SW->setText("DISABLE SENSOR");
     }else{
-        ui->ekg_SW->setText("Enable");
+        ui->ekg_SW->setText("ENABLE SENSOR");
         ekg_Disable(true);
         ekg_disable_button(true);
     }
@@ -130,10 +130,10 @@ void maindialog::ekg_hour_clicked()
     bool clicked = button->property("clicked").toBool();
     button->setProperty("clicked", !clicked);
         if(!clicked) {
-            button->setStyleSheet("background-color:rgb(253,199,0);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");//background-color: rgb(172, 182, 193);
+            button->setStyleSheet("background-color:rgb(253,199,0);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             configuration_settings.ekg_config.ekg_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
-            button->setStyleSheet("background-color:rgb(140, 140, 140)");
+            button->setStyleSheet("background-color:rgb(202, 212, 223);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             configuration_settings.ekg_config.ekg_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 }
@@ -242,9 +242,9 @@ void maindialog::ekg_disable_button(bool disable)
             if(disable){
                 configuration_settings.ekg_config.ekg_activeHour = 0;
                 button->setProperty("clicked", false);
-                button->setStyleSheet("background-color:rgb(105, 105,105)");
+                button->setStyleSheet("background-color:rgb(142, 152, 163);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             }else{
-                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+                button->setStyleSheet("background-color:rgb(202, 212, 223);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             }
         }
     }
@@ -280,19 +280,7 @@ void maindialog::on_ekg_timeclear_button_clicked()
         {
             configuration_settings.ekg_config.ekg_activeHour = 0;
             button->setProperty("clicked", false);
-            button->setStyleSheet("background-color:rgb(172, 182, 193);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
-
-
-            /*
-             *background-color: rgb(172, 182, 193);
-border:none;
-border-right-style:solid;
-border-left-style:solid;
-border-color:rgb(132, 142, 153);
-border-width:1px;
-border-top-style:none;
-border-bottom-style:none;
-             */
+            button->setStyleSheet("background-color:rgb(202, 212, 223);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
         }
     }
 }

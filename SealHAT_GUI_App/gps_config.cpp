@@ -32,10 +32,10 @@ void maindialog::gps_hour_clicked()
     bool clicked = button->property("clicked").toBool();
     button->setProperty("clicked", !clicked);
         if(!clicked) {
-            button->setStyleSheet("background-color:rgb(34,139,34)");
+            button->setStyleSheet("background-color:rgb(253,199,0);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");//background-color: rgb(172, 182, 193);
             configuration_settings.gps_config.gps_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
-            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            button->setStyleSheet("background-color:rgb(202, 212, 223);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             configuration_settings.gps_config.gps_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
 }
@@ -82,12 +82,12 @@ void maindialog::gps_disable(bool disable)
 void maindialog::on_gps_SW_clicked()
 {
     QString title = ui->gps_SW->text();
-    if(title == "Enable")
+    if(title == "ENABLE SENSOR")
     {
         gps_disable(false);
-        ui->gps_SW->setText("Disable");
+        ui->gps_SW->setText("DISABLE SENSOR");
     }else{
-        ui->gps_SW->setText("Enable");
+        ui->gps_SW->setText("ENABLE SENSOR");
         gps_disable(true);
     }
     powerEstimation();
@@ -130,9 +130,9 @@ void maindialog::gps_disable_button(bool disable)
                                     GPS_PSMOO30S                                                // profile
                                 };
                 button->setProperty("clicked", false);
-                button->setStyleSheet("background-color:rgb(105, 105,105)");
+                button->setStyleSheet("background-color:rgb(142, 152, 163);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             }else{
-                button->setStyleSheet("background-color:rgb(152, 162, 173)");
+                button->setStyleSheet("background-color:rgb(202, 212, 223);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             }
         }
     }
@@ -146,7 +146,7 @@ void maindialog::on_gps_timeclear_button_clicked()
         {
             configuration_settings.gps_config.gps_activeHour = 0;
             button->setProperty("clicked", false);
-            button->setStyleSheet("background-color:rgb(152, 162, 173)");
+            button->setStyleSheet("background-color:rgb(202, 212, 223);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
         }
     }
     //powerEstimation();
