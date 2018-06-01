@@ -32,11 +32,19 @@ void maindialog::serialReceived()
 
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 
-    stream >> txData.startSymbol;
+    quint32 temp_startSymbol;
+    quint32 temp_crc;
+
+    stream >>  temp_startSymbol;
+
     for(int i=0;i<PAGE_SIZE_EXTRA; i++){
         stream >> txData.data[i];
     }
-    stream >> txData.crc;
+
+    stream >> temp_crc;
+
+    txData.startSymbol = temp_startSymbol;
+    txData.crc = temp_crc;
 
     return stream;
 }

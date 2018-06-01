@@ -32,8 +32,13 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     display_setReadOnly();
     configureSettingListDisplay();
 
+    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+        {
+            ui->serialPort_comboBox->addItem(serialPortInfo.portName());
+        }
+
     //sendSerial_Config();
-    receiveSerial_samples();
+    //receiveSerial_samples();
 
     //receiveSerial_samples();
 

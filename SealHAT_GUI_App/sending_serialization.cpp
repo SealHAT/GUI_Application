@@ -12,16 +12,26 @@
 void maindialog::sendSerial_Config(){
     serialSetup();
     QByteArray configData;
-    configData[0] = 1;
-    configData[1] = 1;
-    configData[2] = 1;
-    //configData = config_serialize();
+    configData = config_serialize();
 
 
 
-    microSerial->write(configData);
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() <<bytesWritten << endl;
+
+    if (bytesWritten == -1) {
+            qDebug() <<"Failed to write the data to port" << endl;
+        } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+
+        } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+        }
+
+    qDebug() <<"Data successfully sent to port"<< endl;
+
 }
-
 
 QByteArray maindialog::config_serialize(){
     QByteArray byteArray;
@@ -55,6 +65,11 @@ void maindialog::serialSetup()
 
     microSerial = new QSerialPort(this);
 
+    //microSerial_port_name = ui->serialPort_comboBox->currentText();
+    //microSerial_is_available = true;
+
+
+
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
     {
         if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
@@ -63,7 +78,8 @@ void maindialog::serialSetup()
             {
                 if(serialPortInfo.productIdentifier() == microSerial_product_id)
                 {
-                    microSerial_port_name = serialPortInfo.portName();
+                    //microSerial_port_name = serialPortInfo.portName();
+                    microSerial_port_name = ui->serialPort_comboBox->currentText();
                     microSerial_is_available = true;
                 }
             }

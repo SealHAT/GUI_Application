@@ -268,6 +268,8 @@ void maindialog::on_completeButton_clicked()
         ui->welcomeHeadingLabel->setFont(f);
     }else{
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+        sendSerial_Config();
+
         //Need to fill in config id
         //QDate date;
         //QTime time;
@@ -278,7 +280,7 @@ void maindialog::on_completeButton_clicked()
 
 
 
-        sendSerial_Config();//load configuration setting back to microcontroller
+        //sendSerial_Config();//load configuration setting back to microcontroller
     }
 }
 
