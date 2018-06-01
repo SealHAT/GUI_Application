@@ -13,7 +13,8 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
-void maindialog::submitConfig(){
+void maindialog::submitConfig()
+{
     QString acc_timeName = "Accelerometer Time";
     uint32_t acc_timeValue = configuration_settings.accelerometer_config.acc_activeHour;
     QString acc_scaleName = "Accelerometer Scale";
@@ -68,16 +69,6 @@ void maindialog::submitConfig(){
     config.insert(ekg_lpfreqName,ekg_lpfreqValue);
 
     config.insert(gps_timeName,gps_timeValue);
-/*
-    QMapIterator<QString, uint32_t> iter(config);
-
-        while(iter.hasNext())
-        {
-            iter.next();
-            qDebug() << iter.key() << " : " << iter.value();
-        }*/
-
-
 }
 
 void maindialog::on_saveButton_clicked()
@@ -133,16 +124,14 @@ void maindialog::on_loadButton_clicked()
             config.clear();   // clear existing contacts
             in >> config;
             if (config.isEmpty()) {
-                        QMessageBox::information(this, tr("No contacts in file"),
+                        QMessageBox::information(this, tr("No content in file"),
                             tr("The file you are attempting to open contains no settings."));
-                    } else {
-                            collectLoadingData_fromFile();
-                            configureSettingListDisplay();
-                    }
+            } else {
+                    collectLoadingData_fromFile();
+                    configureSettingListDisplay();
+            }
     }
 }
-
-
 
 /**************************************************************
  * FUNCTION: configureSettingListDisplay
@@ -180,15 +169,8 @@ void maindialog::configureSettingListDisplay()
     QString acc_thresholdName = "       Threshold : ";
     QString sensor_thresholdValue = QString::number(((double)configuration_settings.accelerometer_config.acc_threshold/1000), 'f', 2) + " g ";
 
-    ui->xcel_configList->setText(acc_timeName + acc_timeValue +
-                                acc_scaleName + acc_scaleValue +
-                                acc_powerMode +
-                                acc_freqName + acc_freqValue +
-                                acc_sensitivityName + sensor_sensitivityValue +
-                                acc_thresholdName + sensor_thresholdValue);
-
-
-
+    ui->xcel_configList->setText(acc_timeName + acc_timeValue + acc_scaleName + acc_scaleValue + acc_powerMode + acc_freqName + acc_freqValue +
+                                 acc_sensitivityName + sensor_sensitivityValue + acc_thresholdName + sensor_thresholdValue);
 
     QString mag_timeName = "Magnetometer Time : ";
     QString mag_timeValue = QString::number(num_Hours(configuration_settings.magnetometer_config.mag_activeHour)) + " h ";
@@ -211,48 +193,30 @@ void maindialog::configureSettingListDisplay()
     QString ekg_lpfreqName = "                   EKG Low Pass Frequency : ";
     QString ekg_lpfreqValue = QString::number(ekg_lowpassFrequencyValue[configuration_settings.ekg_config.ekg_lowpassFreq]) + " Hz ";
 
-    qDebug() << "ekg_spsValue is" << ekg_spsValue << endl;
-    qDebug() << "ekg_gainValue is" << ekg_gainValue << endl;
-    qDebug() << "ekg_lpfreqValue is" << ekg_lpfreqValue << endl;
-    ui->ekg_configList->setText(ekg_timeName + ekg_timeValue +
-                                ekg_spsName + ekg_spsValue +
-                                ekg_gainName + ekg_gainValue +
-                                ekg_lpfreqName + ekg_lpfreqValue
-                                );
-
+    ui->ekg_configList->setText(ekg_timeName + ekg_timeValue + ekg_spsName + ekg_spsValue + ekg_gainName + ekg_gainValue + ekg_lpfreqName + ekg_lpfreqValue);
 
     QString templight_timeName = "Temperature & Light Time : ";
     QString templight_timeValue = QString::number(num_Hours(configuration_settings.temperature_config.temp_activeHour)) + " h ";
     QString templight_sampleperiodName = "\nTemperature and Light Sample Period : ";
     QString templight_sampleperiodValue = QString::number(configuration_settings.temperature_config.temp_samplePeriod) + " s ";
-    ui->temp_configList->setText(templight_timeName + templight_timeValue +
-                                templight_sampleperiodName + templight_sampleperiodValue
-                                );
+    ui->temp_configList->setText(templight_timeName + templight_timeValue + templight_sampleperiodName + templight_sampleperiodValue);
 
     QString gps_timeName = "GPS Time : ";
     QString gps_timeValue = QString::number(num_Hours(configuration_settings.gps_config.gps_activeHour)) + " h ";
     ui->gps_configList->setText(gps_timeName + gps_timeValue);
 }
 
-void maindialog::on_completeButton_clicked()
+void maindialog::on_configureHomeButton_clicked()
 {
-    if(ui->completeButton->text() == "COMPLETE"){
-        goto_DEV();
-        setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
-        configureSettingListDisplay();
-       ui->welcomeHeadingLabel->setText("Completed configuration List");
-       QFont f;
-       f.setPointSize(36);
-       ui->welcomeHeadingLabel->setFont(f);
+    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+    ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
 
-       ui->completeButton->setText("SUBMIT");
-       ui->backButton->hide();
-    }else{
-        setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
-        QMessageBox::information(this, tr("Submission completed"),
-            tr("Thank you! Configuration Setting submitted!"));
-
-        ;//load configuration setting back to microcontroller
-    }
+    //show list of current configuration settings
+    configureSettingListDisplay();
 }
 
+/*setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+QMessageBox::information(this, tr("Submission completed"),
+    tr("Thank you! Configuration Setting submitted!"));
+
+//load configuration setting back to microcontroller*/

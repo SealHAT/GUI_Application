@@ -9,6 +9,10 @@
 #define SEAL_TYPES_H_
 
 #define SEAL_HAT_VERSION        (1.0)
+#define SEALHAT_BASE_YEAR       (2018)
+
+#define PAGE_SIZE_EXTRA         (2176)              /* Maximum NAND Flash page size (*including* extra space) */
+#define PAGE_SIZE_LESS          (2048)              /* Maximum NAND Flash page size (*excluding* extra space) */
 
 #define MSG_START_SYM           (0xADDE)
 
@@ -138,5 +142,12 @@ struct SENSOR_CONFIGS {
     Ekg_TX          ekg_config;           // configuration data for the EKG
     GPS_TX          gps_config;           // configuration data for the GPS
 };
+
+/** Packet that gets sent over USB to the host computer **/
+typedef struct __attribute__((__packed__)){
+    uint32_t startSymbol;           // start symbol for the data transmission
+    uint8_t  data[PAGE_SIZE_LESS]; // one page of data from flash
+    uint32_t crc;                   // crc32 of the DATA (not the start symbol) using IEEE CRC32 polynomial
+} DATA_TRANSMISSION_t;
 
 #endif /* SEAL_TYPES_H_ */

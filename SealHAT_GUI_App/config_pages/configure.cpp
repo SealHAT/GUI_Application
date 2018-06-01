@@ -18,23 +18,10 @@
 void maindialog::on_backButton_clicked()
 {
     // Sets the dialog back to a login screen
-    this->setFixedSize(421, 421);
-
+    this->setFixedSize(350, 350);
     ui->mainStacked->setCurrentIndex(WELCOME_MAIN_STACK);
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
-    ui->backButton->show();
-    ui->completeButton->setText("COMPLETE");
-    this->centerDialog();
 }
-
-void maindialog::goto_DEV()
-{
-    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
-    ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
-    ui->backButton->show();
-    ui->completeButton->setText("COMPLETE");
-}
-
 
 /**************************************************************
  * FUNCTION: on_temperatureButton_clicked
@@ -52,10 +39,7 @@ void maindialog::on_temperatureButton_clicked()
 {
     //set button colors. selected tab will be highlighted
     setActiveButtonColor(TEMPERATURE_CONFIGURE);
-
     ui->ConfigurePages->setCurrentIndex(TEMPERATURE_CONFIGURE);
-    ui->backButton->show();
-    ui->completeButton->setText("COMPLETE");
 }
 
 /**************************************************************
@@ -73,10 +57,7 @@ void maindialog::on_ekgButton_clicked()
 {
     //set button colors. selected tab will be highlighted
     setActiveButtonColor(EKG_CONFIGURE);
-
     ui->ConfigurePages->setCurrentIndex(EKG_CONFIGURE);
-    ui->backButton->show();
-    ui->completeButton->setText("COMPLETE");
 }
 
 /**************************************************************
@@ -92,23 +73,15 @@ void maindialog::on_ekgButton_clicked()
  **************************************************************/
 void maindialog::on_xcelButton_clicked()
 {
-
     setActiveButtonColor(XCEL_CONFIGURE);
-
     ui->ConfigurePages->setCurrentIndex(XCEL_CONFIGURE);
-    ui->backButton->show();
-    ui->completeButton->setText("COMPLETE");
 }
 
 /*Switch from ACC to MAG*/
 void maindialog::on_magButton_clicked()
 {
-
     setActiveButtonColor(MAG_CONFIGURE);
-
     ui->ConfigurePages->setCurrentIndex(MAG_CONFIGURE);
-    ui->backButton->show();
-    ui->completeButton->setText("COMPLETE");
 }
 /**************************************************************
  * FUNCTION: on_gpsButton_clicked
@@ -125,10 +98,7 @@ void maindialog::on_gpsButton_clicked()
 {
     //set button colors. selected tab will be highlighted
     setActiveButtonColor(GPS_CONFIGURE);
-
     ui->ConfigurePages->setCurrentIndex(GPS_CONFIGURE);
-    ui->backButton->show();
-    ui->completeButton->setText("COMPLETE");
 }
 
 /**************************************************************

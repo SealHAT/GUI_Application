@@ -204,7 +204,6 @@ public:
     ~maindialog();
 
 private slots:
-    void serialReceived();
 
 //Page switch
     void on_ekgButton_clicked();
@@ -212,16 +211,13 @@ private slots:
     void on_magButton_clicked();
     void on_xcelButton_clicked();
     void on_temperatureButton_clicked();
-
     void on_streamDataButton_clicked();
     void on_backButton_clicked(); //
     void on_configureDevOptionButton_clicked(); //
     void on_retrieveDataButton_clicked(); //
     void on_backButton_StreamPage_clicked();
-
     void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);
     void on_backButton_retrieveData_clicked();
-    void goto_DEV();
 
 //Main function control
     //void hour_clicked();
@@ -233,7 +229,6 @@ private slots:
 
 //Accelerometer
     void xcel_setDefault();
-
     void on_xcel_SW_clicked();
     void on_xcel_scaleBox_currentIndexChanged(int index);
     void on_xcel_pwrBox_currentIndexChanged(int);
@@ -245,42 +240,33 @@ private slots:
     void on_xcel_ZL_checkBox_clicked(bool checked);
     void on_xcel_ZH_checkBox_clicked(bool checked);
     void on_xcel_thres_editingFinished();
-
     void IMUxcel_Disable(bool disable);
     void xcel_disable_button(bool disable);
     void on_xcel_timeclear_button_clicked();
-
     void xcel_timeTable_control();
     void xcel_estimation_control();
     void xcel_hour_clicked();
     void xcel_changeMode();
     void xcel_checkTimetoEnable();
-
     void xcel_getloadData();
-
 
 //Magnetometer
     void mag_setDefault();
-
     void on_mag_SW_clicked();
     void on_mag_timeclear_button_clicked();
     void on_mag_pwrBox_currentIndexChanged(int);
     void on_mag_freqBox_currentIndexChanged(int);
-
     void IMUmag_Disable(bool disable);
     void mag_disable_button(bool disable);
-
     void mag_timeTable_control();
     void mag_estimation_control();
     void mag_hour_clicked();
     void mag_dataCollect();
     void mag_checkTimetoEnable();
-
     void mag_getloadData();
 
 //EKG
     void ekg_setDefault();
-
     void on_ekg_SW_clicked();
     void on_ekg_timeclear_button_clicked();
     void on_ekg_odr256_clicked();
@@ -288,53 +274,41 @@ private slots:
     void on_ekg_odr512_clicked();
     void on_ekg_gainBox_currentIndexChanged(int index);
     void on_ekg_LPfreqBox_currentIndexChanged(int index);
-
     void ekg_Disable(bool disable);
     void ekg_disable_button(bool disable);
-
     void ekg_timeTable_control();
     void ekg_estimation_control();
     void ekg_hour_clicked();
     void ekg_checkTimetoEnable();
-
     void ekg_getloadData();
 
 //GPS
-
     void gps_setDefault();
-
     void on_gps_SW_clicked();
     void on_gps_timeclear_button_clicked();
-
     void gps_disable(bool disable);
     void gps_disable_button(bool disable);
-
     void gps_timeTable_control();
     void gps_estimation_control();
     void gps_hour_clicked();
     void gps_checkTimetoEnable();
-
     void gps_getloadData();
 
 //Temperature
     void temp_setDefault();
-
     void on_temp_SW_clicked();
     void on_temp_timeclear_button_clicked();
     void on_temp_samplePeriod_editingFinished();
-
     void temp_disable(bool disable);
     void temp_disable_button(bool disable);
-
     void temp_timeTable_control();
     void temp_hour_clicked();
     void temp_checkTimetoEnable();
-
     void temp_getloadData();
 
 //Data-Retrival Page
     void on_chooseDestButton_clicked();
-    void on_completeButton_clicked();
+    void on_configureHomeButton_clicked();
     void on_storeData_destinationEdit_returnPressed();
 
 //Completed Configuration list setup and ready to submit
@@ -353,23 +327,31 @@ private slots:
     void powerEstimation();
     void storageEstimation();
     void generalEstimation();
-
     void on_batterySizeText_editingFinished();
 
-    void on_ekg_b_4_clicked();
-
-    void on_ekg_b_4_toggled(bool checked);
+//serial stuff
+    void on_pushButton_refreshCOM_clicked();
+    void refreshSerialPorts();
+    void receiveSerial_samples();
+    void data_deserialize(QByteArray& byteArray);
+    void serialReceived();
+    void sendSerial_Config();
+    QByteArray config_serialize();
+    void serialSetup();
 
 private:
     Ui::maindialog *ui;
     QMap<QString, uint32_t> config;
-    QSerialPort *microSerial;
-    static const quint16 microSerial_vendor_id = 1003;
-    static const quint16 microSerial_product_id = 9220;
 
     QString microSerial_port_name;
     bool microSerial_is_available;
 
+    QSerialPort *microSerial;
+    QByteArray serial_readData;
+    QString serialBuffer;
+    DATA_TRANSMISSION_t retrieve_data;
 };
+
+QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs);
 
 #endif // MAINDIALOG_H

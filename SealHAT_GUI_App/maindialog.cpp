@@ -37,81 +37,21 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     display_setReadOnly();
     configureSettingListDisplay();
 
-    microSerial = new QSerialPort(this);
-
-    /*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().length();
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
-        qDebug() << "Has Vender ID: " << serialPortInfo.hasVendorIdentifier();
-        if(serialPortInfo.hasVendorIdentifier()){
-            qDebug() << "Vender ID: " << serialPortInfo.vendorIdentifier();
-        }
-        qDebug() << "Has Product ID: " << serialPortInfo.hasProductIdentifier();
-        if(serialPortInfo.hasVendorIdentifier()){
-            qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
-        }
-         * Has Vender ID:  true
-         *  Vender ID:  1003
-         * Has Product ID:  true
-         * Product ID:  9220
-
-    }*/
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-    {
-        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
-        {
-            if(serialPortInfo.vendorIdentifier() == microSerial_vendor_id)
-            {
-                if(serialPortInfo.productIdentifier() == microSerial_product_id)
-                {
-                    microSerial_port_name = serialPortInfo.portName();
-                    microSerial_is_available = true;
-                }
-
-            }
-        }
-    }
-
-    if(microSerial_is_available)
-    {
-        //open and configure the port
-        microSerial->setPortName(microSerial_port_name);
-        microSerial->open(QSerialPort::ReadWrite);
-        microSerial->setBaudRate(QSerialPort::Baud9600);
-        microSerial->setDataBits(QSerialPort::Data8);
-        microSerial->setParity(QSerialPort::NoParity);
-
-        microSerial->setStopBits(QSerialPort::OneStop);
-        microSerial->setFlowControl(QSerialPort::NoFlowControl);
-
-        qDebug() << "Found Serial Port:  " << microSerial_port_name;
-        char arr[3] = {0x01, 0x02, 0x03};
-
-        QByteArray writeArray(arr,3);
-        /*for(int i = 0; i<25; i++){
-            writeArray[i] = 1;
-        }
-        writeArray[0] = 1;*/
-
-        microSerial->write(writeArray);
-
-        //QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
-
-        qDebug() << "Data successfully read" << endl;
-
-    }else{
-        QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
-    }
-
-    //microSerial->open(QIODevice::ReadWrite);
+    refreshSerialPorts();
 }
 
-
-void maindialog::serialReceived()
+void maindialog::refreshSerialPorts()
 {
-    QByteArray ba;
-    ba = microSerial->readAll();
-    ui->serialLabel->setText(ba);
-    qDebug() << "Serial is working";
+    qDebug() << "Num ports available: " << QSerialPortInfo::availablePorts().count() << "\n";
+
+    //clear current entries so they may be updated
+    ui->comboBox_comPorts->clear();
+
+    //update the combo box with the currently available COM ports
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+    {
+        ui->comboBox_comPorts->addItem(serialPortInfo.portName());
+    }
 }
 
 /*
@@ -171,9 +111,6 @@ void maindialog::labels_hide()
  **/
 maindialog::~maindialog()
 {
-    if(microSerial->isOpen()){
-        microSerial->close();
-    }
     delete ui;
 }
 
@@ -184,7 +121,6 @@ void maindialog::on_configureDevOptionButton_clicked()
     ui->mainStacked->setCurrentIndex(CONFIGURE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
     setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
-    this->centerDialog();
 }
 
 
@@ -194,7 +130,6 @@ void maindialog::on_retrieveDataButton_clicked()
 
     ui->mainStacked->setCurrentIndex(RETRIEVE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(RETRIEVE_DATA_HOME_PAGE);
-    this->centerDialog();
 }
 
 /**
@@ -207,14 +142,12 @@ void maindialog::centerDialog() {
     this->move(x, y);
 }
 
-
 void maindialog::on_streamDataButton_clicked()
 {
     this->setFixedSize(850, 558);
 
     ui->mainStacked->setCurrentIndex(STREAM_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(STREAM_DATA_HOME_PAGE);
-    this->centerDialog();
 }
 
 void maindialog::on_backButton_StreamPage_clicked()
@@ -222,10 +155,7 @@ void maindialog::on_backButton_StreamPage_clicked()
     on_backButton_clicked();
 }
 
-
-
-
-void maindialog::on_ekg_b_4_toggled(bool checked)
+void maindialog::on_pushButton_refreshCOM_clicked()
 {
-
+    refreshSerialPorts();
 }
