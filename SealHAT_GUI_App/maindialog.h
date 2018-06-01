@@ -20,7 +20,7 @@ class maindialog : public QDialog
     /* Struct containing all sensor and micro configuration data. */
     SENSOR_CONFIGS configuration_settings;
 
-  //Analyzation Variables
+    //Analyzation Variables
     uint32_t total_sampleNumber;
 
     uint64_t templight_storage;
@@ -35,7 +35,6 @@ class maindialog : public QDialog
     double micro_magActiveTime;
     double micro_gpsActiveTime;
     double micro_ekgActiveTime;
-
 
     uint64_t templight_groupNum;
     uint64_t acc_groupNum;

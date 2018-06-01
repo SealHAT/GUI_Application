@@ -11,21 +11,27 @@
 maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog)
 {
     ui->setupUi(this);
-    microSerial_is_available = false;
-    microSerial_port_name = "";
+
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
+    // Set size for smaller welcome screen.
+    this->setFixedSize(350, 350);
+
+    //micro serial stuff
+    microSerial_is_available = false;
+    microSerial_port_name = "";
+
+    //hide unused ui coponents for now. TODO: remove unused components
     ui->batterySizeText->hide();
     ui->pwrEst_Text->hide();
     ui->storageEst_Text->hide();
     ui->pwrConsumption_Text->hide();
     ui->storageConsumption_Text->hide();
 
-    // Set size for smaller welcome screen.
-    this->setFixedSize(350, 350);
     //Hide all the warning labels
     labels_hide();
+    display_setReadOnly();
 
     //Set all the sensor configuration back to default
     sensors_setDefault();
@@ -33,10 +39,9 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     sensors_timeTable_control();
     sensor_esitimation_control();
-
-    display_setReadOnly();
     configureSettingListDisplay();
 
+    //scan the serial ports and populate combo box on configuration home page
     refreshSerialPorts();
 }
 
