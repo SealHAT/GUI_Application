@@ -122,7 +122,6 @@ void maindialog::on_xcel_sway_checkBox_clicked(bool checked)
     }else{
         configuration_settings.accelerometer_config.acc_sensitivity &= (~(MOTION_INT_X_LOW|MOTION_INT_X_HIGH));
     }
-    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
 
 }
 
@@ -133,7 +132,6 @@ void maindialog::on_xcel_surge_checkBox_clicked(bool checked)
     }else{
         configuration_settings.accelerometer_config.acc_sensitivity &= (~(MOTION_INT_Y_LOW|MOTION_INT_Y_HIGH));
     }
-    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
 }
 
 void maindialog::on_xcel_heave_checkBox_clicked(bool checked)
@@ -143,7 +141,6 @@ void maindialog::on_xcel_heave_checkBox_clicked(bool checked)
     }else{
         configuration_settings.accelerometer_config.acc_sensitivity &= (~(MOTION_INT_Z_LOW|MOTION_INT_Z_HIGH));
     }
-    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
 }
 
 /* Enable/Disable xcel sensor.
@@ -367,9 +364,6 @@ void maindialog::xcel_getloadData(){
         ui->xcel_heave_checkBox->setChecked(false);
         on_xcel_heave_checkBox_clicked(false);
     }
-
-
-
 
     ui->xcel_thres->setText(xcel_threshold);
 

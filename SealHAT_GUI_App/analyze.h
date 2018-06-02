@@ -1,7 +1,7 @@
 #ifndef ANALYZE_H
 #define ANALYZE_H
 
-#define STORAGECAPACITY         1000000000*8
+#define STORAGECAPACITY         (8000000000.0)
 
 #define IMU_DATA_SIZE           25
 #define GPS_DATA_SIZE           12

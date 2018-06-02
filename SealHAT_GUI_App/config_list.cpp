@@ -188,17 +188,33 @@ void maindialog::configureSettingListDisplay()
 
     QString acc_PWRMode[3]{"Normal", "High Resolution", "Low Power"};
     QString mag_PWRMode[2]{"Normal", "Low Power"};
+    QString acc_direction[3]{"Sway", "Surge", "Heave"};
 
     QString acc_timeName = "Time : ";
     QString acc_timeValue = QString::number(num_Hours(configuration_settings.accelerometer_config.acc_activeHour)) + " h ";
-    QString acc_scaleName = "               Accelerometer Scale : ";
+    QString acc_scaleName = "                                            Accelerometer Scale : ";
     QString acc_scaleValue = QString::number(2 << ((configuration_settings.accelerometer_config.acc_scale/16)%10)) + " g ";
     QString acc_powerMode = "\nPower Mode : " + acc_PWRMode[acc_pwrSelect];
 
     QString acc_freqName = "            Sampling rate : ";
     QString acc_freqValue = QString::number(accFrequency[acc_freqSelect]) + " Hz ";
-    QString acc_sensitivityName = "\nSensitivity : ";
-    QString sensor_sensitivityValue = QString::number(configuration_settings.accelerometer_config.acc_sensitivity);
+    QString acc_sensitivityName = "\nEnabled Direction : ";
+    uint8_t xcel_sensitivity = configuration_settings.accelerometer_config.acc_sensitivity;
+    QString sensor_sensitivityValue = "";
+    if((xcel_sensitivity&(MOTION_INT_X_LOW|MOTION_INT_X_HIGH)))
+    {
+        sensor_sensitivityValue += " Sway ";
+    }
+    if((xcel_sensitivity&(MOTION_INT_Y_LOW|MOTION_INT_Y_HIGH)))
+    {
+        sensor_sensitivityValue += " Surge ";
+    }
+    if((xcel_sensitivity&(MOTION_INT_Z_LOW|MOTION_INT_Z_HIGH)))
+    {
+        sensor_sensitivityValue += " Heave ";
+    }
+
+    //QString sensor_sensitivityValue = QString::number(configuration_settings.accelerometer_config.acc_sensitivity);
     QString acc_thresholdName = "       Threshold : ";
     QString sensor_thresholdValue = QString::number(((double)configuration_settings.accelerometer_config.acc_threshold/1000), 'f', 2) + " g ";
 

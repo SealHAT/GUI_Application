@@ -154,6 +154,7 @@ void maindialog::powerEstimation(){
      micro_totalpower = micro_activehour * MICRO_ACT_PWR * (12) + ((24-micro_activehour) * MICRO_SB_PWR* (12));
 
     //SUM OF POWER
+
      powerEst = (temp_totalPower + light_totalPower + ekg_totalPower + acc_totalPower + mag_totalPower + gps_totalPower
                  + memory_totalpower + micro_totalpower) * 1000;
      QString powerEstString = " " + (QString::number(powerEst,'f',5));
@@ -227,6 +228,8 @@ void maindialog::storageEstimation(){
     gps_storage = (20 * GPS_DATA_SIZE + sizeof(DATA_HEADER_t)); //Gps size(bytes) of samples per day
     ekg_storage = (3 * EKG_DATA_SIZE + sizeof(DATA_HEADER_t));  //Ekg size(bytes) of samples per day
 
+
+
     templight_groupNum = (temp_sampleNumber)/LIGHT_TEMP_SIZE; //
     acc_groupNum = (acc_sampleNumber)/IMU_DATA_SIZE;
     mag_groupNum = (mag_sampleNumber)/IMU_DATA_SIZE;
@@ -240,11 +243,24 @@ void maindialog::storageEstimation(){
              + gps_storage * gps_groupNum
              + ekg_storage * ekg_groupNum) * 8; //Storage caculate in bits = total Bits
 
+    qDebug() << "ekg_storage is " << ekg_storage;
+    qDebug() << "ekg_groupNum is " << ekg_groupNum;
+    qDebug() << "storageEst is " << storageEst;
 
+    QPalette warning_palette;
+    warning_palette.setColor(QPalette::WindowText, Qt::red);
 
-    double StorageConsump = ((double)storageEst*90.0)/(double)STORAGECAPACITY;
+    double StorageConsump = (((double)storageEst * 90.0)*100.0)/STORAGECAPACITY;
     QString storageconsumpString = " " + QString::number(StorageConsump,'f',2) + " % ";
 
-    //ui->storageEst_Text->setText(" " + QString::number(storageEst));
     ui->storageConsumption_Text->setText(storageconsumpString);
+
+    /*if(StorageConsump > 90.0){
+        warning_palette.setColor(QPalette::WindowText, Qt::red);
+    } */
+
+
+    //ui->storageConsumption_Text->setAutoFillBackground(true);
+
+    //ui->storageEst_Text->setText(" " + QString::number(storageEst));
 }
