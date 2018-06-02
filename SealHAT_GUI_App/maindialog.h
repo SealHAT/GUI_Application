@@ -2,6 +2,7 @@
 #define MAINDIALOG_H
 
 #include <QDialog>
+#include <QString>
 #include <QMap>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -337,18 +338,22 @@ private slots:
     void sendSerial_Config();
     QByteArray config_serialize();
     void serialSetup();
+    void on_comboBox_comPorts_currentIndexChanged(const QString &arg1);
+    void serialInitAndOpenPort();
 
 private:
     Ui::maindialog *ui;
+
     QMap<QString, uint32_t> config;
 
-    QString microSerial_port_name;
+    QString current_COM_port;
     bool microSerial_is_available;
 
     QSerialPort *microSerial;
     QByteArray serial_readData;
     QString serialBuffer;
     DATA_TRANSMISSION_t retrieve_data;
+
 };
 
 QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs);

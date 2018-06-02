@@ -58,7 +58,7 @@ QByteArray maindialog::config_serialize(){
 void maindialog::serialSetup()
 {
     microSerial_is_available = false;
-    microSerial_port_name = "";
+    //microSerial_port_name = "";
     serialBuffer = "";
 
     microSerial = new QSerialPort(this);
@@ -72,7 +72,7 @@ void maindialog::serialSetup()
     if(microSerial_is_available)
     {
         //open and configure the port
-        microSerial->setPortName(microSerial_port_name);
+        //microSerial->setPortName(microSerial_port_name);
         microSerial->open(QSerialPort::ReadWrite);
         microSerial->setBaudRate(QSerialPort::Baud9600);
         microSerial->setDataBits(QSerialPort::Data8);
@@ -81,7 +81,7 @@ void maindialog::serialSetup()
         microSerial->setStopBits(QSerialPort::OneStop);
         microSerial->setFlowControl(QSerialPort::NoFlowControl);
 
-        qDebug() << "Found Serial Port:  " << microSerial_port_name;
+        //qDebug() << "Found Serial Port:  " << microSerial_port_name;
 
     }else{
         QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");

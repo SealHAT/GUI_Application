@@ -20,7 +20,7 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     //micro serial stuff
     microSerial_is_available = false;
-    microSerial_port_name = "";
+    //microSerial_port_name = "";
 
     //hide unused ui coponents for now. TODO: remove unused components
     ui->batterySizeText->hide();
@@ -41,8 +41,16 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     sensor_esitimation_control();
     configureSettingListDisplay();
 
+    //allocate memory for serial port objects
+    microSerial = new QSerialPort(this);
+
     //scan the serial ports and populate combo box on configuration home page
     refreshSerialPorts();
+
+    //initialize current active COM port.
+    current_COM_port = ui->comboBox_comPorts->currentText();
+
+    serialInitAndOpenPort();
 }
 
 void maindialog::refreshSerialPorts()
@@ -56,6 +64,7 @@ void maindialog::refreshSerialPorts()
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
     {
         ui->comboBox_comPorts->addItem(serialPortInfo.portName());
+        qDebug() << serialPortInfo.portName() << "\n";
     }
 }
 
@@ -163,4 +172,34 @@ void maindialog::on_backButton_StreamPage_clicked()
 void maindialog::on_pushButton_refreshCOM_clicked()
 {
     refreshSerialPorts();
+}
+
+void maindialog::on_comboBox_comPorts_currentIndexChanged(const QString &arg1)
+{
+    (void)arg1; //unused
+
+    //close port if its currently open
+    if(microSerial->isOpen())
+    {
+        microSerial->close();
+    }
+
+    //initialize current active COM port.
+    current_COM_port = ui->comboBox_comPorts->currentText();
+
+    //set name of new port and open it
+    microSerial->setPortName(current_COM_port);
+    serialInitAndOpenPort();
+
+    qDebug() << "Current active port: " << current_COM_port << "\n";
+}
+
+void maindialog::serialInitAndOpenPort()
+{
+    microSerial->open(QSerialPort::ReadWrite);
+    microSerial->setBaudRate(QSerialPort::Baud9600);
+    microSerial->setDataBits(QSerialPort::Data8);
+    microSerial->setParity(QSerialPort::NoParity);
+    microSerial->setStopBits(QSerialPort::OneStop);
+    microSerial->setFlowControl(QSerialPort::NoFlowControl);
 }
