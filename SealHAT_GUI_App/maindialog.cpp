@@ -32,16 +32,12 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     display_setReadOnly();
     configureSettingListDisplay();
 
-    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-        {
-            ui->serialPort_comboBox->addItem(serialPortInfo.portName());
-        }
+    on_TX_ReScanButton_clicked();
+    //on_RX_ReScanButton_clicked();
+    on_RXstream_ReScanButton_clicked();
 
     //sendSerial_Config();
     //receiveSerial_samples();
-
-    //receiveSerial_samples();
-
 }
 
 /*
@@ -69,9 +65,9 @@ void maindialog::display_setReadOnly()
 {
     ui->gps_highSamplingRateValue->setReadOnly(true);
     ui->gps_lowSamplingRateValue->setReadOnly(true);
-    ui->pwrEst_Text->setReadOnly(true);
+    //ui->pwrEst_Text->setReadOnly(true);
     ui->pwrConsumption_Text->setReadOnly(true);
-    ui->storageEst_Text->setReadOnly(true);
+    //ui->storageEst_Text->setReadOnly(true);
     ui->storageConsumption_Text->setReadOnly(true);
     ui->gps_configList->setReadOnly(true);
     ui->xcel_configList->setReadOnly(true);
@@ -124,6 +120,7 @@ void maindialog::on_retrieveDataButton_clicked()
 
     ui->mainStacked->setCurrentIndex(RETRIEVE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(RETRIEVE_DATA_HOME_PAGE);
+    //on_RX_ReScanButton_clicked();
     this->centerDialog();
 }
 
@@ -144,6 +141,7 @@ void maindialog::on_streamDataButton_clicked()
 
     ui->mainStacked->setCurrentIndex(STREAM_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(STREAM_DATA_HOME_PAGE);
+    on_RXstream_ReScanButton_clicked();
     this->centerDialog();
 }
 
@@ -171,3 +169,11 @@ foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()
      * Has Product ID:  true
      * Product ID:  9220
 }*/
+
+
+
+
+
+
+
+

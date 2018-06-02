@@ -253,6 +253,7 @@ void maindialog::configureSettingListDisplay()
     ui->gps_configList->setText(gps_timeName + gps_timeValue);
 }
 
+
 void maindialog::on_completeButton_clicked()
 {
     if(ui->completeButton->text() == "COMPLETE"){
@@ -260,14 +261,19 @@ void maindialog::on_completeButton_clicked()
         configureSettingListDisplay();
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 
-        ui->completeButton->setText("SUBMIT");
+        ui->completeButton->setText("CONFIGURE SEALHAT");
 
         ui->welcomeHeadingLabel->setText("Completed configuration List");
         QFont f;
         f.setPointSize(36);
         ui->welcomeHeadingLabel->setFont(f);
+        ui->TX_SerialFrame->show();
+
+        on_TX_ReScanButton_clicked();
+
     }else{
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+
         sendSerial_Config();
 
         //Need to fill in config id

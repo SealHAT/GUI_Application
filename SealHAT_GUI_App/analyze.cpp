@@ -158,7 +158,7 @@ void maindialog::powerEstimation(){
                  + memory_totalpower + micro_totalpower) * 1000;
      QString powerEstString = " " + (QString::number(powerEst,'f',5));
 
-     ui->pwrEst_Text->setText(powerEstString);
+     //ui->pwrEst_Text->setText(powerEstString);
      on_batterySizeText_editingFinished();
 
 }
@@ -245,6 +245,6 @@ void maindialog::storageEstimation(){
     double StorageConsump = ((double)storageEst*90.0)/(double)STORAGECAPACITY;
     QString storageconsumpString = " " + QString::number(StorageConsump,'f',2) + " % ";
 
-    ui->storageEst_Text->setText(" " + QString::number(storageEst));
+    //ui->storageEst_Text->setText(" " + QString::number(storageEst));
     ui->storageConsumption_Text->setText(storageconsumpString);
 }

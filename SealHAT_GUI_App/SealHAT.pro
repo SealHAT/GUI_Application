@@ -16,7 +16,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
     maindialog.cpp \
     configure.cpp \
-    retrievedata.cpp \
     temp_config.cpp \
     ekg_config.cpp \
     gps_config.cpp \
@@ -27,6 +26,7 @@ SOURCES += main.cpp\
     loading_data.cpp \
     sending_serialization.cpp \
     receiving_serialization.cpp \
+    data_retrieval.cpp
 
 FORMS    += \
     maindialog.ui

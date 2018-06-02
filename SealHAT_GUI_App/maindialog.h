@@ -240,12 +240,10 @@ private slots:
     void on_xcel_scaleBox_currentIndexChanged(int index);
     void on_xcel_pwrBox_currentIndexChanged(int);
     void on_xcel_freqBox_currentIndexChanged(int);
-    void on_xcel_XL_checkBox_clicked(bool checked);
-    void on_xcel_XH_checkBox_clicked(bool checked);
-    void on_xcel_YL_checkBox_clicked(bool checked);
-    void on_xcel_YH_checkBox_clicked(bool checked);
-    void on_xcel_ZL_checkBox_clicked(bool checked);
-    void on_xcel_ZH_checkBox_clicked(bool checked);
+    void on_xcel_sway_checkBox_clicked(bool checked);
+    void on_xcel_surge_checkBox_clicked(bool checked);
+    void on_xcel_heave_checkBox_clicked(bool checked);
+
     void on_xcel_thres_editingFinished();
 
     void IMUxcel_Disable(bool disable);
@@ -358,14 +356,22 @@ private slots:
 
     void on_batterySizeText_editingFinished();
 
-//data_serialization
+//TX side of GUI
+    void on_TX_ReScanButton_clicked();
     QByteArray config_serialize();
-    void serialSetup();
+    void send_serialSetup();
     void sendSerial_Config();
-    void receiveSerial_samples();
+
+//RX side of GUI
+    void on_RXstream_ReScanButton_clicked();
     void data_deserialize(QByteArray& byteArray);
+    void receiveSerial_samples();
+    void receive_serialSetup();
 
     //
+
+//Data Sample Stream
+    void on_captureDatatoFile_button_clicked();
 
 private:
     Ui::maindialog *ui;
@@ -380,6 +386,7 @@ private:
     QString serialBuffer;
     QString microSerial_port_name;
     bool microSerial_is_available;
+    bool serial_retry;
 
 //
     DATA_TRANSMISSION_t retrieve_data;

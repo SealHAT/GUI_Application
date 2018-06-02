@@ -10,24 +10,32 @@
 /*Cast sensor configuration structures to QByteArray*/
 
 void maindialog::sendSerial_Config(){
-    serialSetup();
+    send_serialSetup();
     QByteArray configData;
     configData = config_serialize();
-
-
+    serial_retry = false;
 
     const qint64 bytesWritten = microSerial->write(configData);
-    qDebug() <<bytesWritten << endl;
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
 
-    if (bytesWritten == -1) {
-            qDebug() <<"Failed to write the data to port" << endl;
-        } else if (bytesWritten != configData.size()) {
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
         qDebug() <<"Failed to write all the data to port" << endl;
-
-        } else if (!microSerial->waitForBytesWritten(5000)) {
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
         qDebug() <<"Operation timed out or an error "
                    "occurred, error:"<< microSerial->errorString()<< endl;
-        }
+        //serial_retry = true;
+    }
+
+    /*while(serial_retry)
+    {
+        const qint64 bytesWritten = microSerial->write(configData);
+        qDebug() << "Retrying! Number of bytes sending:" << bytesWritten << endl;
+    }*/
 
     qDebug() <<"Data successfully sent to port"<< endl;
 
@@ -44,20 +52,28 @@ QByteArray maindialog::config_serialize(){
     return byteArray;
 }
 
+
+void maindialog::on_TX_ReScanButton_clicked()
+{
+    ui->TX_serialPort_comboBox->clear();
+
+    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+        {
+            ui->TX_serialPort_comboBox->addItem(serialPortInfo.portName());
+        }
+}
+
 /**************************************************************
- * FUNCTION: serialSetup
+ * FUNCTION: send_serialSetup
  * ------------------------------------------------------------
- *  This function gets called whenever user finish editing and
- *  reviewed final configuration list.
- *  This function will check estimated power value(in mA)
- *  we got from powerEstimation() function and caculated power
- *  consumption of the battery user choose to used.
+ *  This function checks what serial port users selected
+ *  in the TX_serialPort_comboBox. Set serial port to write only.
  *
  *  Parameters: None
  *
  *  Returns: void
  **************************************************************/
-void maindialog::serialSetup()
+void maindialog::send_serialSetup()
 {
     microSerial_is_available = false;
     microSerial_port_name = "";
@@ -65,32 +81,15 @@ void maindialog::serialSetup()
 
     microSerial = new QSerialPort(this);
 
-    //microSerial_port_name = ui->serialPort_comboBox->currentText();
-    //microSerial_is_available = true;
 
-
-
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-    {
-        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
-        {
-            if(serialPortInfo.vendorIdentifier() == microSerial_vendor_id)
-            {
-                if(serialPortInfo.productIdentifier() == microSerial_product_id)
-                {
-                    //microSerial_port_name = serialPortInfo.portName();
-                    microSerial_port_name = ui->serialPort_comboBox->currentText();
-                    microSerial_is_available = true;
-                }
-            }
-        }
-    }
+    microSerial_port_name = ui->TX_serialPort_comboBox->currentText();
+    microSerial_is_available = true;
 
     if(microSerial_is_available)
     {
         //open and configure the port
         microSerial->setPortName(microSerial_port_name);
-        microSerial->open(QSerialPort::ReadWrite);
+        microSerial->open(QSerialPort::ReadWrite);  //Set serial port to write only
         microSerial->setBaudRate(QSerialPort::Baud9600);
         microSerial->setDataBits(QSerialPort::Data8);
         microSerial->setParity(QSerialPort::NoParity);
@@ -192,3 +191,20 @@ QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs) {
 
     return stream;
 }
+
+
+/*foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+{
+    if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
+    {
+        if(serialPortInfo.vendorIdentifier() == microSerial_vendor_id)
+        {
+            if(serialPortInfo.productIdentifier() == microSerial_product_id)
+            {
+                //microSerial_port_name = serialPortInfo.portName();
+                microSerial_port_name = ui->serialPort_comboBox->currentText();
+                microSerial_is_available = true;
+            }
+        }
+    }
+}*/

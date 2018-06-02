@@ -115,69 +115,33 @@ void maindialog::on_xcel_freqBox_currentIndexChanged(int)
     xcel_changeMode();
 }
 
-void maindialog::on_xcel_XL_checkBox_clicked(bool checked)
+void maindialog::on_xcel_sway_checkBox_clicked(bool checked)
 {
-    ui->xcel_XH_checkBox->setDisabled(checked);
     if(checked){
-        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_X_LOW;
+        configuration_settings.accelerometer_config.acc_sensitivity |= (MOTION_INT_X_LOW|MOTION_INT_X_HIGH);
     }else{
-        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_X_LOW);
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~(MOTION_INT_X_LOW|MOTION_INT_X_HIGH));
     }
     qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
 
 }
 
-void maindialog::on_xcel_XH_checkBox_clicked(bool checked)
+void maindialog::on_xcel_surge_checkBox_clicked(bool checked)
 {
-    ui->xcel_XL_checkBox->setDisabled(checked);
     if(checked){
-        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_X_HIGH;
+        configuration_settings.accelerometer_config.acc_sensitivity |= (MOTION_INT_Y_LOW|MOTION_INT_Y_HIGH);
     }else{
-        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_X_HIGH);
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~(MOTION_INT_Y_LOW|MOTION_INT_Y_HIGH));
     }
     qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
 }
 
-void maindialog::on_xcel_YL_checkBox_clicked(bool checked)
+void maindialog::on_xcel_heave_checkBox_clicked(bool checked)
 {
-    ui->xcel_YH_checkBox->setDisabled(checked);
     if(checked){
-        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_Y_LOW;
+        configuration_settings.accelerometer_config.acc_sensitivity |= (MOTION_INT_Z_LOW|MOTION_INT_Z_HIGH);
     }else{
-        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_Y_LOW);
-    }
-    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
-}
-
-void maindialog::on_xcel_YH_checkBox_clicked(bool checked)
-{
-    ui->xcel_YL_checkBox->setDisabled(checked);
-    if(checked){
-        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_Y_HIGH;
-    }else{
-        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_Y_HIGH);
-    }
-    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
-}
-
-void maindialog::on_xcel_ZL_checkBox_clicked(bool checked)
-{
-    ui->xcel_ZH_checkBox->setDisabled(checked);
-    if(checked){
-        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_Z_LOW;
-    }else{
-        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_Z_LOW);
-    }
-    qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
-}
-
-void maindialog::on_xcel_ZH_checkBox_clicked(bool checked)
-{
-    ui->xcel_ZL_checkBox->setDisabled(checked);
-    if(checked){
-        configuration_settings.accelerometer_config.acc_sensitivity |= MOTION_INT_Z_HIGH;
-    }else{
-        configuration_settings.accelerometer_config.acc_sensitivity &= (~MOTION_INT_Z_HIGH);
+        configuration_settings.accelerometer_config.acc_sensitivity &= (~(MOTION_INT_Z_LOW|MOTION_INT_Z_HIGH));
     }
     qDebug() << configuration_settings.accelerometer_config.acc_sensitivity << endl;
 }
@@ -191,12 +155,9 @@ void maindialog::IMUxcel_Disable(bool disable)
     ui->xcel_scaleBox->setDisabled(disable);
     ui->xcel_pwrBox->setDisabled(disable);
     ui->xcel_freqBox->setDisabled(disable);
-    ui->xcel_XL_checkBox->setDisabled(disable);
-    ui->xcel_XH_checkBox->setDisabled(disable);
-    ui->xcel_YL_checkBox->setDisabled(disable);
-    ui->xcel_YH_checkBox->setDisabled(disable);
-    ui->xcel_ZL_checkBox->setDisabled(disable);
-    ui->xcel_ZH_checkBox->setDisabled(disable);
+    ui->xcel_sway_checkBox->setDisabled(disable);
+    ui->xcel_surge_checkBox->setDisabled(disable);
+    ui->xcel_heave_checkBox->setDisabled(disable);
     ui->xcel_thres->setDisabled(disable);
     if(disable){
         ui->thres_warnLABEL->setVisible(!disable);
@@ -217,7 +178,7 @@ void maindialog::xcel_setDefault()
         0,                                                      // active hours
         ACC_SCALE_2G,                                           // scale
         ACC_HR_50_HZ,                                           // mode
-        0x00,                                                   // sensitivity
+        0x00,                                                  // sensitivity
         300                                                    // threshold
     };
     xcel_checkTimetoEnable();
@@ -375,11 +336,41 @@ void maindialog::xcel_getloadData(){
     uint8_t acc_scaleSelect =  (configuration_settings.accelerometer_config.acc_scale/16)%10 ;
     uint8_t acc_freqSelect = (configuration_settings.accelerometer_config.acc_mode/16)%10 - 1;
     uint8_t xcel_pwrSelect = (configuration_settings.accelerometer_config.acc_mode%16)/4;
-    QString xcel_threshold = QString::number((double)configuration_settings.accelerometer_config.acc_threshold/1000,'f',2);
+    uint8_t xcel_sensitivity = configuration_settings.accelerometer_config.acc_sensitivity;
+    QString xcel_threshold = QString::number((double)configuration_settings.accelerometer_config.acc_threshold/1000,'f',2);    
 
     ui->xcel_scaleBox->setCurrentIndex(acc_scaleSelect);
     ui->xcel_pwrBox->setCurrentIndex(xcel_pwrSelect);
     ui->xcel_freqBox->setCurrentIndex(acc_freqSelect);
+
+    if((xcel_sensitivity&(MOTION_INT_X_LOW|MOTION_INT_X_HIGH)))
+    {
+        ui->xcel_sway_checkBox->setChecked(true);
+        on_xcel_sway_checkBox_clicked(true);
+    }else{
+        ui->xcel_sway_checkBox->setChecked(false);
+        on_xcel_sway_checkBox_clicked(false);
+    }
+    if((xcel_sensitivity&(MOTION_INT_Y_LOW|MOTION_INT_Y_HIGH)))
+    {
+        ui->xcel_surge_checkBox->setChecked(true);
+        on_xcel_surge_checkBox_clicked(true);
+    }else{
+        ui->xcel_surge_checkBox->setChecked(false);
+        on_xcel_surge_checkBox_clicked(false);
+    }
+    if((xcel_sensitivity&(MOTION_INT_Z_LOW|MOTION_INT_Z_HIGH)))
+    {
+        ui->xcel_heave_checkBox->setChecked(true);
+        on_xcel_heave_checkBox_clicked(true);
+    }else{
+        ui->xcel_heave_checkBox->setChecked(false);
+        on_xcel_heave_checkBox_clicked(false);
+    }
+
+
+
+
     ui->xcel_thres->setText(xcel_threshold);
 
 }

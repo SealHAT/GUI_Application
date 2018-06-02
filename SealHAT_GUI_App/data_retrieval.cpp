@@ -16,6 +16,31 @@ void maindialog::on_backButton_retrieveData_clicked()
     on_backButton_clicked();
 }
 
+void maindialog::on_captureDatatoFile_button_clicked()
+{
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Destination Address"),
+                                                    "C:/Users/hpan5/Downloads/gui",
+                                                    tr("Text files (*.txt);;XML files (*.xml)"));
+    if (fileName.isEmpty())
+            return;
+        else {
+            QFile file(fileName);
+            if (!file.open(QIODevice::WriteOnly| QIODevice::Text)) {
+                QMessageBox::information(this, tr("Unable to open file"),
+                    file.errorString());
+                return;
+            }
+
+            QDataStream out(&file);
+            out.setVersion(QDataStream::Qt_4_5);
+            //out << config;
+            //file.close();
+    }
+
+}
+
+
 void maindialog::on_storeData_destinationEdit_returnPressed()
 {
     QString path = ui->storeData_destinationEdit->text();

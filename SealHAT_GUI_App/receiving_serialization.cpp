@@ -13,22 +13,71 @@
 
 void maindialog::receiveSerial_samples()
 {
-    serialSetup();
+    receive_serialSetup();
     QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
 }
 
 void maindialog::serialReceived()
 {
     serial_readData = microSerial->readAll();
-
+    data_deserialize(serial_readData);
 
     serialBuffer = QString::fromStdString(serial_readData.toStdString());
-    ui->serialLabel->setText(serial_readData);
+    //ui->serialLabel->setText(serial_readData);
     //qDebug() << serialBuffer;
     qDebug() << "Serial is working";
 }
 
+/**************************************************************
+ * FUNCTION: send_serialSetup
+ * ------------------------------------------------------------
+ *  This function checks what serial port users selected
+ *  in the TX_serialPort_comboBox. Set serial port to write only.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
+void maindialog::receive_serialSetup()
+{
+    microSerial_is_available = false;
+    microSerial_port_name = "";
+    serialBuffer = "";
 
+    microSerial = new QSerialPort(this);
+
+
+    microSerial_port_name = ui->RXstream_serialPort_comboBox->currentText();
+    microSerial_is_available = true;
+
+    if(microSerial_is_available)
+    {
+        //open and configure the port
+        microSerial->setPortName(microSerial_port_name);
+        microSerial->open(QSerialPort::ReadOnly);  //Set serial port to ReadOnly
+        microSerial->setBaudRate(QSerialPort::Baud9600);
+        microSerial->setDataBits(QSerialPort::Data8);
+        microSerial->setParity(QSerialPort::NoParity);
+
+        microSerial->setStopBits(QSerialPort::OneStop);
+        microSerial->setFlowControl(QSerialPort::NoFlowControl);
+
+        qDebug() << "Found Serial Port:  " << microSerial_port_name;
+
+    }else{
+        QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
+    }
+}
+
+void maindialog::on_RXstream_ReScanButton_clicked()
+{
+    ui->RXstream_serialPort_comboBox->clear();
+
+    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+        {
+            ui->RXstream_serialPort_comboBox->addItem(serialPortInfo.portName());
+        }
+}
 
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 

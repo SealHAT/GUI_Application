@@ -77,6 +77,7 @@ void maindialog::on_ekg_gainBox_currentIndexChanged(int index)
 
 void maindialog::on_ekg_SW_clicked()
 {
+
     QString title = ui->ekg_SW->text();
     if(title == "Enable")
     {
@@ -88,6 +89,7 @@ void maindialog::on_ekg_SW_clicked()
         ekg_Disable(true);
         ekg_disable_button(true);
     }
+
 }
 
 void maindialog::ekg_checkTimetoEnable(){

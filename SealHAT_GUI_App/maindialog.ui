@@ -47,7 +47,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>230</y>
+         <y>270</y>
          <width>113</width>
          <height>32</height>
         </rect>
@@ -175,7 +175,7 @@ border: none;</string>
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>270</y>
+         <y>230</y>
          <width>113</width>
          <height>32</height>
         </rect>
@@ -201,19 +201,6 @@ border: none;</string>
        </property>
        <property name="flat">
         <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="serialLabel">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>340</y>
-         <width>71</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#e7e700;&quot;&gt; H A H A&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
@@ -416,7 +403,7 @@ border: none;</string>
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="ConfigureHomePage">
       <widget class="QLabel" name="welcomeHeadingLabel">
@@ -444,9 +431,9 @@ border: none;</string>
       <widget class="QLabel" name="homePageDescription">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>10</x>
          <y>90</y>
-         <width>531</width>
+         <width>381</width>
          <height>31</height>
         </rect>
        </property>
@@ -460,7 +447,7 @@ border: none;</string>
         <string notr="true">color:rgb(0, 0, 0)</string>
        </property>
        <property name="text">
-        <string>This page will display configuratin list for EACH SENSOR.</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;This page will display current configuratin list for EACH SENSOR.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -647,51 +634,6 @@ border: none;</string>
        <property name="text">
         <string>load Settings</string>
        </property>
-      </widget>
-      <widget class="QFrame" name="SerialFrame">
-       <property name="geometry">
-        <rect>
-         <x>400</x>
-         <y>80</y>
-         <width>211</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(152, 162, 173);</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QComboBox" name="serialPort_comboBox">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>10</y>
-          <width>121</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(170, 170, 255);</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_89">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>71</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#0055ff;&quot;&gt;Serial Port&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
       </widget>
      </widget>
      <widget class="QWidget" name="xcelConfigPage">
@@ -1681,24 +1623,11 @@ border: none;</string>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QLabel" name="label_8">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>131</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;Motion Detection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_7">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>110</y>
+          <y>90</y>
           <width>91</width>
           <height>20</height>
          </rect>
@@ -1711,101 +1640,77 @@ border: none;</string>
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>50</y>
-          <width>101</width>
+          <y>10</y>
+          <width>121</width>
           <height>20</height>
          </rect>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Axes Selection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Motion Detection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
-       <widget class="QCheckBox" name="xcel_XL_checkBox">
+       <widget class="QCheckBox" name="xcel_sway_checkBox">
         <property name="geometry">
          <rect>
-          <x>140</x>
+          <x>160</x>
           <y>50</y>
-          <width>41</width>
-          <height>17</height>
+          <width>51</width>
+          <height>21</height>
          </rect>
         </property>
-        <property name="text">
-         <string>- X</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="xcel_XH_checkBox">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>70</y>
-          <width>41</width>
-          <height>17</height>
-         </rect>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
         </property>
         <property name="text">
-         <string>+ X</string>
+         <string>Sway</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="xcel_thres">
         <property name="geometry">
          <rect>
-          <x>110</x>
-          <y>110</y>
+          <x>140</x>
+          <y>90</y>
           <width>113</width>
           <height>20</height>
          </rect>
         </property>
        </widget>
-       <widget class="QCheckBox" name="xcel_ZL_checkBox">
+       <widget class="QCheckBox" name="xcel_heave_checkBox">
         <property name="geometry">
          <rect>
-          <x>290</x>
+          <x>330</x>
           <y>50</y>
-          <width>41</width>
-          <height>17</height>
+          <width>61</width>
+          <height>21</height>
          </rect>
         </property>
-        <property name="text">
-         <string>- Z</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="xcel_ZH_checkBox">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>70</y>
-          <width>41</width>
-          <height>17</height>
-         </rect>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
         </property>
         <property name="text">
-         <string>+ Z</string>
+         <string>Heave</string>
         </property>
        </widget>
-       <widget class="QCheckBox" name="xcel_YL_checkBox">
+       <widget class="QCheckBox" name="xcel_surge_checkBox">
         <property name="geometry">
          <rect>
-          <x>210</x>
+          <x>240</x>
           <y>50</y>
-          <width>31</width>
-          <height>17</height>
+          <width>61</width>
+          <height>21</height>
          </rect>
         </property>
-        <property name="text">
-         <string>- Y</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="xcel_YH_checkBox">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>70</y>
-          <width>41</width>
-          <height>17</height>
-         </rect>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
         </property>
         <property name="text">
-         <string>+ Y</string>
+         <string>Surge</string>
         </property>
        </widget>
        <widget class="QLabel" name="thres_warnLABEL">
@@ -1814,8 +1719,8 @@ border: none;</string>
         </property>
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>110</y>
+          <x>120</x>
+          <y>120</y>
           <width>181</width>
           <height>20</height>
          </rect>
@@ -1835,6 +1740,19 @@ border: none;</string>
         </property>
         <property name="text">
          <string>  Picture calirification coming soon!</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_89">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>121</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Directions Options&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </widget>
@@ -5652,9 +5570,9 @@ border: none;</string>
     <widget class="QPushButton" name="completeButton">
      <property name="geometry">
       <rect>
-       <x>710</x>
+       <x>630</x>
        <y>10</y>
-       <width>121</width>
+       <width>201</width>
        <height>31</height>
       </rect>
      </property>
@@ -5736,40 +5654,19 @@ border: none;</string>
       <string>COMPLETE</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_estPWR">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>375</y>
-       <width>131</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:7pt; font-weight:600; color:#d9a829;&quot;&gt;Esimated Power (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_179">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>455</y>
-       <width>121</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:7pt; font-weight:600; color:#f1b535;&quot;&gt;Esimated Storage (Bits)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="batterySizeText">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>350</y>
-       <width>121</width>
-       <height>21</height>
+       <x>30</x>
+       <y>370</y>
+       <width>151</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(132, 142, 155);</string>
@@ -5778,76 +5675,55 @@ border: none;</string>
     <widget class="QLabel" name="label_180">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>330</y>
-       <width>131</width>
+       <x>30</x>
+       <y>350</y>
+       <width>161</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:7pt; font-weight:600; color:#ff0000;&quot;&gt;Battery Capacity (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ff0000;&quot;&gt;Battery Capacity (mA*h)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_estPWR_2">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>415</y>
-       <width>131</width>
+       <x>50</x>
+       <y>420</y>
+       <width>111</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:7pt; font-weight:600; color:#d9a829;&quot;&gt;Power Consumption&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#d9a829;&quot;&gt;SealHAT Life Time&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_181">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>495</y>
-       <width>131</width>
+       <x>30</x>
+       <y>480</y>
+       <width>161</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:7pt; font-weight:600; color:#f1b535;&quot;&gt;Storage Consumption(%)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="pwrEst_Text">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>390</y>
-       <width>121</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 69, 140);</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#f1b535;&quot;&gt;Storage Consumption(%)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="pwrConsumption_Text">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>430</y>
-       <width>121</width>
-       <height>20</height>
+       <x>30</x>
+       <y>440</y>
+       <width>151</width>
+       <height>31</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 69, 140);</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="storageEst_Text">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>470</y>
-       <width>121</width>
-       <height>20</height>
-      </rect>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(0, 69, 140);</string>
@@ -5856,15 +5732,81 @@ border: none;</string>
     <widget class="QLineEdit" name="storageConsumption_Text">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>510</y>
-       <width>121</width>
-       <height>20</height>
+       <x>30</x>
+       <y>500</y>
+       <width>151</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(0, 69, 140);</string>
      </property>
+    </widget>
+    <widget class="QFrame" name="TX_SerialFrame">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>10</y>
+       <width>271</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(60, 60, 60);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QComboBox" name="TX_serialPort_comboBox">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>10</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(225, 225, 225);</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_92">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Serial Port&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="TX_ReScanButton">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>10</y>
+        <width>51</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(225, 225, 225);</string>
+      </property>
+      <property name="text">
+       <string>Re-Scan</string>
+      </property>
+     </widget>
     </widget>
     <zorder>ConfigureView</zorder>
     <zorder>topHeadingBackground</zorder>
@@ -5877,16 +5819,13 @@ border: none;</string>
     <zorder>temperatureButton</zorder>
     <zorder>magButton</zorder>
     <zorder>completeButton</zorder>
-    <zorder>label_estPWR</zorder>
-    <zorder>label_179</zorder>
     <zorder>batterySizeText</zorder>
     <zorder>label_180</zorder>
     <zorder>label_estPWR_2</zorder>
     <zorder>label_181</zorder>
-    <zorder>pwrEst_Text</zorder>
     <zorder>pwrConsumption_Text</zorder>
-    <zorder>storageEst_Text</zorder>
     <zorder>storageConsumption_Text</zorder>
+    <zorder>TX_SerialFrame</zorder>
    </widget>
    <widget class="QWidget" name="DataRetrieval">
     <widget class="QGraphicsView" name="adminTopHeadingBackground">
@@ -6079,14 +6018,14 @@ border: none;</string>
       <widget class="QPushButton" name="getDataButton">
        <property name="geometry">
         <rect>
-         <x>210</x>
-         <y>412</y>
+         <x>290</x>
+         <y>390</y>
          <width>111</width>
          <height>41</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 0);</string>
+        <string notr="true">background-color: rgb(241, 181, 33);</string>
        </property>
        <property name="text">
         <string>GET DATA</string>
@@ -6116,11 +6055,73 @@ border: none;</string>
       <number>0</number>
      </property>
     </widget>
+    <widget class="QFrame" name="SerialFrame_2">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>10</y>
+       <width>271</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(60, 60, 60);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QComboBox" name="RX_serialPort_comboBox">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>10</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(225, 225, 225);</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_90">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Serial Port&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RX_ReScanButton">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>10</y>
+        <width>51</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(225, 225, 225);</string>
+      </property>
+      <property name="text">
+       <string>Re-Scan</string>
+      </property>
+     </widget>
+    </widget>
     <zorder>retrieveSideBarBackground</zorder>
     <zorder>adminTopHeadingBackground</zorder>
     <zorder>sealName</zorder>
     <zorder>backButton_retrieveData</zorder>
     <zorder>DataRetrievalPages</zorder>
+    <zorder>SerialFrame_2</zorder>
    </widget>
    <widget class="QWidget" name="DataStream">
     <widget class="QGraphicsView" name="streamSideBarBackground">
@@ -6383,6 +6384,13 @@ border: none;</string>
        <height>511</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(152, 162, 173);</string>
      </property>
@@ -6525,8 +6533,110 @@ border: none;</string>
         </rect>
        </property>
       </widget>
+      <widget class="QPushButton" name="captureDatatoFile_button">
+       <property name="geometry">
+        <rect>
+         <x>500</x>
+         <y>440</y>
+         <width>121</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(241, 181, 33);</string>
+       </property>
+       <property name="text">
+        <string>Capture to File</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QWidget" name="page_2"/>
+    </widget>
+    <widget class="QFrame" name="liveStream_SerialFrame">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>10</y>
+       <width>271</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(60, 60, 60);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QComboBox" name="RXstream_serialPort_comboBox">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>10</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(225, 225, 225);</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_91">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Serial Port&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RXstream_ReScanButton">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>10</y>
+        <width>51</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(225, 225, 225);</string>
+      </property>
+      <property name="text">
+       <string>Re-Scan</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="startStream_button">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>10</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Start Streaming</string>
+     </property>
     </widget>
    </widget>
   </widget>
