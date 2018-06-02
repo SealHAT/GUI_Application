@@ -373,6 +373,8 @@ private slots:
 //Data Sample Stream
     void on_captureDatatoFile_button_clicked();
 
+    void on_startStream_button_clicked();
+
 private:
     Ui::maindialog *ui;
     QMap<QString, uint32_t> config;

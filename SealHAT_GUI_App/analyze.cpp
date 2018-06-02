@@ -159,7 +159,6 @@ void maindialog::powerEstimation(){
                  + memory_totalpower + micro_totalpower) * 1000;
      QString powerEstString = " " + (QString::number(powerEst,'f',5));
 
-     //ui->pwrEst_Text->setText(powerEstString);
      on_batterySizeText_editingFinished();
 
 }
@@ -253,14 +252,16 @@ void maindialog::storageEstimation(){
     double StorageConsump = (((double)storageEst * 90.0)*100.0)/STORAGECAPACITY;
     QString storageconsumpString = " " + QString::number(StorageConsump,'f',2) + " % ";
 
+
+    if(StorageConsump > (90.0)){
+        warning_palette.setColor(QPalette::Text,Qt::red);
+    }else{
+        warning_palette.setColor(QPalette::Text,Qt::black);
+    }
+
+    ui->storageConsumption_Text->setAutoFillBackground(true);
+
+    ui->storageConsumption_Text->setPalette(warning_palette);
+
     ui->storageConsumption_Text->setText(storageconsumpString);
-
-    /*if(StorageConsump > 90.0){
-        warning_palette.setColor(QPalette::WindowText, Qt::red);
-    } */
-
-
-    //ui->storageConsumption_Text->setAutoFillBackground(true);
-
-    //ui->storageEst_Text->setText(" " + QString::number(storageEst));
 }

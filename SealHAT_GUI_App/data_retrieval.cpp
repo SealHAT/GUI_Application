@@ -11,10 +11,17 @@
 #include "ui_maindialog.h"
 
 
-void maindialog::on_backButton_retrieveData_clicked()
+void maindialog::on_startStream_button_clicked()
 {
-    on_backButton_clicked();
+    if(ui->startStream_button->text() == "START STREAMING"){
+        ui->startStream_button->setText("STOP STREAMING");
+
+
+    }else{
+        ui->startStream_button->setText("START STREAMING");
+    }
 }
+
 
 void maindialog::on_captureDatatoFile_button_clicked()
 {
@@ -39,6 +46,13 @@ void maindialog::on_captureDatatoFile_button_clicked()
     }
 
 }
+
+void maindialog::on_backButton_retrieveData_clicked()
+{
+    on_backButton_clicked();
+}
+
+
 
 
 void maindialog::on_storeData_destinationEdit_returnPressed()

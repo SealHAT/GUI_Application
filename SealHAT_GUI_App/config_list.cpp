@@ -277,7 +277,7 @@ void maindialog::on_completeButton_clicked()
         configureSettingListDisplay();
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 
-        ui->completeButton->setText("CONFIGURE SEALHAT");
+        ui->completeButton->setText("CONFIGURE SealHAT");
 
         ui->welcomeHeadingLabel->setText("Completed configuration List");
         QFont f;

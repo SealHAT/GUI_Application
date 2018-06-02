@@ -172,8 +172,3 @@ foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()
 
 
 
-
-
-
-
-

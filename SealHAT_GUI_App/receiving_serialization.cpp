@@ -48,7 +48,12 @@ void maindialog::receive_serialSetup()
 
 
     microSerial_port_name = ui->RXstream_serialPort_comboBox->currentText();
-    microSerial_is_available = true;
+
+    if(ui->RXstream_serialPort_comboBox->count() != 0){
+        microSerial_is_available = true;
+    }else{
+        microSerial_is_available = false;
+    }
 
     if(microSerial_is_available)
     {
@@ -76,6 +81,7 @@ void maindialog::on_RXstream_ReScanButton_clicked()
     foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
         {
             ui->RXstream_serialPort_comboBox->addItem(serialPortInfo.portName());
+
         }
 }
 

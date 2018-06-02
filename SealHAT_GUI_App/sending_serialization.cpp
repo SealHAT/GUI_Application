@@ -13,7 +13,6 @@ void maindialog::sendSerial_Config(){
     send_serialSetup();
     QByteArray configData;
     configData = config_serialize();
-    serial_retry = false;
 
     const qint64 bytesWritten = microSerial->write(configData);
     qDebug() << "number of bytes sending" <<bytesWritten << endl;
@@ -28,16 +27,9 @@ void maindialog::sendSerial_Config(){
     } else if (!microSerial->waitForBytesWritten(5000)) {
         qDebug() <<"Operation timed out or an error "
                    "occurred, error:"<< microSerial->errorString()<< endl;
-        //serial_retry = true;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
     }
-
-    /*while(serial_retry)
-    {
-        const qint64 bytesWritten = microSerial->write(configData);
-        qDebug() << "Retrying! Number of bytes sending:" << bytesWritten << endl;
-    }*/
-
-    qDebug() <<"Data successfully sent to port"<< endl;
 
 }
 
@@ -83,7 +75,12 @@ void maindialog::send_serialSetup()
 
 
     microSerial_port_name = ui->TX_serialPort_comboBox->currentText();
-    microSerial_is_available = true;
+
+    if(ui->RXstream_serialPort_comboBox->count() != 0){
+        microSerial_is_available = true;
+    }else{
+        microSerial_is_available = false;
+    }
 
     if(microSerial_is_available)
     {
