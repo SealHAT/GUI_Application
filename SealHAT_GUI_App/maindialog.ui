@@ -638,11 +638,11 @@ color:black;</string>
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
-      <widget class="QPushButton" name="cButton">
+      <widget class="QPushButton" name="sButton">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>400</y>
+         <x>20</x>
+         <y>380</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -659,7 +659,31 @@ color:black;</string>
 color:black;</string>
        </property>
        <property name="text">
-        <string>SEND &quot;c&quot;</string>
+        <string>SEND &quot;s&quot;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="oButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>420</y>
+         <width>121</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(202, 212, 223);
+color:black;</string>
+       </property>
+       <property name="text">
+        <string>SEND &quot;o&quot;</string>
        </property>
       </widget>
      </widget>

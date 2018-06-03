@@ -24,7 +24,9 @@ void maindialog::serialReceived()
 
     serialBuffer = QString::fromStdString(serial_readData.toStdString());
     ui->serialLabel->setText(serial_readData);
-    //qDebug() << serialBuffer;
+    qDebug() << serialBuffer;
+
+    on_sButton_clicked();
     qDebug() << "Serial is working";
 }
 
@@ -72,17 +74,6 @@ void maindialog::receive_serialSetup()
     }else{
         QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
     }
-}
-
-void maindialog::on_RXstream_ReScanButton_clicked()
-{
-    //ui->RXstream_serialPort_comboBox->clear();
-
-    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-        {
-           // ui->RXstream_serialPort_comboBox->addItem(serialPortInfo.portName());
-
-        }
 }
 
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {

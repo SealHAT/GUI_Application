@@ -44,17 +44,6 @@ QByteArray maindialog::config_serialize(){
     return byteArray;
 }
 
-
-void maindialog::on_TX_ReScanButton_clicked()
-{
-    //ui->TX_serialPort_comboBox->clear();
-
-    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-        {
-            //ui->TX_serialPort_comboBox->addItem(serialPortInfo.portName());
-        }
-}
-
 /**************************************************************
  * FUNCTION: send_serialSetup
  * ------------------------------------------------------------
@@ -71,7 +60,7 @@ void maindialog::send_serialSetup()
     current_COM_port = "";
     serialBuffer = "";
 
-    microSerial = new QSerialPort(this);
+    //microSerial = new QSerialPort(this);
 
 
     current_COM_port = ui->comboBox_comPorts->currentText();

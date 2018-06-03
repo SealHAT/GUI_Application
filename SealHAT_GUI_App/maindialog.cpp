@@ -44,6 +44,8 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     //allocate memory for serial port objects
     microSerial = new QSerialPort(this);
 
+    QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
+
     //scan the serial ports and populate combo box on configuration home page
     refreshSerialPorts();
 
@@ -51,6 +53,9 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     current_COM_port = ui->comboBox_comPorts->currentText();
 
     serialInitAndOpenPort();
+
+    //receiveSerial_samples();
+    qDebug() << ":)";
 }
 
 void maindialog::refreshSerialPorts()
@@ -205,11 +210,35 @@ void maindialog::serialInitAndOpenPort()
     microSerial->setDataTerminalReady(true);
 }
 
-void maindialog::on_cButton_clicked()
+void maindialog::on_sButton_clicked()
 {
-    send_serialSetup();
+    //send_serialSetup();
     QByteArray configData;
-    configData = config_serialize();
+    configData.append("s");//config_serialize();
+
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
+
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
+    }
+}
+
+void maindialog::on_oButton_clicked()
+{
+    //send_serialSetup();
+    QByteArray configData;
+    configData.append("o");//config_serialize();
 
     const qint64 bytesWritten = microSerial->write(configData);
     qDebug() << "number of bytes sending" <<bytesWritten << endl;

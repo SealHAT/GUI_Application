@@ -214,9 +214,3 @@ void maindialog::on_configureHomeButton_clicked()
     //show list of current configuration settings
     configureSettingListDisplay();
 }
-
-/*setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
-QMessageBox::information(this, tr("Submission completed"),
-    tr("Thank you! Configuration Setting submitted!"));
-
-//load configuration setting back to microcontroller*/

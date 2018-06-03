@@ -342,10 +342,10 @@ private slots:
 
     void receive_serialSetup();
     void send_serialSetup();
-    void on_RXstream_ReScanButton_clicked();
-    void on_TX_ReScanButton_clicked();
 
-    void on_cButton_clicked();
+    void on_sButton_clicked();
+
+    void on_oButton_clicked();
 
 private:
     Ui::maindialog *ui;
