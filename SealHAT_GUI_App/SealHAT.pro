@@ -72,9 +72,7 @@ HEADERS  += \
     sensor_header/ubx.h \
     analyze.h \
     maindialog.h \
-    seal_Types.h \
-    ui_login.h \
-    ui_maindialog.h
+    seal_Types.h
 
 RESOURCES += \
     images.qrc

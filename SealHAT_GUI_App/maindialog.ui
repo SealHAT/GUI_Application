@@ -638,6 +638,30 @@ color:black;</string>
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
+      <widget class="QPushButton" name="cButton">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>400</y>
+         <width>121</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(202, 212, 223);
+color:black;</string>
+       </property>
+       <property name="text">
+        <string>SEND &quot;c&quot;</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="xcelConfigPage">
       <widget class="QLabel" name="imuPageDescription">
@@ -6202,8 +6226,8 @@ border: none;</string>
     <widget class="QLineEdit" name="storageEst_Text">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>360</y>
+       <x>20</x>
+       <y>340</y>
        <width>91</width>
        <height>22</height>
       </rect>
@@ -6215,8 +6239,8 @@ border: none;</string>
     <widget class="QLineEdit" name="pwrEst_Text">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>360</y>
+       <x>60</x>
+       <y>400</y>
        <width>117</width>
        <height>16</height>
       </rect>
@@ -6229,8 +6253,8 @@ border:none;</string>
     <widget class="QLineEdit" name="pwrConsumption_Text">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>360</y>
+       <x>130</x>
+       <y>340</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -6243,8 +6267,8 @@ border:none;</string>
     <widget class="QLineEdit" name="storageConsumption_Text">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>360</y>
+       <x>90</x>
+       <y>430</y>
        <width>91</width>
        <height>22</height>
       </rect>
@@ -6624,7 +6648,7 @@ border: none;</string>
 color:rgb(253, 199, 0);</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#d9a829;&quot;&gt;Select SealHAT's COM Port:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#d9a829;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -6640,7 +6664,7 @@ color:rgb(253, 199, 0);</string>
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
      </property>
     </widget>
     <zorder>ConfigurePages</zorder>

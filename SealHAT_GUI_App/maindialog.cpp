@@ -202,4 +202,29 @@ void maindialog::serialInitAndOpenPort()
     microSerial->setParity(QSerialPort::NoParity);
     microSerial->setStopBits(QSerialPort::OneStop);
     microSerial->setFlowControl(QSerialPort::NoFlowControl);
+    microSerial->setDataTerminalReady(true);
+}
+
+void maindialog::on_cButton_clicked()
+{
+    send_serialSetup();
+    QByteArray configData;
+    configData = config_serialize();
+
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
+
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
+    }
 }

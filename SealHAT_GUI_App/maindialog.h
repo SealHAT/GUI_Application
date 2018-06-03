@@ -337,9 +337,15 @@ private slots:
     void serialReceived();
     void sendSerial_Config();
     QByteArray config_serialize();
-    void serialSetup();
     void on_comboBox_comPorts_currentIndexChanged(const QString &arg1);
     void serialInitAndOpenPort();
+
+    void receive_serialSetup();
+    void send_serialSetup();
+    void on_RXstream_ReScanButton_clicked();
+    void on_TX_ReScanButton_clicked();
+
+    void on_cButton_clicked();
 
 private:
     Ui::maindialog *ui;
@@ -353,6 +359,8 @@ private:
     QByteArray serial_readData;
     QString serialBuffer;
     DATA_TRANSMISSION_t retrieve_data;
+
+    bool serial_retry;
 
 };
 
