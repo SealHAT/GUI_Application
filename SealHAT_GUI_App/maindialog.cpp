@@ -18,12 +18,14 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 
     // Set size for smaller welcome screen.
     this->setFixedSize(421, 421);
+
     //Hide all the warning labels
     labels_hide();
 
     //Set all the sensor configuration back to default
-    //configuration_settings.temperature_config.temp_samplePeriod = 1;
     sensors_setDefault();
+
+    //Caculate default power consumption, battery lifetime and
     generalEstimation();
 
     sensors_timeTable_control();
@@ -32,12 +34,11 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     display_setReadOnly();
     configureSettingListDisplay();
 
+    //microSerial = new QSerialPort(this);
+
     on_TX_ReScanButton_clicked();
-    //on_RX_ReScanButton_clicked();
     on_RXstream_ReScanButton_clicked();
 
-    //sendSerial_Config();
-    //receiveSerial_samples();
 }
 
 /*
@@ -97,9 +98,6 @@ void maindialog::labels_hide()
  **/
 maindialog::~maindialog()
 {
-    if(microSerial->isOpen()){
-        microSerial->close();
-    }
     delete ui;
 }
 
@@ -113,7 +111,7 @@ void maindialog::on_configureDevOptionButton_clicked()
     this->centerDialog();
 }
 
-
+/*
 void maindialog::on_retrieveDataButton_clicked()
 {
     this->setFixedSize(850, 558);
@@ -122,7 +120,7 @@ void maindialog::on_retrieveDataButton_clicked()
     ui->ConfigurePages->setCurrentIndex(RETRIEVE_DATA_HOME_PAGE);
     //on_RX_ReScanButton_clicked();
     this->centerDialog();
-}
+}*/
 
 /**
  * Center the contents of the page.

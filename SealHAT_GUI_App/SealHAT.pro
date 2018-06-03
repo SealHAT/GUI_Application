@@ -21,12 +21,13 @@ SOURCES += main.cpp\
     gps_config.cpp \
     mag_config.cpp \
     xcel_config.cpp \
-    config_list.cpp \
     analyze.cpp \
     loading_data.cpp \
-    sending_serialization.cpp \
-    receiving_serialization.cpp \
-    data_retrieval.cpp
+    data_retrieval.cpp \
+    usb_receiving_serialization.cpp \
+    usb_sending_serialization.cpp \
+    usb_serial_port_setup.cpp \
+    configurelist_page.cpp
 
 FORMS    += \
     maindialog.ui

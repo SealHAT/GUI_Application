@@ -31,6 +31,10 @@ void maindialog::sendSerial_Config(){
         qDebug() <<"Data successfully sent to port"<< endl;
     }
 
+    if(microSerial->isOpen()){
+        microSerial->close();
+    }
+
 }
 
 QByteArray maindialog::config_serialize(){
@@ -45,62 +49,6 @@ QByteArray maindialog::config_serialize(){
 }
 
 
-void maindialog::on_TX_ReScanButton_clicked()
-{
-    ui->TX_serialPort_comboBox->clear();
-
-    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-        {
-            ui->TX_serialPort_comboBox->addItem(serialPortInfo.portName());
-        }
-}
-
-/**************************************************************
- * FUNCTION: send_serialSetup
- * ------------------------------------------------------------
- *  This function checks what serial port users selected
- *  in the TX_serialPort_comboBox. Set serial port to write only.
- *
- *  Parameters: None
- *
- *  Returns: void
- **************************************************************/
-void maindialog::send_serialSetup()
-{
-    microSerial_is_available = false;
-    microSerial_port_name = "";
-    serialBuffer = "";
-
-    microSerial = new QSerialPort(this);
-
-
-    microSerial_port_name = ui->TX_serialPort_comboBox->currentText();
-
-    if(ui->RXstream_serialPort_comboBox->count() != 0){
-        microSerial_is_available = true;
-    }else{
-        microSerial_is_available = false;
-    }
-
-    if(microSerial_is_available)
-    {
-        //open and configure the port
-        microSerial->setPortName(microSerial_port_name);
-        microSerial->open(QSerialPort::ReadWrite);  //Set serial port to write only
-        microSerial->setBaudRate(QSerialPort::Baud9600);
-        microSerial->setDataBits(QSerialPort::Data8);
-        microSerial->setParity(QSerialPort::NoParity);
-
-        microSerial->setStopBits(QSerialPort::OneStop);
-        microSerial->setFlowControl(QSerialPort::NoFlowControl);
-
-        qDebug() << "Found Serial Port:  " << microSerial_port_name;
-
-    }else{
-        QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
-    }
-
-}
 
 
 

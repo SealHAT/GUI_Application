@@ -10,7 +10,18 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
-
+/**************************************************************
+ * FUNCTION: on_startStream_button_clicked
+ * ------------------------------------------------------------
+ *  This function gets called whenever the "START STREAMING" or
+ *  "STOP STREAMING" button is clicked. It will set serial port
+ *  user selected to be ReadOnly mode and start or stop
+ *  streaming the sampling data GUI gets from microcontroller.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_startStream_button_clicked()
 {
     if(ui->startStream_button->text() == "START STREAMING"){
@@ -18,11 +29,26 @@ void maindialog::on_startStream_button_clicked()
 
 
     }else{
+        receiveSerial_samples();
+        if(microSerial->isOpen()){
+            microSerial->close();
+        }
         ui->startStream_button->setText("START STREAMING");
     }
 }
 
 
+/**************************************************************
+ * FUNCTION: on_captureDatatoFile_button_clicked
+ * ------------------------------------------------------------
+ *  This function gets called whenever the "Capture to File"
+ *  button is clicked. It will open a new file and store the data
+ *  the same time data streaming from microcontroller.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_captureDatatoFile_button_clicked()
 {
 

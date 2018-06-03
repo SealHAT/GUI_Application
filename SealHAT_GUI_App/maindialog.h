@@ -218,7 +218,7 @@ private slots:
     void on_streamDataButton_clicked();
     void on_backButton_clicked(); //
     void on_configureDevOptionButton_clicked(); //
-    void on_retrieveDataButton_clicked(); //
+    //void on_retrieveDataButton_clicked(); //
     void on_backButton_StreamPage_clicked();
 
     void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);

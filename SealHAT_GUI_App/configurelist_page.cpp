@@ -287,18 +287,33 @@ void maindialog::on_completeButton_clicked()
 
         on_TX_ReScanButton_clicked();
 
+        configuration_settings.num_flash_chips = 4;
+        //qDebug() << "num_flash_chips:" << configuration_settings.num_flash_chips;
+
+
+        //Need to fill in config id
+        QDateTime date = QDateTime::currentDateTime();
+        QString year = date.toString("yyyy");
+        QString month = date.toString("M");
+        QString day = date.toString("d");
+        QString time = date.toString("hhmmss");
+
+        configuration_settings.start_logging_day.year = year.toUInt();
+        configuration_settings.start_logging_day.month = month.toUInt();
+        configuration_settings.start_logging_day.day =  day.toUInt();
+        configuration_settings.start_logging_time =  time.toUInt();
+
+        //qDebug() << "year:" << configuration_settings.start_logging_day.year;
+        //qDebug() << "month:" << configuration_settings.start_logging_day.month;
+        //qDebug() << "day:" << configuration_settings.start_logging_day.day;
+        //qDebug() << "time:" << configuration_settings.start_logging_time;
+
     }else{
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 
         sendSerial_Config();
 
-        //Need to fill in config id
-        //QDate date;
-        //QTime time;
-        //configuration_settings.start_logging_day.year = (uint16_t)date.year();
-        //configuration_settings.start_logging_day.month = (uint8_t)date.month();
-        //configuration_settings.start_logging_day.day = date.currentDate().toString().toUInt();
-        //configuration_settings.start_logging_time = time.currentTime().toString().toUInt();
+
 
 
 

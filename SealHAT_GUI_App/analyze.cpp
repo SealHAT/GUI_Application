@@ -242,10 +242,6 @@ void maindialog::storageEstimation(){
              + gps_storage * gps_groupNum
              + ekg_storage * ekg_groupNum) * 8; //Storage caculate in bits = total Bits
 
-    qDebug() << "ekg_storage is " << ekg_storage;
-    qDebug() << "ekg_groupNum is " << ekg_groupNum;
-    qDebug() << "storageEst is " << storageEst;
-
     QPalette warning_palette;
     warning_palette.setColor(QPalette::WindowText, Qt::red);
 
