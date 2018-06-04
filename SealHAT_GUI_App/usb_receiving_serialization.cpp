@@ -31,17 +31,43 @@ void maindialog::serialReceived()
     qDebug() << "Serial is working";
 }
 
-/*
-void maindialog::recognizeData(){
-    retrieve_data.data
-}*/
+
+void maindialog::recognizeData(DATA_HEADER_t *header){
+    //((DATA_HEADER_t*)data)->size
+    //*(DATA_HEADER_t*)(data+sizeof(DATA_HEADER_t)+(*(DATA_HEADER_t*)data).size)
+    //uint16_t sample_size[200];
+    uint16_t id = (header->id);
+
+    uint8_t* data_startPoint = (uint8_t*)(header+sizeof(DATA_HEADER_t));
+
+    switch(id){
+    case DEVICE_ID_LIGHT:
+        for(int i = 0; i < (header->size/4); i++){
+            ui->light_streamText->append(QString(((uint32_t*)data_startPoint)[i]));
+        }
+        break;
+
+
+    }
+
+}
+
+void maindialog::searchingHeader(){
+    DATA_HEADER_t* firstSampleHeader = (DATA_HEADER_t*)retrieve_data.data;
+    //recognizeData();
+    for(DATA_HEADER_t* curr = firstSampleHeader;
+        curr+sizeof(DATA_HEADER_t)+curr->size < firstSampleHeader+PAGE_SIZE_EXTRA;
+        curr += (sizeof(DATA_HEADER_t) + curr->size)) {
+        recognizeData(curr);
+    }
+}
 
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 
     quint32 temp_startSymbol;
     quint32 temp_crc;
 
-    stream >>  temp_startSymbol;
+    stream >> temp_startSymbol;
 
     for(int i=0;i<PAGE_SIZE_EXTRA; i++){
         stream >> txData.data[i];
@@ -57,9 +83,8 @@ QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 
 
 void maindialog::data_deserialize(QByteArray& byteArray){
-    //read_size = byteArray.size();
-     QDataStream stream(&byteArray,QSerialPort::ReadWrite);
-    //QDataStream stream(byteArray); //QIODevice:ReadOnly
+
+    QDataStream stream(&byteArray,QSerialPort::ReadOnly);
     stream.setVersion(QDataStream::Qt_4_5);
 
     stream.startTransaction();

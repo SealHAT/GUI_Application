@@ -82,6 +82,8 @@ typedef struct __attribute__((__packed__)){
     uint16_t size;		  // size of data packet to follow in bytes
 } DATA_HEADER_t;
 
+
+
 /**
  * \brief Time struct for calendar
  */
@@ -143,7 +145,6 @@ struct SENSOR_CONFIGS {
     EKG_TX          ekg_config;           // configuration data for the EKG
     GPS_TX          gps_config;           // configuration data for the GPS
 
-    //friend QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs);
 };
 
 /** Packet that gets sent over USB to the host computer **/

@@ -374,6 +374,8 @@ private slots:
     void on_captureDatatoFile_button_clicked();
 
     void on_startStream_button_clicked();
+    void recognizeData(DATA_HEADER_t *header);
+    void searchingHeader();
 
 private:
     Ui::maindialog *ui;
