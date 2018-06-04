@@ -367,6 +367,7 @@ private slots:
     void data_deserialize(QByteArray& byteArray);
     void receiveSerial_samples();
     void receive_serialSetup();
+    void closeSerialPort();
 
     //
 

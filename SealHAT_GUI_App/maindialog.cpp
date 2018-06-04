@@ -34,10 +34,13 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
     display_setReadOnly();
     configureSettingListDisplay();
 
+    //receiveSerial_samples();
+
     //microSerial = new QSerialPort(this);
 
     on_TX_ReScanButton_clicked();
     on_RXstream_ReScanButton_clicked();
+
 
 }
 

@@ -311,7 +311,7 @@ void maindialog::on_completeButton_clicked()
     }else{
         setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 
-        sendSerial_Config();
+        //sendSerial_Config();
 
 
 

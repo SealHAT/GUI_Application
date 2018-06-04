@@ -25,14 +25,15 @@
 void maindialog::on_startStream_button_clicked()
 {
     if(ui->startStream_button->text() == "START STREAMING"){
+
+
         ui->startStream_button->setText("STOP STREAMING");
+
+        receiveSerial_samples();
 
 
     }else{
-        receiveSerial_samples();
-        if(microSerial->isOpen()){
-            microSerial->close();
-        }
+        closeSerialPort();
         ui->startStream_button->setText("START STREAMING");
     }
 }

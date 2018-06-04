@@ -41,10 +41,11 @@ void maindialog::send_serialSetup()
     {
         //open and configure the port
         microSerial->setPortName(microSerial_port_name);
-        microSerial->open(QSerialPort::WriteOnly);  //Set serial port to write only
+        microSerial->open(QSerialPort::ReadWrite);  //Set serial port to write only
         microSerial->setBaudRate(QSerialPort::Baud9600);
         microSerial->setDataBits(QSerialPort::Data8);
         microSerial->setParity(QSerialPort::NoParity);
+        microSerial->setDataTerminalReady(true);
 
         microSerial->setStopBits(QSerialPort::OneStop);
         microSerial->setFlowControl(QSerialPort::NoFlowControl);
@@ -89,10 +90,11 @@ void maindialog::receive_serialSetup()
     {
         //open and configure the port
         microSerial->setPortName(microSerial_port_name);
-        microSerial->open(QSerialPort::ReadOnly);  //Set serial port to ReadOnly
+        microSerial->open(QSerialPort::ReadWrite);  //Set serial port to ReadOnly
         microSerial->setBaudRate(QSerialPort::Baud9600);
         microSerial->setDataBits(QSerialPort::Data8);
         microSerial->setParity(QSerialPort::NoParity);
+        microSerial->setDataTerminalReady(true);
 
         microSerial->setStopBits(QSerialPort::OneStop);
         microSerial->setFlowControl(QSerialPort::NoFlowControl);
@@ -104,6 +106,14 @@ void maindialog::receive_serialSetup()
     }
 }
 
+
+void maindialog::closeSerialPort()
+{
+    if (microSerial->isOpen())
+        microSerial->close();
+
+    qDebug() << "SeiralPort is closed!" ;
+}
 
 /**************************************************************
  * FUNCTION: on_TX_ReScanButton_clicked

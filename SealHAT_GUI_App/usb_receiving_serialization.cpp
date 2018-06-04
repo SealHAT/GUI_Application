@@ -14,18 +14,25 @@
 void maindialog::receiveSerial_samples()
 {
     receive_serialSetup();
+    qDebug() << "Serial is trying to receive";
+    if(microSerial->DataTerminalReadySignal){
+        serial_readData = microSerial->readAll();
+        serialBuffer = QString::fromStdString(serial_readData.toStdString());
+        ui->xcelStreamText->append(serialBuffer);
+    }
+    //connect(microSerial, &QSerialPort::DataTerminalReadySignal, this, &maindialog::serialReceived);
     QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
 }
 
 void maindialog::serialReceived()
 {
     serial_readData = microSerial->readAll();
-    data_deserialize(serial_readData);
+    //data_deserialize(serial_readData);
 
     //retrieve_data.data ==
 
-    //serialBuffer = QString::fromStdString(retrieve_data.toStdString());
-    ui->xcelStreamText->setText(serialBuffer);
+    serialBuffer = QString::fromStdString(serial_readData.toStdString());
+    ui->xcelStreamText->append(serialBuffer);
     //ui->serialLabel->setText(serial_readData);
     //qDebug() << serialBuffer;
     qDebug() << "Serial is working";
@@ -84,7 +91,7 @@ QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 
 void maindialog::data_deserialize(QByteArray& byteArray){
 
-    QDataStream stream(&byteArray,QSerialPort::ReadOnly);
+    QDataStream stream(&byteArray,QSerialPort::ReadWrite);
     stream.setVersion(QDataStream::Qt_4_5);
 
     stream.startTransaction();
