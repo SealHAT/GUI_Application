@@ -24,7 +24,7 @@ void maindialog::send_serialSetup()
 {
     microSerial_is_available = false;
     microSerial_port_name = "";
-    serialBuffer = "";
+    serialDataBuffer = "";
 
     microSerial = new QSerialPort(this);
 
@@ -73,7 +73,7 @@ void maindialog::receive_serialSetup()
 {
     microSerial_is_available = false;
     microSerial_port_name = "";
-    serialBuffer = "";
+    serialDataBuffer = "";
 
     microSerial = new QSerialPort(this);
 

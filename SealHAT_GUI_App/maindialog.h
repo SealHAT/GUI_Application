@@ -373,10 +373,11 @@ private slots:
 
 //Data Sample Stream
     void on_captureDatatoFile_button_clicked();
-
     void on_startStream_button_clicked();
     void recognizeData(DATA_HEADER_t *header);
     void searchingHeader();
+    void findDataBuffer_fromPacket(QByteArray serial_readData);
+    void recognizeData_fromBuffer(QByteArray buffer);
 
 private:
     Ui::maindialog *ui;
@@ -388,7 +389,7 @@ private:
     static const quint16 microSerial_product_id = 9220;
 
     QByteArray serial_readData;
-    QString serialBuffer;
+    QString serialDataBuffer;
     QString microSerial_port_name;
     bool microSerial_is_available;
     bool serial_retry;

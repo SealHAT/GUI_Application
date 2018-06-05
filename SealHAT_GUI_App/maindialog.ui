@@ -6728,7 +6728,7 @@ border: none;</string>
         <string>Capture to File</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="xcelStreamText">
+      <widget class="QTextEdit" name="xcel_streamText">
        <property name="geometry">
         <rect>
          <x>90</x>
