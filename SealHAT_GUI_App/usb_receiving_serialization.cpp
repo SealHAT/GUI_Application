@@ -25,11 +25,20 @@
 void maindialog::receiveSerial_samples()
 {
     receive_serialSetup();
-    qDebug() << "Serial is trying to receive";
-    //connect(microSerial, &QSerialPort::DataTerminalReadySignal, this, &maindialog::serialReceived);
     QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
 }
 
+
+/**************************************************************
+ * FUNCTION: serialReceived
+ * ------------------------------------------------------------
+ * This function will be called whenever there is data ready
+ * signal generated on the serial port from microcontroller side.
+ *
+ *  Parameters: none
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::serialReceived()
 {
     serial_readData = microSerial->readAll();
@@ -40,10 +49,19 @@ void maindialog::serialReceived()
 
 }
 
+
+/**************************************************************
+ * FUNCTION: findDataBuffer_fromPacket
+ * ------------------------------------------------------------
+ * This function will be called whenever there is data ready
+ * signal generated on the serial port from microcontroller side.
+ *
+ *  Parameters: none
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::findDataBuffer_fromPacket(QByteArray serial_readData){
     QByteArray pattern("ADDE");
-    //uint32_t sysPattern = MSG_START_SYM;
-    //QByteArray pattern((char*)&sysPattern,1);
     QByteArray buffer;
 
     //Now use QByteArrayMatcher to find your byte array.
@@ -55,8 +73,9 @@ void maindialog::findDataBuffer_fromPacket(QByteArray serial_readData){
             i < pos + sizeof(uint32_t) + PAGE_SIZE_EXTRA;
             i++)
         {
-            //buffer.append(serial_readData.at(i));
+            buffer.append(serial_readData.at(i));
             serialDataBuffer.append(serial_readData.at(i));
+
         }
     }
 }
@@ -65,6 +84,7 @@ void maindialog::recognizeData_fromBuffer(QByteArray buffer){
     //QByteArray pattern("ADDE"); //Header patter
     data_deserialize(buffer);
     searchingHeader();
+    //recognizeData(DATA_HEADER_t *header);
 
     //uin8_t* buffer = buffer;
 
@@ -78,8 +98,9 @@ void maindialog::recognizeData_fromBuffer(QByteArray buffer){
 
 
 void maindialog::searchingHeader(){
+
     DATA_HEADER_t* firstSampleHeader = (DATA_HEADER_t*)retrieve_data.data;
-    //recognizeData();
+
     for(DATA_HEADER_t* curr = firstSampleHeader;
         curr+sizeof(DATA_HEADER_t)+curr->size < firstSampleHeader+PAGE_SIZE_EXTRA;
         curr += (sizeof(DATA_HEADER_t) + curr->size)) {
@@ -88,9 +109,6 @@ void maindialog::searchingHeader(){
 }
 
 void maindialog::recognizeData(DATA_HEADER_t *header){
-    //((DATA_HEADER_t*)data)->size
-    //*(DATA_HEADER_t*)(data+sizeof(DATA_HEADER_t)+(*(DATA_HEADER_t*)data).size)
-    //uint16_t sample_size[200];
     uint16_t id = (header->id);
 
     uint8_t* data_startPoint = (uint8_t*)(header+sizeof(DATA_HEADER_t));
@@ -134,7 +152,6 @@ void maindialog::recognizeData(DATA_HEADER_t *header){
 }
 
 
-
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 
     for(int i=0;i<PAGE_SIZE_EXTRA; i++){
@@ -156,6 +173,21 @@ void maindialog::data_deserialize(QByteArray& byteArray){
     //stream.commitTransaction();
 
 }
+
+
+/*
+void maindialog::saveData(QByteArray& byteArray){
+
+    //QDataStream stream(&byteArray,QSerialPort::ReadWrite);
+    QDataStream stream(byteArray);
+    stream.setVersion(QDataStream::Qt_4_5);
+
+    //stream.startTransaction();
+    stream >> retrieve_data;
+    //stream.commitTransaction();
+
+}
+*/
 
 
 
