@@ -42,14 +42,16 @@ void maindialog::receiveSerial_samples()
 void maindialog::serialReceived()
 {
     serial_readData = microSerial->readAll();
-    data_deserialize(serial_readData);
-    qDebug() << "retrieve_data.startSymbol" << QString::number(retrieve_data.startSymbol,16);
-    qDebug() << "retrieve_data.crc" << QString::number(retrieve_data.crc,16);
+    findDataBuffer_fromPacket(serial_readData);
+    //data_deserialize(serial_readData);
+    //searchingHeader();
+    //qDebug() << "retrieve_data.startSymbol" << QString::number(retrieve_data.startSymbol,16);
+    //qDebug() << "retrieve_data.crc" << QString::number(retrieve_data.crc,16);
 
     //findDataBuffer_fromPacket(serial_readData);
     //serialDataBuffer =  QString::fromStdString(findDataBuffer_fromPacket(serial_readData).toStdString());
 
-    //ui->xcel_streamText->append(retrieve_data.startSymbol);
+    ui->xcel_streamText->append(retrieve_data.startSymbol);
 
 }
 
@@ -66,6 +68,8 @@ void maindialog::serialReceived()
  **************************************************************/
 void maindialog::findDataBuffer_fromPacket(QByteArray serial_readData){
     QByteArray pattern("ADDE");
+    QByteArray patternHex(MSG_START_SYM,1);
+
     QByteArray buffer;
 
     //Now use QByteArrayMatcher to find your byte array.
@@ -84,22 +88,38 @@ void maindialog::findDataBuffer_fromPacket(QByteArray serial_readData){
     }
 }
 
-void maindialog::recognizeData_fromBuffer(QByteArray buffer){
-    //QByteArray pattern("ADDE"); //Header patter
-    data_deserialize(buffer);
-    searchingHeader();
-    //recognizeData(DATA_HEADER_t *header);
+void maindialog::recognizeData_fromBuffer(QByteArray databuffer){
+    QByteArray patternHex(MSG_START_SYM,1);
+    QByteArrayMatcher matcher(patternHex);
 
-    //uin8_t* buffer = buffer;
-
-    //Now use QByteArrayMatcher to find your byte array.
-    /*QByteArrayMatcher matcher(pattern);
     uint32_t pos = 0;
-    if((pos = matcher.indexIn(buffer, pos)) != -1) {
+    if((pos = matcher.indexIn(databuffer, pos)) != -1) {
+        qDebug() << "dataBuffer found at pos" << pos;
+        QByteArray header;
 
-    }*/
+        for(uint32_t i = pos;
+            i < pos + sizeof(DATA_HEADER_t);
+            i++)
+        {
+            header.append(serial_readData.at(i));
+        }
+        header_deserialize();
+
+    }
+
 }
 
+
+DATA_HEADER_t maindialog::header_deserialize(QByteArray& byteArray){
+    DATA_HEADER_t header;
+
+    QDataStream stream(&byteArray,QSerialPort::ReadWrite);
+    stream.setVersion(QDataStream::Qt_4_5);
+
+    //stream.startTransaction();
+    stream >> header;
+    //stream.commitTransaction();
+}
 
 void maindialog::searchingHeader(){
 
