@@ -42,10 +42,14 @@ void maindialog::receiveSerial_samples()
 void maindialog::serialReceived()
 {
     serial_readData = microSerial->readAll();
-    findDataBuffer_fromPacket(serial_readData);
+    data_deserialize(serial_readData);
+    qDebug() << "retrieve_data.startSymbol" << QString::number(retrieve_data.startSymbol,16);
+    qDebug() << "retrieve_data.crc" << QString::number(retrieve_data.crc,16);
+
+    //findDataBuffer_fromPacket(serial_readData);
     //serialDataBuffer =  QString::fromStdString(findDataBuffer_fromPacket(serial_readData).toStdString());
 
-    ui->xcel_streamText->append(serialDataBuffer);
+    //ui->xcel_streamText->append(retrieve_data.startSymbol);
 
 }
 
@@ -153,10 +157,19 @@ void maindialog::recognizeData(DATA_HEADER_t *header){
 
 
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
+    quint32 temp_startSymbol;
+    quint32 temp_crc;
+
+    stream >> temp_startSymbol;
 
     for(int i=0;i<PAGE_SIZE_EXTRA; i++){
         stream >> txData.data[i];
     }
+
+    stream >> temp_crc;
+
+    txData.startSymbol = temp_startSymbol;
+    txData.crc = temp_crc;
 
     return stream;
 }
@@ -164,8 +177,7 @@ QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 
 void maindialog::data_deserialize(QByteArray& byteArray){
 
-    //QDataStream stream(&byteArray,QSerialPort::ReadWrite);
-    QDataStream stream(byteArray);
+    QDataStream stream(&byteArray,QSerialPort::ReadWrite);
     stream.setVersion(QDataStream::Qt_4_5);
 
     //stream.startTransaction();
@@ -175,19 +187,7 @@ void maindialog::data_deserialize(QByteArray& byteArray){
 }
 
 
-/*
-void maindialog::saveData(QByteArray& byteArray){
 
-    //QDataStream stream(&byteArray,QSerialPort::ReadWrite);
-    QDataStream stream(byteArray);
-    stream.setVersion(QDataStream::Qt_4_5);
-
-    //stream.startTransaction();
-    stream >> retrieve_data;
-    //stream.commitTransaction();
-
-}
-*/
 
 
 
