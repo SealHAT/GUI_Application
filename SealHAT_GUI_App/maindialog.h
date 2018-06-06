@@ -13,6 +13,7 @@
 #include "seal_Types.h"
 #include "analyze.h"
 
+#define SPLIT_MSG_START_SYM (0xDEAD)
 namespace Ui {class maindialog;}
 
 class maindialog : public QDialog
@@ -376,8 +377,9 @@ private slots:
     void on_startStream_button_clicked();
     void recognizeData(DATA_HEADER_t *header);
     void searchingHeader();
-    void findDataBuffer_fromPacket(QByteArray serial_readData);
+    void findDataBuffer_fromPacket();
     void recognizeData_fromBuffer(QByteArray buffer);
+    void header_deserialize(QByteArray& byteArray);
 
 private:
     Ui::maindialog *ui;
@@ -396,11 +398,13 @@ private:
 
 //
     DATA_TRANSMISSION_t retrieve_data;
+    DATA_HEADER_t header;
 
 
 };
 
 QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs);
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData);
+QDataStream& operator>>(QDataStream& stream, DATA_HEADER_t& data_header);
 
 #endif // MAINDIALOG_H

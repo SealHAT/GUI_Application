@@ -42,16 +42,14 @@ void maindialog::receiveSerial_samples()
 void maindialog::serialReceived()
 {
     serial_readData = microSerial->readAll();
-    findDataBuffer_fromPacket(serial_readData);
-    //data_deserialize(serial_readData);
-    //searchingHeader();
-    //qDebug() << "retrieve_data.startSymbol" << QString::number(retrieve_data.startSymbol,16);
-    //qDebug() << "retrieve_data.crc" << QString::number(retrieve_data.crc,16);
+    findDataBuffer_fromPacket();
 
-    //findDataBuffer_fromPacket(serial_readData);
+
+
+    ui->xcel_streamText->append(serialDataBuffer);
     //serialDataBuffer =  QString::fromStdString(findDataBuffer_fromPacket(serial_readData).toStdString());
 
-    ui->xcel_streamText->append(retrieve_data.startSymbol);
+
 
 }
 
@@ -66,60 +64,92 @@ void maindialog::serialReceived()
  *
  *  Returns: void
  **************************************************************/
-void maindialog::findDataBuffer_fromPacket(QByteArray serial_readData){
-    QByteArray pattern("ADDE");
-    QByteArray patternHex(MSG_START_SYM,1);
+void maindialog::findDataBuffer_fromPacket(){
+    QByteArray pattern("\xDE\xAD");
+    //QByteArray patternHex {0xDE,0xAD};
 
-    QByteArray buffer;
+    QByteArray dataBuffer;
 
     //Now use QByteArrayMatcher to find your byte array.
     QByteArrayMatcher matcher(pattern);
-    uint32_t pos = 0;
+    int pos = 0;
     if((pos = matcher.indexIn(serial_readData, pos)) != -1) {
         qDebug() << "pattern found at pos" << pos;
         for(uint32_t i = pos + sizeof(uint32_t);
             i < pos + sizeof(uint32_t) + PAGE_SIZE_EXTRA;
             i++)
         {
-            buffer.append(serial_readData.at(i));
-            serialDataBuffer.append(serial_readData.at(i));
-
+            dataBuffer.append(serial_readData.at(i));
+            //serialDataBuffer.append(QString::number(static_cast<unsigned char>(serial_readData[i]), 16).toUpper());
+            serialDataBuffer.append(dataBuffer.toHex());
         }
+        recognizeData_fromBuffer(dataBuffer);
+
+    }else{
+        qDebug() << "No matching was found";
     }
+
 }
 
 void maindialog::recognizeData_fromBuffer(QByteArray databuffer){
-    QByteArray patternHex(MSG_START_SYM,1);
-    QByteArrayMatcher matcher(patternHex);
+    //QByteArray patternHex(MSG_START_SYM,1);
+    QByteArray pattern("\xDE\xAD");
+    QByteArrayMatcher matcher(pattern);
 
-    uint32_t pos = 0;
+    int pos = 0;
     if((pos = matcher.indexIn(databuffer, pos)) != -1) {
         qDebug() << "dataBuffer found at pos" << pos;
-        QByteArray header;
+        QByteArray header_ba;
 
         for(uint32_t i = pos;
             i < pos + sizeof(DATA_HEADER_t);
             i++)
         {
-            header.append(serial_readData.at(i));
+            header_ba.append(serial_readData.at(i));
         }
-        header_deserialize();
+
+        header_deserialize(header_ba);
+        qDebug() << header.startSym;
+        qDebug() << header.id;
 
     }
 
 }
 
+QDataStream& operator>>(QDataStream& stream, DATA_HEADER_t& data_header) {
+    quint32 temp_timestamp;
+    quint16 temp_startSym, temp_id, temp_msTime, temp_size;
 
-DATA_HEADER_t maindialog::header_deserialize(QByteArray& byteArray){
-    DATA_HEADER_t header;
+    stream >> temp_startSym
+           >> temp_id
+           >> temp_timestamp
+           >> temp_msTime
+           >> temp_size;
+
+    data_header.startSym  = (uint16_t)temp_startSym;
+    data_header.id        = (uint16_t)temp_id;
+    data_header.timestamp = (uint32_t)temp_timestamp;
+    data_header.msTime    = (uint16_t)temp_msTime;
+    data_header.size    = (uint16_t)temp_size;
+
+    return stream;
+}
+
+void maindialog::header_deserialize(QByteArray& byteArray){
+    //DATA_HEADER_t header;
 
     QDataStream stream(&byteArray,QSerialPort::ReadWrite);
     stream.setVersion(QDataStream::Qt_4_5);
 
     //stream.startTransaction();
     stream >> header;
+
+    //return header;
     //stream.commitTransaction();
 }
+
+
+
 
 void maindialog::searchingHeader(){
 
@@ -188,8 +218,8 @@ QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
 
     stream >> temp_crc;
 
-    txData.startSymbol = temp_startSymbol;
-    txData.crc = temp_crc;
+    txData.startSymbol = (uint32_t)temp_startSymbol;
+    txData.crc = (uint32_t)temp_crc;
 
     return stream;
 }
