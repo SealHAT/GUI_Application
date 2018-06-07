@@ -46,23 +46,9 @@ void maindialog::serialReceived()
 {
     serial_readData = microSerial->readAll();
 
-    //pos = 0;
     findDataBuffer_fromPacket();
 
-    //pos += sizeof(DATA_HEADER_t);
     recognizeData_fromBuffer();
-/*
-if(pos){
-    for(uint32_t i = pos + sizeof(DATA_HEADER_t);
-        i < pos +  sizeof(DATA_HEADER_t) + (header.size/4);
-        i++){
-        sampleBuf.append(dataBuffer.at(i));
-    }
-}else{
-    qDebug() << "error!";
-}*/
-
-    //serialDataBuffer.append(sampleBuf.toHex());
 
 
     headerAnalyze_display();
@@ -123,28 +109,73 @@ void maindialog::recognizeData_fromBuffer(){
             }
             header_deserialize(header_ba);
             qDebug() << "header size is" << qToBigEndian(header.size);
+            uint16_t id = qToBigEndian(header.id);
 
-            serialDataBuffer.clear();
-            serialDataBuffer.reserve(qToBigEndian(header.size)*2);
-            for(uint64_t i = pos + sizeof(DATA_HEADER_t);
-                i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
-                i++){
-                /*if(i >= dataBuffer.size()) {
-                    qDebug() <<"Too much";
-                }*/
 
-                //sampleBuf.clear();
-                //sampleBuf.append(dataBuffer.at(i));
-                serialDataBuffer.append(QString::number(dataBuffer.at(i), 16));
+
+
+            switch(id){
+            case DEVICE_ID_LIGHT:
+                light_DataBuffer.clear();
+                light_DataBuffer.reserve(qToBigEndian(header.size)*2);
+                for(uint64_t i = pos + sizeof(DATA_HEADER_t);
+                    i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
+                    i++){
+                    light_DataBuffer.append(QString::number(dataBuffer.at(i), 16));
+                }
+                break;
+            case DEVICE_ID_TEMPERATURE:
+                temp_DataBuffer.clear();
+                temp_DataBuffer.reserve(qToBigEndian(header.size)*2);
+                for(uint64_t i = pos + sizeof(DATA_HEADER_t);
+                    i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
+                    i++){
+                    temp_DataBuffer.append(QString::number(dataBuffer.at(i), 16));
+                }
+                break;
+            case DEVICE_ID_ACCELEROMETER:
+                qDebug() << "xcel is receiving";
+                acc_DataBuffer.clear();
+                acc_DataBuffer.reserve(qToBigEndian(header.size)*2);
+                for(uint64_t i = pos + sizeof(DATA_HEADER_t);
+                    i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
+                    i++){
+                    acc_DataBuffer.append(QString::number(dataBuffer.at(i), 16));
+                }
+                break;
+            case DEVICE_ID_MAGNETIC_FIELD:
+                mag_DataBuffer.clear();
+                mag_DataBuffer.reserve(qToBigEndian(header.size)*2);
+                for(uint64_t i = pos + sizeof(DATA_HEADER_t);
+                    i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
+                    i++){
+                    mag_DataBuffer.append(QString::number(dataBuffer.at(i), 16));
+                }
+                break;
+
+            case DEVICE_ID_GPS:
+                gps_DataBuffer.clear();
+                gps_DataBuffer.reserve(qToBigEndian(header.size)*2);
+                for(uint64_t i = pos + sizeof(DATA_HEADER_t);
+                    i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
+                    i++){
+                    gps_DataBuffer.append(QString::number(dataBuffer.at(i), 16));
+                }
+                break;
+            case DEVICE_ID_EKG:
+                ekg_DataBuffer.clear();
+                ekg_DataBuffer.reserve(qToBigEndian(header.size)*2);
+                for(uint64_t i = pos + sizeof(DATA_HEADER_t);
+                    i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
+                    i++){
+                    ekg_DataBuffer.append(QString::number(dataBuffer.at(i), 16));
+                }
+                break;
             }
 
     }else{
         qDebug() << "No matching header found";
         }
-    //}
-
-
-
 
 
 }
@@ -159,14 +190,14 @@ void maindialog::headerAnalyze_display(){
             ui->light_streamText->clear();
         }
         ui->light_streamText->moveCursor(QTextCursor::End);
-        ui->light_streamText->insertPlainText(serialDataBuffer);
+        ui->light_streamText->insertPlainText(light_DataBuffer);
         break;
     case DEVICE_ID_TEMPERATURE:
         if(ui->temp_streamText->toPlainText().size() > 10000) {
             ui->temp_streamText->clear();
         }
         ui->temp_streamText->moveCursor(QTextCursor::End);
-        ui->temp_streamText->insertPlainText(serialDataBuffer);
+        ui->temp_streamText->insertPlainText(temp_DataBuffer);
         break;
     case DEVICE_ID_ACCELEROMETER:
                 qDebug() << "xcel should displaying";
@@ -174,14 +205,14 @@ void maindialog::headerAnalyze_display(){
             ui->xcel_streamText->clear();
          }
         ui->xcel_streamText->moveCursor(QTextCursor::End);
-        ui->xcel_streamText->insertPlainText(serialDataBuffer);
+        ui->xcel_streamText->insertPlainText(acc_DataBuffer);
         break;
     case DEVICE_ID_MAGNETIC_FIELD:
         if(ui->mag_streamText->toPlainText().size() > 10000) {
             ui->mag_streamText->clear();
          }
         ui->mag_streamText->moveCursor(QTextCursor::End);
-        ui->mag_streamText->insertPlainText(serialDataBuffer);
+        ui->mag_streamText->insertPlainText(mag_DataBuffer);
         break;
 
     case DEVICE_ID_GPS:
@@ -189,14 +220,14 @@ void maindialog::headerAnalyze_display(){
             ui->gps_streamText->clear();
          }
         ui->gps_streamText->moveCursor(QTextCursor::End);
-        ui->gps_streamText->insertPlainText(serialDataBuffer);
+        ui->gps_streamText->insertPlainText(gps_DataBuffer);
         break;
     case DEVICE_ID_EKG:
         if(ui->ekg_streamText->toPlainText().size() > 10000) {
             ui->ekg_streamText->clear();
          }
         ui->ekg_streamText->moveCursor(QTextCursor::End);
-        ui->ekg_streamText->insertPlainText(serialDataBuffer);
+        ui->ekg_streamText->insertPlainText(ekg_DataBuffer);
         break;
     }
 

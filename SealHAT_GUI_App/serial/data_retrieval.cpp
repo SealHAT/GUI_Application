@@ -53,24 +53,57 @@ void maindialog::on_startStream_button_clicked()
 void maindialog::on_captureDatatoFile_button_clicked()
 {
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Destination Address"),
-                                                    "C:/Users/hpan5/Downloads/gui",
-                                                    tr("Text files (*.txt);;XML files (*.xml)"));
-    if (fileName.isEmpty())
-            return;
-        else {
-            QFile file(fileName);
-            if (!file.open(QIODevice::WriteOnly| QIODevice::Text)) {
-                QMessageBox::information(this, tr("Unable to open file"),
-                    file.errorString());
-                return;
-            }
+    QString dir = QFileDialog::getExistingDirectory(
+                this,
+                tr("Open Directory"),
+                "C:/Users/hpan5/Downloads/gui",
+                QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
+            );
 
-            QDataStream out(&file);
-            out.setVersion(QDataStream::Qt_4_5);
-            //out << config;
-            //file.close();
-    }
+    QFile acc_file( dir +"/accelerometer.txt");
+    QFile mag_file( dir +"/magnetometer.txt");
+    QFile ekg_file( dir +"/electrocardiogram.txt");
+    QFile temp_file( dir +"/temperature.txt");
+    QFile light_file( dir +"/light.txt");
+    QFile gps_file( dir +"/gps.txt");
+
+    if (!acc_file.open(QIODevice::WriteOnly | QIODevice::Text))
+           return;
+    qDebug()<<"acc_file now exists";
+
+    if (!mag_file.open(QIODevice::WriteOnly | QIODevice::Text))
+           return;
+    qDebug()<<"mag_file now exists";
+
+    if (!ekg_file.open(QIODevice::WriteOnly | QIODevice::Text))
+           return;
+    qDebug()<<"ekg_file now exists";
+
+    if (!temp_file.open(QIODevice::WriteOnly | QIODevice::Text))
+           return;
+    qDebug()<<"temp_file now exists";
+
+    if (!light_file.open(QIODevice::WriteOnly | QIODevice::Text))
+           return;
+    qDebug()<<"light_file now exists";
+
+    if (!gps_file.open(QIODevice::WriteOnly | QIODevice::Text))
+           return;
+    qDebug()<<"gps_file now exists";
+
+       QTextStream acc_out(&acc_file);
+       QTextStream mag_out(&mag_file);
+       QTextStream ekg_out(&ekg_file);
+       QTextStream gps_out(&gps_file);
+       QTextStream temp_out(&temp_file);
+       QTextStream light_out(&light_file);
+
+       acc_out << acc_DataBuffer;
+       mag_out << mag_DataBuffer;
+       ekg_out << ekg_DataBuffer;
+       gps_out << gps_DataBuffer;
+       temp_out << temp_DataBuffer;
+       light_out << light_DataBuffer;
 
 }
 
@@ -126,3 +159,21 @@ void maindialog::on_getDataButton_clicked()
 
 }
 
+/*QString fileName = QFileDialog::getSaveFileName(this, tr("Save Destination Address"),
+                                                "C:/Users/hpan5/Downloads/gui",
+                                                tr("Text files (*.txt);;XML files (*.xml)"));
+if (fileName.isEmpty())
+        return;
+    else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly| QIODevice::Text)) {
+            QMessageBox::information(this, tr("Unable to open file"),
+                file.errorString());
+            return;
+        }
+
+        QDataStream out(&file);
+        out.setVersion(QDataStream::Qt_4_5);
+        //out << config;
+        //file.close();
+}*/

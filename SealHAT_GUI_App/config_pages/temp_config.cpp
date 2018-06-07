@@ -100,9 +100,6 @@ void maindialog::temp_hour_clicked()
             button->setStyleSheet("background-color:rgb(202, 212, 223);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             configuration_settings.temperature_config.temp_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
-        //powerEstimation();
-
-        //qDebug() << "temp time is :" << configuration_settings.temperature_config.temp_activeHour << endl;
 
 }
 

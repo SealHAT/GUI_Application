@@ -397,7 +397,7 @@ private slots:
 
     void on_batterySizeText_selectionChanged();
 
-    void on_batterySizeText_returnPressed();
+    //void on_batterySizeText_returnPressed();
 
 private:
     Ui::maindialog *ui;
@@ -413,6 +413,14 @@ private:
     QByteArray sampleBuf;
     QByteArray header_ba;
     QString serialDataBuffer;
+    QString acc_DataBuffer;
+    QString mag_DataBuffer;
+    QString light_DataBuffer;
+    QString temp_DataBuffer;
+    QString gps_DataBuffer;
+    QString ekg_DataBuffer;
+
+
     QString microSerial_port_name;
     int pos;
     bool microSerial_is_available;

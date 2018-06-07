@@ -11,6 +11,7 @@
 maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog)
 {
     ui->setupUi(this);
+    microSerial = new QSerialPort(this);
 
     //configuration_settings.temperature_config.temp_samplePeriod = 1;
     // On the Login stack, set the welcome page.
@@ -101,6 +102,7 @@ void maindialog::labels_hide()
  **/
 maindialog::~maindialog()
 {
+    delete microSerial;
     delete ui;
 }
 

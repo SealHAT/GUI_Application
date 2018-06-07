@@ -26,7 +26,7 @@ void maindialog::send_serialSetup()
     microSerial_port_name = "";
     serialDataBuffer = "";
 
-    microSerial = new QSerialPort(this);
+    //microSerial = new QSerialPort(this);
 
 
     microSerial_port_name = ui->TX_serialPort_comboBox->currentText();
@@ -75,7 +75,7 @@ void maindialog::receive_serialSetup()
     microSerial_port_name = "";
     serialDataBuffer = "";
 
-    microSerial = new QSerialPort(this);
+    //microSerial = new QSerialPort(this);
 
 
     microSerial_port_name = ui->RXstream_serialPort_comboBox->currentText();
