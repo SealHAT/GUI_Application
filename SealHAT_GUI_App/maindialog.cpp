@@ -1,11 +1,9 @@
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDebug>
+#include <QtWidgets>
 #include "maindialog.h"
 #include "ui_maindialog.h"
-#include "seal_Types.h"
-#include "sensor_header/LSM303AGR.h"
-#include "sensor_header/LSM303AGRTypes.h"
 
 /**
  * Initial GUI setup.
@@ -14,33 +12,87 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 {
     ui->setupUi(this);
 
+    //configuration_settings.temperature_config.temp_samplePeriod = 1;
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
     // Set size for smaller welcome screen.
-    this->setFixedSize(421, 421);
+    this->setFixedSize(350, 350);
 
+    //Hide all the warning labels
+    labels_hide();
+
+    //Set all the sensor configuration back to default
+    sensors_setDefault();
+
+    //Caculate default power consumption, battery lifetime and
+    generalEstimation();
+
+    sensors_timeTable_control();
+    sensor_esitimation_control();
+
+    display_setReadOnly();
+    configureSettingListDisplay();
+
+    //receiveSerial_samples();
+
+    //microSerial = new QSerialPort(this);
+
+    on_TX_ReScanButton_clicked();
+    on_RXstream_ReScanButton_clicked();
+
+
+}
+
+/*
+ * Set all the sensors to default configuration
+ * and default display
+*/
+void maindialog::sensors_setDefault()
+{
     xcel_setDefault();
     mag_setDefault();
     ekg_setDefault();
     temp_setDefault();
     gps_setDefault();
-    // Hide all the warning label on the IMU page
-    labels_hide();
+}
 
-    ui->PwrStorageText->setReadOnly(true);
+void maindialog::sensor_esitimation_control(){
+    ekg_estimation_control();
+    xcel_estimation_control();
+    mag_estimation_control();
+    gps_estimation_control();
+}
+
+/**/
+void maindialog::display_setReadOnly()
+{
+    ui->gps_highSamplingRateValue->setReadOnly(true);
+    ui->gps_lowSamplingRateValue->setReadOnly(true);
+    //ui->pwrEst_Text->setReadOnly(true);
+    ui->pwrConsumption_Text->setReadOnly(true);
+    //ui->storageEst_Text->setReadOnly(true);
+    ui->storageConsumption_Text->setReadOnly(true);
+    ui->gps_configList->setReadOnly(true);
+    ui->xcel_configList->setReadOnly(true);
+    ui->mag_configList->setReadOnly(true);
+}
+
+/*Set all the sensors to default configuration*/
+void maindialog::sensors_timeTable_control()
+{
     temp_timeTable_control();
     ekg_timeTable_control();
     gps_timeTable_control();
     xcel_timeTable_control();
     mag_timeTable_control();
-    setConfigList();
 }
 
+
+/* Hide all the warning label*/
 void maindialog::labels_hide()
 {
     ui->thres_warnLABEL->hide();
-    ui->dur_warnLABEL->hide();
     ui->temp_warnLABEL->hide();
 }
 
@@ -58,19 +110,19 @@ void maindialog::on_configureDevOptionButton_clicked()
 
     ui->mainStacked->setCurrentIndex(CONFIGURE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(CONFIGURE_DEV_HOME_PAGE);
-    this->centerDialog();
+    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 }
 
-
-
+/*
 void maindialog::on_retrieveDataButton_clicked()
 {
     this->setFixedSize(850, 558);
 
     ui->mainStacked->setCurrentIndex(RETRIEVE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(RETRIEVE_DATA_HOME_PAGE);
+    //on_RX_ReScanButton_clicked();
     this->centerDialog();
-}
+}*/
 
 /**
  * Center the contents of the page.
@@ -82,24 +134,6 @@ void maindialog::centerDialog() {
     this->move(x, y);
 }
 
-void maindialog::hour_clicked()
-{
-
-    QPushButton* button = qobject_cast<QPushButton*>(sender());
-    if(!button->property("clicked").isValid()) {
-        button->setProperty("clicked", false);
-    }
-    bool clicked = button->property("clicked").toBool();
-    button->setProperty("clicked", !clicked);
-    qDebug() << "click after setproperty is :" << clicked << endl;
-
-        if(!clicked) {
-            button->setStyleSheet("background-color:rgb(34,139,34)");
-        } else {
-            button->setStyleSheet("background-color:rgb(152, 162, 173)");
-        }
-}
-
 
 void maindialog::on_streamDataButton_clicked()
 {
@@ -107,10 +141,36 @@ void maindialog::on_streamDataButton_clicked()
 
     ui->mainStacked->setCurrentIndex(STREAM_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(STREAM_DATA_HOME_PAGE);
+    on_RXstream_ReScanButton_clicked();
     this->centerDialog();
 }
 
 void maindialog::on_backButton_StreamPage_clicked()
 {
     on_backButton_clicked();
+}
+
+
+
+/*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().
+ *
+ * length();
+foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
+    qDebug() << "Has Vender ID: " << serialPortInfo.hasVendorIdentifier();
+    if(serialPortInfo.hasVendorIdentifier()){
+        qDebug() << "Vender ID: " << serialPortInfo.vendorIdentifier();
+    }
+    qDebug() << "Has Product ID: " << serialPortInfo.hasProductIdentifier();
+    if(serialPortInfo.hasVendorIdentifier()){
+        qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
+    }
+     * Has Vender ID:  true
+     *  Vender ID:  1003
+     * Has Product ID:  true
+     * Product ID:  9220
+}*/
+
+void maindialog::on_batterySizeText_selectionChanged()
+{
+    ui->batterySizeText->clear();
 }

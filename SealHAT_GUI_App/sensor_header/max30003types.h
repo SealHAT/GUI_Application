@@ -459,9 +459,9 @@ typedef enum {
 } CNFGECG_GAIN_VAL;
 
 typedef enum {
-	RATE_MAX_SPS	= 0,
-	RATE_MED_SPS	= 1,
-	RATE_MIN_SPS	= 2,
+	RATE_MAX_SPS	= 0, //512
+	RATE_MED_SPS	= 1, //256
+	RATE_MIN_SPS	= 2, //128
 	RATE_RESERVED	= 3
 } CNFGECG_RATE_VAL;
 
