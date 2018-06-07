@@ -60,7 +60,6 @@ void maindialog::temp_setDefault()
 void maindialog::temp_disable(bool disable)
 {
     ui->temp_timeclear_button->setDisabled(disable);
-    //temp_disable_button(disable);
     ui->temp_samplePeriod->setDisabled(disable);
     ui->temp_warnLABEL->hide();
 }

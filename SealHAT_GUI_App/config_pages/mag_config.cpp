@@ -116,6 +116,7 @@ void maindialog::on_mag_freqBox_currentIndexChanged(int)
 */
 void maindialog::IMUmag_Disable(bool disable)
 {
+    qDebug() << "IMU mag buttons status is :" << disable;
     ui->mag_timeclear_button->setDisabled(disable);
     ui->mag_pwrBox->setDisabled(disable);
     ui->mag_freqBox->setDisabled(disable);
@@ -177,10 +178,13 @@ void maindialog::mag_hour_clicked()
 
         if(!clicked) {
             button->setStyleSheet("background-color:rgb(253,199,0);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
+            configuration_settings.magnetometer_config.mag_activeHour |= 1 << button->property("button_shift").toInt();
         } else {
             button->setStyleSheet("background-color:rgb(202, 212, 223);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
             configuration_settings.magnetometer_config.mag_activeHour &= ~(1 << button->property("button_shift").toInt());
         }
+        qDebug() << "mag hours are "<< configuration_settings.magnetometer_config.mag_activeHour;
+
 }
 
 
