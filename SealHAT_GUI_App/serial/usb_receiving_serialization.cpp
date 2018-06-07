@@ -129,9 +129,9 @@ void maindialog::recognizeData_fromBuffer(){
             for(uint64_t i = pos + sizeof(DATA_HEADER_t);
                 i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
                 i++){
-                if(i >= dataBuffer.size()) {
+                /*if(i >= dataBuffer.size()) {
                     qDebug() <<"Too much";
-                }
+                }*/
 
                 //sampleBuf.clear();
                 //sampleBuf.append(dataBuffer.at(i));

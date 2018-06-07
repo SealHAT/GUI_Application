@@ -74,7 +74,7 @@ void maindialog::temp_disable_button(bool disable)
                 configuration_settings.temperature_config = {
                     {MSG_START_SYM, DEVICE_ID_LIGHT, 0, 0, sizeof(uint16_t)},// header data
                     0,                                                       // active hours
-                    0                                                        // sample period
+                    1                                                        // sample period
                 };
                 button->setProperty("clicked", false);
                 button->setStyleSheet("background-color:rgb(142, 152, 163);border:none;border-right-style:solid;border-left-style:solid;border-color:rgb(132, 142, 153);border-width:1px;border-top-style:none;border-bottom-style:none;");
