@@ -112,6 +112,18 @@ class maindialog : public QDialog
     uint32_t bit_Mask;
 
 
+
+    typedef enum {
+        INVERSE_INVERSE_DEVICE_ID_ENVIRONMENTAL     = 0x1000,
+        INVERSE_DEVICE_ID_LIGHT                     = 0x2000,
+        INVERSE_DEVICE_ID_TEMPERATURE               = 0x3000,
+        INVERSE_DEVICE_ID_ACCELEROMETER             = 0x4000,
+        INVERSE_DEVICE_ID_MAGNETIC_FIELD            = 0x5000,
+        INVERSE_DEVICE_ID_GPS               = 0x9000,
+        INVERSE_DEVICE_ID_EKG               = 0xA000,
+    } INVERSE_DEVICE_ID_t;
+
+
     /*************
      * GUI PAGES *
      *************/
@@ -378,8 +390,10 @@ private slots:
     void recognizeData(DATA_HEADER_t *header);
     void searchingHeader();
     void findDataBuffer_fromPacket();
-    void recognizeData_fromBuffer(QByteArray buffer);
+    void recognizeData_fromBuffer();
     void header_deserialize(QByteArray& byteArray);
+    void headerAnalyze_display();
+    void printData();
 
 private:
     Ui::maindialog *ui;
@@ -391,8 +405,12 @@ private:
     static const quint16 microSerial_product_id = 9220;
 
     QByteArray serial_readData;
+    QByteArray dataBuffer;
+    QByteArray sampleBuf;
+    QByteArray header_ba;
     QString serialDataBuffer;
     QString microSerial_port_name;
+    int pos;
     bool microSerial_is_available;
     bool serial_retry;
 

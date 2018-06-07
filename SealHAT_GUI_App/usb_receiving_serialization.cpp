@@ -10,6 +10,7 @@
 #include <QDataStream>
 #include "maindialog.h"
 #include "ui_maindialog.h"
+#include "qendian.h"
 
 /**************************************************************
  * FUNCTION: receiveSerial_samples
@@ -25,7 +26,10 @@
 void maindialog::receiveSerial_samples()
 {
     receive_serialSetup();
+    pos = 0;
     QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
+    //QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(printData()));
+
 }
 
 
@@ -44,13 +48,35 @@ void maindialog::serialReceived()
     serial_readData = microSerial->readAll();
     findDataBuffer_fromPacket();
 
+    recognizeData_fromBuffer();
 
 
-    ui->xcel_streamText->append(serialDataBuffer);
-    //serialDataBuffer =  QString::fromStdString(findDataBuffer_fromPacket(serial_readData).toStdString());
+/*
+if(pos){
+    for(uint32_t i = pos + sizeof(DATA_HEADER_t);
+        i < pos +  sizeof(DATA_HEADER_t) + (header.size/4);
+        i++){
+        sampleBuf.append(dataBuffer.at(i));
+    }
+}else{
+    qDebug() << "error!";
+}*/
+
+    //serialDataBuffer.append(sampleBuf.toHex());
 
 
+    headerAnalyze_display();
 
+}
+
+void maindialog::printData()
+{
+    for(uint32_t i = pos; i < pos + (header.size/4); i++){
+            sampleBuf.append(dataBuffer.at(i));
+     }
+
+        serialDataBuffer.append(sampleBuf.toHex());
+        headerAnalyze_display();
 }
 
 
@@ -65,74 +91,121 @@ void maindialog::serialReceived()
  *  Returns: void
  **************************************************************/
 void maindialog::findDataBuffer_fromPacket(){
-    QByteArray pattern("\xDE\xAD");
-    //QByteArray patternHex {0xDE,0xAD};
-
-    QByteArray dataBuffer;
+    QByteArray pattern_start("\xCA\xFE\xD0\x0D");
 
     //Now use QByteArrayMatcher to find your byte array.
-    QByteArrayMatcher matcher(pattern);
-    int pos = 0;
-    if((pos = matcher.indexIn(serial_readData, pos)) != -1) {
-        qDebug() << "pattern found at pos" << pos;
-        for(uint32_t i = pos + sizeof(uint32_t);
-            i < pos + sizeof(uint32_t) + PAGE_SIZE_EXTRA;
+    QByteArrayMatcher matcherST(pattern_start);
+    int begin = 0;
+    if((begin = matcherST.indexIn(serial_readData, begin)) != -1) {
+        //qDebug() << "pattern begin at" << begin;
+
+        for(uint32_t i = begin + sizeof(uint32_t);
+            i < begin + sizeof(uint32_t) + PAGE_SIZE_EXTRA;
             i++)
         {
             dataBuffer.append(serial_readData.at(i));
-            //serialDataBuffer.append(QString::number(static_cast<unsigned char>(serial_readData[i]), 16).toUpper());
-            serialDataBuffer.append(dataBuffer.toHex());
         }
-        recognizeData_fromBuffer(dataBuffer);
+
 
     }else{
-        qDebug() << "No matching was found";
+        qDebug() << "No matching start was found";
     }
 
 }
 
-void maindialog::recognizeData_fromBuffer(QByteArray databuffer){
-    //QByteArray patternHex(MSG_START_SYM,1);
+void maindialog::recognizeData_fromBuffer(){
     QByteArray pattern("\xDE\xAD");
     QByteArrayMatcher matcher(pattern);
 
-    int pos = 0;
-    if((pos = matcher.indexIn(databuffer, pos)) != -1) {
+    /*for(pos = pos; pos < pos + PAGE_SIZE_EXTRA; pos += sizeof(DATA_HEADER_t)){
+
+    }*/
+    //pos += sizeof(DATA_HEADER_t);
+
+    if((pos = matcher.indexIn((dataBuffer), pos)) != -1) {
         qDebug() << "dataBuffer found at pos" << pos;
-        QByteArray header_ba;
+        header_ba.clear();
 
         for(uint32_t i = pos;
             i < pos + sizeof(DATA_HEADER_t);
             i++)
         {
-            header_ba.append(serial_readData.at(i));
+            header_ba.append((dataBuffer).at(i));
+        }
+        header_deserialize(header_ba);
+        qDebug() << "header size is" << qToBigEndian(header.size);
+
+        serialDataBuffer.clear();
+        serialDataBuffer.reserve(qToBigEndian(header.size)*2);
+        for(uint64_t i = pos + sizeof(DATA_HEADER_t);
+            i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
+            i++){
+            if(i >= dataBuffer.size()) {
+                qDebug() <<"Too much";
+            }
+
+            //sampleBuf.clear();
+            //sampleBuf.append(dataBuffer.at(i));
+            serialDataBuffer.append(QString::number(dataBuffer.at(i), 16));
         }
 
-        header_deserialize(header_ba);
-        qDebug() << header.startSym;
-        qDebug() << header.id;
-
+    }else{
+        qDebug() << "No matching header found";
     }
 
 }
 
-QDataStream& operator>>(QDataStream& stream, DATA_HEADER_t& data_header) {
-    quint32 temp_timestamp;
-    quint16 temp_startSym, temp_id, temp_msTime, temp_size;
+void maindialog::headerAnalyze_display(){
+    uint16_t id = qToBigEndian(header.id);
+    qDebug() << "ID is "<<QString::number(id,16);
 
-    stream >> temp_startSym
-           >> temp_id
-           >> temp_timestamp
-           >> temp_msTime
-           >> temp_size;
+    switch(id){
+    case DEVICE_ID_LIGHT:
+        if(ui->light_streamText->toPlainText().size() > 10000) {
+            ui->light_streamText->clear();
+        }
+        ui->light_streamText->moveCursor(QTextCursor::End);
+        ui->light_streamText->insertPlainText(serialDataBuffer);
+        break;
+    case DEVICE_ID_TEMPERATURE:
+        if(ui->temp_streamText->toPlainText().size() > 10000) {
+            ui->temp_streamText->clear();
+        }
+        ui->temp_streamText->moveCursor(QTextCursor::End);
+        ui->temp_streamText->insertPlainText(serialDataBuffer);
+        break;
+    case DEVICE_ID_ACCELEROMETER:
+                qDebug() << "xcel should displaying";
+        if(ui->xcel_streamText->toPlainText().size() > 10000) {
+            ui->xcel_streamText->clear();
+         }
+        ui->xcel_streamText->moveCursor(QTextCursor::End);
+        ui->xcel_streamText->insertPlainText(serialDataBuffer);
+        break;
+    case DEVICE_ID_MAGNETIC_FIELD:
+        if(ui->mag_streamText->toPlainText().size() > 10000) {
+            ui->mag_streamText->clear();
+         }
+        ui->mag_streamText->moveCursor(QTextCursor::End);
+        ui->mag_streamText->insertPlainText(serialDataBuffer);
+        break;
 
-    data_header.startSym  = (uint16_t)temp_startSym;
-    data_header.id        = (uint16_t)temp_id;
-    data_header.timestamp = (uint32_t)temp_timestamp;
-    data_header.msTime    = (uint16_t)temp_msTime;
-    data_header.size    = (uint16_t)temp_size;
+    case DEVICE_ID_GPS:
+        if(ui->gps_streamText->toPlainText().size() > 10000) {
+            ui->gps_streamText->clear();
+         }
+        ui->gps_streamText->moveCursor(QTextCursor::End);
+        ui->gps_streamText->insertPlainText(serialDataBuffer);
+        break;
+    case DEVICE_ID_EKG:
+        if(ui->ekg_streamText->toPlainText().size() > 10000) {
+            ui->ekg_streamText->clear();
+         }
+        ui->ekg_streamText->moveCursor(QTextCursor::End);
+        ui->ekg_streamText->insertPlainText(serialDataBuffer);
+        break;
+    }
 
-    return stream;
 }
 
 void maindialog::header_deserialize(QByteArray& byteArray){
@@ -147,9 +220,6 @@ void maindialog::header_deserialize(QByteArray& byteArray){
     //return header;
     //stream.commitTransaction();
 }
-
-
-
 
 void maindialog::searchingHeader(){
 
@@ -199,11 +269,30 @@ void maindialog::recognizeData(DATA_HEADER_t *header){
             ui->ekg_streamText->append(QString(((uint32_t*)data_startPoint)[i]));
         }
         break;
-
-
     }
 
 }
+
+QDataStream& operator>>(QDataStream& stream, DATA_HEADER_t& data_header) {
+    quint32 temp_timestamp;
+    quint16 temp_startSym, temp_id, temp_msTime, temp_size;
+
+    stream >> temp_startSym
+           >> temp_id
+           >> temp_timestamp
+           >> temp_msTime
+           >> temp_size;
+
+    data_header.startSym  = (uint16_t)temp_startSym;
+    data_header.id        = (uint16_t)temp_id;
+    data_header.timestamp = (uint32_t)temp_timestamp;
+    data_header.msTime    = (uint16_t)temp_msTime;
+    data_header.size    = (uint16_t)temp_size;
+
+    return stream;
+}
+
+
 
 
 QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData) {
