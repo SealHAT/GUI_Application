@@ -31,6 +31,10 @@ void maindialog::sendSerial_Config(){
         qDebug() <<"Data successfully sent to port"<< endl;
     }
 
+    if(microSerial->isOpen()){
+        microSerial->close();
+    }
+
 }
 
 QByteArray maindialog::config_serialize(){
@@ -39,57 +43,12 @@ QByteArray maindialog::config_serialize(){
     QDataStream stream(&byteArray, QSerialPort::ReadWrite); //QIODevice:WriteOnly
     stream.setVersion(QDataStream::Qt_4_5);
 
-    stream << 'c';
+    stream << configuration_settings;
 
     return byteArray;
 }
 
-/**************************************************************
- * FUNCTION: send_serialSetup
- * ------------------------------------------------------------
- *  This function checks what serial port users selected
- *  in the TX_serialPort_comboBox. Set serial port to write only.
- *
- *  Parameters: None
- *
- *  Returns: void
- **************************************************************/
-void maindialog::send_serialSetup()
-{
-    microSerial_is_available = false;
-    current_COM_port = "";
-    serialBuffer = "";
 
-    //microSerial = new QSerialPort(this);
-
-
-    current_COM_port = ui->comboBox_comPorts->currentText();
-
-    if(ui->comboBox_comPorts->count() != 0){
-        microSerial_is_available = true;
-    }else{
-        microSerial_is_available = false;
-    }
-
-    if(microSerial_is_available)
-    {
-        //open and configure the port
-        microSerial->setPortName(current_COM_port);
-        microSerial->open(QSerialPort::ReadWrite);  //Set serial port to write only
-        microSerial->setBaudRate(QSerialPort::Baud9600);
-        microSerial->setDataBits(QSerialPort::Data8);
-        microSerial->setParity(QSerialPort::NoParity);
-
-        microSerial->setStopBits(QSerialPort::OneStop);
-        microSerial->setFlowControl(QSerialPort::NoFlowControl);
-
-        qDebug() << "Found Serial Port:  " << current_COM_port;
-
-    }else{
-        QMessageBox::warning(this, "Port error", "Could not find the Microcontroller Serial Port!");
-    }
-
-}
 
 
 
@@ -134,7 +93,7 @@ QDataStream& operator<<(QDataStream& stream, const Temp_TX& temp) {
     return stream;
 }
 
-/*QDataStream& operator<<(QDataStream& stream, const EKG_TX& ekg) {
+QDataStream& operator<<(QDataStream& stream, const EKG_TX& ekg) {
 
     stream << ekg.ekg_headerData
            << (quint32)ekg.ekg_activeHour
@@ -143,13 +102,13 @@ QDataStream& operator<<(QDataStream& stream, const Temp_TX& temp) {
            << ekg.ekg_lowpassFreq;
 
     return stream;
-}*/
+}
 
 QDataStream& operator<<(QDataStream& stream, const GPS_TX& gps) {
 
     stream << gps.gps_headerData
-           << (quint32)gps.gps_activeHour;
-           //<< gps.default_profile;
+           << (quint32)gps.gps_activeHour
+           << gps.default_profile;
 
     return stream;
 }
@@ -172,8 +131,25 @@ QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs) {
            << configs.accelerometer_config
            << configs.magnetometer_config
            << configs.temperature_config
-           //<< configs.ekg_config
+           << configs.ekg_config
            << configs.gps_config;
 
     return stream;
 }
+
+
+/*foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+{
+    if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
+    {
+        if(serialPortInfo.vendorIdentifier() == microSerial_vendor_id)
+        {
+            if(serialPortInfo.productIdentifier() == microSerial_product_id)
+            {
+                //microSerial_port_name = serialPortInfo.portName();
+                microSerial_port_name = ui->serialPort_comboBox->currentText();
+                microSerial_is_available = true;
+            }
+        }
+    }
+}*/

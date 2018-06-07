@@ -129,6 +129,7 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+            ui->configureHomeButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case XCEL_CONFIGURE: {
             ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
@@ -136,6 +137,7 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->xcelButton->setStyleSheet("background-color:rgb(253, 199, 0)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+            ui->configureHomeButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case MAG_CONFIGURE: {
             ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
@@ -143,6 +145,7 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->magButton->setStyleSheet("background-color:rgb(253, 199, 0)");
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+            ui->configureHomeButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case EKG_CONFIGURE: {
             ui->ekgButton->setStyleSheet("background-color:rgb(253, 199, 0)");
@@ -150,6 +153,7 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+            ui->configureHomeButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case TEMPERATURE_CONFIGURE: {
             ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
@@ -157,6 +161,7 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(253, 199, 0)");
+            ui->configureHomeButton->setStyleSheet("background-color:rgb(152, 162, 173)");
         } break;
         case CONFIGURE_DEV_HOME_PAGE: {
             ui->ekgButton->setStyleSheet("background-color:rgb(152, 162, 173)");
@@ -164,6 +169,7 @@ void maindialog::setActiveButtonColor(CONFIGURE_PAGES pageToHighlight)
             ui->xcelButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->magButton->setStyleSheet("background-color:rgb(152, 162, 173)");
             ui->temperatureButton->setStyleSheet("background-color:rgb(152, 162, 173)");
+            ui->configureHomeButton->setStyleSheet("background-color:rgb(253, 199, 0)");
         } break;
     }
 }

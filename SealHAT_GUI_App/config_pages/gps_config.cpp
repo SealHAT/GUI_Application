@@ -82,12 +82,12 @@ void maindialog::gps_disable(bool disable)
 void maindialog::on_gps_SW_clicked()
 {
     QString title = ui->gps_SW->text();
-    if(title == "ENABLE SENSOR")
+    if(title == "Enable")
     {
         gps_disable(false);
-        ui->gps_SW->setText("DISABLE SENSOR");
+        ui->gps_SW->setText("Disable");
     }else{
-        ui->gps_SW->setText("ENABLE SENSOR");
+        ui->gps_SW->setText("Enable");
         gps_disable(true);
     }
     powerEstimation();

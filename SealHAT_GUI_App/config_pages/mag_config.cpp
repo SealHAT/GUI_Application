@@ -139,13 +139,13 @@ void maindialog::mag_setDefault()
 void maindialog::on_mag_SW_clicked()
 {
     QString title = ui->mag_SW->text();
-    if(title == "ENABLE SENSOR")
+    if(title == "Enable")
     {
-        ui->mag_SW->setText("DISABLE SENSOR");
+        ui->mag_SW->setText("Disable");
         IMUmag_Disable(false);
         mag_disable_button(false);
     }else{
-        ui->mag_SW->setText("ENABLE SENSOR");
+        ui->mag_SW->setText("Enable");
         IMUmag_Disable(true);
         mag_disable_button(true);
     }
@@ -185,7 +185,7 @@ void maindialog::mag_hour_clicked()
 
 
 void maindialog::mag_disable_button(bool disable)
-{    
+{
     for(QPushButton* button : ui->magConfigPage->findChildren<QPushButton*>()) {
         if(button->property("button_shift").isValid()) {
             button->setDisabled(disable);

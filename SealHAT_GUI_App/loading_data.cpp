@@ -1,3 +1,4 @@
+
 #include <QDesktopWidget>
 #include <QMessageBox>
 #include <QDebug>
@@ -34,6 +35,35 @@ void maindialog::collectLoadingData_fromFile()
     configuration_settings.temperature_config.temp_samplePeriod = config[ "Temperature and Light Sample Period"];
 
     configuration_settings.gps_config.gps_activeHour = config["GPS Time"];
+    QString tempSWtext = ui->temp_SW->text();
+    //qDebug() << "temperature switch text is"<< tempSWtext << configuration_settings.temperature_config.temp_activeHour;
+
+    if((configuration_settings.temperature_config.temp_activeHour > 0) &&
+            (tempSWtext== "Enable"))
+    {
+        ui->temp_SW->setText("Disable");
+        //qDebug() << "temperature switch text is"<< tempSWtext;
+    }
+    if(configuration_settings.accelerometer_config.acc_activeHour > 0 &&
+            ui->xcel_SW->text() == "Enable")
+    {
+        ui->xcel_SW->setText("Disable");
+    }
+    if(configuration_settings.magnetometer_config.mag_activeHour > 0 &&
+            ui->mag_SW->text() == "Enable")
+    {
+        ui->mag_SW->setText("Disable");
+    }
+    if(configuration_settings.ekg_config.ekg_activeHour > 0 &&
+            ui->ekg_SW->text() == "Enable")
+    {
+        ui->ekg_SW->setText("Disable");
+    }
+    if(configuration_settings.gps_config.gps_activeHour > 0 &&
+            ui->gps_SW->text() == "Enable")
+    {
+        ui->gps_SW->setText("Disable");
+    }
 
     loaddata_fromSensors();
     generalEstimation();
@@ -51,5 +81,7 @@ void maindialog::loaddata_fromSensors(){
     ekg_checkTimetoEnable();
     mag_checkTimetoEnable();
     temp_checkTimetoEnable();
+
+
 }
 

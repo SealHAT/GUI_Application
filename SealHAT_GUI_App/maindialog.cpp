@@ -12,65 +12,36 @@ maindialog::maindialog(QWidget *parent) : QDialog(parent), ui(new Ui::maindialog
 {
     ui->setupUi(this);
 
+    //configuration_settings.temperature_config.temp_samplePeriod = 1;
     // On the Login stack, set the welcome page.
     ui->StartPageStacked->setCurrentIndex(INITIAL_PAGE);
 
     // Set size for smaller welcome screen.
     this->setFixedSize(350, 350);
 
-    //micro serial stuff
-    microSerial_is_available = false;
-    //microSerial_port_name = "";
-
-    //hide unused ui coponents for now. TODO: remove unused components
-    ui->batterySizeText->hide();
-    ui->pwrEst_Text->hide();
-    ui->storageEst_Text->hide();
-    ui->pwrConsumption_Text->hide();
-    ui->storageConsumption_Text->hide();
-
     //Hide all the warning labels
     labels_hide();
-    display_setReadOnly();
 
     //Set all the sensor configuration back to default
     sensors_setDefault();
+
+    //Caculate default power consumption, battery lifetime and
     generalEstimation();
 
     sensors_timeTable_control();
     sensor_esitimation_control();
+
+    display_setReadOnly();
     configureSettingListDisplay();
 
-    //allocate memory for serial port objects
-    microSerial = new QSerialPort(this);
-
-    QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
-
-    //scan the serial ports and populate combo box on configuration home page
-    refreshSerialPorts();
-
-    //initialize current active COM port.
-    current_COM_port = ui->comboBox_comPorts->currentText();
-
-    serialInitAndOpenPort();
-
     //receiveSerial_samples();
-    qDebug() << ":)";
-}
 
-void maindialog::refreshSerialPorts()
-{
-    qDebug() << "Num ports available: " << QSerialPortInfo::availablePorts().count() << "\n";
+    //microSerial = new QSerialPort(this);
 
-    //clear current entries so they may be updated
-    ui->comboBox_comPorts->clear();
+    on_TX_ReScanButton_clicked();
+    on_RXstream_ReScanButton_clicked();
 
-    //update the combo box with the currently available COM ports
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
-    {
-        ui->comboBox_comPorts->addItem(serialPortInfo.portName());
-        qDebug() << serialPortInfo.portName() << "\n";
-    }
+
 }
 
 /*
@@ -98,9 +69,9 @@ void maindialog::display_setReadOnly()
 {
     ui->gps_highSamplingRateValue->setReadOnly(true);
     ui->gps_lowSamplingRateValue->setReadOnly(true);
-    ui->pwrEst_Text->setReadOnly(true);
+    //ui->pwrEst_Text->setReadOnly(true);
     ui->pwrConsumption_Text->setReadOnly(true);
-    ui->storageEst_Text->setReadOnly(true);
+    //ui->storageEst_Text->setReadOnly(true);
     ui->storageConsumption_Text->setReadOnly(true);
     ui->gps_configList->setReadOnly(true);
     ui->xcel_configList->setReadOnly(true);
@@ -142,14 +113,16 @@ void maindialog::on_configureDevOptionButton_clicked()
     setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
 }
 
-
+/*
 void maindialog::on_retrieveDataButton_clicked()
 {
     this->setFixedSize(850, 558);
 
     ui->mainStacked->setCurrentIndex(RETRIEVE_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(RETRIEVE_DATA_HOME_PAGE);
-}
+    //on_RX_ReScanButton_clicked();
+    this->centerDialog();
+}*/
 
 /**
  * Center the contents of the page.
@@ -161,12 +134,15 @@ void maindialog::centerDialog() {
     this->move(x, y);
 }
 
+
 void maindialog::on_streamDataButton_clicked()
 {
     this->setFixedSize(850, 558);
 
     ui->mainStacked->setCurrentIndex(STREAM_MAIN_STACK);
     ui->ConfigurePages->setCurrentIndex(STREAM_DATA_HOME_PAGE);
+    on_RXstream_ReScanButton_clicked();
+    this->centerDialog();
 }
 
 void maindialog::on_backButton_StreamPage_clicked()
@@ -174,86 +150,27 @@ void maindialog::on_backButton_StreamPage_clicked()
     on_backButton_clicked();
 }
 
-void maindialog::on_pushButton_refreshCOM_clicked()
-{
-    refreshSerialPorts();
-}
 
-void maindialog::on_comboBox_comPorts_currentIndexChanged(const QString &arg1)
-{
-    (void)arg1; //unused
 
-    //close port if its currently open
-    if(microSerial->isOpen())
-    {
-        microSerial->close();
+/*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().
+ *
+ * length();
+foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
+    qDebug() << "Has Vender ID: " << serialPortInfo.hasVendorIdentifier();
+    if(serialPortInfo.hasVendorIdentifier()){
+        qDebug() << "Vender ID: " << serialPortInfo.vendorIdentifier();
     }
-
-    //initialize current active COM port.
-    current_COM_port = ui->comboBox_comPorts->currentText();
-
-    //set name of new port and open it
-    microSerial->setPortName(current_COM_port);
-    serialInitAndOpenPort();
-
-    qDebug() << "Current active port: " << current_COM_port << "\n";
-}
-
-void maindialog::serialInitAndOpenPort()
-{
-    microSerial->open(QSerialPort::ReadWrite);
-    microSerial->setBaudRate(QSerialPort::Baud9600);
-    microSerial->setDataBits(QSerialPort::Data8);
-    microSerial->setParity(QSerialPort::NoParity);
-    microSerial->setStopBits(QSerialPort::OneStop);
-    microSerial->setFlowControl(QSerialPort::NoFlowControl);
-    microSerial->setDataTerminalReady(true);
-}
-
-void maindialog::on_sButton_clicked()
-{
-    //send_serialSetup();
-    QByteArray configData;
-    configData.append("s");//config_serialize();
-
-    const qint64 bytesWritten = microSerial->write(configData);
-    qDebug() << "number of bytes sending" <<bytesWritten << endl;
-
-    if (bytesWritten == -1)
-    {
-        qDebug() <<"Failed to write the data to port" << endl;
-        serial_retry = true;
-    } else if (bytesWritten != configData.size()) {
-        qDebug() <<"Failed to write all the data to port" << endl;
-        serial_retry = true;
-    } else if (!microSerial->waitForBytesWritten(5000)) {
-        qDebug() <<"Operation timed out or an error "
-                   "occurred, error:"<< microSerial->errorString()<< endl;
-    }else{
-        qDebug() <<"Data successfully sent to port"<< endl;
+    qDebug() << "Has Product ID: " << serialPortInfo.hasProductIdentifier();
+    if(serialPortInfo.hasVendorIdentifier()){
+        qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
     }
-}
+     * Has Vender ID:  true
+     *  Vender ID:  1003
+     * Has Product ID:  true
+     * Product ID:  9220
+}*/
 
-void maindialog::on_oButton_clicked()
+void maindialog::on_batterySizeText_selectionChanged()
 {
-    //send_serialSetup();
-    QByteArray configData;
-    configData.append("o");//config_serialize();
-
-    const qint64 bytesWritten = microSerial->write(configData);
-    qDebug() << "number of bytes sending" <<bytesWritten << endl;
-
-    if (bytesWritten == -1)
-    {
-        qDebug() <<"Failed to write the data to port" << endl;
-        serial_retry = true;
-    } else if (bytesWritten != configData.size()) {
-        qDebug() <<"Failed to write all the data to port" << endl;
-        serial_retry = true;
-    } else if (!microSerial->waitForBytesWritten(5000)) {
-        qDebug() <<"Operation timed out or an error "
-                   "occurred, error:"<< microSerial->errorString()<< endl;
-    }else{
-        qDebug() <<"Data successfully sent to port"<< endl;
-    }
+    ui->batterySizeText->clear();
 }

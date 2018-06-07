@@ -1,7 +1,7 @@
 #ifndef ANALYZE_H
 #define ANALYZE_H
 
-#define STORAGECAPACITY         1000000000*8
+#define STORAGECAPACITY         (8000000000.0)
 
 #define IMU_DATA_SIZE           25
 #define GPS_DATA_SIZE           12
@@ -39,6 +39,6 @@
 #define SPI_SB_CURRENT  15.0/1000000
 
 #define MICRO_ACT_PWR   32.0/1000000
-#define MICRO_SB_PWR    4.6/1000000
+#define MICRO_SB_PWR    (13.0)/1000000 //
 
 #endif // ANALYZE_H

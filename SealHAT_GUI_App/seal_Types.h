@@ -82,6 +82,8 @@ typedef struct __attribute__((__packed__)){
     uint16_t size;		  // size of data packet to follow in bytes
 } DATA_HEADER_t;
 
+
+
 /**
  * \brief Time struct for calendar
  */
@@ -117,13 +119,14 @@ struct Temp_TX {
    uint16_t         temp_samplePeriod;
 };
 
-struct Ekg_TX {
+struct EKG_TX {
    DATA_HEADER_t    ekg_headerData;
    uint32_t         ekg_activeHour;
    CNFGECG_RATE_VAL ekg_sampleRate;
    CNFGECG_GAIN_VAL ekg_gain;
    CNFGECG_DLPF_VAL ekg_lowpassFreq;
 };
+
 
 struct GPS_TX {
    DATA_HEADER_t    gps_headerData;
@@ -133,21 +136,24 @@ struct GPS_TX {
 
 struct SENSOR_CONFIGS {
     DATA_HEADER_t   config_header;        // packet header for all configuration data
-    uint8_t         num_flash_chips;      // number of flash chips installed on device
+    uint8_t         num_flash_chips ;      // number of flash chips installed on device
     calendar_date   start_logging_day;    // day the device should begin data collection
     uint32_t        start_logging_time;   // time the device will start on the day given by start_logging_day
     Xcel_TX         accelerometer_config; // configuration data for the accelerometer
     Mag_TX          magnetometer_config;  // configuration data for the magnetometer
     Temp_TX         temperature_config;   // configuration data for the temperature sensor
-    Ekg_TX          ekg_config;           // configuration data for the EKG
+    EKG_TX          ekg_config;           // configuration data for the EKG
     GPS_TX          gps_config;           // configuration data for the GPS
+
 };
 
 /** Packet that gets sent over USB to the host computer **/
 typedef struct __attribute__((__packed__)){
     uint32_t startSymbol;           // start symbol for the data transmission
-    uint8_t  data[PAGE_SIZE_LESS]; // one page of data from flash
+    uint8_t  data[PAGE_SIZE_EXTRA]; // one page of data from flash
     uint32_t crc;                   // crc32 of the DATA (not the start symbol) using IEEE CRC32 polynomial
 } DATA_TRANSMISSION_t;
+
+
 
 #endif /* SEAL_TYPES_H_ */

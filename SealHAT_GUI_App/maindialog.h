@@ -2,16 +2,18 @@
 #define MAINDIALOG_H
 
 #include <QDialog>
-#include <QString>
 #include <QMap>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QTextStream>
+#include <QDataStream>
+#include <QByteArray>
 #include "seal_Types.h"
 #include "analyze.h"
 
+#define SPLIT_MSG_START_SYM (0xDEAD)
 namespace Ui {class maindialog;}
 
 class maindialog : public QDialog
@@ -19,9 +21,8 @@ class maindialog : public QDialog
     Q_OBJECT
 
     /* Struct containing all sensor and micro configuration data. */
-    SENSOR_CONFIGS configuration_settings;
 
-    //Analyzation Variables
+  //Analyzation Variables
     uint32_t total_sampleNumber;
 
     uint64_t templight_storage;
@@ -36,6 +37,7 @@ class maindialog : public QDialog
     double micro_magActiveTime;
     double micro_gpsActiveTime;
     double micro_ekgActiveTime;
+
 
     uint64_t templight_groupNum;
     uint64_t acc_groupNum;
@@ -108,6 +110,18 @@ class maindialog : public QDialog
     //Time button mask and setting
     uint8_t shift_property;
     uint32_t bit_Mask;
+
+
+
+    typedef enum {
+        INVERSE_INVERSE_DEVICE_ID_ENVIRONMENTAL     = 0x1000,
+        INVERSE_DEVICE_ID_LIGHT                     = 0x2000,
+        INVERSE_DEVICE_ID_TEMPERATURE               = 0x3000,
+        INVERSE_DEVICE_ID_ACCELEROMETER             = 0x4000,
+        INVERSE_DEVICE_ID_MAGNETIC_FIELD            = 0x5000,
+        INVERSE_DEVICE_ID_GPS               = 0x9000,
+        INVERSE_DEVICE_ID_EKG               = 0xA000,
+    } INVERSE_DEVICE_ID_t;
 
 
     /*************
@@ -200,10 +214,12 @@ class maindialog : public QDialog
 
 public:
     explicit maindialog(QWidget *parent = 0);
+    friend QDataStream& operator>>(QDataStream& stream, const DATA_TRANSMISSION_t& txData);
     void centerDialog();
     ~maindialog();
 
 private slots:
+    void serialReceived();
 
 //Page switch
     void on_ekgButton_clicked();
@@ -211,11 +227,13 @@ private slots:
     void on_magButton_clicked();
     void on_xcelButton_clicked();
     void on_temperatureButton_clicked();
+
     void on_streamDataButton_clicked();
     void on_backButton_clicked(); //
     void on_configureDevOptionButton_clicked(); //
-    void on_retrieveDataButton_clicked(); //
+    //void on_retrieveDataButton_clicked(); //
     void on_backButton_StreamPage_clicked();
+
     void setActiveButtonColor(CONFIGURE_PAGES pageToHighlight);
     void on_backButton_retrieveData_clicked();
 
@@ -229,44 +247,52 @@ private slots:
 
 //Accelerometer
     void xcel_setDefault();
+
     void on_xcel_SW_clicked();
     void on_xcel_scaleBox_currentIndexChanged(int index);
     void on_xcel_pwrBox_currentIndexChanged(int);
     void on_xcel_freqBox_currentIndexChanged(int);
-    void on_xcel_XL_checkBox_clicked(bool checked);
-    void on_xcel_XH_checkBox_clicked(bool checked);
-    void on_xcel_YL_checkBox_clicked(bool checked);
-    void on_xcel_YH_checkBox_clicked(bool checked);
-    void on_xcel_ZL_checkBox_clicked(bool checked);
-    void on_xcel_ZH_checkBox_clicked(bool checked);
+    void on_xcel_sway_checkBox_clicked(bool checked);
+    void on_xcel_surge_checkBox_clicked(bool checked);
+    void on_xcel_heave_checkBox_clicked(bool checked);
+
     void on_xcel_thres_editingFinished();
+
     void IMUxcel_Disable(bool disable);
     void xcel_disable_button(bool disable);
     void on_xcel_timeclear_button_clicked();
+
     void xcel_timeTable_control();
     void xcel_estimation_control();
     void xcel_hour_clicked();
     void xcel_changeMode();
     void xcel_checkTimetoEnable();
+
     void xcel_getloadData();
+
 
 //Magnetometer
     void mag_setDefault();
+
     void on_mag_SW_clicked();
     void on_mag_timeclear_button_clicked();
     void on_mag_pwrBox_currentIndexChanged(int);
     void on_mag_freqBox_currentIndexChanged(int);
+
     void IMUmag_Disable(bool disable);
     void mag_disable_button(bool disable);
+
     void mag_timeTable_control();
     void mag_estimation_control();
     void mag_hour_clicked();
     void mag_dataCollect();
     void mag_checkTimetoEnable();
+
     void mag_getloadData();
 
 //EKG
     void ekg_setDefault();
+
     void on_ekg_SW_clicked();
     void on_ekg_timeclear_button_clicked();
     void on_ekg_odr256_clicked();
@@ -274,41 +300,52 @@ private slots:
     void on_ekg_odr512_clicked();
     void on_ekg_gainBox_currentIndexChanged(int index);
     void on_ekg_LPfreqBox_currentIndexChanged(int index);
+
     void ekg_Disable(bool disable);
     void ekg_disable_button(bool disable);
+
     void ekg_timeTable_control();
     void ekg_estimation_control();
     void ekg_hour_clicked();
     void ekg_checkTimetoEnable();
+
     void ekg_getloadData();
 
 //GPS
+
     void gps_setDefault();
+
     void on_gps_SW_clicked();
     void on_gps_timeclear_button_clicked();
+
     void gps_disable(bool disable);
     void gps_disable_button(bool disable);
+
     void gps_timeTable_control();
     void gps_estimation_control();
     void gps_hour_clicked();
     void gps_checkTimetoEnable();
+
     void gps_getloadData();
 
 //Temperature
     void temp_setDefault();
+
     void on_temp_SW_clicked();
     void on_temp_timeclear_button_clicked();
     void on_temp_samplePeriod_editingFinished();
+
     void temp_disable(bool disable);
     void temp_disable_button(bool disable);
+
     void temp_timeTable_control();
     void temp_hour_clicked();
     void temp_checkTimetoEnable();
+
     void temp_getloadData();
 
 //Data-Retrival Page
     void on_chooseDestButton_clicked();
-    void on_configureHomeButton_clicked();
     void on_storeData_destinationEdit_returnPressed();
 
 //Completed Configuration list setup and ready to submit
@@ -327,43 +364,69 @@ private slots:
     void powerEstimation();
     void storageEstimation();
     void generalEstimation();
+
     void on_batterySizeText_editingFinished();
 
-//serial stuff
-    void on_pushButton_refreshCOM_clicked();
-    void refreshSerialPorts();
-    void receiveSerial_samples();
-    void data_deserialize(QByteArray& byteArray);
-    void serialReceived();
-    void sendSerial_Config();
+//TX side of GUI
+    void on_TX_ReScanButton_clicked();
     QByteArray config_serialize();
-    void on_comboBox_comPorts_currentIndexChanged(const QString &arg1);
-    void serialInitAndOpenPort();
-
-    void receive_serialSetup();
     void send_serialSetup();
+    void sendSerial_Config();
 
-    void on_sButton_clicked();
+//RX side of GUI
+    void on_RXstream_ReScanButton_clicked();
+    void data_deserialize(QByteArray& byteArray);
+    void receiveSerial_samples();
+    void receive_serialSetup();
+    void closeSerialPort();
 
-    void on_oButton_clicked();
+    //
+
+//Data Sample Stream
+    void on_captureDatatoFile_button_clicked();
+    void on_startStream_button_clicked();
+    void recognizeData(DATA_HEADER_t *header);
+    void searchingHeader();
+    void findDataBuffer_fromPacket();
+    void recognizeData_fromBuffer();
+    void header_deserialize(QByteArray& byteArray);
+    void headerAnalyze_display();
+
+    void on_sendConfigsButton_clicked();
+    void on_configureHomeButton_clicked();
+
+    void on_batterySizeText_selectionChanged();
+
+    void on_batterySizeText_returnPressed();
 
 private:
     Ui::maindialog *ui;
-
     QMap<QString, uint32_t> config;
-
-    QString current_COM_port;
-    bool microSerial_is_available;
+    SENSOR_CONFIGS configuration_settings;
 
     QSerialPort *microSerial;
-    QByteArray serial_readData;
-    QString serialBuffer;
-    DATA_TRANSMISSION_t retrieve_data;
+    static const quint16 microSerial_vendor_id = 1003;
+    static const quint16 microSerial_product_id = 9220;
 
+    QByteArray serial_readData;
+    QByteArray dataBuffer;
+    QByteArray sampleBuf;
+    QByteArray header_ba;
+    QString serialDataBuffer;
+    QString microSerial_port_name;
+    int pos;
+    bool microSerial_is_available;
     bool serial_retry;
+
+//
+    DATA_TRANSMISSION_t retrieve_data;
+    DATA_HEADER_t header;
+
 
 };
 
 QDataStream& operator<<(QDataStream& stream, const SENSOR_CONFIGS& configs);
+QDataStream& operator>>(QDataStream& stream, DATA_TRANSMISSION_t& txData);
+QDataStream& operator>>(QDataStream& stream, DATA_HEADER_t& data_header);
 
 #endif // MAINDIALOG_H

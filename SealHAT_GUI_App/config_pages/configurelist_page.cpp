@@ -6,6 +6,8 @@
 #include <QFile>
 #include <QList>
 #include <QFont>
+#include <QDate>
+#include <QTime>
 #include <QMap>
 #include <QMessageBox>
 #include <QDataStream>
@@ -13,8 +15,19 @@
 #include "maindialog.h"
 #include "ui_maindialog.h"
 
-void maindialog::submitConfig()
-{
+
+/**************************************************************
+ * FUNCTION: submitConfig
+ * ------------------------------------------------------------
+ *  This function store all the configuration setting and
+ *  submit to a Configuration QMap.
+ *  It gets called inside on_saveButton_clicked().
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
+void maindialog::submitConfig(){
     QString acc_timeName = "Accelerometer Time";
     uint32_t acc_timeValue = configuration_settings.accelerometer_config.acc_activeHour;
     QString acc_scaleName = "Accelerometer Scale";
@@ -69,8 +82,23 @@ void maindialog::submitConfig()
     config.insert(ekg_lpfreqName,ekg_lpfreqValue);
 
     config.insert(gps_timeName,gps_timeValue);
+
+
 }
 
+
+/**************************************************************
+ * FUNCTION: on_saveButton_clicked
+ * ------------------------------------------------------------
+ *  This function saved all the configuration setting as QMap and
+ *  save them into a file.
+ *
+ *  It gets called whenever saveButton is clicked.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_saveButton_clicked()
 {
     submitConfig();
@@ -92,22 +120,25 @@ void maindialog::on_saveButton_clicked()
             out.setVersion(QDataStream::Qt_4_5);
             out << config;
             file.close();
-            qDebug() <<"File size is:"<< file.size() << "now";
-                }
-
-    QMapIterator<QString, uint32_t> iter(config);
-
-        while(iter.hasNext())
-        {
-            iter.next();
-            qDebug() << iter.key() << " : " << iter.value();
-        }
+    }
 
 }
 
+/**************************************************************
+ * FUNCTION: on_loadButton_clicked
+ * ------------------------------------------------------------
+ *  This function load all the configuration setting as QMap
+ *  the configuration file users saved before.
+ *
+ *  It gets called whenever loadButoon is clicked.
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::on_loadButton_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,tr("Open saved configuration setting"),
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Open saved configuration settings"),
                                                     "C:/Users/hpan5/Downloads/gui",
                                                     tr("Text files (*.txt);;XML files (*.xml)"));
     if (fileName.isEmpty())
@@ -124,14 +155,16 @@ void maindialog::on_loadButton_clicked()
             config.clear();   // clear existing contacts
             in >> config;
             if (config.isEmpty()) {
-                        QMessageBox::information(this, tr("No content in file"),
+                        QMessageBox::information(this, tr("No contacts in file"),
                             tr("The file you are attempting to open contains no settings."));
-            } else {
-                    collectLoadingData_fromFile();
-                    configureSettingListDisplay();
-            }
+                    } else {
+                            collectLoadingData_fromFile();
+                            configureSettingListDisplay();
+                    }
     }
 }
+
+
 
 /**************************************************************
  * FUNCTION: configureSettingListDisplay
@@ -155,22 +188,45 @@ void maindialog::configureSettingListDisplay()
 
     QString acc_PWRMode[3]{"Normal", "High Resolution", "Low Power"};
     QString mag_PWRMode[2]{"Normal", "Low Power"};
+    QString acc_direction[3]{"Sway", "Surge", "Heave"};
 
     QString acc_timeName = "Time : ";
     QString acc_timeValue = QString::number(num_Hours(configuration_settings.accelerometer_config.acc_activeHour)) + " h ";
-    QString acc_scaleName = "               Accelerometer Scale : ";
+    QString acc_scaleName = "                                            Accelerometer Scale : ";
     QString acc_scaleValue = QString::number(2 << ((configuration_settings.accelerometer_config.acc_scale/16)%10)) + " g ";
     QString acc_powerMode = "\nPower Mode : " + acc_PWRMode[acc_pwrSelect];
 
     QString acc_freqName = "            Sampling rate : ";
     QString acc_freqValue = QString::number(accFrequency[acc_freqSelect]) + " Hz ";
-    QString acc_sensitivityName = "\nSensitivity : ";
-    QString sensor_sensitivityValue = QString::number(configuration_settings.accelerometer_config.acc_sensitivity);
+    QString acc_sensitivityName = "\nEnabled Direction : ";
+    uint8_t xcel_sensitivity = configuration_settings.accelerometer_config.acc_sensitivity;
+    QString sensor_sensitivityValue = "";
+    if((xcel_sensitivity&(MOTION_INT_X_LOW|MOTION_INT_X_HIGH)))
+    {
+        sensor_sensitivityValue += " Sway ";
+    }
+    if((xcel_sensitivity&(MOTION_INT_Y_LOW|MOTION_INT_Y_HIGH)))
+    {
+        sensor_sensitivityValue += " Surge ";
+    }
+    if((xcel_sensitivity&(MOTION_INT_Z_LOW|MOTION_INT_Z_HIGH)))
+    {
+        sensor_sensitivityValue += " Heave ";
+    }
+
+    //QString sensor_sensitivityValue = QString::number(configuration_settings.accelerometer_config.acc_sensitivity);
     QString acc_thresholdName = "       Threshold : ";
     QString sensor_thresholdValue = QString::number(((double)configuration_settings.accelerometer_config.acc_threshold/1000), 'f', 2) + " g ";
 
-    ui->xcel_configList->setText(acc_timeName + acc_timeValue + acc_scaleName + acc_scaleValue + acc_powerMode + acc_freqName + acc_freqValue +
-                                 acc_sensitivityName + sensor_sensitivityValue + acc_thresholdName + sensor_thresholdValue);
+    ui->xcel_configList->setText(acc_timeName + acc_timeValue +
+                                acc_scaleName + acc_scaleValue +
+                                acc_powerMode +
+                                acc_freqName + acc_freqValue +
+                                acc_sensitivityName + sensor_sensitivityValue +
+                                acc_thresholdName + sensor_thresholdValue);
+
+
+
 
     QString mag_timeName = "Magnetometer Time : ";
     QString mag_timeValue = QString::number(num_Hours(configuration_settings.magnetometer_config.mag_activeHour)) + " h ";
@@ -193,18 +249,26 @@ void maindialog::configureSettingListDisplay()
     QString ekg_lpfreqName = "                   EKG Low Pass Frequency : ";
     QString ekg_lpfreqValue = QString::number(ekg_lowpassFrequencyValue[configuration_settings.ekg_config.ekg_lowpassFreq]) + " Hz ";
 
-    ui->ekg_configList->setText(ekg_timeName + ekg_timeValue + ekg_spsName + ekg_spsValue + ekg_gainName + ekg_gainValue + ekg_lpfreqName + ekg_lpfreqValue);
+    ui->ekg_configList->setText(ekg_timeName + ekg_timeValue +
+                                ekg_spsName + ekg_spsValue +
+                                ekg_gainName + ekg_gainValue +
+                                ekg_lpfreqName + ekg_lpfreqValue
+                                );
+
 
     QString templight_timeName = "Temperature & Light Time : ";
     QString templight_timeValue = QString::number(num_Hours(configuration_settings.temperature_config.temp_activeHour)) + " h ";
     QString templight_sampleperiodName = "\nTemperature and Light Sample Period : ";
     QString templight_sampleperiodValue = QString::number(configuration_settings.temperature_config.temp_samplePeriod) + " s ";
-    ui->temp_configList->setText(templight_timeName + templight_timeValue + templight_sampleperiodName + templight_sampleperiodValue);
+    ui->temp_configList->setText(templight_timeName + templight_timeValue +
+                                templight_sampleperiodName + templight_sampleperiodValue
+                                );
 
     QString gps_timeName = "GPS Time : ";
     QString gps_timeValue = QString::number(num_Hours(configuration_settings.gps_config.gps_activeHour)) + " h ";
     ui->gps_configList->setText(gps_timeName + gps_timeValue);
 }
+
 
 void maindialog::on_configureHomeButton_clicked()
 {
@@ -214,3 +278,28 @@ void maindialog::on_configureHomeButton_clicked()
     //show list of current configuration settings
     configureSettingListDisplay();
 }
+
+void maindialog::on_sendConfigsButton_clicked()
+{
+    configureSettingListDisplay();
+    setActiveButtonColor(CONFIGURE_DEV_HOME_PAGE);
+
+    on_TX_ReScanButton_clicked();
+
+    configuration_settings.num_flash_chips = 4;
+
+    //Need to fill in config id
+    QDateTime date = QDateTime::currentDateTime();
+    QString year = date.toString("yyyy");
+    QString month = date.toString("M");
+    QString day = date.toString("d");
+    QString time = date.toString("hhmmss");
+
+    configuration_settings.start_logging_day.year = year.toUInt();
+    configuration_settings.start_logging_day.month = month.toUInt();
+    configuration_settings.start_logging_day.day =  day.toUInt();
+    configuration_settings.start_logging_time =  time.toUInt();
+
+    sendSerial_Config();
+}
+

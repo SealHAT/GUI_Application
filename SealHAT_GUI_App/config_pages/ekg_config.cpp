@@ -77,17 +77,19 @@ void maindialog::on_ekg_gainBox_currentIndexChanged(int index)
 
 void maindialog::on_ekg_SW_clicked()
 {
+
     QString title = ui->ekg_SW->text();
-    if(title == "ENABLE SENSOR")
+    if(title == "Enable")
     {
         ekg_Disable(false);
         ekg_disable_button(false);
-        ui->ekg_SW->setText("DISABLE SENSOR");
+        ui->ekg_SW->setText("Disable");
     }else{
-        ui->ekg_SW->setText("ENABLE SENSOR");
+        ui->ekg_SW->setText("Enable");
         ekg_Disable(true);
         ekg_disable_button(true);
     }
+
 }
 
 void maindialog::ekg_checkTimetoEnable(){

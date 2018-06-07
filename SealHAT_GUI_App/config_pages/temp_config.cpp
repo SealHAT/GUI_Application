@@ -30,20 +30,22 @@ void maindialog::temp_getloadData(){
 void maindialog::on_temp_SW_clicked()
 {
     QString title = ui->temp_SW->text();
-    if(title == "ENABLE SENSOR")
+    if(title == "Enable")
     {
         temp_disable(false);
         temp_disable_button(false);
-        ui->temp_SW->setText("DISABLE SENSOR");
+        ui->temp_SW->setText("Disable");
     }else{
-        ui->temp_SW->setText("ENABLE SENSOR");
-        temp_disable(true);
+        ui->temp_SW->setText("Enable");
         temp_disable_button(true);
+        temp_disable(true);
     }
+    generalEstimation();
 }
 
 void maindialog::temp_setDefault()
 {
+    configuration_settings.temperature_config.temp_samplePeriod = 1;
    on_temp_timeclear_button_clicked();
    ui->temp_samplePeriod->setText("1");
    configuration_settings.temperature_config = {
