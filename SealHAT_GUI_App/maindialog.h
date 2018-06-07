@@ -393,7 +393,6 @@ private slots:
     void recognizeData_fromBuffer();
     void header_deserialize(QByteArray& byteArray);
     void headerAnalyze_display();
-    void printData();
 
 private:
     Ui::maindialog *ui;

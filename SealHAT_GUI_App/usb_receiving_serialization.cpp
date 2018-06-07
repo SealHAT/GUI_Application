@@ -26,7 +26,6 @@
 void maindialog::receiveSerial_samples()
 {
     receive_serialSetup();
-    pos = 0;
     QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
     //QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(printData()));
 
@@ -46,11 +45,12 @@ void maindialog::receiveSerial_samples()
 void maindialog::serialReceived()
 {
     serial_readData = microSerial->readAll();
+
+    //pos = 0;
     findDataBuffer_fromPacket();
 
+    //pos += sizeof(DATA_HEADER_t);
     recognizeData_fromBuffer();
-
-
 /*
 if(pos){
     for(uint32_t i = pos + sizeof(DATA_HEADER_t);
@@ -68,17 +68,6 @@ if(pos){
     headerAnalyze_display();
 
 }
-
-void maindialog::printData()
-{
-    for(uint32_t i = pos; i < pos + (header.size/4); i++){
-            sampleBuf.append(dataBuffer.at(i));
-     }
-
-        serialDataBuffer.append(sampleBuf.toHex());
-        headerAnalyze_display();
-}
-
 
 /**************************************************************
  * FUNCTION: findDataBuffer_fromPacket
@@ -117,41 +106,46 @@ void maindialog::recognizeData_fromBuffer(){
     QByteArray pattern("\xDE\xAD");
     QByteArrayMatcher matcher(pattern);
 
-    /*for(pos = pos; pos < pos + PAGE_SIZE_EXTRA; pos += sizeof(DATA_HEADER_t)){
+    //for(pos = pos; pos < pos + (PAGE_SIZE_EXTRA); pos += sizeof(DATA_HEADER_t)){
+    //pos += 1;
 
-    }*/
-    //pos += sizeof(DATA_HEADER_t);
+    pos += sizeof(DATA_HEADER_t);
 
-    if((pos = matcher.indexIn((dataBuffer), pos)) != -1) {
-        qDebug() << "dataBuffer found at pos" << pos;
-        header_ba.clear();
+        if((pos = matcher.indexIn((dataBuffer), pos)) != -1) {
+            qDebug() << "dataBuffer found at pos" << pos;
+            header_ba.clear();
 
-        for(uint32_t i = pos;
-            i < pos + sizeof(DATA_HEADER_t);
-            i++)
-        {
-            header_ba.append((dataBuffer).at(i));
-        }
-        header_deserialize(header_ba);
-        qDebug() << "header size is" << qToBigEndian(header.size);
-
-        serialDataBuffer.clear();
-        serialDataBuffer.reserve(qToBigEndian(header.size)*2);
-        for(uint64_t i = pos + sizeof(DATA_HEADER_t);
-            i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
-            i++){
-            if(i >= dataBuffer.size()) {
-                qDebug() <<"Too much";
+            for(uint32_t i = pos;
+                i < pos + sizeof(DATA_HEADER_t);
+                i++)
+            {
+                header_ba.append((dataBuffer).at(i));
             }
+            header_deserialize(header_ba);
+            qDebug() << "header size is" << qToBigEndian(header.size);
 
-            //sampleBuf.clear();
-            //sampleBuf.append(dataBuffer.at(i));
-            serialDataBuffer.append(QString::number(dataBuffer.at(i), 16));
-        }
+            serialDataBuffer.clear();
+            serialDataBuffer.reserve(qToBigEndian(header.size)*2);
+            for(uint64_t i = pos + sizeof(DATA_HEADER_t);
+                i < pos +  sizeof(DATA_HEADER_t) + qToBigEndian(header.size);
+                i++){
+                if(i >= dataBuffer.size()) {
+                    qDebug() <<"Too much";
+                }
+
+                //sampleBuf.clear();
+                //sampleBuf.append(dataBuffer.at(i));
+                serialDataBuffer.append(QString::number(dataBuffer.at(i), 16));
+            }
 
     }else{
         qDebug() << "No matching header found";
-    }
+        }
+    //}
+
+
+
+
 
 }
 
