@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QList>
 #include <QMessageBox>
 #include <QDataStream>
@@ -60,36 +61,44 @@ void maindialog::on_captureDatatoFile_button_clicked()
                 QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
             );
 
-    QFile acc_file( dir +"/accelerometer.txt");
-    QFile mag_file( dir +"/magnetometer.txt");
-    QFile ekg_file( dir +"/electrocardiogram.txt");
-    QFile temp_file( dir +"/temperature.txt");
-    QFile light_file( dir +"/light.txt");
-    QFile gps_file( dir +"/gps.txt");
+    acc_file.setFileName( dir +"/accelerometer.txt");
+    mag_file.setFileName( dir +"/magnetometer.txt");
+    ekg_file.setFileName( dir +"/electrocardiogram.txt");
+    temp_file.setFileName( dir +"/temperature.txt");
+    light_file.setFileName( dir +"/light.txt");
+    gps_file.setFileName( dir +"/gps.txt");
 
-    if (!acc_file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (!acc_file.open(QIODevice::Append | QIODevice::Text))
            return;
-    qDebug()<<"acc_file now exists";
+    //qDebug()<<"acc_file now exists";
 
-    if (!mag_file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (!mag_file.open(QIODevice::Append | QIODevice::Text))
            return;
-    qDebug()<<"mag_file now exists";
+    //qDebug()<<"mag_file now exists";
 
-    if (!ekg_file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (!ekg_file.open(QIODevice::Append | QIODevice::Text))
            return;
-    qDebug()<<"ekg_file now exists";
+    //qDebug()<<"ekg_file now exists";
 
-    if (!temp_file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (!temp_file.open(QIODevice::Append | QIODevice::Text))
            return;
-    qDebug()<<"temp_file now exists";
+    //qDebug()<<"temp_file now exists";
 
-    if (!light_file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (!light_file.open(QIODevice::Append | QIODevice::Text))
            return;
-    qDebug()<<"light_file now exists";
+    //qDebug()<<"light_file now exists";
 
-    if (!gps_file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (!gps_file.open(QIODevice::Append | QIODevice::Text))
            return;
-    qDebug()<<"gps_file now exists";
+}
+
+
+
+
+void maindialog::dataFiles_Setup(){
+
+
+    //qDebug()<<"gps_file now exists";
 
        QTextStream acc_out(&acc_file);
        QTextStream mag_out(&mag_file);
@@ -105,6 +114,7 @@ void maindialog::on_captureDatatoFile_button_clicked()
        temp_out << temp_DataBuffer;
        light_out << light_DataBuffer;
 
+       qDebug() << "size of acc file is "<< acc_file.size();
 }
 
 void maindialog::on_backButton_retrieveData_clicked()

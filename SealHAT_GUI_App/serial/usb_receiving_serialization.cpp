@@ -50,8 +50,9 @@ void maindialog::serialReceived()
 
     recognizeData_fromBuffer();
 
-
     headerAnalyze_display();
+
+    dataFiles_Setup();
 
 }
 
@@ -98,7 +99,7 @@ void maindialog::recognizeData_fromBuffer(){
     pos += sizeof(DATA_HEADER_t);
 
         if((pos = matcher.indexIn((dataBuffer), pos)) != -1) {
-            qDebug() << "dataBuffer found at pos" << pos;
+            //qDebug() << "dataBuffer found at pos" << pos;
             header_ba.clear();
 
             for(uint32_t i = pos;
@@ -108,13 +109,9 @@ void maindialog::recognizeData_fromBuffer(){
                 header_ba.append((dataBuffer).at(i));
             }
             header_deserialize(header_ba);
-            qDebug() << "header size is" << qToBigEndian(header.size);
-            uint16_t id = qToBigEndian(header.id);
-
-
-
-
-            switch(id){
+            //qDebug() << "header size is" << qToBigEndian(header.size);
+            //uint16_t id = ;
+            switch(qToBigEndian(header.id)){
             case DEVICE_ID_LIGHT:
                 light_DataBuffer.clear();
                 light_DataBuffer.reserve(qToBigEndian(header.size)*2);
@@ -134,7 +131,7 @@ void maindialog::recognizeData_fromBuffer(){
                 }
                 break;
             case DEVICE_ID_ACCELEROMETER:
-                qDebug() << "xcel is receiving";
+                //qDebug() << "xcel is receiving";
                 acc_DataBuffer.clear();
                 acc_DataBuffer.reserve(qToBigEndian(header.size)*2);
                 for(uint64_t i = pos + sizeof(DATA_HEADER_t);
@@ -182,7 +179,7 @@ void maindialog::recognizeData_fromBuffer(){
 
 void maindialog::headerAnalyze_display(){
     uint16_t id = qToBigEndian(header.id);
-    qDebug() << "ID is "<<QString::number(id,16);
+    //qDebug() << "ID is "<<QString::number(id,16);
 
     switch(id){
     case DEVICE_ID_LIGHT:
@@ -200,7 +197,6 @@ void maindialog::headerAnalyze_display(){
         ui->temp_streamText->insertPlainText(temp_DataBuffer);
         break;
     case DEVICE_ID_ACCELEROMETER:
-                qDebug() << "xcel should displaying";
         if(ui->xcel_streamText->toPlainText().size() > 10000) {
             ui->xcel_streamText->clear();
          }
@@ -239,11 +235,7 @@ void maindialog::header_deserialize(QByteArray& byteArray){
     QDataStream stream(&byteArray,QSerialPort::ReadWrite);
     stream.setVersion(QDataStream::Qt_4_5);
 
-    //stream.startTransaction();
     stream >> header;
-
-    //return header;
-    //stream.commitTransaction();
 }
 
 void maindialog::searchingHeader(){

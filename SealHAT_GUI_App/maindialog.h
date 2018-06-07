@@ -9,6 +9,7 @@
 #include <QSerialPortInfo>
 #include <QTextStream>
 #include <QDataStream>
+#include <QFile>
 #include <QByteArray>
 #include "seal_Types.h"
 #include "analyze.h"
@@ -365,6 +366,8 @@ private slots:
     void storageEstimation();
     void generalEstimation();
 
+    void on_batterySizeText_selectionChanged();
+
     void on_batterySizeText_editingFinished();
 
 //TX side of GUI
@@ -394,8 +397,9 @@ private slots:
 
     void on_sendConfigsButton_clicked();
     void on_configureHomeButton_clicked();
+    void dataFiles_Setup();
+    void closeFile_saving();
 
-    void on_batterySizeText_selectionChanged();
 
     //void on_batterySizeText_returnPressed();
 
@@ -420,13 +424,20 @@ private:
     QString gps_DataBuffer;
     QString ekg_DataBuffer;
 
+    QFile acc_file;
+    QFile mag_file;
+    QFile ekg_file;
+    QFile temp_file;
+    QFile light_file;
+    QFile gps_file;
+
+    //bool data_to_file_available;
 
     QString microSerial_port_name;
     int pos;
     bool microSerial_is_available;
     bool serial_retry;
 
-//
     DATA_TRANSMISSION_t retrieve_data;
     DATA_HEADER_t header;
 

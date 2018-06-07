@@ -150,8 +150,18 @@ void maindialog::on_streamDataButton_clicked()
 void maindialog::on_backButton_StreamPage_clicked()
 {
     on_backButton_clicked();
+    closeFile_saving();
 }
 
+void maindialog::closeFile_saving()
+{
+    acc_file.close();
+    mag_file.close();
+    gps_file.close();
+    ekg_file.close();
+    temp_file.close();
+    light_file.close();
+}
 
 
 /*qDebug() << "Number of availabel ports: " << QSerialPortInfo::availablePorts().
