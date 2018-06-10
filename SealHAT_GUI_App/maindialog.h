@@ -403,6 +403,18 @@ private slots:
 
     //void on_batterySizeText_returnPressed();
 
+    void on_rButton_clicked();
+
+    void on_sButton_clicked();
+
+    void on_oButton_clicked();
+
+    void on_lButton_clicked();
+
+    void on_bButton_clicked();
+
+    void on_cButton_clicked();
+
 private:
     Ui::maindialog *ui;
     QMap<QString, uint32_t> config;
@@ -412,6 +424,7 @@ private:
     static const quint16 microSerial_vendor_id = 1003;
     static const quint16 microSerial_product_id = 9220;
 
+    uint64_t error_count;
     QByteArray serial_readData;
     QByteArray dataBuffer;
     QByteArray sampleBuf;

@@ -26,6 +26,7 @@
 void maindialog::receiveSerial_samples()
 {
     receive_serialSetup();
+    error_count = 0;
     QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(serialReceived()));
     //QObject::connect(microSerial, SIGNAL(readyRead()), this, SLOT(printData()));
 
@@ -54,6 +55,8 @@ void maindialog::serialReceived()
 
     dataFiles_Setup();
 
+    qDebug() << serial_readData;
+
 }
 
 /**************************************************************
@@ -61,6 +64,8 @@ void maindialog::serialReceived()
  * ------------------------------------------------------------
  * This function will be called whenever there is data ready
  * signal generated on the serial port from microcontroller side.
+ * It find the header of each received data package , filter out
+ * header and append the data buffer to a new global buffer.
  *
  *  Parameters: none
  *
@@ -73,7 +78,6 @@ void maindialog::findDataBuffer_fromPacket(){
     QByteArrayMatcher matcherST(pattern_start);
     int begin = 0;
     if((begin = matcherST.indexIn(serial_readData, begin)) != -1) {
-        //qDebug() << "pattern begin at" << begin;
 
         for(uint32_t i = begin + sizeof(uint32_t);
             i < begin + sizeof(uint32_t) + PAGE_SIZE_EXTRA;
@@ -82,24 +86,35 @@ void maindialog::findDataBuffer_fromPacket(){
             dataBuffer.append(serial_readData.at(i));
         }
 
-
     }else{
-        qDebug() << "No matching start was found";
+
+        error_count++;
+        qDebug() << "No matching start was found, error number: " << error_count;
     }
 
 }
 
+
+/**************************************************************
+ * FUNCTION: recognizeData_fromBuffer
+ * ------------------------------------------------------------
+ *  This function should get called only after
+ *  findDataBuffer_fromPacket(), it takes data buffer, find the
+ *  header in the sensor buffer, check
+ *
+ *
+ *  Parameters: None
+ *
+ *  Returns: void
+ **************************************************************/
 void maindialog::recognizeData_fromBuffer(){
     QByteArray pattern("\xDE\xAD");
     QByteArrayMatcher matcher(pattern);
 
-    //for(pos = pos; pos < pos + (PAGE_SIZE_EXTRA); pos += sizeof(DATA_HEADER_t)){
-    //pos += 1;
-
     pos += sizeof(DATA_HEADER_t);
 
         if((pos = matcher.indexIn((dataBuffer), pos)) != -1) {
-            //qDebug() << "dataBuffer found at pos" << pos;
+            qDebug() << "dataBuffer found at pos" << pos;
             header_ba.clear();
 
             for(uint32_t i = pos;
@@ -109,8 +124,7 @@ void maindialog::recognizeData_fromBuffer(){
                 header_ba.append((dataBuffer).at(i));
             }
             header_deserialize(header_ba);
-            //qDebug() << "header size is" << qToBigEndian(header.size);
-            //uint16_t id = ;
+
             switch(qToBigEndian(header.id)){
             case DEVICE_ID_LIGHT:
                 light_DataBuffer.clear();
@@ -179,7 +193,6 @@ void maindialog::recognizeData_fromBuffer(){
 
 void maindialog::headerAnalyze_display(){
     uint16_t id = qToBigEndian(header.id);
-    //qDebug() << "ID is "<<QString::number(id,16);
 
     switch(id){
     case DEVICE_ID_LIGHT:

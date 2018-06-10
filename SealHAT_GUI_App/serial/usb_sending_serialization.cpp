@@ -33,6 +33,7 @@ void maindialog::sendSerial_Config(){
 
     if(microSerial->isOpen()){
         microSerial->close();
+        qDebug() << "Transmitting serial port is closed";
     }
 
 }

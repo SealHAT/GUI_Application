@@ -189,3 +189,177 @@ void maindialog::on_batterySizeText_selectionChanged()
 {
     ui->batterySizeText->clear();
 }
+
+void maindialog::on_rButton_clicked()
+{
+    send_serialSetup();
+    QByteArray configData;
+    configData.append("r");
+
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
+
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
+    }
+
+    /*if(microSerial->isOpen()){
+        microSerial->close();
+        qDebug() << "Transmitting serial port is closed";
+    }*/
+}
+
+void maindialog::on_sButton_clicked()
+{
+    send_serialSetup();
+    QByteArray configData;
+    configData.append("s");
+
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
+
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
+    }
+
+    /*if(microSerial->isOpen()){
+        microSerial->close();
+        qDebug() << "Transmitting serial port is closed";
+    }*/
+}
+
+void maindialog::on_oButton_clicked()
+{
+    send_serialSetup();
+    QByteArray configData;
+    configData.append("o");
+
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
+
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
+    }
+
+    /*if(microSerial->isOpen()){
+        microSerial->close();
+        qDebug() << "Transmitting serial port is closed";
+    }*/
+}
+
+void maindialog::on_lButton_clicked()
+{
+    send_serialSetup();
+    QByteArray configData;
+    configData.append("l");
+
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
+
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
+    }
+
+    /*if(microSerial->isOpen()){
+        microSerial->close();
+        qDebug() << "Transmitting serial port is closed";
+    }*/
+}
+
+void maindialog::on_bButton_clicked()
+{
+    send_serialSetup();
+    QByteArray configData;
+    configData.append("b");
+
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
+
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
+    }
+
+    /*if(microSerial->isOpen()){
+        microSerial->close();
+        qDebug() << "Transmitting serial port is closed";
+    }*/
+}
+
+void maindialog::on_cButton_clicked()
+{
+    send_serialSetup();
+    QByteArray configData;
+    configData.append("c");
+
+    const qint64 bytesWritten = microSerial->write(configData);
+    qDebug() << "number of bytes sending" <<bytesWritten << endl;
+
+    if (bytesWritten == -1)
+    {
+        qDebug() <<"Failed to write the data to port" << endl;
+        serial_retry = true;
+    } else if (bytesWritten != configData.size()) {
+        qDebug() <<"Failed to write all the data to port" << endl;
+        serial_retry = true;
+    } else if (!microSerial->waitForBytesWritten(5000)) {
+        qDebug() <<"Operation timed out or an error "
+                   "occurred, error:"<< microSerial->errorString()<< endl;
+    }else{
+        qDebug() <<"Data successfully sent to port"<< endl;
+    }
+
+    /*if(microSerial->isOpen()){
+        microSerial->close();
+        qDebug() << "Transmitting serial port is closed";
+    }*/
+}
